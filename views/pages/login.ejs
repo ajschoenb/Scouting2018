@@ -1,0 +1,49 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main style="padding-top: 60px;">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <% if(message !== '') { %>
+	<div class="alert alert-danger" role="alert"><p><%= message %></p></div>
+	<% } %>
+        <form id="login" action="/login" method="post">
+          <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+              <div class="input-group-sm">
+                <label class="control-label">Username</label>
+                <input tabindex="1" type="text" class="form-control" name="username" required />
+              </div>
+            </div>
+	  </div>
+	  <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+              <div class="input-group-sm">
+                <label class="control-label">Password</label>
+                <input tabindex="2" type="password" class="form-control" name="password" required />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-9" align="right">
+              <input tabindex="2" type="submit" class="btn btn-success" value="Submit" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main style="padding-top:60px;">
+    <div class="row">
+      <div class="col-md-12">
+        <%- message %>
+        <form id="main_data_entry" method="post" action="/parse-data">
+          <div class="form-group" style="padding-top:15px;">
+            <div class="row">
+              <div class="col-xs-3 col-xs-offset-3">
+                <div class="input-group-sm">
+                  <label class="control-label">Match Number</label>
+                  <input tabindex="1" type="text" class="form-control" name="match_num" required />
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="input-group-sm">
+                  <label class="control-label">Team Number</label>
+                  <input tabindex="2" type="text" class="form-control" name="team_num" required />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-xs-12">
+              <center><h3>Balls</h3></center>
+            </div>
+            <div class="row">
+              <div class="col-xs-2 col-xs-offset-2">
+                <div class="input-group-sm">
+                  <label class="control-label">High Made</label>
+                  <input tabindex="5" type="text" class="form-control" name="tele_high_made" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">High Missed</label>
+                  <input tabindex="6" type="text" class="form-control" name="tele_high_missed" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Low Made</label>
+                  <input tabindex="7" type="text" class="form-control" name="tele_low_made" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Low Missed</label>
+                  <input tabindex="8" type="text" class="form-control" name="tele_low_missed" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-2 col-xs-offset-4">
+                <div class="input-group-sm">
+                  <label class="control-label">Floor Intake</label>
+                  <input tabindex="9" type="text" class="form-control" name="tele_floor_ball_intake" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">HP/Hopper Intake</label>
+                  <input tabindex="10" type="text" class="form-control" name="tele_hopper_intake" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-xs-12">
+              <center><h3>Gears</h3></center>
+            </div>
+            <div class="row">
+              <div class="col-xs-2 col-xs-offset-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Gears Scored</label>
+                  <input tabindex="11" type="text" class="form-control" name="tele_gears_scored" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Gears Missed</label>
+                  <input tabindex="12" type="text" class="form-control" name="tele_gears_missed" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">HP Gear Intake</label>
+                  <input tabindex="13" type="text" class="form-control" name="hp_gear_intake" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">HP Gear Missed</label>
+                  <input tabindex="14" type="text" class="form-control" name="hp_gear_intake_miss" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-2 col-xs-offset-3">
+                <div class="input-group-sm">
+                  <label class="control-label">Floor Gear Intake</label>
+                  <input tabindex="15" type="text" class="form-control" name="tele_floor_gear_intake" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Gears Dropped</label>
+                  <input tabindex="16" type="text" class="form-control" name="tele_gears_dropped" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Gear Knockouts</label>
+                  <input tabindex="17" type="text" class="form-control" name="tele_gear_knockouts" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-xs-12">
+              <center><h3>Climb/Ratings</h3></center>
+            </div>
+            <div class="row">
+              <div class="col-xs-2 col-xs-offset-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Climb Rating</label>
+                  <input tabindex="20" type="text" class="form-control" name="climb_rating" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Climb Time</label>
+                  <input tabindex="21" type="text" class="form-control" name="climb_time" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Mobility Rating</label>
+                  <input tabindex="22" type="text" class="form-control" name="mobility_rating" required />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Defense Rating</label>
+                  <input tabindex="23" type="text" class="form-control" name="defense_rating" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <center><h3>Auton</h3></center>
+              </div>
+              <div class="col-xs-2 col-xs-offset-1">
+                <div class="input-group-sm">
+                  <label class="control-label">Auton High</label>
+                  <input tabindex="24" type="text" class="form-control" name="auto_high_made" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Auton High Missed</label>
+                  <input tabindex="25" type="text" class="form-control" name="auto_high_missed" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Auton Low</label>
+                  <input tabindex="26" type="text" class="form-control" name="auto_low_made" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Auton Low Missed</label>
+                  <input tabindex="27" type="text" class="form-control" name="auto_low_missed" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Total Ball Intake</label>
+                  <input tabindex="28" type="text" class="form-control" name="auto_hopper_intake" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-2 col-xs-offset-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Gears Scored</label>
+                  <input tabindex="29" type="text" class="form-control" name="auto_gears_scored" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Gears Missed</label>
+                  <input tabindex="30" type="text" class="form-control" name="auto_gears_missed" />
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Gear Location</label>
+                  <select tabindex="31" class="form-control" name="auto_gear_location">
+                    <option>FDR</option>
+                    <option>MID</option>
+                    <option>BOI</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="input-group-sm">
+                  <label class="control-label">Baseline Cross</label>
+                  <input tabindex="32" type="text" class="form-control" name="baseline_cross" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-11">
+              <input tabindex="33" style="float:right;" type="submit" class="btn btn-success" value="Submit Data" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

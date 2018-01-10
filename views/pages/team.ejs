@@ -1,0 +1,229 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main style="padding-top:60px;">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>
+          <strong><%= team_num %> - <%= team_name %></strong>
+          <br />
+          <div class="btn-group" role="group" aria-label="..." style="top: 5px;">
+            <a href="/team/<%= previous_team_num %>" type="button" class="btn btn-default">Previous</a>
+            <a href="/team/<%= next_team_num %>" type="button" class="btn btn-default">Next</a>
+          </div>
+        </h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <h3><u>Miscellaneous</u></h3>
+        <table class="table">
+          <tr>
+            <td><h5 style="margin-top:0;">Auto kPa: <%= avg_auto_contrib_kpa %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Total kPa: <%= avg_contrib_kpa %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Drive Type: <%= drive_type %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">No Autos: <%= no_autos %></h5></td>
+          </tr>
+        </table>
+        <!-- <h3 style="margin-top:0;">Average kPa: <%= avg_auto_contrib_kpa %> / <%= avg_contrib_kpa %></h3>
+        < <h3 style="margin-top:0;">Blacklist: < tot_blacklist ></h3>
+        <h4 style="margin-top:0;">Drive Type: <%= drive_type %></h4>
+        <h4 style="margin-top:0;">No Autos: <%= no_autos %></h4> -->
+        <h3><u>Autonomous Data</u></h3>
+        <table class="table">
+          <tr>
+            <!-- <td><h5 style="margin-top:0;">No Auto: <%= no_autos %></h5></td> -->
+            <!-- <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Cross: <%= tot_baseline_cross %></h5></td> -->
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">High Goals: <%= avg_auto_high_made %> / <%= avg_auto_high_attempts %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_auto_low_made %> / <%= avg_auto_low_attempts %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Gears Scored Feeder: <%= tot_auto_gears_scored_fdr %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored Mid: <%= tot_auto_gears_scored_mid %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Gears Scored Boiler: <%= tot_auto_gears_scored_boi %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored: <%= tot_auto_gears_scored %> / <%= tot_auto_gears_attempts %> (Rank <%= auto_gear_ranked %>)</h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Hopper Intake: <%= avg_auto_hopper_intake %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Cross: <%= tot_baseline_cross %></h5></td>
+          </tr>
+        </table>
+        <h3><u>Teleop Data</u></h3>
+        <table class="table">
+          <tr>
+            <td><h5 style="margin-top:0;">High Goals: <%= avg_tele_high_made %> / <%= avg_tele_high_attempts %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_tele_low_made %> / <%= avg_tele_low_attempts %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Gears Scored: <%= avg_tele_gears_scored %> / <%= avg_tele_gears_attempts %> (Rank <%= tele_gear_ranked %>)</h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_tele_hopper_intake %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Floor Gear Intake: <%= avg_tele_floor_gear_intake %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Floor Ball Intake: <%= avg_tele_floor_ball_intake %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Gears Dropped: <%= avg_tele_gears_dropped %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gear Knockouts: <%= tot_tele_gear_knockouts %></h5></td>
+          </tr>
+          <tr>
+            <!-- <td><h5 style="margin-top:0;">Drive Type: <%= drive_type %></h5></td> -->
+            <td><h5 style="margin-top:0;">HP Gear Intake: <%= avg_hp_gear_intake %> / <%= avg_hp_gear_intake_miss %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb: <%= tot_climb %> / <%= tot_climb_attempts %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Climb Rating: <%= avg_climb_rating %> (Rank <%= climb_ranked %>)</h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb Time: <%= avg_climb_time %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_mobility_rating %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating %></h5></td>
+          </tr>
+        </table>
+        <h3><u>Data Maximums</u></h3>
+        <table class="table">
+          <tr>
+            <td><h5 style="margin-top:0;">Auto Contrib kPa: <%= max_auto_contrib_kpa %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Contrib kPa: <%= max_contrib_kpa %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Auto Gears Scored: <%= max_auto_gears_scored %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Gears Scored: <%= max_tele_gears_scored %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Auto High Made: <%= max_auto_high_made %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele High Made: <%= max_tele_high_made %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Auto Low Made: <%= max_auto_low_made %></h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Low Made: <%= max_tele_low_made %></h5></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-sm-12 col-xs-12" style="font-size: 10px; top: -60px;">
+        <div>
+          <h4><strong>Gear Trend</strong></h4>
+          <canvas id="gears_trend_line"></canvas>
+        </div>
+
+        <div>
+          <h4><strong>High Goal Trend</strong></h4>
+          <canvas id="high_trend_line"></canvas>
+        </div>
+
+        <div>
+          <h4><strong>Climb Trend</strong></h4>
+          <canvas id="climb_trend_line"></canvas>
+        </div>
+
+        <script type="text/javascript">
+          var gears_data = {
+            labels: [<%= trend_labels %> 'Next'],
+            datasets: [
+              {
+                label: "Auton",
+                fillColor: "rgba(255,166,158,0.2)",
+                strokeColor: "rgba(255,166,158,1)",
+                pointColor: "rgba(255,166,158,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(255,166,158,1)",
+                data: [<%= auto_gears_trend %>]
+              },
+              {
+                label: "TeleOp",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [<%= tele_gears_trend %>]
+              }
+            ]
+          };
+
+          var high_data = {
+            labels: [<%= trend_labels %> 'Next'],
+            datasets: [
+              {
+                label: "Auton",
+                fillColor: "rgba(255,166,158,0.2)",
+                strokeColor: "rgba(255,166,158,1)",
+                pointColor: "rgba(255,166,158,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(255,166,158,1)",
+                data: [<%= auto_high_goal_trend %>]
+              },
+              {
+                label: "TeleOp",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [<%= tele_high_goal_trend %>]
+              }
+            ]
+          };
+
+          var climb_data = {
+            labels: [<%= trend_labels %> 'Next'],
+            datasets: [
+              {
+                label: "Climb",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [<%= climb_trend %>]
+              }
+            ]
+          };
+          window.onload = function()
+          {
+            var ctx = document.getElementById("gears_trend_line").getContext("2d");
+            var ctx1 = document.getElementById("high_trend_line").getContext("2d");
+            var ctx2 = document.getElementById("climb_trend_line").getContext("2d");
+            var myLineChart = new Chart(ctx).Line(gears_data,  {responsive: true, scaleOverride: true, scaleSteps: 8, scaleStepWidth: 1, scaleStartValue: 0});
+            var myLineChart1 = new Chart(ctx1).Line(high_data,  {responsive: true, scaleOverride: true, scaleSteps: 8, scaleStepWidth: 25, scaleStartValue: 0});
+            var myLineChart2 = new Chart(ctx2).Line(climb_data,  {responsive: true, scaleOverride: true, scaleSteps: 5, scaleStepWidth: 1, scaleStartValue: 0});
+          }
+        </script>
+      </div>
+    </div>
+    <div id="spoiler" style="display: none;">
+      <%- videos %>
+
+      <!-- <div class="col-lg-6">
+        <video width="480" height="360" controls>
+          <source src="../videos/F1M2.mp4" type="video/mp4">
+        </video>
+      </div> -->
+    </div>
+    <button title="Click to show/hide videos" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/Hide Videos</button>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

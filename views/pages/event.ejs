@@ -1,0 +1,40 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main style="padding-top: 60px;">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <form id="event-select" action="/parse-event" method="post">
+          <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+              <div class="input-group-md">
+                <h4 style="margin-top:10px; text-align: center;"><strong>Event</strong></h4>
+                <select tabindex="1" class="form-control" name="event">
+                  <%- events %>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-9" align="right">
+              <input tabindex="2" type="submit" class="btn btn-success" value="Submit" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

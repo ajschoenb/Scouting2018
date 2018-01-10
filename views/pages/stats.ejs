@@ -1,0 +1,48 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main style="padding-top: 60px;">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><%= var_name_1 %> Top 30</div>
+          <table class="table">
+            <tr>
+              <th>Rank</th>
+              <th>Number</th>
+              <th><%= var_name_1 %></th>
+            </tr>
+            <%- rank_list_1 %>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><%= var_name_2 %> Top 30</div>
+          <table class="table">
+            <tr>
+              <th>Rank</th>
+              <th>Number</th>
+              <th><%= var_name_2 %></th>
+            </tr>
+            <%- rank_list_2 %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

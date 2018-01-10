@@ -1,0 +1,62 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main style="padding-top: 60px;">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <form id="pit_entry" action="/pit-parse" method="post">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="input-group-md">
+                <h4 style="margin-top:10px; text-align: center;"><strong>Team Number</strong></h4>
+                <input tabindex="1" type="text" class="form-control" name="team_num" required />
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="input-group-md">
+                <h4 style="margin-top:10px; text-align: center;"><strong>Drive Type</strong></h4>
+                <select tabindex="2" class="form-control" name="drive_type">
+                  <option>Unknown</option>
+                  <option>Other</option>
+                  <option>Swerve</option>
+                  <option>H-Drive</option>
+                  <option>Omni</option>
+                  <option>Mechanum</option>
+                  <option>Traction</option>
+                  <option>Drop Center</option>
+                  <option>Butterfly</option>
+                  <option>Kiwi</option>
+                  <option>X-Drive</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="input-group-md">
+                <h4 style="margin-top:10px; text-align: center;"><strong>Weight</strong></h4>
+                <input tabindex="3" type="text" class="form-control" name="weight" required />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12" align="right">
+              <input tabindex="4" type="submit" class="btn btn-success" value="Submit" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

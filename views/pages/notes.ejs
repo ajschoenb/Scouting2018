@@ -1,0 +1,38 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main style="padding-top: 60px;">
+    <div class="row">
+      <div class="col-xs-12" align="left">
+        <input tabindex="1" type="submit" class="btn btn-success" value="Save" onclick="saveNotes()" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Team Notes</div>
+          <table class="table edit-table" id="notes">
+            <tr>
+              <th>Team</th>
+              <th>Notes</th>
+            </tr>
+            <%- notes %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

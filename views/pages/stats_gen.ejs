@@ -1,0 +1,70 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="en">
+<head>
+  <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+  <header>
+    <% include ../partials/header.ejs %>
+  </header>
+
+  <main style="padding-top: 60px;">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <form id="stats_select" action="/stats_gen" method="post">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group-md">
+                <h4 style="margin-top:10px; text-align: center;"><strong>Variable 1</strong></h4>
+                <select tabindex="1" class="form-control" name="var_name_1">
+                  <!-- < var_names %> -->
+                  <option>Auto Gears Scored</option>
+                  <option>Tele Gears Scored</option>
+                  <option>Auto High Made</option>
+                  <option>Tele High Made</option>
+                  <option>Auto Low Made</option>
+                  <option>Tele Low Made</option>
+                  <option>Climb Percentage</option>
+                  <option>Mobility Rating</option>
+                  <option>Defense Rating</option>
+                  <option>Auto Contrib kPa</option>
+                  <option>Contrib kPa</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="input-group-md">
+                <h4 style="margin-top:10px; text-align: center;"><strong>Variable 2</strong></h4>
+                <select tabindex="2" class="form-control" name="var_name_2">
+                  <!-- < var_names %> -->
+                  <option>Auto Gears Scored</option>
+                  <option>Tele Gears Scored</option>
+                  <option>Auto High Made</option>
+                  <option>Tele High Made</option>
+                  <option>Auto Low Made</option>
+                  <option>Tele Low Made</option>
+                  <option>Climb Percentage</option>
+                  <option>Mobility Rating</option>
+                  <option>Defense Rating</option>
+                  <option>Auto Contrib kPa</option>
+                  <option>Contrib kPa</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12" align="right">
+              <input tabindex="3" type="submit" class="btn btn-success" value="Submit" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>
