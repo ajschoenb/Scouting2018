@@ -63,7 +63,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     var score_list = "";
     var consist_list = "";
     var notes_query = "";
-    
+
     var get_teams = "SELECT * FROM teams";
     //TEAM QUERY
     connection.query(get_teams, function(err,rows,fields) {
@@ -84,7 +84,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
         score_list += "<tr title='"+ rows[x].team_name +"' class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ Number(Number(rows[x].avg_tele_gears_scored) + Number(rows[x].avg_auto_gears_scored)).toFixed(3) +"</td><td>"+ rows[x].avg_contrib_kpa +"</td><td>"+ rows[x].avg_climb_rating +"</td></tr>";
       }
     });
-    
+
     connection.query("SELECT * FROM notes WHERE user='" + req.user.username + "'", function(err, rows) {
       if(!rows.length)
       {
@@ -93,7 +93,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
 	});
       }
     });
-    
+
     var get_consist_rank = "SELECT * FROM teams ORDER BY cst_tele_gears_scored DESC, team_num ASC";
     connection.query(get_consist_rank, function(err, rows) {
       // console.log(rows);
@@ -155,8 +155,8 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
       });
     });
   });
-  
-      
+
+
   router.post("/notes", ensureLogin.ensureLoggedIn('/login'), function(req, res) {
     //console.log(req.body);
     var query = "UPDATE notes SET notes='" + req.body.notes + "' WHERE user='" + req.user.username + "'";
@@ -328,7 +328,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     var date = new Date();
     var day = date.getDate();
     var month = date.getMonth() + 1;
-    var date_str = "2017-" + month + "-" + day;
+    var date_str = "2018-" + month + "-" + day;
     var events = "";
     tba.getEventList(function(err, list_of_teams) {
       for(var x in list_of_teams) {
