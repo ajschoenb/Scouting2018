@@ -2,7 +2,7 @@
 var mysql = require("mysql");
 var fs = require("fs");
 var TBA = require('thebluealliance');
-var tba = new TBA('FRCScout2017','Software for scouting for 2017 season','1.1.1');
+var tba = new TBA('FRCScout2018','Software for scouting for 2018 season','1.1.1');
 var ensureLogin = require('connect-ensure-login');
 var message = "";
 
@@ -348,7 +348,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
   router.post("/parse-event", reqAdmin(), function(req, res) {
     var event_code = req.body.event.split("-")[0];
     var teams = [];
-    tba.getEventTeams(event_code, 2017, function(err, team_list) {
+    tba.getEventTeams(event_code, 2018, function(err, team_list) {
       var drop_teams_sql = "TRUNCATE teams;"
       connection.query(drop_teams_sql, function(err) {
         if(err) {
