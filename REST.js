@@ -61,7 +61,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
   router.get('/', ensureLogin.ensureLoggedIn('/login'), function(req, res) {       //PAGE RENDER
     var team_list = "";
     var score_list = "";
-    var consist_list = "";
+    var rating_list = "";
     var notes_query = "";
 
     var get_teams = "SELECT * FROM teams";
@@ -71,41 +71,41 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
       for(var x in rows)
       {
         team_list += "<tr class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ rows[x].team_name +"</td></tr>";
-	updateTeams(rows[x].team_num);
-	notes_query += rows[x].team_num + "` `";
+	      updateTeams(rows[x].team_num);
+	      notes_query += rows[x].team_num + "` `";
       }
       notes_query = notes_query.substring(0, notes_query.length - 2) + "');"
     });
     //CONTRIB SCORE QUERY
-    var get_contrib_score_rank = "SELECT * FROM teams ORDER BY avg_auto_gears_scored+avg_tele_gears_scored DESC, avg_contrib_kpa DESC, team_num ASC";
+    var get_contrib_score_rank = "SELECT * FROM teams ORDER BY avg_tele_cubes_scored DESC, avg_tele_intake DESC, team_num ASC";
     connection.query(get_contrib_score_rank, function(err, rows, fields) {
       for(var x in rows)
       {
-        score_list += "<tr title='"+ rows[x].team_name +"' class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ Number(Number(rows[x].avg_tele_gears_scored) + Number(rows[x].avg_auto_gears_scored)).toFixed(3) +"</td><td>"+ rows[x].avg_contrib_kpa +"</td><td>"+ rows[x].avg_climb_rating +"</td></tr>";
+        score_list += "<tr class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ rows[x].avg_tele_cubes_scored +"</td><td>"+ rows[x].avg_tele_intake +"</td></tr>";
       }
     });
 
     connection.query("SELECT * FROM notes WHERE user='" + req.user.username + "'", function(err, rows) {
       if(!rows.length)
       {
-	connection.query(notes_query, function(err) {
+        connection.query(notes_query, function(err) {
           if(err) console.log(err);
-	});
+        });
       }
     });
 
-    var get_consist_rank = "SELECT * FROM teams ORDER BY cst_tele_gears_scored DESC, team_num ASC";
-    connection.query(get_consist_rank, function(err, rows) {
+    var get_rating_rank = "SELECT * FROM teams ORDER BY alliance_rating DESC, team_num ASC";
+    connection.query(get_rating_rank, function(err, rows) {
       // console.log(rows);
       for(var x in rows)
       {
-        consist_list += "<tr class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ rows[x].cst_tele_gears_scored + "</td></tr>";
+        rating_list += "<tr class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ rows[x].alliance_rating + "</td></tr>";
       }
       res.render('pages/index', {
-	req: req,
+	      req: req,
         team_list: team_list,
         score_list: score_list,
-        consist_list: consist_list
+        rating_list: rating_list
       });
     });
   });
@@ -2487,114 +2487,129 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     var num_matches = 0;
     var next_team_num = 0;
     var previous_team_num = 0;
-    var tot_auto_gears_scored = 0;
-    var max_auto_gears_scored = 0;
-    var tot_auto_gears_attempts = 0;
-    var avg_auto_high_made = 0;
-    var max_auto_high_made = 0;
-    var avg_auto_high_attempts = 0;
-    var avg_auto_low_made = 0;
-    var max_auto_low_made = 0;
-    var avg_auto_low_attempts = 0;
-    var tot_baseline_cross = 0;
-    var avg_auto_hopper_intake = 0;
-    var avg_auto_contrib_kpa = 0;
-    var max_auto_contrib_kpa = 0;
-
-    var avg_tele_high_made = 0;
-    var max_tele_high_made = 0;
-    var avg_tele_high_attempts = 0;
-    var avg_tele_low_made = 0;
-    var max_tele_low_made = 0;
-    var avg_tele_low_attempts = 0;
-    var avg_tele_gears_scored = 0;
-    var max_tele_gears_scored = 0;
-    var avg_tele_gears_attempts = 0;
-    var avg_tele_floor_ball_intake = 0;
-    var avg_tele_floor_gear_intake = 0;
-    var avg_tele_hopper_intake= 0;
-    var avg_hp_gear_intake = 0;
-    var avg_hp_gear_intake_miss = 0;
-    var avg_tele_gears_dropped = 0;
-    var tot_tele_gear_knockouts = 0;
-    var tot_climb = 0;
-    var tot_climb_attempts = 0;
-    var avg_climb_rating = 0;
-    var avg_climb_time = 0;
-    var avg_mobility_rating = 0;
+    var tot_auto_cross = 0;
+    var tot_auto_left = 0;
+    var tot_auto_center = 0;
+    var tot_auto_right = 0;
+    var tot_auto_pyramid_intake = 0;
+    var tot_auto_unprotected_intake = 0;
+    var tot_auto_near_switch_made = 0;
+    var tot_auto_near_switch_attempts = 0;
+    var tot_auto_exchange_made = 0;
+    var tot_auto_exchange_attempts = 0;
+    var tot_auto_scale_high_made = 0;
+    var tot_auto_scale_high_attempts = 0;
+    var tot_auto_scale_low_made = 0;
+    var tot_auto_scale_low_attempts = 0;
+    var avg_tele_cubes_scored = 0;
+    var max_tele_cubes_scored = 0;
+    var avg_tele_exchange_made = 0;
+    var avg_tele_exchange_attempts = 0;
+    var avg_tele_near_switch_made = 0;
+    var avg_tele_near_switch_attempts = 0;
+    var avg_tele_far_switch_made = 0;
+    var avg_tele_far_switch_attempts = 0;
+    var avg_tele_scale_high_made = 0;
+    var avg_tele_scale_high_attempts = 0;
+    var avg_tele_scale_low_made = 0;
+    var avg_tele_scale_low_attempts = 0;
+    var avg_tele_knockouts = 0;
+    var avg_tele_cubes_dropped = 0;
+    var avg_tele_intake = 0;
+    var max_tele_intake = 0;
+    var avg_tele_portal_intake_made = 0;
+    var avg_tele_portal_intake_attempts = 0;
+    var avg_tele_pyramid_intake = 0;
+    var avg_tele_unprotected_intake = 0;
+    var avg_tele_floor_intake = 0;
+    var tot_tele_orderly = 0;
+    var max_tele_highest_level = 0;
+    var frq_tele_highest_level = 0;
+    var tot_tele_climb = 0;
+    var tot_tele_climb_attempts = 0;
+    var tot_tele_climb_assisted = 0;
+    var tot_tele_plus_one = 0;
+    var tot_tele_plus_one_attempts = 0;
+    var tot_tele_plus_two = 0;
+    var tot_tele_plus_two_attempts = 0;
+    var avg_driver_rating = 0;
     var avg_defense_rating = 0;
-    var drive_type = "";
-    var avg_contrib_kpa = 0;
-    var max_contrib_kpa = 0;
 
-    var no_autos = 0;
+    var pyramid_intake_trend = "";
+    var unprotected_intake_trend = "";
+    var portal_intake_trend = "";
+    var floor_intake_trend = "";
+    var total_intake_trend = "";
+    var near_switch_cubes_trend = "";
+    var far_switch_cubes_trend = "";
+    var scale_high_cubes_trend = "";
+    var scale_low_cubes_trend = "";
+    var exchange_cubes_trend = "";
+    var total_cubes_trend = "";
     var trend_labels = "";
-    var tele_gears_trend = "";
-    var auto_gears_trend = "";
-    var tele_high_goal_trend = "";
-    var auto_high_goal_trend = "";
-    var climb_trend = "";
-    var tele_gear_ranked = 0;
-    var auto_gear_ranked = 0;
-    var climb_ranked = 0;
-    var videos = "";
+
 //updateContribScores(team_num);
     updateTeams(team_num);
 
 
-    var get_data = "SELECT * FROM teams WHERE team_num='"+ team_num +"'";
-    var next_team = "SELECT * FROM teams WHERE team_num > '"+ team_num +"' ORDER BY team_num LIMIT 1";
-    var previous_team = "SELECT * FROM teams WHERE team_num < '"+ team_num +"' ORDER BY team_num DESC LIMIT 1";
-    var get_graph_data = "SELECT * FROM matches WHERE team_num='"+ team_num +"' ORDER BY match_num";
+    var get_data = "SELECT * FROM teams WHERE team_num="+ team_num +"";
+    var next_team = "SELECT * FROM teams WHERE team_num > "+ team_num +" ORDER BY team_num LIMIT 1";
+    var previous_team = "SELECT * FROM teams WHERE team_num < "+ team_num +" ORDER BY team_num DESC LIMIT 1";
+    var get_graph_data = "SELECT * FROM matches WHERE team_num="+ team_num +" ORDER BY match_num";
 
     connection.query(get_data, function(err, rows, fields) {
+      // console.log(rows);
       team_name = rows[0].team_name;
       num_matches = rows[0].num_matches;
-      tot_auto_gears_scored_fdr = rows[0].tot_auto_gears_scored_fdr;
-      tot_auto_gears_scored_mid = rows[0].tot_auto_gears_scored_mid;
-      tot_auto_gears_scored_boi = rows[0].tot_auto_gears_scored_boi;
-      tot_auto_gears_scored = rows[0].tot_auto_gears_scored;
-      max_auto_gears_scored = rows[0].max_auto_gears_scored;
-      tot_auto_gears_attempts = rows[0].tot_auto_gears_attempts;
-      avg_auto_high_made = rows[0].avg_auto_high_made;
-      max_auto_high_made = rows[0].max_auto_high_made;
-      avg_auto_high_attempts = rows[0].avg_auto_high_attempts;
-      avg_auto_low_made = rows[0].avg_auto_low_made;
-      max_auto_low_made = rows[0].max_auto_low_made;
-      avg_auto_low_attempts = rows[0].avg_auto_low_attempts;
-      tot_baseline_cross = rows[0].tot_baseline_cross;
-      avg_auto_hopper_intake = rows[0].avg_auto_hopper_intake;
-      avg_auto_contrib_kpa = rows[0].avg_auto_contrib_kpa;
-      max_auto_contrib_kpa = rows[0].max_auto_contrib_kpa;
-
-      avg_tele_high_made = rows[0].avg_tele_high_made;
-      max_tele_high_made = rows[0].max_tele_high_made;
-      avg_tele_high_attempts = rows[0].avg_tele_high_attempts;
-      avg_tele_low_made = rows[0].avg_tele_low_made;
-      max_tele_low_made = rows[0].max_tele_low_made;
-      avg_tele_low_attempts = rows[0].avg_tele_low_attempts;
-      avg_tele_gears_scored = rows[0].avg_tele_gears_scored;
-      max_tele_gears_scored = rows[0].max_tele_gears_scored;
-      avg_tele_gears_attempts = rows[0].avg_tele_gears_attempts;
-      avg_tele_floor_ball_intake = rows[0].avg_tele_floor_ball_intake;
-      avg_tele_floor_gear_intake = rows[0].avg_tele_floor_gear_intake;
-      avg_tele_hopper_intake = rows[0].avg_tele_hopper_intake;
-      avg_hp_gear_intake = rows[0].avg_hp_gear_intake;
-      avg_hp_gear_intake_miss = rows[0].avg_hp_gear_intake_miss;
-      avg_tele_gears_dropped = rows[0].avg_tele_gears_dropped;
-      tot_tele_gear_knockouts = rows[0].tot_tele_gear_knockouts;
-      tot_climb = rows[0].tot_climb;
-      tot_climb_attempts = rows[0].tot_climb_attempts;
-      avg_climb_rating = rows[0].avg_climb_rating;
-      avg_climb_time = rows[0].avg_climb_time;
-      avg_mobility_rating = rows[0].avg_mobility_rating;
+      tot_auto_cross = rows[0].tot_auto_cross;
+      tot_auto_left = rows[0].tot_auto_left;
+      tot_auto_center = rows[0].tot_auto_center;
+      tot_auto_right = rows[0].tot_auto_right;
+      tot_auto_pyramid_intake = rows[0].tot_auto_pyramid_intake;
+      tot_auto_unprotected_intake = rows[0].tot_auto_unprotected_intake;
+      tot_auto_near_switch_made = rows[0].tot_auto_near_switch_made;
+      tot_auto_near_switch_attempts = rows[0].tot_auto_near_switch_attempts;
+      tot_auto_exchange_made = rows[0].tot_auto_exchange_made;
+      tot_auto_exchange_attempts = rows[0].tot_auto_exchange_attempts;
+      tot_auto_scale_high_made = rows[0].tot_auto_scale_high_made;
+      tot_auto_scale_high_attempts = rows[0].tot_auto_scale_high_attempts;
+      tot_auto_scale_low_made = rows[0].tot_auto_scale_low_made;
+      tot_auto_scale_low_attempts = rows[0].tot_auto_scale_low_attempts;
+      avg_tele_cubes_scored = rows[0].avg_tele_cubes_scored;
+      max_tele_cubes_scored = rows[0].max_tele_cubes_scored;
+      avg_tele_exchange_made = rows[0].avg_tele_exchange_made;
+      avg_tele_exchange_attempts = rows[0].avg_tele_exchange_attempts;
+      avg_tele_near_switch_made = rows[0].avg_tele_near_switch_made;
+      avg_tele_near_switch_attempts = rows[0].avg_tele_near_switch_attempts;
+      avg_tele_far_switch_made = rows[0].avg_tele_far_switch_made;
+      avg_tele_far_switch_attempts = rows[0].avg_tele_far_switch_attempts;
+      avg_tele_scale_high_made = rows[0].avg_tele_scale_high_made;
+      avg_tele_scale_high_attempts = rows[0].avg_tele_scale_high_attempts;
+      avg_tele_scale_low_made = rows[0].avg_tele_scale_low_made;
+      avg_tele_scale_low_attempts = rows[0].avg_tele_scale_low_attempts;
+      avg_tele_knockouts = rows[0].avg_tele_knockouts;
+      avg_tele_cubes_dropped = rows[0].avg_tele_cubes_dropped;
+      avg_tele_intake = rows[0].avg_tele_intake;
+      max_tele_intake = rows[0].max_tele_intake;
+      avg_tele_portal_intake_made = rows[0].avg_tele_portal_intake_made;
+      avg_tele_portal_intake_attempts = rows[0].avg_tele_portal_intake_attempts;
+      avg_tele_pyramid_intake = rows[0].avg_tele_pyramid_intake;
+      avg_tele_unprotected_intake = rows[0].avg_tele_unprotected_intake;
+      avg_tele_floor_intake = rows[0].avg_tele_floor_intake;
+      tot_tele_orderly = rows[0].tot_tele_orderly;
+      max_tele_highest_level = rows[0].max_tele_highest_level;
+      frq_tele_highest_level = rows[0].frq_tele_highest_level;
+      tot_tele_climb = rows[0].tot_tele_climb;
+      tot_tele_climb_attempts = rows[0].tot_tele_climb_attempts;
+      tot_tele_climb_assisted = rows[0].tot_tele_climb_assisted;
+      tot_tele_plus_one = rows[0].tot_tele_plus_one;
+      tot_tele_plus_one_attempts = rows[0].tot_tele_plus_one_attempts;
+      tot_tele_plus_two = rows[0].tot_tele_plus_two;
+      tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
+      avg_driver_rating = rows[0].avg_driver_rating;
       avg_defense_rating = rows[0].avg_defense_rating;
-      drive_type = rows[0].drive_type;
-      avg_contrib_kpa = rows[0].avg_contrib_kpa;
-      max_contrib_kpa = rows[0].max_contrib_kpa;
-    });
 
-    var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
+    /*var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
     connection.query(no_auto_sql, function(err, rows, fields) {
       for(var x in rows)
       {
@@ -2605,12 +2620,12 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
           no_autos++;
         }
       }
-    });
+    });*/
 
     var last_team;
     var first_team;
-    var get_last_team_sql = "SELECT team_num FROM teams WHERE 1=1 ORDER BY team_num DESC";
-    var get_first_team_sql = "SELECT team_num FROM teams WHERE 1=1";
+    var get_last_team_sql = "SELECT team_num FROM teams ORDER BY team_num DESC";
+    var get_first_team_sql = "SELECT team_num FROM teams";
     connection.query(get_last_team_sql, function(err, rows, fields) {
        last_team = rows[0].team_num;
     });
@@ -2636,17 +2651,23 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
       // console.log(rows);
       for(var x in rows)
       {
+        pyramid_intake_trend += rows[x].tele_pyramid_intake + ", ";
+        unprotected_intake_trend += rows[x].tele_unprotected_intake + ", ";
+        portal_intake_trend += rows[x].tele_portal_intake_made + ", ";
+        floor_intake_trend += rows[x].tele_floor_intake + ", ";
+        total_intake_trend += Number(rows[x].tele_pyramid_intake + rows[x].tele_unprotected_intake + rows[x].tele_portal_intake_made + rows[x].tele_floor_intake) + ", ";
+        near_switch_cubes_trend += rows[x].tele_near_switch_made + ", ";
+        far_switch_cubes_trend += rows[x].tele_far_switch_made + ", ";
+        scale_high_cubes_trend += rows[x].tele_scale_high_made + ", ";
+        scale_low_cubes_trend += rows[x].tele_scale_low_made + ", ";
+        exchange_cubes_trend += rows[x].tele_exchange_made + ", ";
+        total_cubes_trend += Number(rows[x].tele_near_switch_made + rows[x].tele_far_switch_made + rows[x].tele_scale_high_made + rows[x].tele_scale_low_made + rows[x].tele_exchange_made) + ", ";
         trend_labels += rows[x].match_num + ", ";
-        tele_gears_trend += rows[x].tele_gears_scored + ", ";
-        auto_gears_trend += rows[x].auto_gears_scored + ", ";
-        tele_high_goal_trend += rows[x].tele_high_made + ", ";
-        auto_high_goal_trend += rows[x].auto_high_made + ", ";
-        climb_trend += rows[x].climb_rating + ", ";
       }
-      // console.log(high_goal_trend);
-      // console.log(gears_trend);
+      // console.log(total_intake_trend);
+      // console.log();
 
-    });
+    // });
 
     var dir = __dirname + "\\public\\videos";
     var files = null;
@@ -2669,8 +2690,8 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
 
       // console.log(files);
 
-      var match_sql = "SELECT match_num FROM matches WHERE team_num = " + team_num;
-      connection.query(match_sql, function(err, rows, fields) {
+      // var match_sql = "SELECT match_num FROM matches WHERE team_num = " + team_num;
+      // connection.query(match_sql, function(err, rows, fields) {
         /*for(var x in rows) {
           // console.log(x % 2 === 0);// + ", " + x % 2 === 1 + ", " + x + 1 >= rows.size + ", " + rows.size + ", " + x);
           // console.log(x % 2 === 1);
@@ -2688,74 +2709,82 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
           }
         }*/
 
-        var tele_gear_ranked = tele_gear_rank[team_num];
-        var auto_gear_ranked = auto_gear_rank[team_num];
-        var climb_ranked = climb_rank[team_num];
+        // var tele_gear_ranked = tele_gear_rank[team_num];
+        // var auto_gear_ranked = auto_gear_rank[team_num];
+        // var climb_ranked = climb_rank[team_num];
 
         // console.log(videos);
         res.render('pages/team', {
-	  req: req,
+      	  req: req,
           team_num: team_num,
           team_name: team_name,
           previous_team_num: previous_team_num,
           next_team_num: next_team_num,
-          tot_auto_gears_scored_fdr: tot_auto_gears_scored_fdr,
-          tot_auto_gears_scored_mid: tot_auto_gears_scored_mid,
-          tot_auto_gears_scored_boi: tot_auto_gears_scored_boi,
-          tot_auto_gears_scored: tot_auto_gears_scored,
-          max_auto_gears_scored: max_auto_gears_scored,
-          tot_auto_gears_attempts: tot_auto_gears_attempts,
-          avg_auto_high_made: avg_auto_high_made,
-          max_auto_high_made: max_auto_high_made,
-          avg_auto_high_attempts: avg_auto_high_attempts,
-          avg_auto_low_made: avg_auto_low_made,
-          max_auto_low_made: max_auto_low_made,
-          avg_auto_low_attempts: avg_auto_low_attempts,
-          tot_baseline_cross: tot_baseline_cross,
-          avg_auto_hopper_intake: avg_auto_hopper_intake,
-          avg_auto_contrib_kpa: avg_auto_contrib_kpa,
-          max_auto_contrib_kpa: max_auto_contrib_kpa,
-
-          avg_tele_high_made: avg_tele_high_made,
-          max_tele_high_made: max_tele_high_made,
-          avg_tele_high_attempts: avg_tele_high_attempts,
-          avg_tele_low_made: avg_tele_low_made,
-          max_tele_low_made: max_tele_low_made,
-          avg_tele_low_attempts: avg_tele_low_attempts,
-          avg_tele_gears_scored: avg_tele_gears_scored,
-          max_tele_gears_scored: max_tele_gears_scored,
-          avg_tele_gears_attempts: avg_tele_gears_attempts,
-          avg_tele_floor_ball_intake: avg_tele_floor_ball_intake,
-          avg_tele_floor_gear_intake: avg_tele_floor_gear_intake,
-          avg_tele_hopper_intake: avg_tele_hopper_intake,
-          avg_hp_gear_intake: avg_hp_gear_intake,
-          avg_hp_gear_intake_miss: avg_hp_gear_intake_miss,
-          avg_tele_gears_dropped: avg_tele_gears_dropped,
-          tot_tele_gear_knockouts: tot_tele_gear_knockouts,
-          tot_climb: tot_climb,
-          tot_climb_attempts: tot_climb_attempts,
-          avg_climb_rating: avg_climb_rating,
-          avg_climb_time: avg_climb_time,
-          avg_mobility_rating: avg_mobility_rating,
+          num_matches: num_matches,
+          tot_auto_cross: tot_auto_cross,
+          tot_auto_left: tot_auto_left,
+          tot_auto_center: tot_auto_center,
+          tot_auto_right: tot_auto_right,
+          tot_auto_pyramid_intake: tot_auto_pyramid_intake,
+          tot_auto_unprotected_intake: tot_auto_unprotected_intake,
+          tot_auto_near_switch_made: tot_auto_near_switch_made,
+          tot_auto_near_switch_attempts: tot_auto_near_switch_attempts,
+          tot_auto_exchange_made: tot_auto_exchange_made,
+          tot_auto_exchange_attempts: tot_auto_exchange_attempts,
+          tot_auto_scale_high_made: tot_auto_scale_high_made,
+          tot_auto_scale_high_attempts: tot_auto_scale_high_attempts,
+          tot_auto_scale_low_made: tot_auto_scale_low_made,
+          tot_auto_scale_low_attempts: tot_auto_scale_low_attempts,
+          avg_tele_cubes_scored: avg_tele_cubes_scored,
+          max_tele_cubes_scored: max_tele_cubes_scored,
+          avg_tele_exchange_made: avg_tele_exchange_made,
+          avg_tele_exchange_attempts: avg_tele_exchange_attempts,
+          avg_tele_near_switch_made: avg_tele_near_switch_made,
+          avg_tele_near_switch_attempts: avg_tele_near_switch_attempts,
+          avg_tele_far_switch_made: avg_tele_far_switch_made,
+          avg_tele_far_switch_attempts: avg_tele_far_switch_attempts,
+          avg_tele_scale_high_made: avg_tele_scale_high_made,
+          avg_tele_scale_high_attempts: avg_tele_scale_high_attempts,
+          avg_tele_scale_low_made: avg_tele_scale_low_made,
+          avg_tele_scale_low_attempts: avg_tele_scale_low_attempts,
+          avg_tele_knockouts: avg_tele_knockouts,
+          avg_tele_cubes_dropped: avg_tele_cubes_dropped,
+          avg_tele_intake: avg_tele_intake,
+          max_tele_intake: max_tele_intake,
+          avg_tele_portal_intake_made: avg_tele_portal_intake_made,
+          avg_tele_portal_intake_attempts: avg_tele_portal_intake_attempts,
+          avg_tele_pyramid_intake: avg_tele_pyramid_intake,
+          avg_tele_unprotected_intake: avg_tele_unprotected_intake,
+          avg_tele_floor_intake: avg_tele_floor_intake,
+          tot_tele_orderly: tot_tele_orderly,
+          max_tele_highest_level: max_tele_highest_level,
+          frq_tele_highest_level: frq_tele_highest_level,
+          tot_tele_climb: tot_tele_climb,
+          tot_tele_climb_attempts: tot_tele_climb_attempts,
+          tot_tele_climb_assisted: tot_tele_climb_assisted,
+          tot_tele_plus_one: tot_tele_plus_one,
+          tot_tele_plus_one_attempts: tot_tele_plus_one_attempts,
+          tot_tele_plus_two: tot_tele_plus_two,
+          tot_tele_plus_two_attempts: tot_tele_plus_two_attempts,
+          avg_driver_rating: avg_driver_rating,
           avg_defense_rating: avg_defense_rating,
-          avg_contrib_kpa: avg_contrib_kpa,
-          max_contrib_kpa: max_contrib_kpa,
-          drive_type: drive_type,
-          no_autos: no_autos,
-          trend_labels: trend_labels,
-          tele_gears_trend: tele_gears_trend,
-          auto_gears_trend: auto_gears_trend,
-          tele_high_goal_trend: tele_high_goal_trend,
-          auto_high_goal_trend: auto_high_goal_trend,
-          climb_trend: climb_trend,
-          tele_gear_ranked: tele_gear_ranked,
-          auto_gear_ranked: auto_gear_ranked,
-          climb_ranked: climb_ranked,
-          videos: videos
+
+          pyramid_intake_trend: pyramid_intake_trend,
+          unprotected_intake_trend: unprotected_intake_trend,
+          portal_intake_trend: portal_intake_trend,
+          floor_intake_trend: floor_intake_trend,
+          total_intake_trend: total_intake_trend,
+          near_switch_cubes_trend: near_switch_cubes_trend,
+          far_switch_cubes_trend: far_switch_cubes_trend,
+          scale_high_cubes_trend: scale_high_cubes_trend,
+          scale_low_cubes_trend: scale_low_cubes_trend,
+          exchange_cubes_trend: exchange_cubes_trend,
+          total_cubes_trend: total_cubes_trend,
+          trend_labels: trend_labels
         });
       });
     });
-  //});
+  });
 
   router.get('/data-entry', reqAdmin(), function(req, res) {
     var display_entry = "";
@@ -2775,49 +2804,66 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     var team_num = Number(req.body.team_num);
     var match_num = Number(req.body.match_num);
 
-    var auto_high_made = Number(req.body.auto_high_made);
-    var auto_high_missed = Number(req.body.auto_high_missed);
-    var auto_low_made = Number(req.body.auto_low_made);
-    var auto_low_missed = Number(req.body.auto_low_missed);
-    var baseline_cross = Number(req.body.baseline_cross);
-    var auto_hopper_intake = Number(req.body.auto_hopper_intake);
-    var auto_gears_scored = Number(req.body.auto_gears_scored);
-    var auto_gears_missed = Number(req.body.auto_gears_missed);
-    var auto_gear_location = req.body.auto_gear_location;
-    var tele_high_made = Number(req.body.tele_high_made);
-    var tele_high_missed = Number(req.body.tele_high_missed);
-    var tele_low_made = Number(req.body.tele_low_made);
-    var tele_low_missed = Number(req.body.tele_low_missed);
-    var tele_floor_ball_intake = Number(req.body.tele_floor_ball_intake);
-    var tele_hopper_intake = Number(req.body.tele_hopper_intake);
-    var tele_gears_scored = Number(req.body.tele_gears_scored);
-    var tele_gears_missed = Number(req.body.tele_gears_missed);
-    var tele_floor_gear_intake = Number(req.body.tele_floor_gear_intake);
-    var hp_gear_intake = Number(req.body.hp_gear_intake);
-    var hp_gear_intake_miss = Number(req.body.hp_gear_intake_miss);
-    var tele_gears_dropped = Number(req.body.tele_gears_dropped);
-    var tele_gear_knockouts = Number(req.body.tele_gear_knockouts);
-    var climb_rating = Number(req.body.climb_rating);
-    var climb_time = Number(req.body.climb_time);
-    var mobility_rating = Number(req.body.mobility_rating);
+    var auto_position = req.body.auto_position;
+    var auto_cross = Number(req.body.auto_cross);
+    var auto_pyramid_intake = Number(req.body.auto_pyramid_intake);
+    var auto_unprotected_intake = Number(req.body.auto_unprotected_intake);
+    var auto_near_switch_made = Number(req.body.auto_near_switch_made);
+    var auto_near_switch_missed = Number(req.body.auto_near_switch_missed);
+    var auto_scale_high_made = Number(req.body.auto_scale_high_made);
+    var auto_scale_high_missed = Number(req.body.auto_scale_high_missed);
+    var auto_scale_low_made = Number(req.body.auto_scale_low_made);
+    var auto_scale_low_missed = Number(req.body.auto_scale_low_missed);
+    var auto_exchange_made = Number(req.body.auto_exchange_made);
+    var auto_exchange_missed = Number(req.body.auto_exchange_missed);
+    var tele_floor_intake = Number(req.body.tele_floor_intake);
+    var tele_portal_intake_made = Number(req.body.tele_portal_intake_made);
+    var tele_portal_intake_missed = Number(req.body.tele_portal_intake_missed);
+    var tele_pyramid_intake = Number(req.body.tele_pyramid_intake);
+    var tele_unprotected_intake = Number(req.body.tele_unprotected_intake);
+    var tele_exchange_made = Number(req.body.tele_exchange_made);
+    var tele_exchange_missed = Number(req.body.tele_exchange_missed);
+    var tele_scale_high_made = Number(req.body.tele_scale_high_made);
+    var tele_scale_high_missed = Number(req.body.tele_scale_high_missed);
+    var tele_scale_low_made = Number(req.body.tele_scale_low_made);
+    var tele_scale_low_missed = Number(req.body.tele_scale_low_missed);
+    var tele_far_switch_made = Number(req.body.tele_far_switch_made);
+    var tele_far_switch_missed = Number(req.body.tele_far_switch_missed);
+    var tele_near_switch_made = Number(req.body.tele_near_switch_made);
+    var tele_near_switch_missed = Number(req.body.tele_near_switch_missed);
+    var tele_knockouts = Number(req.body.tele_knockouts);
+    var tele_cubes_dropped = Number(req.body.tele_cubes_dropped);
+    var tele_highest_level = Number(req.body.tele_highest_level);
+    var tele_orderly = Number(req.body.tele_orderly);
+    var tele_climb = Number(req.body.tele_climb);
+    var tele_climb_failed = Number(req.body.tele_climb_failed);
+    var tele_plus_one = Number(req.body.tele_plus_one);
+    var tele_plus_one_failed = Number(req.body.tele_plus_one_failed);
+    var tele_plus_two = Number(req.body.tele_plus_two);
+    var tele_plus_two_failed = Number(req.body.tele_plus_two_failed);
+    var tele_climb_assisted = Number(req.body.tele_climb_assisted);
+    var driver_rating = Number(req.body.driver_rating);
     var defense_rating = Number(req.body.defense_rating);
 
-    var auto_kpa = auto_high_made + 1/3 * auto_low_made;
-    var tot_kpa = auto_kpa + 1/3 * tele_high_made + 1/9 * tele_low_made;
-
-    var matches_sql_v2 = "INSERT INTO `matches` (`match_num`, `team_num`, `auto_high_made`, `auto_high_missed`, " +
-      "`auto_low_made`, `auto_low_missed`, `baseline_cross`, `auto_hopper_intake`, " +
-      "`auto_gears_scored`, `auto_gears_missed`, `auto_gear_location`, `tele_high_made`, `tele_high_missed`, " +
-      "`tele_low_made`, `tele_low_missed`, `tele_floor_ball_intake`, `tele_hopper_intake`, `tele_gears_scored`, " +
-      "`tele_gears_missed`, `tele_floor_gear_intake`, `hp_gear_intake`, `hp_gear_intake_miss`, `tele_gears_dropped`, " +
-      "`tele_gear_knockouts`, `climb_rating`, `climb_time`, `mobility_rating`, `defense_rating`, " +
-      "`auto_contrib_kpa`, `contrib_kpa`) VALUES (" + match_num + ", " + team_num + ", " + auto_high_made + ", " + auto_high_missed +
-      ", " + auto_low_made + ", " + auto_low_missed + ", " + baseline_cross + ", " + auto_hopper_intake + ", " + auto_gears_scored +
-      ", " + auto_gears_missed + ", \"" + auto_gear_location + "\", " + tele_high_made + ", " + tele_high_missed + ", " + tele_low_made +
-      ", " + tele_low_missed + ", " + tele_floor_ball_intake + ", " + tele_hopper_intake + ", " + tele_gears_scored +
-      ", " + tele_gears_missed + ", " + tele_floor_gear_intake + ", " + hp_gear_intake + ", " + hp_gear_intake_miss +
-      ", " + tele_gears_dropped + ", " + tele_gear_knockouts + ", " + climb_rating + ", " + climb_time + ", " + mobility_rating +
-      ", " + defense_rating + ", " + auto_kpa + ", " + tot_kpa + ");"
+    var matches_sql_v2 = "INSERT INTO `matches` (`match_num`, `team_num`, `auto_position`, `auto_cross`, `auto_pyramid_intake`, "
+      + "`auto_unprotected_intake`, `auto_near_switch_made`, `auto_near_switch_missed`, `auto_scale_high_made`, `auto_scale_high_missed`, "
+      + "`auto_scale_low_made`, `auto_scale_low_missed`, `auto_exchange_made`, `auto_exchange_missed`, `tele_floor_intake`, "
+      + "`tele_portal_intake_made`, `tele_portal_intake_missed`, `tele_pyramid_intake`, `tele_unprotected_intake`, "
+      + "`tele_exchange_made`, `tele_exchange_missed`, `tele_scale_high_made`, `tele_scale_high_missed`, `tele_scale_low_made`, "
+      + "`tele_scale_low_missed`, `tele_near_switch_made`, `tele_near_switch_missed`, `tele_far_switch_made`, `tele_far_switch_missed`, "
+      + "`tele_knockouts`, `tele_cubes_dropped`, `tele_highest_level`, `tele_orderly`, `tele_climb`, `tele_climb_failed`, "
+      + "`tele_plus_one`, `tele_plus_one_failed`, `tele_plus_two`, `tele_plus_two_failed`, `tele_climb_assisted`, `driver_rating`, "
+      + "`defense_rating`) VALUES (" + match_num + ", " + team_num + ", '" + auto_position + "', " + auto_cross + ", "
+      + auto_pyramid_intake + ", " + auto_unprotected_intake + ", " + auto_near_switch_made + ", " + auto_near_switch_missed + ", "
+      + auto_scale_high_made + ", " + auto_scale_high_missed + ", " + auto_scale_low_made + ", " + auto_scale_low_missed + ", "
+      + auto_exchange_made + ", " + auto_exchange_missed + ", " + tele_floor_intake + ", " + tele_portal_intake_made + ", "
+      + tele_portal_intake_missed + ", " + tele_pyramid_intake + ", " + tele_unprotected_intake + ", " + tele_exchange_made + ", "
+      + tele_exchange_missed + ", " + tele_scale_high_made + ", " + tele_scale_high_missed + ", " + tele_scale_low_made + ", "
+      + tele_scale_low_missed + ", " + tele_near_switch_made + ", " + tele_near_switch_missed + ", " + tele_far_switch_made + ", "
+      + tele_far_switch_missed + ", " + tele_knockouts + ", " + tele_cubes_dropped + ", " + tele_highest_level + ", "
+      + tele_orderly + ", " + tele_climb + ", " + tele_climb_failed + ", " + tele_plus_one + ", " + tele_plus_one_failed + ", "
+      + tele_plus_two + ", " + tele_plus_two_failed + ", " + tele_climb_assisted + ", " + driver_rating + ", " + defense_rating + ")";
+      // console.log(matches_sql_v2);
     connection.query("SELECT * FROM matches WHERE match_num=" + match_num, function(err, rows) {
       num_matches = rows.length + 1 || 1;
       connection.query(matches_sql_v2, function(err) {
@@ -2839,64 +2885,6 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     });
   });
 
-
-function updateContribScores(team_num)
-{
-grab_data_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
-
-connection.query(grab_data_sql, function(err, rows, fields) {
-          console.log(err);
-
-	for(var x in rows)
-	{
-		var a1 = rows[x].a1_total;
-		if(a1>2)
-			a1 = 2;
-		var a2 = rows[x].a2_total;
-		if(a2)
-			a2 = 2;
-		var b1 = rows[x].b1_total;
-		if(b1>2)
-			b1 = 2;
-		var b2 = rows[x].b2_total;
-		if(b2>2)
-			b2 = 2;
-		var c1 = rows[x].c1_total;
-		if(c1>2)
-			c1 = 2;
-		var c2 = rows[x].c2_total;
-		if(c2>2)
-			c2 = 2;
-		var d1 = rows[x].d1_total;
-		if(d1>2)
-			d1 = 2;
-		var d2 = rows[x].d2_total;
-		if(d2>2)
-			d2 = 2;
-		var lb = rows[x].lb_total;
-		if(lb>2)
-			lb = 2;
-
-
-		console.log(a1);
-		console.log(a2);
-		console.log(b1);
-		console.log(b2);
-		console.log(c1);
-		console.log(c2);
-		console.log(d1);
-		console.log(d2);
-		console.log(lb);
-		var dis_contributed_score = rows[x].auton_score + (5*(a1 + a2 + b1 + b2 + c1 + c2 + d1 + d2 + lb) + 2*rows[x].tele_low_made + 5*rows[x].tele_high_made + 15*rows[x].tele_hang + 5*rows[x].tele_challenge);
-		console.log(dis_contributed_score);
-		var update_sql_script = "UPDATE matches SET contributed_score='"+ dis_contributed_score +"' WHERE team_num='"+ team_num +"' AND match_number='"+ rows[x].match_number +"'";
-
-
-		connection.query(update_sql_script);
-	}
-      });
-
-}
 
   function stdevGears(team_num)
   {
@@ -2967,103 +2955,128 @@ connection.query(grab_data_sql, function(err, rows, fields) {
   {
     //  console.log("updating data into teams for team: " + team_num);
       var team_sql = "UPDATE teams SET num_matches=(SELECT COUNT(*) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_auto_gears_scored_fdr=(SELECT AVG(auto_gears_scored) FROM matches WHERE auto_gear_location=\"FDR\" AND team_num=" + team_num + "), " +
-      "tot_auto_gears_scored_fdr=(SELECT SUM(auto_gears_scored) FROM matches WHERE auto_gear_location=\"FDR\" AND team_num=" + team_num + "), " +
+      "tot_auto_left=(SELECT COUNT(*) FROM matches WHERE auto_position=\"Left\" AND team_num=" + team_num + "), " +
+      "tot_auto_center=(SELECT COUNT(*) FROM matches WHERE auto_position=\"Center\" AND team_num=" + team_num + "), " +
+      "tot_auto_right=(SELECT COUNT(*) FROM matches WHERE auto_position=\"Right\" AND team_num=" + team_num + "), " +
+      "tot_auto_cross=(SELECT SUM(auto_cross) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "tot_auto_gears_scored_mid=(SELECT AVG(auto_gears_scored) FROM matches WHERE auto_gear_location=\"MID\" AND team_num=" + team_num + "), " +
-      "tot_auto_gears_scored_mid=(SELECT SUM(auto_gears_scored) FROM matches WHERE auto_gear_location=\"MID\" AND team_num=" + team_num + "), " +
+      "tot_auto_pyramid_intake=(SELECT SUM(auto_pyramid_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_pyramid_intake=(SELECT AVG(auto_pyramid_intake) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "tot_auto_gears_scored_boi=(SELECT AVG(auto_gears_scored) FROM matches WHERE auto_gear_location=\"BOI\" AND team_num=" + team_num + "), " +
-      "tot_auto_gears_scored_boi=(SELECT SUM(auto_gears_scored) FROM matches WHERE auto_gear_location=\"BOI\" AND team_num=" + team_num + "), " +
+      "tot_auto_unprotected_intake=(SELECT SUM(auto_unprotected_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_unprotected_intake=(SELECT AVG(auto_unprotected_intake) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "perc_auto_gears_scored=100*(SELECT SUM(auto_gears_scored)/(SUM(auto_gears_missed)+SUM(auto_gears_scored)) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_auto_gears_scored=(SELECT SUM(auto_gears_scored) FROM matches WHERE team_num=" + team_num + "), " +
-      "max_auto_gears_scored=(SELECT auto_gears_scored FROM matches WHERE team_num=" + team_num + " ORDER BY auto_gears_scored DESC LIMIT 1), " +
-      "tot_auto_gears_attempts=(SELECT SUM(auto_gears_scored)+SUM(auto_gears_missed) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_auto_gears_scored=(SELECT AVG(auto_gears_scored) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_auto_gears_attempts=(SELECT AVG(auto_gears_scored+auto_gears_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "perc_auto_near_switch_made=100*(SELECT SUM(avg_auto_near_switch_made)/(SUM(auto_near_switch_missed)+SUM(auto_near_switch_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_auto_near_switch_made=(SELECT SUM(avg_auto_near_switch_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_auto_near_switch_attempts=(SELECT SUM(auto_near_switch_made)+SUM(auto_near_switch_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_near_switch_made=(SELECT AVG(auto_near_switch_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_near_switch_attempts=(SELECT AVG(auto_near_switch_made+auto_near_switch_missed) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "perc_auto_high_made=100*(SELECT SUM(auto_high_made)/(SUM(auto_high_missed)+SUM(auto_high_made)) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_auto_high_made=(SELECT SUM(auto_high_made) FROM matches WHERE team_num=" + team_num + "), " +
-      "max_auto_high_made=(SELECT auto_high_made FROM matches WHERE team_num=" + team_num + " ORDER BY auto_high_made DESC LIMIT 1), " +
-      "tot_auto_high_attempts=(SELECT SUM(auto_high_made)+SUM(auto_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_auto_high_made=(SELECT AVG(auto_high_made) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_auto_high_attempts=(SELECT AVG(auto_high_made+auto_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "perc_auto_scale_high_made=100*(SELECT SUM(auto_scale_high_made)/(SUM(auto_scale_high_missed)+SUM(auto_scale_high_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_auto_scale_high_made=(SELECT SUM(auto_scale_high_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_auto_scale_high_attempts=(SELECT SUM(auto_scale_high_made)+SUM(auto_scale_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_scale_high_made=(SELECT AVG(auto_scale_high_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_scale_high_attempts=(SELECT AVG(auto_scale_high_made+auto_scale_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
       // "std_auto_high_made=(SELECT STD(auto_high_made) FROM matches WHERE team_num=" + team_num + "), " +
       // "cst_auto_high_made=avg_auto_high_made/std_auto_high_made, " +
 
-      "perc_auto_low_made=100*(SELECT SUM(auto_low_made)/(SUM(auto_low_missed)+SUM(auto_low_made)) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_auto_low_made=(SELECT SUM(auto_low_made) FROM matches WHERE team_num=" + team_num + "), " +
-      "max_auto_low_made=(SELECT auto_low_made FROM matches WHERE team_num=" + team_num + " ORDER BY auto_low_made DESC LIMIT 1), " +
-      "tot_auto_low_attempts=(SELECT SUM(auto_low_made)+SUM(auto_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_auto_low_made=(SELECT AVG(auto_low_made) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_auto_low_attempts=(SELECT AVG(auto_low_made+auto_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "perc_auto_scale_low_made=100*(SELECT SUM(auto_scale_low_made)/(SUM(auto_scale_low_missed)+SUM(auto_scale_low_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_auto_scale_low_made=(SELECT SUM(auto_scale_low_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_auto_scale_low_attempts=(SELECT SUM(auto_scale_low_made)+SUM(auto_scale_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_scale_low_made=(SELECT AVG(auto_scale_low_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_scale_low_attempts=(SELECT AVG(auto_scale_low_made+auto_scale_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "tot_baseline_cross=(SELECT SUM(baseline_cross) FROM matches WHERE team_num=" + team_num + "), " +
+      "perc_auto_exchange_made=100*(SELECT SUM(auto_exchange_made)/(SUM(auto_exchange_missed)+SUM(auto_exchange_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_auto_exchange_made=(SELECT SUM(auto_exchange_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_auto_exchange_attempts=(SELECT SUM(auto_exchange_made)+SUM(auto_exchange_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_exchange_made=(SELECT AVG(auto_exchange_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_auto_exchange_attempts=(SELECT AVG(auto_exchange_made+auto_exchange_missed) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "avg_auto_hopper_intake=(SELECT AVG(auto_hopper_intake) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_auto_hopper_intake=(SELECT SUM(auto_hopper_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_intake=(SELECT SUM(tele_floor_intake+tele_pyramid_intake+tele_unprotected_intake+tele_portal_intake_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_intake=(SELECT AVG(tele_floor_intake+tele_pyramid_intake+tele_unprotected_intake+tele_portal_intake_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "max_tele_intake=(SELECT (tele_floor_intake+tele_pyramid_intake+tele_unprotected_intake+tele_portal_intake_made) FROM matches WHERE team_num=" + team_num + " ORDER BY (tele_floor_intake+tele_pyramid_intake+tele_unprotected_intake+tele_portal_intake_made) DESC LIMIT 1), " +
 
-      "perc_tele_high_made=100*(SELECT SUM(tele_high_made)/(SUM(tele_high_missed)+SUM(tele_high_made)) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_high_made=(SELECT SUM(tele_high_made) FROM matches WHERE team_num=" + team_num + "), " +
-      "max_tele_high_made=(SELECT tele_high_made FROM matches WHERE team_num=" + team_num + " ORDER BY tele_high_made DESC LIMIT 1), " +
-      "tot_tele_high_attempts=(SELECT SUM(tele_high_made)+SUM(tele_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_tele_high_made=(SELECT AVG(tele_high_made) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_tele_high_attempts=(SELECT AVG(tele_high_made+tele_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_floor_intake=(SELECT SUM(tele_floor_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_floor_intake=(SELECT AVG(tele_floor_intake) FROM matches WHERE team_num=" + team_num + "), " +
+
+      "tot_tele_pyramid_intake=(SELECT SUM(tele_pyramid_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_pyramid_intake=(SELECT AVG(tele_pyramid_intake) FROM matches WHERE team_num=" + team_num + "), " +
+
+      "tot_tele_unprotected_intake=(SELECT SUM(tele_unprotected_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_unprotected_intake=(SELECT AVG(tele_unprotected_intake) FROM matches WHERE team_num=" + team_num + "), " +
+
+      "perc_tele_portal_intake_made=100*(SELECT SUM(tele_portal_intake_made)/(SUM(tele_portal_intake_missed)+SUM(tele_portal_intake_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_portal_intake_made=(SELECT SUM(tele_portal_intake_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_portal_intake_attempts=(SELECT SUM(tele_portal_intake_made)+SUM(tele_portal_intake_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_portal_intake_made=(SELECT AVG(tele_portal_intake_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_portal_intake_attempts=(SELECT AVG(tele_portal_intake_made+tele_portal_intake_missed) FROM matches WHERE team_num=" + team_num + "), " +
+
+      "perc_tele_near_switch_made=100*(SELECT SUM(tele_near_switch_made)/(SUM(tele_near_switch_missed)+SUM(tele_near_switch_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_near_switch_made=(SELECT SUM(tele_near_switch_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_near_switch_attempts=(SELECT SUM(tele_near_switch_made)+SUM(tele_near_switch_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_near_switch_made=(SELECT AVG(tele_near_switch_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_near_switch_attempts=(SELECT AVG(tele_near_switch_made+tele_near_switch_missed) FROM matches WHERE team_num=" + team_num + "), " +
       // "std_tele_high_made=(SELECT STD(tele_high_made) FROM matches WHERE team_num=" + team_num + "), " +
       // "cst_tele_high_made=avg_tele_high_made/std_tele_high_made, " +
 
-      "perc_tele_low_made=100*(SELECT SUM(tele_low_made)/(SUM(tele_low_missed)+SUM(tele_low_made)) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_low_made=(SELECT SUM(tele_low_made) FROM matches WHERE team_num=" + team_num + "), " +
-      "max_tele_low_made=(SELECT tele_low_made FROM matches WHERE team_num=" + team_num + " ORDER BY tele_low_made DESC LIMIT 1), " +
-      "tot_tele_low_attempts=(SELECT SUM(tele_low_made)+SUM(tele_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_tele_low_made=(SELECT AVG(tele_low_made) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_tele_low_attempts=(SELECT AVG(tele_low_made+tele_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "perc_tele_far_switch_made=100*(SELECT SUM(tele_far_switch_made)/(SUM(tele_far_switch_missed)+SUM(tele_far_switch_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_far_switch_made=(SELECT SUM(tele_far_switch_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_far_switch_attempts=(SELECT SUM(tele_far_switch_made)+SUM(tele_far_switch_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_far_switch_made=(SELECT AVG(tele_far_switch_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_far_switch_attempts=(SELECT AVG(tele_far_switch_made+tele_far_switch_missed) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "perc_tele_gears_scored=100*(SELECT SUM(tele_gears_scored)/(SUM(tele_gears_missed)+SUM(tele_gears_scored)) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_gears_scored=(SELECT SUM(tele_gears_scored) FROM matches WHERE team_num=" + team_num + "), " +
-      "max_tele_gears_scored=(SELECT tele_gears_scored FROM matches WHERE team_num=" + team_num + " ORDER BY tele_gears_scored DESC LIMIT 1), " +
-      "tot_tele_gears_attempts=(SELECT SUM(tele_gears_scored)+SUM(tele_gears_missed) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_tele_gears_scored=(SELECT AVG(tele_gears_scored) FROM matches WHERE team_num=" + team_num + "), " +
-      "avg_tele_gears_attempts=(SELECT AVG(tele_gears_scored+tele_gears_missed) FROM matches WHERE team_num=" + team_num + "), " +
-      "std_tele_gears_scored=(SELECT STD(tele_gears_scored) FROM matches WHERE team_num=" + team_num + "), " +
-      "cst_tele_gears_scored=avg_tele_gears_scored/std_tele_gears_scored, " +
+      "perc_tele_scale_high_made=100*(SELECT SUM(tele_scale_high_made)/(SUM(tele_scale_high_missed)+SUM(tele_scale_high_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_scale_high_made=(SELECT SUM(tele_scale_high_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_scale_high_attempts=(SELECT SUM(tele_scale_high_made)+SUM(tele_scale_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_scale_high_made=(SELECT AVG(tele_scale_high_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_scale_high_attempts=(SELECT AVG(tele_scale_high_made+tele_scale_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
+//      "std_tele_gears_scored=(SELECT STD(tele_gears_scored) FROM matches WHERE team_num=" + team_num + "), " +
+//      "cst_tele_gears_scored=avg_tele_gears_scored/std_tele_gears_scored, " +
 
-      "avg_tele_floor_ball_intake=(SELECT AVG(tele_floor_ball_intake) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_floor_ball_intake=(SELECT SUM(tele_floor_ball_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "perc_tele_scale_low_made=100*(SELECT SUM(tele_scale_low_made)/(SUM(tele_scale_low_missed)+SUM(tele_scale_low_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_scale_low_made=(SELECT SUM(tele_scale_low_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_scale_low_attempts=(SELECT SUM(tele_scale_low_made)+SUM(tele_scale_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_scale_low_made=(SELECT AVG(tele_scale_low_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_scale_low_attempts=(SELECT AVG(tele_scale_low_made+tele_scale_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "avg_tele_hopper_intake=(SELECT AVG(tele_hopper_intake) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_hopper_intake=(SELECT SUM(tele_hopper_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "perc_tele_exchange_made=100*(SELECT SUM(tele_exchange_made)/(SUM(tele_exchange_missed)+SUM(tele_exchange_made)) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_exchange_made=(SELECT SUM(tele_exchange_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_exchange_attempts=(SELECT SUM(tele_exchange_made)+SUM(tele_exchange_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_exchange_made=(SELECT AVG(tele_exchange_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_exchange_attempts=(SELECT AVG(tele_exchange_made+tele_exchange_missed) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "avg_tele_floor_gear_intake=(SELECT AVG(tele_floor_gear_intake) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_floor_gear_intake=(SELECT SUM(tele_floor_gear_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_cubes_scored=(SELECT SUM(tele_near_switch_made+tele_far_switch_made+tele_scale_high_made+tele_scale_low_made+tele_exchange_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_cubes_scored=(SELECT AVG(tele_near_switch_made+tele_far_switch_made+tele_scale_high_made+tele_scale_low_made+tele_exchange_made) FROM matches WHERE team_num=" + team_num + "), " +
+      "max_tele_cubes_scored=(SELECT (tele_near_switch_made+tele_far_switch_made+tele_scale_high_made+tele_scale_low_made+tele_exchange_made) FROM matches WHERE team_num=" + team_num + " ORDER BY (tele_near_switch_made+tele_far_switch_made+tele_scale_high_made+tele_scale_low_made+tele_exchange_made) DESC LIMIT 1), " +
 
-      "avg_hp_gear_intake=(SELECT AVG(hp_gear_intake) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_hp_gear_intake=(SELECT SUM(hp_gear_intake) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_knockouts=(SELECT SUM(tele_knockouts) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_knockouts=(SELECT AVG(tele_knockouts) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "avg_hp_gear_intake_miss=(SELECT AVG(hp_gear_intake_miss) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_hp_gear_intake_miss=(SELECT SUM(hp_gear_intake_miss) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_cubes_dropped=(SELECT SUM(tele_cubes_dropped) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_cubes_dropped=(SELECT AVG(tele_cubes_dropped) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "avg_tele_gears_dropped=(SELECT AVG(tele_gears_dropped) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_gears_dropped=(SELECT SUM(tele_gears_dropped) FROM matches WHERE team_num=" + team_num + "), " +
+      "max_tele_highest_level=(SELECT tele_highest_level FROM matches WHERE team_num=" + team_num + " ORDER BY tele_highest_level DESC LIMIT 1), " +
+      "frq_tele_highest_level=(SELECT COUNT(*) FROM matches WHERE tele_highest_level=max_tele_highest_level AND team_num=" + team_num + "), " +
 
-      "tot_tele_gear_knockouts=(SELECT AVG(tele_gear_knockouts) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_gear_knockouts=(SELECT SUM(tele_gear_knockouts) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_orderly=(SELECT SUM(tele_orderly) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "perc_climb=100*((SELECT COUNT(*) FROM matches WHERE climb_rating=5 AND team_num=" + team_num + ")/(SELECT COUNT(*) FROM matches WHERE climb_rating<>0 AND team_num=" + team_num + ")), " +
-      "tot_climb=(SELECT COUNT(*) FROM matches WHERE climb_rating=5 AND team_num=" + team_num + "), " +
-      "tot_climb_attempts=(SELECT COUNT(*) FROM matches WHERE climb_rating<>0 AND team_num=" + team_num + "), " +
+      "perc_tele_climb=100*((SELECT SUM(tele_climb) FROM matches WHERE team_num=" + team_num + ")/(SELECT SUM(tele_climb)+SUM(tele_climb_failed) FROM matches WHERE team_num=" + team_num + ")), " +
+      "tot_tele_climb=(SELECT SUM(tele_climb) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_climb_attempts=(SELECT SUM(tele_climb+tele_climb_failed)+SUM(tele_climb) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "avg_climb_rating=(SELECT AVG(climb_rating) FROM matches WHERE climb_rating<>0 AND team_num=" + team_num + "), " +
-      "avg_climb_time=(SELECT AVG(climb_time) FROM matches WHERE climb_rating<>0 AND team_num=" + team_num + "), " +
+      "perc_tele_plus_one=100*((SELECT SUM(tele_plus_one) FROM matches WHERE team_num=" + team_num + ")/(SELECT SUM(tele_plus_one)+SUM(tele_plus_one_failed) FROM matches WHERE team_num=" + team_num + ")), " +
+      "tot_tele_plus_one=(SELECT SUM(tele_plus_one) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_plus_one_attempts=(SELECT SUM(tele_plus_one+tele_plus_one_failed) FROM matches WHERE team_num=" + team_num + "), " +
 
-      "avg_mobility_rating=(SELECT AVG(mobility_rating) FROM matches WHERE team_num=" + team_num + "), " +
+      "perc_tele_plus_two=100*((SELECT SUM(tele_plus_two) FROM matches WHERE team_num=" + team_num + ")/(SELECT SUM(tele_plus_two)+SUM(tele_plus_two_failed) FROM matches WHERE team_num=" + team_num + ")), " +
+      "tot_tele_plus_two=(SELECT SUM(tele_plus_two) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_plus_two_attempts=(SELECT SUM(tele_plus_two+tele_plus_two_failed) FROM matches WHERE team_num=" + team_num + "), " +
+
+      "tot_tele_climb_assisted=(SELECT AVG(tele_climb_assisted) FROM matches WHERE team_num=" + team_num + "), " +
+
+      "avg_driver_rating=(SELECT AVG(driver_rating) FROM matches WHERE team_num=" + team_num + "), " +
       "avg_defense_rating=(SELECT AVG(defense_rating) FROM matches WHERE team_num=" + team_num + " AND defense_rating<>0), " +
-
-      "avg_auto_contrib_kpa=(SELECT AVG(auto_contrib_kpa) FROM matches WHERE team_num=" + team_num + "), "  +
-      "max_auto_contrib_kpa=(SELECT auto_contrib_kpa FROM matches WHERE team_num=" + team_num + " ORDER BY auto_contrib_kpa DESC LIMIT 1), " +
-      "avg_contrib_kpa=(SELECT AVG(contrib_kpa) FROM matches WHERE team_num=" + team_num + "), " +
-      "max_contrib_kpa=(SELECT contrib_kpa FROM matches WHERE team_num=" + team_num + " ORDER BY contrib_kpa DESC LIMIT 1) " +
+      "alliance_rating=(avg_tele_cubes_scored+avg_tele_intake) " +
 
       "WHERE team_num=" + team_num;
 
