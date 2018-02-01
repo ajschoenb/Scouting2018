@@ -95,64 +95,78 @@
           </tr>
         </table>
       </div>
-      <div class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-sm-12 col-xs-12" style="font-size: 10px; top: -60px;">
-        <div>
+      <div class="col-lg-7 col-lg-offset-0 col-md-6 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-sm-12 col-xs-12" style="font-size: 14px; top: 15px;">
+        <div class="row">
           <h4><strong>Intake Trend</strong></h4>
-          <canvas id="intake_trend"></canvas>
-          <div id="legend">
-            <ul>
+          <div class="col-lg-9">
+            <canvas id="intake_trend"></canvas>
+          </div>
+          <div class="col-lg-3" id="legend" style="top: 15px;">
+            <ul style="list-style-type: none;">
               <li>
-                <span style="background-color: rgba(255,166,158,1)" />
-                Pyramid
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(255,166,158,1);"></div>
+                <strong>Pyramid</strong>
               </li>
               <li>
-                <span style="background-color: rgba(201,235,148,1)" />
-                Unprotected
+                <!-- <span style="background-color: rgba(201,235,148,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(201,235,148,1);"></div>
+                <strong>Unprotected</strong>
               </li>
               <li>
-                <span style="background-color: rgba(151,187,205,1)" />
-                Portal
+                <!-- <span style="background-color: rgba(151,187,205,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(151,187,205,1);"></div>
+                <strong>Portal</strong>
               </li>
               <li>
-                <span style="background-color: rgba(247,239,118,1)" />
-                Floor
+                <!-- <span style="background-color: rgba(247,239,118,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(247,239,118,1);"></div>
+                <strong>Floor</strong>
               </li>
               <li>
-                <span style="background-color: rgba(228,156,255,1)" />
-                Total
+                <!-- <span style="background-color: rgba(228,156,255,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(228,156,255,1);"></div>
+                <strong>Total</strong>
               </li>
             </ul>
           </div>
         </div>
 
-        <div>
+        <div class="row">
           <h4><strong>Cubes Trend</strong></h4>
-          <canvas id="cubes_trend"></canvas>
-          <div id="legend">
-            <ul>
+          <div class="col-lg-9">
+            <canvas id="cubes_trend"></canvas>
+          </div>
+          <div class="col-lg-3" id="legend" style="top: 15px;">
+            <ul style="list-style: none;">
               <li>
-                <span style="background-color: rgba(255,166,158,1)" />
-                Near Switch
+                <!-- <span style="background-color: rgba(255,166,158,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(255,166,158,1);"></div>
+                <strong>Near Switch</strong>
               </li>
               <li>
-                <span style="background-color: rgba(201,235,148,1)" />
-                Far Switch
+                <!-- <span style="background-color: rgba(201,235,148,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(201,235,148,1);"></div>
+                <strong>Far Switch</strong>
               </li>
               <li>
-                <span style="background-color: rgba(151,187,205,1)" />
-                Scale High
+                <!-- <span style="background-color: rgba(151,187,205,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(151,187,205,1);"></div>
+                <strong>Scale High</strong>
               </li>
               <li>
-                <span style="background-color: rgba(168,254,254,1)" />
-                Scale Low
+                <!-- <span style="background-color: rgba(168,254,254,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(168,254,254,1);"></div>
+                <strong>Scale Low</strong>
               </li>
               <li>
-                <span style="background-color: rgba(247,239,118,1)" />
-                Exchange
+                <!-- <span style="background-color: rgba(247,239,118,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(247,239,118,1);"></div>
+                <strong>Exchange</strong>
               </li>
               <li>
-                <span style="background-color: rgba(228,156,255,1)" />
-                Total
+                <!-- <span style="background-color: rgba(228,156,255,1)" /> -->
+                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(228,156,255,1);"></div>
+                <strong>Total</strong>
               </li>
             </ul>
           </div>
