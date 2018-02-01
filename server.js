@@ -52,24 +52,32 @@ REST.prototype.connectMysql = function()
 {
     var self = this;
 
-    var pool = mysql.createPool({
-        connectionLimit: 100,
-        host     : '127.0.0.1',
-        user     : 'root',
-        password : '',
-        database : 'frcscout2018',
-        debug    : false
-    });
-    /* DEPLOY ONLY*/
-
-    /*var pool = mysql.createPool({
+    var pool = null;
+    if(process.argv[2] && process.argv[2] === "local")
+    {
+      console.log("Connecting to local DB");
+      pool = mysql.createPool({
+          connectionLimit: 100,
+          host     : '127.0.0.1',
+          user     : 'root',
+          password : '',
+          database : 'frcscout2018',
+          debug    : false
+      });
+    }
+    else
+    {
+      console.log("Connecting to remote DB");
+      /* DEPLOY ONLY*/
+      pool = mysql.createPool({
         connectionLimit: 100,
         host     : 'sql9.freesqldatabase.com',
         user     : 'sql9207328',
         password : 'WaNG8mTXnN',
         database : 'sql9207328',
         debug    : false
-    });*/
+      });
+    }
     pool.getConnection(function(err, connection) {
         if(err)
             self.stop(err);
