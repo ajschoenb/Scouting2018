@@ -2786,7 +2786,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     });
   });
 
-  router.get('/data-entry', reqAdmin(), function(req, res) {
+  router.get('/data-entry', ensureLogin.ensureLoggedIn(), function(req, res) {
     var display_entry = "";
     if(most_recent == -1)
       display_entry = '<div class="alert alert-danger" role="alert"><p><b>Oh snap</b>, looks like this is a duplicate entry. Data not queried.</p></div>';
