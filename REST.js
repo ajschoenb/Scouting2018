@@ -72,7 +72,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
       {
         team_list += "<tr class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ rows[x].team_name +"</td></tr>";
 	      updateTeams(rows[x].team_num);
-	      notes_query += rows[x].team_num + "` `";
+	      notes_query += rows[x].team_num + "``";
       }
       notes_query = notes_query.substring(0, notes_query.length - 2) + "');"
     });
@@ -142,6 +142,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     var query = "SELECT * FROM notes WHERE user='" + req.user.username + "';";
     //console.log(query);
     connection.query(query, function(err, rows) {
+      // console.log(rows);
+      // console.log(rows.length);
+      if(err) console.log(err);
+      if(rows.length === 0) res.redirect("/");
       notes = rows[0].notes.split('`');
       //console.log(notes);
       for(var x = 0; x < notes.length; x += 2)
@@ -162,7 +166,44 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     var query = "UPDATE notes SET notes='" + req.body.notes + "' WHERE user='" + req.user.username + "'";
     connection.query(query, function(err) {
       if(err) console.log(err);
-      res.redirect("/notes");
+      var get_all = "SELECT * FROM notes WHERE user<>'admin'";
+      connection.query(get_all, function(err, rows) {
+        var notes, notes_split = [];
+        // console.log(rows);
+        for(var n in rows[0].notes.split("`"))
+        {
+          notes_split[n] = "";
+        }
+        for(var x in rows)
+        {
+          for(var y in (notes = rows[x].notes.split("`")))
+          {
+            if(!Number(notes_split[y].substring(0, notes_split[y].length - 2)))
+            {
+              // notes_split[y] += (notes[y].replace('\n', '') + ", ") || "";
+              var foo = "";
+              if((foo = notes[y].replace('\n', '')) && !((foo = notes[y].replace('\n', '')) === " "))
+              {
+                if(notes_split[y] && !Number(notes_split[y])) notes_split[y] += ", "
+                notes_split[y] += foo;
+              }
+              // if(Number(notes_split[y].substring(0, notes_split[y].length - 2))) notes_split[y] = notes_split[y].substring(0, notes_split[y].length - 2);
+              // if(Number(notes_split[y].substring(2))) notes_split[y] = notes_split[y].substring(2);
+            }
+          }
+          // notes += rows[x].notes;
+        }
+        // console.log(notes_split);
+        var csv = notes_split.join('`');
+        // csv = csv.substring(0);
+        console.log(csv);
+        var push_query = "UPDATE notes SET notes='" + csv + "' WHERE user='admin'";
+        connection.query(push_query, function(err)
+        {
+          res.redirect("/notes");
+        });
+        // notes_split = notes.split("`");
+      });
     });
   });
 
@@ -349,16 +390,16 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     var event_code = req.body.event.split("-")[0];
     var teams = [];
     tba.getEventTeams(event_code, 2018, function(err, team_list) {
-      var drop_teams_sql = "TRUNCATE teams;"
+      var drop_teams_sql = "TRUNCATE teams; TRUNCATE matches; TRUNCATE notes; INSERT INTO notes (user, notes) VALUES ('admin', '');";
       connection.query(drop_teams_sql, function(err) {
         if(err) {
           console.log(err);
         }
-        var drop_matches_sql = "TRUNCATE matches;"
-        connection.query(drop_matches_sql, function(err) {
-          if(err) {
-            console.log(err);
-          }
+        // var drop_matches_sql = "TRUNCATE matches;"
+        // connection.query(drop_matches_sql, function(err) {
+        //   if(err) {
+        //     console.log(err);
+        //   }
 
           for(var x in team_list) {
             var team_sql = "INSERT INTO teams (team_num, team_name) VALUES (" + team_list[x].team_number + ", \"" + team_list[x].nickname + "\")";
@@ -369,7 +410,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
           }
           res.redirect("/");
         });
-      });
+      // });
     });
   });
 
@@ -2786,7 +2827,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     });
   });
 
-  router.get('/data-entry', ensureLogin.ensureLoggedIn(), function(req, res) {
+  router.get('/data-entry', ensureLogin.ensureLoggedIn('/login'), function(req, res) {
     var display_entry = "";
     if(most_recent == -1)
       display_entry = '<div class="alert alert-danger" role="alert"><p><b>Oh snap</b>, looks like this is a duplicate entry. Data not queried.</p></div>';
