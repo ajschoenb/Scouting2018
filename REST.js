@@ -72,9 +72,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
       {
         team_list += "<tr class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ rows[x].team_name +"</td></tr>";
 	      updateTeams(rows[x].team_num);
-	      notes_query += rows[x].team_num + "``";
+	      notes_query += rows[x].team_num + "~~";
       }
-      notes_query = notes_query.substring(0, notes_query.length - 2) + "');"
+      notes_query = notes_query.substring(0, notes_query.length - 1) + "');"
+      // console.log(notes_query);
     });
     //CONTRIB SCORE QUERY
     var get_contrib_score_rank = "SELECT * FROM teams ORDER BY avg_tele_cubes_scored DESC, avg_tele_intake DESC, team_num ASC";
@@ -146,7 +147,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
       // console.log(rows.length);
       if(err) console.log(err);
       if(rows.length === 0) res.redirect("/");
-      notes = rows[0].notes.split('`');
+      notes = rows[0].notes.split('~');
       //console.log(notes);
       for(var x = 0; x < notes.length; x += 2)
       {
@@ -165,18 +166,18 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
     //console.log(req.body);
     var query = "UPDATE notes SET notes='" + req.body.notes + "' WHERE user='" + req.user.username + "'";
     connection.query(query, function(err) {
-      if(err) console.log(err);
+      if(err) console.log("update " + err);
       var get_all = "SELECT * FROM notes WHERE user<>'admin'";
       connection.query(get_all, function(err, rows) {
         var notes, notes_split = [];
         // console.log(rows);
-        for(var n in rows[0].notes.split("`"))
+        for(var n in rows[0].notes.split("~"))
         {
           notes_split[n] = "";
         }
         for(var x in rows)
         {
-          for(var y in (notes = rows[x].notes.split("`")))
+          for(var y in (notes = rows[x].notes.split("~")))
           {
             if(!Number(notes_split[y].substring(0, notes_split[y].length - 2)))
             {
@@ -184,6 +185,9 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
               var foo = "";
               if((foo = notes[y].replace('\n', '')) && !((foo = notes[y].replace('\n', '')) === " "))
               {
+                foo = foo.replace("'", "''");
+                foo = foo.replace('"', '""');
+                // console.log(foo);
                 if(notes_split[y] && !Number(notes_split[y])) notes_split[y] += ", "
                 notes_split[y] += foo;
               }
@@ -193,13 +197,12 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
           }
           // notes += rows[x].notes;
         }
-        // console.log(notes_split);
-        var csv = notes_split.join('`');
-        // csv = csv.substring(0);
-        console.log(csv);
+        // console.log(notes_split[notes_split.length - 1]);
+        var csv = notes_split.join('~');
+        // console.log(csv);
         var push_query = "UPDATE notes SET notes='" + csv + "' WHERE user='admin'";
-        connection.query(push_query, function(err)
-        {
+        connection.query(push_query, function(err) {
+          if(err) console.log("admin push " + err);
           res.redirect("/notes");
         });
         // notes_split = notes.split("`");

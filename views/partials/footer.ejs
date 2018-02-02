@@ -61,11 +61,13 @@
               var notesData = [];
   	    $(this).find("td").each(function() {
   	        sVal = $(this).text().replace('\n', '');
+            sVal = sVal.replace("'", "''");
+            sVal = sVal.replace('"', '""');
   	        notesData.push("" + sVal + "");
   	    });
-  	    notes.push(notesData.join('`'));
+  	    notes.push(notesData.join('~'));
   	  });
-  	  var csv = notes.join('`');
+  	  var csv = notes.join('~');
   	  csv = csv.substring(1);
   	  //alert(csv);
 
