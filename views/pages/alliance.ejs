@@ -24,79 +24,78 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <h3 style="margin-top:0;">Average kPa: <%= avg_auto_contrib_kpa_1 %> / <%= avg_contrib_kpa_1 %></h3>
-            <h3 style="margin-top:0;">Last Match: <%= most_recent_match_1[1] %></h3>
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_auto_high_made_1 %> / <%= avg_auto_high_attempts_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_auto_low_made_1 %> / <%= avg_auto_low_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_1 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Left: <%= tot_auto_gears_scored_fdr_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored Mid: <%= tot_auto_gears_scored_mid_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_1 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Right: <%= tot_auto_gears_scored_boi_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored: <%= tot_auto_gears_scored_1 %> / <%= tot_auto_gears_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_1 %></h5></td>
               </tr>
-	            <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_baseline_cross_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_auto_hopper_intake_1 %></h5></td>
+              <tr>
+                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_1 %> / <%= tot_auto_near_switch_attempts_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_1 %> / <%= tot_auto_exchange_attempts_1 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_1 %> / <%= tot_auto_scale_high_attempts_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_1 %> / <%= tot_auto_scale_low_attempts_1 %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_tele_high_made_1 %> / <%= avg_tele_high_attempts_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_tele_low_made_1 %> / <%= avg_tele_low_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_1 %> (Max: <%= max_tele_cubes_scored_1 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_1 %> / <%= avg_tele_exchange_attempts_1 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored: <%= avg_tele_gears_scored_1 %> / <%= avg_tele_gears_attempts_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_tele_hopper_intake_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_1 %> / <%= avg_tele_near_switch_attempts_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_1 %> / <%= avg_tele_far_switch_attempts_1 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Gear Intake: <%= avg_tele_floor_gear_intake_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Floor Ball Intake: <%= avg_tele_floor_ball_intake_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_1 %> / <%= avg_tele_scale_high_attempts_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_1 %> / <%= avg_tele_scale_low_attempts_1 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Dropped: <%= avg_tele_gears_dropped_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gear Knockouts: <%= tot_tele_gear_knockouts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Cubes Dropped: <%= avg_tele_cubes_dropped_1 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">HP Gear Intake: <%= avg_hp_gear_intake_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb: <%= tot_climb_1 %> / <%= tot_climb_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_1 %> (Max: <%= max_tele_intake_1 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_1 %> / <%= avg_tele_portal_intake_attempts_1 %></h5></td>
               </tr>
-             <tr>
-                <td><h5 style="margin-top:0;">Climb Rating: <%= avg_climb_rating_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb Time: <%= avg_climb_time_1 %></h5></td>
-             </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_mobility_rating_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_1 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly_1 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Frq. of Max Highest Level: <%= frq_tele_highest_level_1 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_1 %> / <%= tot_tele_climb_attempts_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_1 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_1 %> / <%= tot_tele_plus_one_attempts_1 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_1 %> / <%= tot_tele_plus_two_attempts_1 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_1 %></h5></td>
                 <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_1 %></h5></td>
               </tr>
             </table>
-            <h3><u>Data Maximums</u></h3>
-            <table class="table">
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Contrib kPa: <%= max_auto_contrib_kpa_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Contrib kPa: <%= max_contrib_kpa_1 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Gears Scored: <%= max_auto_gears_scored_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Gears Scored: <%= max_tele_gears_scored_1 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto High Made: <%= max_auto_high_made_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele High Made: <%= max_tele_high_made_1 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Low Made: <%= max_auto_low_made_1 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Low Made: <%= max_tele_low_made_1 %></h5></td>
-              </tr>
-            </table>
           </div>
-    		</div>
+        </div>
       </div>
 
   		<div id="team2" style="padding-left: 10px; padding-right: 10px;" class="col-lg-4">
@@ -110,79 +109,78 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <h3 style="margin-top:0;">Average kPa: <%= avg_auto_contrib_kpa_2 %> / <%= avg_contrib_kpa_2 %></h3>
-            <h3 style="margin-top:0;">Last Match: <%= most_recent_match_2[1] %></h3>
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_auto_high_made_2 %> / <%= avg_auto_high_attempts_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_auto_low_made_2 %> / <%= avg_auto_low_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_2 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Left: <%= tot_auto_gears_scored_fdr_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored Mid: <%= tot_auto_gears_scored_mid_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_2 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Right: <%= tot_auto_gears_scored_boi_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored: <%= tot_auto_gears_scored_2 %> / <%= tot_auto_gears_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_2 %></h5></td>
               </tr>
-	      <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_baseline_cross_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_auto_hopper_intake_2 %></h5></td>
+              <tr>
+                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_2 %> / <%= tot_auto_near_switch_attempts_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_2 %> / <%= tot_auto_exchange_attempts_2 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_2 %> / <%= tot_auto_scale_high_attempts_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_2 %> / <%= tot_auto_scale_low_attempts_2 %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_tele_high_made_2 %> / <%= avg_tele_high_attempts_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_tele_low_made_2 %> / <%= avg_tele_low_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_2 %> (Max: <%= max_tele_cubes_scored_2 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_2 %> / <%= avg_tele_exchange_attempts_2 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored: <%= avg_tele_gears_scored_2 %> / <%= avg_tele_gears_attempts_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_tele_hopper_intake_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_2 %> / <%= avg_tele_near_switch_attempts_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_2 %> / <%= avg_tele_far_switch_attempts_2 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Gear Intake: <%= avg_tele_floor_gear_intake_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Floor Ball Intake: <%= avg_tele_floor_ball_intake_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_2 %> / <%= avg_tele_scale_high_attempts_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_2 %> / <%= avg_tele_scale_low_attempts_2 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Dropped: <%= avg_tele_gears_dropped_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gear Knockouts: <%= tot_tele_gear_knockouts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Cubes Dropped: <%= avg_tele_cubes_dropped_2 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">HP Gear Intake: <%= avg_hp_gear_intake_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb: <%= tot_climb_2 %> / <%= tot_climb_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_2 %> (Max: <%= max_tele_intake_2 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_2 %> / <%= avg_tele_portal_intake_attempts_2 %></h5></td>
               </tr>
-             <tr>
-                <td><h5 style="margin-top:0;">Climb Rating: <%= avg_climb_rating_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb Time: <%= avg_climb_time_2 %></h5></td>
-             </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_mobility_rating_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_2 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly_2 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Frq. of Max Highest Level: <%= frq_tele_highest_level_2 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_2 %> / <%= tot_tele_climb_attempts_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_2 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_2 %> / <%= tot_tele_plus_one_attempts_2 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_2 %> / <%= tot_tele_plus_two_attempts_2 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_2 %></h5></td>
                 <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_2 %></h5></td>
               </tr>
             </table>
-            <h3><u>Data Maximums</u></h3>
-            <table class="table">
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Contrib kPa: <%= max_auto_contrib_kpa_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Contrib kPa: <%= max_contrib_kpa_2 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Gears Scored: <%= max_auto_gears_scored_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Gears Scored: <%= max_tele_gears_scored_2 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto High Made: <%= max_auto_high_made_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele High Made: <%= max_tele_high_made_2 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Low Made: <%= max_auto_low_made_2 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Low Made: <%= max_tele_low_made_2 %></h5></td>
-              </tr>
-            </table>
           </div>
-    		</div>
+        </div>
   		</div>
 
   		<div id="team3" style="padding-left: 10px; padding-right: 10px;" class="col-lg-4">
@@ -196,75 +194,74 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <h3 style="margin-top:0;">Average kPa: <%= avg_auto_contrib_kpa_3 %> / <%= avg_contrib_kpa_3 %></h3>
-            <h3 style="margin-top:0;">Last Match: <%= most_recent_match_3[1] %></h3>
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_auto_high_made_3 %> / <%= avg_auto_high_attempts_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_auto_low_made_3 %> / <%= avg_auto_low_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_3 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Left: <%= tot_auto_gears_scored_fdr_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored Mid: <%= tot_auto_gears_scored_mid_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_3 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Right: <%= tot_auto_gears_scored_boi_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored: <%= tot_auto_gears_scored_3 %> / <%= tot_auto_gears_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_3 %></h5></td>
               </tr>
-        <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_baseline_cross_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_auto_hopper_intake_3 %></h5></td>
+              <tr>
+                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_3 %> / <%= tot_auto_near_switch_attempts_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_3 %> / <%= tot_auto_exchange_attempts_3 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_3 %> / <%= tot_auto_scale_high_attempts_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_3 %> / <%= tot_auto_scale_low_attempts_3 %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_tele_high_made_3 %> / <%= avg_tele_high_attempts_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_tele_low_made_3 %> / <%= avg_tele_low_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_3 %> (Max: <%= max_tele_cubes_scored_3 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_3 %> / <%= avg_tele_exchange_attempts_3 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored: <%= avg_tele_gears_scored_3 %> / <%= avg_tele_gears_attempts_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_tele_hopper_intake_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_3 %> / <%= avg_tele_near_switch_attempts_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_3 %> / <%= avg_tele_far_switch_attempts_3 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Gear Intake: <%= avg_tele_floor_gear_intake_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Floor Ball Intake: <%= avg_tele_floor_ball_intake_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_3 %> / <%= avg_tele_scale_high_attempts_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_3 %> / <%= avg_tele_scale_low_attempts_3 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Dropped: <%= avg_tele_gears_dropped_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gear Knockouts: <%= tot_tele_gear_knockouts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Cubes Dropped: <%= avg_tele_cubes_dropped_3 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">HP Gear Intake: <%= avg_hp_gear_intake_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb: <%= tot_climb_3 %> / <%= tot_climb_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_3 %> (Max: <%= max_tele_intake_3 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_3 %> / <%= avg_tele_portal_intake_attempts_3 %></h5></td>
               </tr>
-             <tr>
-                <td><h5 style="margin-top:0;">Climb Rating: <%= avg_climb_rating_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb Time: <%= avg_climb_time_3 %></h5></td>
-             </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_mobility_rating_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_3 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly_3 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Frq. of Max Highest Level: <%= frq_tele_highest_level_3 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_3 %> / <%= tot_tele_climb_attempts_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_3 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_3 %> / <%= tot_tele_plus_one_attempts_3 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_3 %> / <%= tot_tele_plus_two_attempts_3 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_3 %></h5></td>
                 <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_3 %></h5></td>
-              </tr>
-            </table>
-            <h3><u>Data Maximums</u></h3>
-            <table class="table">
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Contrib kPa: <%= max_auto_contrib_kpa_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Contrib kPa: <%= max_contrib_kpa_3 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Gears Scored: <%= max_auto_gears_scored_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Gears Scored: <%= max_tele_gears_scored_3 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto High Made: <%= max_auto_high_made_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele High Made: <%= max_tele_high_made_3 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Low Made: <%= max_auto_low_made_3 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Low Made: <%= max_tele_low_made_3 %></h5></td>
               </tr>
             </table>
           </div>
@@ -285,75 +282,74 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <h3 style="margin-top:0;">Average kPa: <%= avg_auto_contrib_kpa_4 %> / <%= avg_contrib_kpa_4 %></h3>
-            <h3 style="margin-top:0;">Last Match: <%= most_recent_match_4[1] %></h3>
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_auto_high_made_4 %> / <%= avg_auto_high_attempts_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_auto_low_made_4 %> / <%= avg_auto_low_attempts_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_4 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Left: <%= tot_auto_gears_scored_fdr_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored Mid: <%= tot_auto_gears_scored_mid_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_4 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Right: <%= tot_auto_gears_scored_boi_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored: <%= tot_auto_gears_scored_4 %> / <%= tot_auto_gears_attempts_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_4 %></h5></td>
               </tr>
-        <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_baseline_cross_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_auto_hopper_intake_4 %></h5></td>
+              <tr>
+                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_4 %> / <%= tot_auto_near_switch_attempts_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_4 %> / <%= tot_auto_exchange_attempts_4 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_4 %> / <%= tot_auto_scale_high_attempts_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_4 %> / <%= tot_auto_scale_low_attempts_4 %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_tele_high_made_4 %> / <%= avg_tele_high_attempts_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_tele_low_made_4 %> / <%= avg_tele_low_attempts_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_4 %> (Max: <%= max_tele_cubes_scored_4 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_4 %> / <%= avg_tele_exchange_attempts_4 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored: <%= avg_tele_gears_scored_4 %> / <%= avg_tele_gears_attempts_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_tele_hopper_intake_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_4 %> / <%= avg_tele_near_switch_attempts_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_4 %> / <%= avg_tele_far_switch_attempts_4 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Gear Intake: <%= avg_tele_floor_gear_intake_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Floor Ball Intake: <%= avg_tele_floor_ball_intake_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_4 %> / <%= avg_tele_scale_high_attempts_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_4 %> / <%= avg_tele_scale_low_attempts_4 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Dropped: <%= avg_tele_gears_dropped_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gear Knockouts: <%= tot_tele_gear_knockouts_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Cubes Dropped: <%= avg_tele_cubes_dropped_4 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">HP Gear Intake: <%= avg_hp_gear_intake_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb: <%= tot_climb_4 %> / <%= tot_climb_attempts_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_4 %> (Max: <%= max_tele_intake_4 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_4 %> / <%= avg_tele_portal_intake_attempts_4 %></h5></td>
               </tr>
-             <tr>
-                <td><h5 style="margin-top:0;">Climb Rating: <%= avg_climb_rating_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb Time: <%= avg_climb_time_4 %></h5></td>
-             </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_mobility_rating_4 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_4 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly_4 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Frq. of Max Highest Level: <%= frq_tele_highest_level_4 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_4 %> / <%= tot_tele_climb_attempts_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_4 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_4 %> / <%= tot_tele_plus_one_attempts_4 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_4 %> / <%= tot_tele_plus_two_attempts_4 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_4 %></h5></td>
                 <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_4 %></h5></td>
-              </tr>
-            </table>
-            <h3><u>Data Maximums</u></h3>
-            <table class="table">
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Contrib kPa: <%= max_auto_contrib_kpa_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Contrib kPa: <%= max_contrib_kpa_4 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Gears Scored: <%= max_auto_gears_scored_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Gears Scored: <%= max_tele_gears_scored_4 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto High Made: <%= max_auto_high_made_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele High Made: <%= max_tele_high_made_4 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Low Made: <%= max_auto_low_made_4 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Low Made: <%= max_tele_low_made_4 %></h5></td>
               </tr>
             </table>
           </div>
@@ -373,79 +369,78 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <h3 style="margin-top:0;">Average kPa: <%= avg_auto_contrib_kpa_5 %> / <%= avg_contrib_kpa_5 %></h3>
-            <h3 style="margin-top:0;">Last Match: <%= most_recent_match_5[1] %></h3>
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_auto_high_made_5 %> / <%= avg_auto_high_attempts_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_auto_low_made_5 %> / <%= avg_auto_low_attempts_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_5 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Left: <%= tot_auto_gears_scored_fdr_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored Mid: <%= tot_auto_gears_scored_mid_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_5 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Right: <%= tot_auto_gears_scored_boi_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored: <%= tot_auto_gears_scored_5 %> / <%= tot_auto_gears_attempts_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_5 %></h5></td>
               </tr>
-	            <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_baseline_cross_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_auto_hopper_intake_5 %></h5></td>
+              <tr>
+                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_5 %> / <%= tot_auto_near_switch_attempts_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_5 %> / <%= tot_auto_exchange_attempts_5 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_5 %> / <%= tot_auto_scale_high_attempts_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_5 %> / <%= tot_auto_scale_low_attempts_5 %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_tele_high_made_5 %> / <%= avg_tele_high_attempts_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_tele_low_made_5 %> / <%= avg_tele_low_attempts_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_5 %> (Max: <%= max_tele_cubes_scored_5 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_5 %> / <%= avg_tele_exchange_attempts_5 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored: <%= avg_tele_gears_scored_5 %> / <%= avg_tele_gears_attempts_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_tele_hopper_intake_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_5 %> / <%= avg_tele_near_switch_attempts_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_5 %> / <%= avg_tele_far_switch_attempts_5 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Gear Intake: <%= avg_tele_floor_gear_intake_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Floor Ball Intake: <%= avg_tele_floor_ball_intake_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_5 %> / <%= avg_tele_scale_high_attempts_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_5 %> / <%= avg_tele_scale_low_attempts_5 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Dropped: <%= avg_tele_gears_dropped_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gear Knockouts: <%= tot_tele_gear_knockouts_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Cubes Dropped: <%= avg_tele_cubes_dropped_5 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">HP Gear Intake: <%= avg_hp_gear_intake_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb: <%= tot_climb_5 %> / <%= tot_climb_attempts_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_5 %> (Max: <%= max_tele_intake_5 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_5 %> / <%= avg_tele_portal_intake_attempts_5 %></h5></td>
               </tr>
-             <tr>
-                <td><h5 style="margin-top:0;">Climb Rating: <%= avg_climb_rating_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb Time: <%= avg_climb_time_5 %></h5></td>
-             </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_mobility_rating_5 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_5 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly_5 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Frq. of Max Highest Level: <%= frq_tele_highest_level_5 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_5 %> / <%= tot_tele_climb_attempts_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_5 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_5 %> / <%= tot_tele_plus_one_attempts_5 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_5 %> / <%= tot_tele_plus_two_attempts_5 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_5 %></h5></td>
                 <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_5 %></h5></td>
               </tr>
             </table>
-            <h3><u>Data Maximums</u></h3>
-            <table class="table">
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Contrib kPa: <%= max_auto_contrib_kpa_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Contrib kPa: <%= max_contrib_kpa_5 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Gears Scored: <%= max_auto_gears_scored_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Gears Scored: <%= max_tele_gears_scored_5 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto High Made: <%= max_auto_high_made_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele High Made: <%= max_tele_high_made_5 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Low Made: <%= max_auto_low_made_5 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Low Made: <%= max_tele_low_made_5 %></h5></td>
-              </tr>
-            </table>
           </div>
-    		</div>
+        </div>
   		</div>
       <% } %>
 
@@ -461,75 +456,74 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <h3 style="margin-top:0;">Average kPa: <%= avg_auto_contrib_kpa_6 %> / <%= avg_contrib_kpa_6 %></h3>
-            <h3 style="margin-top:0;">Last Match: <%= most_recent_match_6[1] %></h3>
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_auto_high_made_6 %> / <%= avg_auto_high_attempts_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_auto_low_made_6 %> / <%= avg_auto_low_attempts_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_6 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Left: <%= tot_auto_gears_scored_fdr_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored Mid: <%= tot_auto_gears_scored_mid_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_6 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored Right: <%= tot_auto_gears_scored_boi_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gears Scored: <%= tot_auto_gears_scored_6 %> / <%= tot_auto_gears_attempts_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_6 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_baseline_cross_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_auto_hopper_intake_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_6 %> / <%= tot_auto_near_switch_attempts_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_6 %> / <%= tot_auto_exchange_attempts_6 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_6 %> / <%= tot_auto_scale_high_attempts_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_6 %> / <%= tot_auto_scale_low_attempts_6 %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">High Goals: <%= avg_tele_high_made_6 %> / <%= avg_tele_high_attempts_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Low Goals: <%= avg_tele_low_made_6 %> / <%= avg_tele_low_attempts_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_6 %> (Max: <%= max_tele_cubes_scored_6 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_6 %> / <%= avg_tele_exchange_attempts_6 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Scored: <%= avg_tele_gears_scored_6 %> / <%= avg_tele_gears_attempts_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Hopper Intake: <%= avg_tele_hopper_intake_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_6 %> / <%= avg_tele_near_switch_attempts_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_6 %> / <%= avg_tele_far_switch_attempts_6 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Gear Intake: <%= avg_tele_floor_gear_intake_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Floor Ball Intake: <%= avg_tele_floor_ball_intake_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_6 %> / <%= avg_tele_scale_high_attempts_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_6 %> / <%= avg_tele_scale_low_attempts_6 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Gears Dropped: <%= avg_tele_gears_dropped_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Gear Knockouts: <%= tot_tele_gear_knockouts_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Cubes Dropped: <%= avg_tele_cubes_dropped_6 %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">HP Gear Intake: <%= avg_hp_gear_intake_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb: <%= tot_climb_6 %> / <%= tot_climb_attempts_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_6 %> (Max: <%= max_tele_intake_6 %>)</h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_6 %> / <%= avg_tele_portal_intake_attempts_6 %></h5></td>
               </tr>
-             <tr>
-                <td><h5 style="margin-top:0;">Climb Rating: <%= avg_climb_rating_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Climb Time: <%= avg_climb_time_6 %></h5></td>
-             </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_mobility_rating_6 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_6 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly_6 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Frq. of Max Highest Level: <%= frq_tele_highest_level_6 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_6 %> / <%= tot_tele_climb_attempts_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_6 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_6 %> / <%= tot_tele_plus_one_attempts_6 %></h5></td>
+                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_6 %> / <%= tot_tele_plus_two_attempts_6 %></h5></td>
+              </tr>
+              <tr>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_6 %></h5></td>
                 <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_6 %></h5></td>
-              </tr>
-            </table>
-            <h3><u>Data Maximums</u></h3>
-            <table class="table">
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Contrib kPa: <%= max_auto_contrib_kpa_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Contrib kPa: <%= max_contrib_kpa_6 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Gears Scored: <%= max_auto_gears_scored_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Gears Scored: <%= max_tele_gears_scored_6 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto High Made: <%= max_auto_high_made_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele High Made: <%= max_tele_high_made_6 %></h5></td>
-              </tr>
-              <tr>
-                <td><h5 style="margin-top:0;">Auto Low Made: <%= max_auto_low_made_6 %></h5></td>
-                <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Tele Low Made: <%= max_tele_low_made_6 %></h5></td>
               </tr>
             </table>
           </div>

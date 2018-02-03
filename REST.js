@@ -442,286 +442,322 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
       res.redirect("/alliance/" + team_1 + "," + team_2 + "," + team_3 + "," + team_4 + "," + team_5 + "," + team_6);
   });
 
-  router.get('/alliance/:team_1,:team_2,:team_3,:team_4,:team_5,:team_6', function(req, res) {
+  router.get('/alliance/:team_1,:team_2,:team_3,:team_4,:team_5,:team_6', ensureLogin.ensureLoggedIn('/login'), function(req, res) {
 		// console.log(req.params.team_1);
 		// console.log(req.params.team_2);
 		// console.log(req.params.team_3);
 
     var team_num_1 = !Number.isNaN(req.params.team_1) ? Number(req.params.team_1) : 0;
     var team_name_1 = "";
-    var most_recent_match_1 = [];
     var num_matches_1 = 0;
-    var tot_auto_gears_scored_fdr_1 = 0;
-    var tot_auto_gears_scored_mid_1 = 0;
-    var tot_auto_gears_scored_boi_1 = 0;
-    var tot_auto_gears_scored_1 = 0;
-    var max_auto_gears_scored_1 = 0;
-    var tot_auto_gears_attempts_1 = 0;
-    var avg_auto_high_made_1 = 0;
-    var max_auto_high_made_1 = 0;
-    var avg_auto_high_attempts_1 = 0;
-    var avg_auto_low_made_1 = 0;
-    var max_auto_low_made_1 = 0;
-    var avg_auto_low_attempts_1 = 0;
-    var tot_baseline_cross_1 = 0;
-    var avg_auto_hopper_intake_1 = 0;
-    var avg_auto_contrib_kpa_1 = 0;
-    var max_auto_contrib_kpa_1 = 0;
-    var avg_tele_high_made_1 = 0;
-    var max_tele_high_made_1 = 0;
-    var avg_tele_high_attempts_1 = 0;
-    var avg_tele_low_made_1 = 0;
-    var max_tele_low_made_1 = 0;
-    var avg_tele_low_attempts_1 = 0;
-    var avg_tele_gears_scored_1 = 0;
-    var max_tele_gears_scored_1 = 0;
-    var avg_tele_gears_attempts_1 = 0;
-    var avg_tele_floor_ball_intake_1 = 0;
-    var avg_tele_floor_gear_intake_1 = 0;
-    var avg_tele_hopper_intake_1 = 0;
-    var avg_hp_gear_intake_1 = 0;
-    var avg_hp_gear_intake_miss_1 = 0;
-    var avg_tele_gears_dropped_1 = 0;
-    var tot_tele_gear_knockouts_1 = 0;
-    var tot_climb_1 = 0;
-    var tot_climb_attempts_1 = 0;
-    var avg_climb_rating_1 = 0;
-    var avg_climb_time_1 = 0;
-    var avg_mobility_rating_1 = 0;
+    var most_recent_match_1 = [];
+    var tot_auto_cross_1 = 0;
+    var tot_auto_left_1 = 0;
+    var tot_auto_center_1 = 0;
+    var tot_auto_right_1 = 0;
+    var tot_auto_pyramid_intake_1 = 0;
+    var tot_auto_unprotected_intake_1 = 0;
+    var tot_auto_near_switch_made_1 = 0;
+    var tot_auto_near_switch_attempts_1 = 0;
+    var tot_auto_exchange_made_1 = 0;
+    var tot_auto_exchange_attempts_1 = 0;
+    var tot_auto_scale_high_made_1 = 0;
+    var tot_auto_scale_high_attempts_1 = 0;
+    var tot_auto_scale_low_made_1 = 0;
+    var tot_auto_scale_low_attempts_1 = 0;
+    var avg_tele_cubes_scored_1 = 0;
+    var max_tele_cubes_scored_1 = 0;
+    var avg_tele_exchange_made_1 = 0;
+    var avg_tele_exchange_attempts_1 = 0;
+    var avg_tele_near_switch_made_1 = 0;
+    var avg_tele_near_switch_attempts_1 = 0;
+    var avg_tele_far_switch_made_1 = 0;
+    var avg_tele_far_switch_attempts_1 = 0;
+    var avg_tele_scale_high_made_1 = 0;
+    var avg_tele_scale_high_attempts_1 = 0;
+    var avg_tele_scale_low_made_1 = 0;
+    var avg_tele_scale_low_attempts_1 = 0;
+    var avg_tele_knockouts_1 = 0;
+    var avg_tele_cubes_dropped_1 = 0;
+    var avg_tele_intake_1 = 0;
+    var max_tele_intake_1 = 0;
+    var avg_tele_portal_intake_made_1 = 0;
+    var avg_tele_portal_intake_attempts_1 = 0;
+    var avg_tele_pyramid_intake_1 = 0;
+    var avg_tele_unprotected_intake_1 = 0;
+    var avg_tele_floor_intake_1 = 0;
+    var tot_tele_orderly_1 = 0;
+    var max_tele_highest_level_1 = 0;
+    var frq_tele_highest_level_1 = 0;
+    var tot_tele_climb_1 = 0;
+    var tot_tele_climb_attempts_1 = 0;
+    var tot_tele_climb_assisted_1 = 0;
+    var tot_tele_plus_one_1 = 0;
+    var tot_tele_plus_one_attempts_1 = 0;
+    var tot_tele_plus_two_1 = 0;
+    var tot_tele_plus_two_attempts_1 = 0;
+    var avg_driver_rating_1 = 0;
     var avg_defense_rating_1 = 0;
-    var avg_contrib_kpa_1 = 0;
-    var max_contrib_kpa_1 = 0;
-    var no_autos_1 = 0;
 
     var team_num_2 = !Number.isNaN(req.params.team_2) ? Number(req.params.team_2) : 0;
     var team_name_2 = "";
-    var most_recent_match_2 = [];
     var num_matches_2 = 0;
-    var tot_auto_gears_scored_fdr_2 = 0;
-    var tot_auto_gears_scored_mid_2 = 0;
-    var tot_auto_gears_scored_boi_2 = 0;
-    var tot_auto_gears_scored_2 = 0;
-    var max_auto_gears_scored_2 = 0;
-    var tot_auto_gears_attempts_2 = 0;
-    var avg_auto_high_made_2 = 0;
-    var max_auto_high_made_2 = 0;
-    var avg_auto_high_attempts_2 = 0;
-    var avg_auto_low_made_2 = 0;
-    var max_auto_low_made_2 = 0;
-    var avg_auto_low_attempts_2 = 0;
-    var tot_baseline_cross_2 = 0;
-    var avg_auto_hopper_intake_2 = 0;
-    var avg_auto_contrib_kpa_2 = 0;
-    var max_auto_contrib_kpa_2 = 0;
-    var avg_tele_high_made_2 = 0;
-    var max_tele_high_made_2 = 0;
-    var avg_tele_high_attempts_2 = 0;
-    var avg_tele_low_made_2 = 0;
-    var max_tele_low_made_2 = 0;
-    var avg_tele_low_attempts_2 = 0;
-    var avg_tele_gears_scored_2 = 0;
-    var max_tele_gears_scored_2 = 0;
-    var avg_tele_gears_attempts_2 = 0;
-    var avg_tele_floor_ball_intake_2 = 0;
-    var avg_tele_floor_gear_intake_2 = 0;
-    var avg_tele_hopper_intake_2 = 0;
-    var avg_hp_gear_intake_2 = 0;
-    var avg_hp_gear_intake_miss_2 = 0;
-    var avg_tele_gears_dropped_2 = 0;
-    var tot_tele_gear_knockouts_2 = 0;
-    var tot_climb_2 = 0;
-    var tot_climb_attempts_2 = 0;
-    var avg_climb_rating_2 = 0;
-    var avg_climb_time_2 = 0;
-    var avg_mobility_rating_2 = 0;
+    var most_recent_match_2 = [];
+    var tot_auto_cross_2 = 0;
+    var tot_auto_left_2 = 0;
+    var tot_auto_center_2 = 0;
+    var tot_auto_right_2 = 0;
+    var tot_auto_pyramid_intake_2 = 0;
+    var tot_auto_unprotected_intake_2 = 0;
+    var tot_auto_near_switch_made_2 = 0;
+    var tot_auto_near_switch_attempts_2 = 0;
+    var tot_auto_exchange_made_2 = 0;
+    var tot_auto_exchange_attempts_2 = 0;
+    var tot_auto_scale_high_made_2 = 0;
+    var tot_auto_scale_high_attempts_2 = 0;
+    var tot_auto_scale_low_made_2 = 0;
+    var tot_auto_scale_low_attempts_2 = 0;
+    var avg_tele_cubes_scored_2 = 0;
+    var max_tele_cubes_scored_2 = 0;
+    var avg_tele_exchange_made_2 = 0;
+    var avg_tele_exchange_attempts_2 = 0;
+    var avg_tele_near_switch_made_2 = 0;
+    var avg_tele_near_switch_attempts_2 = 0;
+    var avg_tele_far_switch_made_2 = 0;
+    var avg_tele_far_switch_attempts_2 = 0;
+    var avg_tele_scale_high_made_2 = 0;
+    var avg_tele_scale_high_attempts_2 = 0;
+    var avg_tele_scale_low_made_2 = 0;
+    var avg_tele_scale_low_attempts_2 = 0;
+    var avg_tele_knockouts_2 = 0;
+    var avg_tele_cubes_dropped_2 = 0;
+    var avg_tele_intake_2 = 0;
+    var max_tele_intake_2 = 0;
+    var avg_tele_portal_intake_made_2 = 0;
+    var avg_tele_portal_intake_attempts_2 = 0;
+    var avg_tele_pyramid_intake_2 = 0;
+    var avg_tele_unprotected_intake_2 = 0;
+    var avg_tele_floor_intake_2 = 0;
+    var tot_tele_orderly_2 = 0;
+    var max_tele_highest_level_2 = 0;
+    var frq_tele_highest_level_2 = 0;
+    var tot_tele_climb_2 = 0;
+    var tot_tele_climb_attempts_2 = 0;
+    var tot_tele_climb_assisted_2 = 0;
+    var tot_tele_plus_one_2 = 0;
+    var tot_tele_plus_one_attempts_2 = 0;
+    var tot_tele_plus_two_2 = 0;
+    var tot_tele_plus_two_attempts_2 = 0;
+    var avg_driver_rating_2 = 0;
     var avg_defense_rating_2 = 0;
-    var avg_contrib_kpa_2 = 0;
-    var max_contrib_kpa_2 = 0;
-    var no_autos_2 = 0;
 
     var team_num_3 = !Number.isNaN(req.params.team_3) ? Number(req.params.team_3) : 0;
     var team_name_3 = "";
-    var most_recent_match_3 = [];
     var num_matches_3 = 0;
-    var tot_auto_gears_scored_fdr_3 = 0;
-    var tot_auto_gears_scored_mid_3 = 0;
-    var tot_auto_gears_scored_boi_3 = 0;
-    var tot_auto_gears_scored_3 = 0;
-    var max_auto_gears_scored_3 = 0;
-    var tot_auto_gears_attempts_3 = 0;
-    var avg_auto_high_made_3 = 0;
-    var max_auto_high_made_3 = 0;
-    var avg_auto_high_attempts_3 = 0;
-    var avg_auto_low_made_3 = 0;
-    var max_auto_low_made_3 = 0;
-    var avg_auto_low_attempts_3 = 0;
-    var tot_baseline_cross_3 = 0;
-    var avg_auto_hopper_intake_3 = 0;
-    var avg_auto_contrib_kpa_3 = 0;
-    var max_auto_contrib_kpa_3 = 0;
-    var avg_tele_high_made_3 = 0;
-    var max_tele_high_made_3 = 0;
-    var avg_tele_high_attempts_3 = 0;
-    var avg_tele_low_made_3 = 0;
-    var max_tele_low_made_3 = 0;
-    var avg_tele_low_attempts_3 = 0;
-    var avg_tele_gears_scored_3 = 0;
-    var max_tele_gears_scored_3 = 0;
-    var avg_tele_gears_attempts_3 = 0;
-    var avg_tele_floor_ball_intake_3 = 0;
-    var avg_tele_floor_gear_intake_3 = 0;
-    var avg_tele_hopper_intake_3 = 0;
-    var avg_hp_gear_intake_3 = 0;
-    var avg_hp_gear_intake_miss_3 = 0;
-    var avg_tele_gears_dropped_3 = 0;
-    var tot_tele_gear_knockouts_3 = 0;
-    var tot_climb_3 = 0;
-    var tot_climb_attempts_3 = 0;
-    var avg_climb_rating_3 = 0;
-    var avg_climb_time_3 = 0;
-    var avg_mobility_rating_3 = 0;
+    var most_recent_match_3 = [];
+    var tot_auto_cross_3 = 0;
+    var tot_auto_left_3 = 0;
+    var tot_auto_center_3 = 0;
+    var tot_auto_right_3 = 0;
+    var tot_auto_pyramid_intake_3 = 0;
+    var tot_auto_unprotected_intake_3 = 0;
+    var tot_auto_near_switch_made_3 = 0;
+    var tot_auto_near_switch_attempts_3 = 0;
+    var tot_auto_exchange_made_3 = 0;
+    var tot_auto_exchange_attempts_3 = 0;
+    var tot_auto_scale_high_made_3 = 0;
+    var tot_auto_scale_high_attempts_3 = 0;
+    var tot_auto_scale_low_made_3 = 0;
+    var tot_auto_scale_low_attempts_3 = 0;
+    var avg_tele_cubes_scored_3 = 0;
+    var max_tele_cubes_scored_3 = 0;
+    var avg_tele_exchange_made_3 = 0;
+    var avg_tele_exchange_attempts_3 = 0;
+    var avg_tele_near_switch_made_3 = 0;
+    var avg_tele_near_switch_attempts_3 = 0;
+    var avg_tele_far_switch_made_3 = 0;
+    var avg_tele_far_switch_attempts_3 = 0;
+    var avg_tele_scale_high_made_3 = 0;
+    var avg_tele_scale_high_attempts_3 = 0;
+    var avg_tele_scale_low_made_3 = 0;
+    var avg_tele_scale_low_attempts_3 = 0;
+    var avg_tele_knockouts_3 = 0;
+    var avg_tele_cubes_dropped_3 = 0;
+    var avg_tele_intake_3 = 0;
+    var max_tele_intake_3 = 0;
+    var avg_tele_portal_intake_made_3 = 0;
+    var avg_tele_portal_intake_attempts_3 = 0;
+    var avg_tele_pyramid_intake_3 = 0;
+    var avg_tele_unprotected_intake_3 = 0;
+    var avg_tele_floor_intake_3 = 0;
+    var tot_tele_orderly_3 = 0;
+    var max_tele_highest_level_3 = 0;
+    var frq_tele_highest_level_3 = 0;
+    var tot_tele_climb_3 = 0;
+    var tot_tele_climb_attempts_3 = 0;
+    var tot_tele_climb_assisted_3 = 0;
+    var tot_tele_plus_one_3 = 0;
+    var tot_tele_plus_one_attempts_3 = 0;
+    var tot_tele_plus_two_3 = 0;
+    var tot_tele_plus_two_attempts_3 = 0;
+    var avg_driver_rating_3 = 0;
     var avg_defense_rating_3 = 0;
-    var avg_contrib_kpa_3 = 0;
-    var max_contrib_kpa_3 = 0;
-    var no_autos_3 = 0;
 
     var team_num_4 = !Number.isNaN(req.params.team_4) ? Number(req.params.team_4) : 0;
     var team_name_4 = "";
-    var most_recent_match_4 = [];
     var num_matches_4 = 0;
-    var tot_auto_gears_scored_fdr_4 = 0;
-    var tot_auto_gears_scored_mid_4 = 0;
-    var tot_auto_gears_scored_boi_4 = 0;
-    var tot_auto_gears_scored_4 = 0;
-    var max_auto_gears_scored_4 = 0;
-    var tot_auto_gears_attempts_4 = 0;
-    var avg_auto_high_made_4 = 0;
-    var max_auto_high_made_4 = 0;
-    var avg_auto_high_attempts_4 = 0;
-    var avg_auto_low_made_4 = 0;
-    var max_auto_low_made_4 = 0;
-    var avg_auto_low_attempts_4 = 0;
-    var tot_baseline_cross_4 = 0;
-    var avg_auto_hopper_intake_4 = 0;
-    var avg_auto_contrib_kpa_4 = 0;
-    var max_auto_contrib_kpa_4 = 0;
-    var avg_tele_high_made_4 = 0;
-    var max_tele_high_made_4 = 0;
-    var avg_tele_high_attempts_4 = 0;
-    var avg_tele_low_made_4 = 0;
-    var max_tele_low_made_4 = 0;
-    var avg_tele_low_attempts_4 = 0;
-    var avg_tele_gears_scored_4 = 0;
-    var max_tele_gears_scored_4 = 0;
-    var avg_tele_gears_attempts_4 = 0;
-    var avg_tele_floor_ball_intake_4 = 0;
-    var avg_tele_floor_gear_intake_4 = 0;
-    var avg_tele_hopper_intake_4 = 0;
-    var avg_hp_gear_intake_4 = 0;
-    var avg_hp_gear_intake_miss_4 = 0;
-    var avg_tele_gears_dropped_4 = 0;
-    var tot_tele_gear_knockouts_4 = 0;
-    var tot_climb_4 = 0;
-    var tot_climb_attempts_4 = 0;
-    var avg_climb_rating_4 = 0;
-    var avg_climb_time_4 = 0;
-    var avg_mobility_rating_4 = 0;
+    var most_recent_match_4 = [];
+    var tot_auto_cross_4 = 0;
+    var tot_auto_left_4 = 0;
+    var tot_auto_center_4 = 0;
+    var tot_auto_right_4 = 0;
+    var tot_auto_pyramid_intake_4 = 0;
+    var tot_auto_unprotected_intake_4 = 0;
+    var tot_auto_near_switch_made_4 = 0;
+    var tot_auto_near_switch_attempts_4 = 0;
+    var tot_auto_exchange_made_4 = 0;
+    var tot_auto_exchange_attempts_4 = 0;
+    var tot_auto_scale_high_made_4 = 0;
+    var tot_auto_scale_high_attempts_4 = 0;
+    var tot_auto_scale_low_made_4 = 0;
+    var tot_auto_scale_low_attempts_4 = 0;
+    var avg_tele_cubes_scored_4 = 0;
+    var max_tele_cubes_scored_4 = 0;
+    var avg_tele_exchange_made_4 = 0;
+    var avg_tele_exchange_attempts_4 = 0;
+    var avg_tele_near_switch_made_4 = 0;
+    var avg_tele_near_switch_attempts_4 = 0;
+    var avg_tele_far_switch_made_4 = 0;
+    var avg_tele_far_switch_attempts_4 = 0;
+    var avg_tele_scale_high_made_4 = 0;
+    var avg_tele_scale_high_attempts_4 = 0;
+    var avg_tele_scale_low_made_4 = 0;
+    var avg_tele_scale_low_attempts_4 = 0;
+    var avg_tele_knockouts_4 = 0;
+    var avg_tele_cubes_dropped_4 = 0;
+    var avg_tele_intake_4 = 0;
+    var max_tele_intake_4 = 0;
+    var avg_tele_portal_intake_made_4 = 0;
+    var avg_tele_portal_intake_attempts_4 = 0;
+    var avg_tele_pyramid_intake_4 = 0;
+    var avg_tele_unprotected_intake_4 = 0;
+    var avg_tele_floor_intake_4 = 0;
+    var tot_tele_orderly_4 = 0;
+    var max_tele_highest_level_4 = 0;
+    var frq_tele_highest_level_4 = 0;
+    var tot_tele_climb_4 = 0;
+    var tot_tele_climb_attempts_4 = 0;
+    var tot_tele_climb_assisted_4 = 0;
+    var tot_tele_plus_one_4 = 0;
+    var tot_tele_plus_one_attempts_4 = 0;
+    var tot_tele_plus_two_4 = 0;
+    var tot_tele_plus_two_attempts_4 = 0;
+    var avg_driver_rating_4 = 0;
     var avg_defense_rating_4 = 0;
-    var avg_contrib_kpa_4 = 0;
-    var max_contrib_kpa_4 = 0;
-    var no_autos_4 = 0;
 
     var team_num_5 = !Number.isNaN(req.params.team_5) ? Number(req.params.team_5) : 0;
     var team_name_5 = "";
-    var most_recent_match_5 = [];
     var num_matches_5 = 0;
-    var tot_auto_gears_scored_fdr_5 = 0;
-    var tot_auto_gears_scored_mid_5 = 0;
-    var tot_auto_gears_scored_boi_5 = 0;
-    var tot_auto_gears_scored_5 = 0;
-    var max_auto_gears_scored_5 = 0;
-    var tot_auto_gears_attempts_5 = 0;
-    var avg_auto_high_made_5 = 0;
-    var max_auto_high_made_5 = 0;
-    var avg_auto_high_attempts_5 = 0;
-    var avg_auto_low_made_5 = 0;
-    var max_auto_low_made_5 = 0;
-    var avg_auto_low_attempts_5 = 0;
-    var tot_baseline_cross_5 = 0;
-    var avg_auto_hopper_intake_5 = 0;
-    var avg_auto_contrib_kpa_5 = 0;
-    var max_auto_contrib_kpa_5 = 0;
-    var avg_tele_high_made_5 = 0;
-    var max_tele_high_made_5 = 0;
-    var avg_tele_high_attempts_5 = 0;
-    var avg_tele_low_made_5 = 0;
-    var max_tele_low_made_5 = 0;
-    var avg_tele_low_attempts_5 = 0;
-    var avg_tele_gears_scored_5 = 0;
-    var max_tele_gears_scored_5 = 0;
-    var avg_tele_gears_attempts_5 = 0;
-    var avg_tele_floor_ball_intake_5 = 0;
-    var avg_tele_floor_gear_intake_5 = 0;
-    var avg_tele_hopper_intake_5 = 0;
-    var avg_hp_gear_intake_5 = 0;
-    var avg_hp_gear_intake_miss_5 = 0;
-    var avg_tele_gears_dropped_5 = 0;
-    var tot_tele_gear_knockouts_5 = 0;
-    var tot_climb_5 = 0;
-    var tot_climb_attempts_5 = 0;
-    var avg_climb_rating_5 = 0;
-    var avg_climb_time_5 = 0;
-    var avg_mobility_rating_5 = 0;
+    var most_recent_match_5 = [];
+    var tot_auto_cross_5 = 0;
+    var tot_auto_left_5 = 0;
+    var tot_auto_center_5 = 0;
+    var tot_auto_right_5 = 0;
+    var tot_auto_pyramid_intake_5 = 0;
+    var tot_auto_unprotected_intake_5 = 0;
+    var tot_auto_near_switch_made_5 = 0;
+    var tot_auto_near_switch_attempts_5 = 0;
+    var tot_auto_exchange_made_5 = 0;
+    var tot_auto_exchange_attempts_5 = 0;
+    var tot_auto_scale_high_made_5 = 0;
+    var tot_auto_scale_high_attempts_5 = 0;
+    var tot_auto_scale_low_made_5 = 0;
+    var tot_auto_scale_low_attempts_5 = 0;
+    var avg_tele_cubes_scored_5 = 0;
+    var max_tele_cubes_scored_5 = 0;
+    var avg_tele_exchange_made_5 = 0;
+    var avg_tele_exchange_attempts_5 = 0;
+    var avg_tele_near_switch_made_5 = 0;
+    var avg_tele_near_switch_attempts_5 = 0;
+    var avg_tele_far_switch_made_5 = 0;
+    var avg_tele_far_switch_attempts_5 = 0;
+    var avg_tele_scale_high_made_5 = 0;
+    var avg_tele_scale_high_attempts_5 = 0;
+    var avg_tele_scale_low_made_5 = 0;
+    var avg_tele_scale_low_attempts_5 = 0;
+    var avg_tele_knockouts_5 = 0;
+    var avg_tele_cubes_dropped_5 = 0;
+    var avg_tele_intake_5 = 0;
+    var max_tele_intake_5 = 0;
+    var avg_tele_portal_intake_made_5 = 0;
+    var avg_tele_portal_intake_attempts_5 = 0;
+    var avg_tele_pyramid_intake_5 = 0;
+    var avg_tele_unprotected_intake_5 = 0;
+    var avg_tele_floor_intake_5 = 0;
+    var tot_tele_orderly_5 = 0;
+    var max_tele_highest_level_5 = 0;
+    var frq_tele_highest_level_5 = 0;
+    var tot_tele_climb_5 = 0;
+    var tot_tele_climb_attempts_5 = 0;
+    var tot_tele_climb_assisted_5 = 0;
+    var tot_tele_plus_one_5 = 0;
+    var tot_tele_plus_one_attempts_5 = 0;
+    var tot_tele_plus_two_5 = 0;
+    var tot_tele_plus_two_attempts_5 = 0;
+    var avg_driver_rating_5 = 0;
     var avg_defense_rating_5 = 0;
-    var avg_contrib_kpa_5 = 0;
-    var max_contrib_kpa_5 = 0;
-    var no_autos_5 = 0;
 
     var team_num_6 = !Number.isNaN(req.params.team_6) ? Number(req.params.team_6) : 0;
     var team_name_6 = "";
-    var most_recent_match_6 = [];
     var num_matches_6 = 0;
-    var tot_auto_gears_scored_fdr_6 = 0;
-    var tot_auto_gears_scored_mid_6 = 0;
-    var tot_auto_gears_scored_boi_6 = 0;
-    var tot_auto_gears_scored_6 = 0;
-    var max_auto_gears_scored_6 = 0;
-    var tot_auto_gears_attempts_6 = 0;
-    var avg_auto_high_made_6 = 0;
-    var max_auto_high_made_6 = 0;
-    var avg_auto_high_attempts_6 = 0;
-    var avg_auto_low_made_6 = 0;
-    var max_auto_low_made_6 = 0;
-    var avg_auto_low_attempts_6 = 0;
-    var tot_baseline_cross_6 = 0;
-    var avg_auto_hopper_intake_6 = 0;
-    var avg_auto_contrib_kpa_6 = 0;
-    var max_auto_contrib_kpa_6 = 0;
-    var avg_tele_high_made_6 = 0;
-    var max_tele_high_made_6 = 0;
-    var avg_tele_high_attempts_6 = 0;
-    var avg_tele_low_made_6 = 0;
-    var max_tele_low_made_6 = 0;
-    var avg_tele_low_attempts_6 = 0;
-    var avg_tele_gears_scored_6 = 0;
-    var max_tele_gears_scored_6 = 0;
-    var avg_tele_gears_attempts_6 = 0;
-    var avg_tele_floor_ball_intake_6 = 0;
-    var avg_tele_floor_gear_intake_6 = 0;
-    var avg_tele_hopper_intake_6 = 0;
-    var avg_hp_gear_intake_6 = 0;
-    var avg_hp_gear_intake_miss_6 = 0;
-    var avg_tele_gears_dropped_6 = 0;
-    var tot_tele_gear_knockouts_6 = 0;
-    var tot_climb_6 = 0;
-    var tot_climb_attempts_6 = 0;
-    var avg_climb_rating_6 = 0;
-    var avg_climb_time_6 = 0;
-    var avg_mobility_rating_6 = 0;
+    var most_recent_match_6 = [];
+    var tot_auto_cross_6 = 0;
+    var tot_auto_left_6 = 0;
+    var tot_auto_center_6 = 0;
+    var tot_auto_right_6 = 0;
+    var tot_auto_pyramid_intake_6 = 0;
+    var tot_auto_unprotected_intake_6 = 0;
+    var tot_auto_near_switch_made_6 = 0;
+    var tot_auto_near_switch_attempts_6 = 0;
+    var tot_auto_exchange_made_6 = 0;
+    var tot_auto_exchange_attempts_6 = 0;
+    var tot_auto_scale_high_made_6 = 0;
+    var tot_auto_scale_high_attempts_6 = 0;
+    var tot_auto_scale_low_made_6 = 0;
+    var tot_auto_scale_low_attempts_6 = 0;
+    var avg_tele_cubes_scored_6 = 0;
+    var max_tele_cubes_scored_6 = 0;
+    var avg_tele_exchange_made_6 = 0;
+    var avg_tele_exchange_attempts_6 = 0;
+    var avg_tele_near_switch_made_6 = 0;
+    var avg_tele_near_switch_attempts_6 = 0;
+    var avg_tele_far_switch_made_6 = 0;
+    var avg_tele_far_switch_attempts_6 = 0;
+    var avg_tele_scale_high_made_6 = 0;
+    var avg_tele_scale_high_attempts_6 = 0;
+    var avg_tele_scale_low_made_6 = 0;
+    var avg_tele_scale_low_attempts_6 = 0;
+    var avg_tele_knockouts_6 = 0;
+    var avg_tele_cubes_dropped_6 = 0;
+    var avg_tele_intake_6 = 0;
+    var max_tele_intake_6 = 0;
+    var avg_tele_portal_intake_made_6 = 0;
+    var avg_tele_portal_intake_attempts_6 = 0;
+    var avg_tele_pyramid_intake_6 = 0;
+    var avg_tele_unprotected_intake_6 = 0;
+    var avg_tele_floor_intake_6 = 0;
+    var tot_tele_orderly_6 = 0;
+    var max_tele_highest_level_6 = 0;
+    var frq_tele_highest_level_6 = 0;
+    var tot_tele_climb_6 = 0;
+    var tot_tele_climb_attempts_6 = 0;
+    var tot_tele_climb_assisted_6 = 0;
+    var tot_tele_plus_one_6 = 0;
+    var tot_tele_plus_one_attempts_6 = 0;
+    var tot_tele_plus_two_6 = 0;
+    var tot_tele_plus_two_attempts_6 = 0;
+    var avg_driver_rating_6 = 0;
     var avg_defense_rating_6 = 0;
-    var avg_contrib_kpa_6 = 0;
-    var max_contrib_kpa_6 = 0;
-    var no_autos_6 = 0;
 
 
 		if(team_num_1 != 0 && team_num_2 != 0 && team_num_3 != 0)
@@ -741,60 +777,65 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
         // console.log(rows[0] != undefined);
         team_name_1 = rows[0].team_name;
         num_matches_1 = rows[0].num_matches;
-        tot_auto_gears_scored_fdr_1 = rows[0].tot_auto_gears_scored_fdr;
-        tot_auto_gears_scored_mid_1 = rows[0].tot_auto_gears_scored_mid;
-        tot_auto_gears_scored_boi_1 = rows[0].tot_auto_gears_scored_boi;
-        tot_auto_gears_scored_1 = rows[0].tot_auto_gears_scored;
-        max_auto_gears_scored_1 = rows[0].max_auto_gears_scored;
-        tot_auto_gears_attempts_1 = rows[0].tot_auto_gears_attempts;
-        avg_auto_high_made_1 = rows[0].avg_auto_high_made;
-        max_auto_high_made_1 = rows[0].max_auto_high_made;
-        avg_auto_high_attempts_1 = rows[0].avg_auto_high_attempts;
-        avg_auto_low_made_1 = rows[0].avg_auto_low_made;
-        max_auto_low_made_1 = rows[0].max_auto_low_made;
-        avg_auto_low_attempts_1 = rows[0].avg_auto_low_attempts;
-        tot_baseline_cross_1 = rows[0].tot_baseline_cross;
-        avg_auto_hopper_intake_1 = rows[0].avg_auto_hopper_intake;
-        avg_auto_contrib_kpa_1 = rows[0].avg_auto_contrib_kpa;
-        max_auto_contrib_kpa_1 = rows[0].max_auto_contrib_kpa;
-
-        avg_tele_high_made_1 = rows[0].avg_tele_high_made;
-        max_tele_high_made_1 = rows[0].avg_tele_high_made;
-        avg_tele_high_attempts_1 = rows[0].avg_tele_high_attempts;
-        avg_tele_low_made_1 = rows[0].avg_tele_low_made;
-        max_tele_low_made_1 = rows[0].max_tele_low_made;
-        avg_tele_low_attempts_1 = rows[0].avg_tele_low_attempts;
-        avg_tele_gears_scored_1 = rows[0].avg_tele_gears_scored;
-        max_tele_gears_scored_1 = rows[0].max_tele_gears_scored;
-        avg_tele_gears_attempts_1 = rows[0].avg_tele_gears_attempts;
-        avg_tele_floor_ball_intake_1 = rows[0].avg_tele_floor_ball_intake;
-        avg_tele_floor_gear_intake_1 = rows[0].avg_tele_floor_gear_intake;
-        avg_tele_hopper_intake_1 = rows[0].avg_tele_hopper_intake;
-        avg_hp_gear_intake_1 = rows[0].avg_hp_gear_intake;
-        avg_hp_gear_intake_miss_1 = rows[0].avg_hp_gear_intake_miss;
-        avg_tele_gears_dropped_1 = rows[0].avg_tele_gears_dropped;
-        tot_tele_gear_knockouts_1 = rows[0].tot_tele_gear_knockouts;
-        tot_climb_1 = rows[0].tot_climb;
-        tot_climb_attempts_1 = rows[0].tot_climb_attempts;
-        avg_climb_rating_1 = rows[0].avg_climb_rating;
-        avg_climb_time_1 = rows[0].avg_climb_time;
-        avg_mobility_rating_1 = rows[0].avg_mobility_rating;
+        tot_auto_cross_1 = rows[0].tot_auto_cross;
+        tot_auto_left_1 = rows[0].tot_auto_left;
+        tot_auto_center_1 = rows[0].tot_auto_center;
+        tot_auto_right_1 = rows[0].tot_auto_right;
+        tot_auto_pyramid_intake_1 = rows[0].tot_auto_pyramid_intake;
+        tot_auto_unprotected_intake_1 = rows[0].tot_auto_unprotected_intake;
+        tot_auto_near_switch_made_1 = rows[0].tot_auto_near_switch_made;
+        tot_auto_near_switch_attempts_1 = rows[0].tot_auto_near_switch_attempts;
+        tot_auto_exchange_made_1 = rows[0].tot_auto_exchange_made;
+        tot_auto_exchange_attempts_1 = rows[0].tot_auto_exchange_attempts;
+        tot_auto_scale_high_made_1 = rows[0].tot_auto_scale_high_made;
+        tot_auto_scale_high_attempts_1 = rows[0].tot_auto_scale_high_attempts;
+        tot_auto_scale_low_made_1 = rows[0].tot_auto_scale_low_made;
+        tot_auto_scale_low_attempts_1 = rows[0].tot_auto_scale_low_attempts;
+        avg_tele_cubes_scored_1 = rows[0].avg_tele_cubes_scored;
+        max_tele_cubes_scored_1 = rows[0].max_tele_cubes_scored;
+        avg_tele_exchange_made_1 = rows[0].avg_tele_exchange_made;
+        avg_tele_exchange_attempts_1 = rows[0].avg_tele_exchange_attempts;
+        avg_tele_near_switch_made_1 = rows[0].avg_tele_near_switch_made;
+        avg_tele_near_switch_attempts_1 = rows[0].avg_tele_near_switch_attempts;
+        avg_tele_far_switch_made_1 = rows[0].avg_tele_far_switch_made;
+        avg_tele_far_switch_attempts_1 = rows[0].avg_tele_far_switch_attempts;
+        avg_tele_scale_high_made_1 = rows[0].avg_tele_scale_high_made;
+        avg_tele_scale_high_attempts_1 = rows[0].avg_tele_scale_high_attempts;
+        avg_tele_scale_low_made_1 = rows[0].avg_tele_scale_low_made;
+        avg_tele_scale_low_attempts_1 = rows[0].avg_tele_scale_low_attempts;
+        avg_tele_knockouts_1 = rows[0].avg_tele_knockouts;
+        avg_tele_cubes_dropped_1 = rows[0].avg_tele_cubes_dropped;
+        avg_tele_intake_1 = rows[0].avg_tele_intake;
+        max_tele_intake_1 = rows[0].max_tele_intake;
+        avg_tele_portal_intake_made_1 = rows[0].avg_tele_portal_intake_made;
+        avg_tele_portal_intake_attempts_1 = rows[0].avg_tele_portal_intake_attempts;
+        avg_tele_pyramid_intake_1 = rows[0].avg_tele_pyramid_intake;
+        avg_tele_unprotected_intake_1 = rows[0].avg_tele_unprotected_intake;
+        avg_tele_floor_intake_1 = rows[0].avg_tele_floor_intake;
+        tot_tele_orderly_1 = rows[0].tot_tele_orderly;
+        max_tele_highest_level_1 = rows[0].max_tele_highest_level;
+        frq_tele_highest_level_1 = rows[0].frq_tele_highest_level;
+        tot_tele_climb_1 = rows[0].tot_tele_climb;
+        tot_tele_climb_attempts_1 = rows[0].tot_tele_climb_attempts;
+        tot_tele_climb_assisted_1 = rows[0].tot_tele_climb_assisted;
+        tot_tele_plus_one_1 = rows[0].tot_tele_plus_one;
+        tot_tele_plus_one_attempts_1 = rows[0].tot_tele_plus_one_attempts;
+        tot_tele_plus_two_1 = rows[0].tot_tele_plus_two;
+        tot_tele_plus_two_attempts_1 = rows[0].tot_tele_plus_two_attempts;
+        avg_driver_rating_1 = rows[0].avg_driver_rating;
         avg_defense_rating_1 = rows[0].avg_defense_rating;
-        drive_type_1 = rows[0].drive_type;
-        avg_contrib_kpa_1 = rows[0].avg_contrib_kpa;
-        max_contrib_kpa_1 = rows[0].max_contrib_kpa;
 			});
 
-      var no_auto_sql_1 = "SELECT * FROM matches WHERE team_num='"+ team_num_1 +"'";
-      connection.query(no_auto_sql_1, function(err, rows, fields) {
-        for(var x in rows)
-        {
-          if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
-          {
-            no_autos_1++;
-          }
-        }
-			});
+      // var no_auto_sql_1 = "SELECT * FROM matches WHERE team_num='"+ team_num_1 +"'";
+      // connection.query(no_auto_sql_1, function(err, rows, fields) {
+      //   for(var x in rows)
+      //   {
+      //     if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
+      //     {
+      //       no_autos_1++;
+      //     }
+      //   }
+			// });
 		//}
 
 		//if(!isNaN(team_num_2))
@@ -807,65 +848,68 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
 				{
           team_name_2 = rows[0].team_name;
           num_matches_2 = rows[0].num_matches;
-          tot_auto_gears_scored_fdr_2 = rows[0].tot_auto_gears_scored_fdr;
-          tot_auto_gears_scored_mid_2 = rows[0].tot_auto_gears_scored_mid;
-          tot_auto_gears_scored_boi_2 = rows[0].tot_auto_gears_scored_boi;
-          tot_auto_gears_scored_2 = rows[0].tot_auto_gears_scored;
-          max_auto_gears_scored_2 = rows[0].max_auto_gears_scored;
-          tot_auto_gears_attempts_2 = rows[0].tot_auto_gears_attempts;
-          avg_auto_high_made_2 = rows[0].avg_auto_high_made;
-          max_auto_high_made_2 = rows[0].max_auto_high_made;
-          avg_auto_high_attempts_2 = rows[0].avg_auto_high_attempts;
-          avg_auto_low_made_2 = rows[0].avg_auto_low_made;
-          max_auto_low_made_2 = rows[0].max_auto_low_made;
-          avg_auto_low_attempts_2 = rows[0].avg_auto_low_attempts;
-          tot_baseline_cross_2 = rows[0].tot_baseline_cross;
-          avg_auto_hopper_intake_2 = rows[0].avg_auto_hopper_intake;
-          avg_auto_contrib_kpa_2 = rows[0].avg_auto_contrib_kpa;
-          max_auto_contrib_kpa_2 = rows[0].max_auto_contrib_kpa;
-
-          avg_tele_high_made_2 = rows[0].avg_tele_high_made;
-          max_tele_high_made_2 = rows[0].avg_tele_high_made;
-          avg_tele_high_attempts_2 = rows[0].avg_tele_high_attempts;
-          avg_tele_low_made_2 = rows[0].avg_tele_low_made;
-          max_tele_low_made_2 = rows[0].max_tele_low_made;
-          avg_tele_low_attempts_2 = rows[0].avg_tele_low_attempts;
-          avg_tele_gears_scored_2 = rows[0].avg_tele_gears_scored;
-          max_tele_gears_scored_2 = rows[0].max_tele_gears_scored;
-          avg_tele_gears_attempts_2 = rows[0].avg_tele_gears_attempts;
-          avg_tele_floor_ball_intake_2 = rows[0].avg_tele_floor_ball_intake;
-          avg_tele_floor_gear_intake_2 = rows[0].avg_tele_floor_gear_intake;
-          avg_tele_hopper_intake_2 = rows[0].avg_tele_hopper_intake;
-          avg_hp_gear_intake_2 = rows[0].avg_hp_gear_intake;
-          avg_hp_gear_intake_miss_2 = rows[0].avg_hp_gear_intake_miss;
-          avg_tele_gears_dropped_2 = rows[0].avg_tele_gears_dropped;
-          tot_tele_gear_knockouts_2 = rows[0].tot_tele_gear_knockouts;
-          tot_climb_2 = rows[0].tot_climb;
-          tot_climb_attempts_2 = rows[0].tot_climb_attempts;
-          avg_climb_rating_2 = rows[0].avg_climb_rating;
-          avg_climb_time_2 = rows[0].avg_climb_time;
-          avg_mobility_rating_2 = rows[0].avg_mobility_rating;
+          tot_auto_cross_2 = rows[0].tot_auto_cross;
+          tot_auto_left_2 = rows[0].tot_auto_left;
+          tot_auto_center_2 = rows[0].tot_auto_center;
+          tot_auto_right_2 = rows[0].tot_auto_right;
+          tot_auto_pyramid_intake_2 = rows[0].tot_auto_pyramid_intake;
+          tot_auto_unprotected_intake_2 = rows[0].tot_auto_unprotected_intake;
+          tot_auto_near_switch_made_2 = rows[0].tot_auto_near_switch_made;
+          tot_auto_near_switch_attempts_2 = rows[0].tot_auto_near_switch_attempts;
+          tot_auto_exchange_made_2 = rows[0].tot_auto_exchange_made;
+          tot_auto_exchange_attempts_2 = rows[0].tot_auto_exchange_attempts;
+          tot_auto_scale_high_made_2 = rows[0].tot_auto_scale_high_made;
+          tot_auto_scale_high_attempts_2 = rows[0].tot_auto_scale_high_attempts;
+          tot_auto_scale_low_made_2 = rows[0].tot_auto_scale_low_made;
+          tot_auto_scale_low_attempts_2 = rows[0].tot_auto_scale_low_attempts;
+          avg_tele_cubes_scored_2 = rows[0].avg_tele_cubes_scored;
+          max_tele_cubes_scored_2 = rows[0].max_tele_cubes_scored;
+          avg_tele_exchange_made_2 = rows[0].avg_tele_exchange_made;
+          avg_tele_exchange_attempts_2 = rows[0].avg_tele_exchange_attempts;
+          avg_tele_near_switch_made_2 = rows[0].avg_tele_near_switch_made;
+          avg_tele_near_switch_attempts_2 = rows[0].avg_tele_near_switch_attempts;
+          avg_tele_far_switch_made_2 = rows[0].avg_tele_far_switch_made;
+          avg_tele_far_switch_attempts_2 = rows[0].avg_tele_far_switch_attempts;
+          avg_tele_scale_high_made_2 = rows[0].avg_tele_scale_high_made;
+          avg_tele_scale_high_attempts_2 = rows[0].avg_tele_scale_high_attempts;
+          avg_tele_scale_low_made_2 = rows[0].avg_tele_scale_low_made;
+          avg_tele_scale_low_attempts_2 = rows[0].avg_tele_scale_low_attempts;
+          avg_tele_knockouts_2 = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_dropped_2 = rows[0].avg_tele_cubes_dropped;
+          avg_tele_intake_2 = rows[0].avg_tele_intake;
+          max_tele_intake_2 = rows[0].max_tele_intake;
+          avg_tele_portal_intake_made_2 = rows[0].avg_tele_portal_intake_made;
+          avg_tele_portal_intake_attempts_2 = rows[0].avg_tele_portal_intake_attempts;
+          avg_tele_pyramid_intake_2 = rows[0].avg_tele_pyramid_intake;
+          avg_tele_unprotected_intake_2 = rows[0].avg_tele_unprotected_intake;
+          avg_tele_floor_intake_2 = rows[0].avg_tele_floor_intake;
+          tot_tele_orderly_2 = rows[0].tot_tele_orderly;
+          max_tele_highest_level_2 = rows[0].max_tele_highest_level;
+          frq_tele_highest_level_2 = rows[0].frq_tele_highest_level;
+          tot_tele_climb_2 = rows[0].tot_tele_climb;
+          tot_tele_climb_attempts_2 = rows[0].tot_tele_climb_attempts;
+          tot_tele_climb_assisted_2 = rows[0].tot_tele_climb_assisted;
+          tot_tele_plus_one_2 = rows[0].tot_tele_plus_one;
+          tot_tele_plus_one_attempts_2 = rows[0].tot_tele_plus_one_attempts;
+          tot_tele_plus_two_2 = rows[0].tot_tele_plus_two;
+          tot_tele_plus_two_attempts_2 = rows[0].tot_tele_plus_two_attempts;
+          avg_driver_rating_2 = rows[0].avg_driver_rating;
           avg_defense_rating_2 = rows[0].avg_defense_rating;
-          drive_type_2 = rows[0].drive_type;
-          avg_contrib_kpa_2 = rows[0].avg_contrib_kpa;
-          max_contrib_kpa_2 = rows[0].max_contrib_kpa;
 				}
 			});
 
-      var no_auto_sql_2 = "SELECT * FROM matches WHERE team_num='"+ team_num_2 +"'";
-      connection.query(no_auto_sql_2, function(err, rows, fields) {
-        for(var x in rows)
-        {
-          if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
-          {
-            no_autos_2++;
-          }
-        }
-			});
+      // var no_auto_sql_2 = "SELECT * FROM matches WHERE team_num='"+ team_num_2 +"'";
+      // connection.query(no_auto_sql_2, function(err, rows, fields) {
+      //   for(var x in rows)
+      //   {
+      //     if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
+      //     {
+      //       no_autos_2++;
+      //     }
+      //   }
+			// });
 		//}
 
-		//if(!isNaN(team_num_3))
-		//{
 			var get_data_3 = "SELECT * FROM teams WHERE team_num='"+ team_num_3 +"'";
 
 			connection.query(get_data_3, function(err, rows, fields) {
@@ -874,60 +918,65 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
 				{
           team_name_3 = rows[0].team_name;
           num_matches_3 = rows[0].num_matches;
-          tot_auto_gears_scored_fdr_3 = rows[0].tot_auto_gears_scored_fdr;
-          tot_auto_gears_scored_mid_3 = rows[0].tot_auto_gears_scored_mid;
-          tot_auto_gears_scored_boi_3 = rows[0].tot_auto_gears_scored_boi;
-          tot_auto_gears_scored_3 = rows[0].tot_auto_gears_scored;
-          max_auto_gears_scored_3 = rows[0].max_auto_gears_scored;
-          tot_auto_gears_attempts_3 = rows[0].tot_auto_gears_attempts;
-          avg_auto_high_made_3 = rows[0].avg_auto_high_made;
-          max_auto_high_made_3 = rows[0].max_auto_high_made;
-          avg_auto_high_attempts_3 = rows[0].avg_auto_high_attempts;
-          avg_auto_low_made_3 = rows[0].avg_auto_low_made;
-          max_auto_low_made_3 = rows[0].max_auto_low_made;
-          avg_auto_low_attempts_3 = rows[0].avg_auto_low_attempts;
-          tot_baseline_cross_3 = rows[0].tot_baseline_cross;
-          avg_auto_hopper_intake_3 = rows[0].avg_auto_hopper_intake;
-          avg_auto_contrib_kpa_3 = rows[0].avg_auto_contrib_kpa;
-          max_auto_contrib_kpa_3 = rows[0].max_auto_contrib_kpa;
-
-          avg_tele_high_made_3 = rows[0].avg_tele_high_made;
-          max_tele_high_made_3 = rows[0].avg_tele_high_made;
-          avg_tele_high_attempts_3 = rows[0].avg_tele_high_attempts;
-          avg_tele_low_made_3 = rows[0].avg_tele_low_made;
-          max_tele_low_made_3 = rows[0].max_tele_low_made;
-          avg_tele_low_attempts_3 = rows[0].avg_tele_low_attempts;
-          avg_tele_gears_scored_3 = rows[0].avg_tele_gears_scored;
-          max_tele_gears_scored_3 = rows[0].max_tele_gears_scored;
-          avg_tele_gears_attempts_3 = rows[0].avg_tele_gears_attempts;
-          avg_tele_floor_ball_intake_3 = rows[0].avg_tele_floor_ball_intake;
-          avg_tele_floor_gear_intake_3 = rows[0].avg_tele_floor_gear_intake;
-          avg_tele_hopper_intake_3 = rows[0].avg_tele_hopper_intake;
-          avg_hp_gear_intake_3 = rows[0].avg_hp_gear_intake;
-          avg_hp_gear_intake_miss_3 = rows[0].avg_hp_gear_intake_miss;
-          avg_tele_gears_dropped_3 = rows[0].avg_tele_gears_dropped;
-          tot_tele_gear_knockouts_3 = rows[0].tot_tele_gear_knockouts;
-          tot_climb_3 = rows[0].tot_climb;
-          tot_climb_attempts_3 = rows[0].tot_climb_attempts;
-          avg_climb_rating_3 = rows[0].avg_climb_rating;
-          avg_climb_time_3 = rows[0].avg_climb_time;
-          avg_mobility_rating_3 = rows[0].avg_mobility_rating;
+          tot_auto_cross_3 = rows[0].tot_auto_cross;
+          tot_auto_left_3 = rows[0].tot_auto_left;
+          tot_auto_center_3 = rows[0].tot_auto_center;
+          tot_auto_right_3 = rows[0].tot_auto_right;
+          tot_auto_pyramid_intake_3 = rows[0].tot_auto_pyramid_intake;
+          tot_auto_unprotected_intake_3 = rows[0].tot_auto_unprotected_intake;
+          tot_auto_near_switch_made_3 = rows[0].tot_auto_near_switch_made;
+          tot_auto_near_switch_attempts_3 = rows[0].tot_auto_near_switch_attempts;
+          tot_auto_exchange_made_3 = rows[0].tot_auto_exchange_made;
+          tot_auto_exchange_attempts_3 = rows[0].tot_auto_exchange_attempts;
+          tot_auto_scale_high_made_3 = rows[0].tot_auto_scale_high_made;
+          tot_auto_scale_high_attempts_3 = rows[0].tot_auto_scale_high_attempts;
+          tot_auto_scale_low_made_3 = rows[0].tot_auto_scale_low_made;
+          tot_auto_scale_low_attempts_3 = rows[0].tot_auto_scale_low_attempts;
+          avg_tele_cubes_scored_3 = rows[0].avg_tele_cubes_scored;
+          max_tele_cubes_scored_3 = rows[0].max_tele_cubes_scored;
+          avg_tele_exchange_made_3 = rows[0].avg_tele_exchange_made;
+          avg_tele_exchange_attempts_3 = rows[0].avg_tele_exchange_attempts;
+          avg_tele_near_switch_made_3 = rows[0].avg_tele_near_switch_made;
+          avg_tele_near_switch_attempts_3 = rows[0].avg_tele_near_switch_attempts;
+          avg_tele_far_switch_made_3 = rows[0].avg_tele_far_switch_made;
+          avg_tele_far_switch_attempts_3 = rows[0].avg_tele_far_switch_attempts;
+          avg_tele_scale_high_made_3 = rows[0].avg_tele_scale_high_made;
+          avg_tele_scale_high_attempts_3 = rows[0].avg_tele_scale_high_attempts;
+          avg_tele_scale_low_made_3 = rows[0].avg_tele_scale_low_made;
+          avg_tele_scale_low_attempts_3 = rows[0].avg_tele_scale_low_attempts;
+          avg_tele_knockouts_3 = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_dropped_3 = rows[0].avg_tele_cubes_dropped;
+          avg_tele_intake_3 = rows[0].avg_tele_intake;
+          max_tele_intake_3 = rows[0].max_tele_intake;
+          avg_tele_portal_intake_made_3 = rows[0].avg_tele_portal_intake_made;
+          avg_tele_portal_intake_attempts_3 = rows[0].avg_tele_portal_intake_attempts;
+          avg_tele_pyramid_intake_3 = rows[0].avg_tele_pyramid_intake;
+          avg_tele_unprotected_intake_3 = rows[0].avg_tele_unprotected_intake;
+          avg_tele_floor_intake_3 = rows[0].avg_tele_floor_intake;
+          tot_tele_orderly_3 = rows[0].tot_tele_orderly;
+          max_tele_highest_level_3 = rows[0].max_tele_highest_level;
+          frq_tele_highest_level_3 = rows[0].frq_tele_highest_level;
+          tot_tele_climb_3 = rows[0].tot_tele_climb;
+          tot_tele_climb_attempts_3 = rows[0].tot_tele_climb_attempts;
+          tot_tele_climb_assisted_3 = rows[0].tot_tele_climb_assisted;
+          tot_tele_plus_one_3 = rows[0].tot_tele_plus_one;
+          tot_tele_plus_one_attempts_3 = rows[0].tot_tele_plus_one_attempts;
+          tot_tele_plus_two_3 = rows[0].tot_tele_plus_two;
+          tot_tele_plus_two_attempts_3 = rows[0].tot_tele_plus_two_attempts;
+          avg_driver_rating_3 = rows[0].avg_driver_rating;
           avg_defense_rating_3 = rows[0].avg_defense_rating;
-          drive_type_3 = rows[0].drive_type;
-          avg_contrib_kpa_3 = rows[0].avg_contrib_kpa;
-          max_contrib_kpa_3 = rows[0].max_contrib_kpa;
 				}
 
-        var no_auto_sql_3 = "SELECT * FROM matches WHERE team_num='"+ team_num_3 +"'";
-        connection.query(no_auto_sql_3, function(err, rows, fields) {
-          for(var x in rows)
-          {
-            if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
-            {
-              no_autos_3++;
-            }
-          }
-        });
+        // var no_auto_sql_3 = "SELECT * FROM matches WHERE team_num='"+ team_num_3 +"'";
+        // connection.query(no_auto_sql_3, function(err, rows, fields) {
+        //   for(var x in rows)
+        //   {
+        //     if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
+        //     {
+        //       no_autos_3++;
+        //     }
+        //   }
+        // });
       });
     }
 
@@ -940,60 +989,65 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
           // console.log(rows[0] != undefined);
           team_name_4 = rows[0].team_name;
           num_matches_4 = rows[0].num_matches;
-          tot_auto_gears_scored_fdr_4 = rows[0].tot_auto_gears_scored_fdr;
-          tot_auto_gears_scored_mid_4 = rows[0].tot_auto_gears_scored_mid;
-          tot_auto_gears_scored_boi_4 = rows[0].tot_auto_gears_scored_boi;
-          tot_auto_gears_scored_4 = rows[0].tot_auto_gears_scored;
-          max_auto_gears_scored_4 = rows[0].max_auto_gears_scored;
-          tot_auto_gears_attempts_4 = rows[0].tot_auto_gears_attempts;
-          avg_auto_high_made_4 = rows[0].avg_auto_high_made;
-          max_auto_high_made_4 = rows[0].max_auto_high_made;
-          avg_auto_high_attempts_4 = rows[0].avg_auto_high_attempts;
-          avg_auto_low_made_4 = rows[0].avg_auto_low_made;
-          max_auto_low_made_4 = rows[0].max_auto_low_made;
-          avg_auto_low_attempts_4 = rows[0].avg_auto_low_attempts;
-          tot_baseline_cross_4 = rows[0].tot_baseline_cross;
-          avg_auto_hopper_intake_4 = rows[0].avg_auto_hopper_intake;
-          avg_auto_contrib_kpa_4 = rows[0].avg_auto_contrib_kpa;
-          max_auto_contrib_kpa_4 = rows[0].max_auto_contrib_kpa;
-
-          avg_tele_high_made_4 = rows[0].avg_tele_high_made;
-          max_tele_high_made_4 = rows[0].avg_tele_high_made;
-          avg_tele_high_attempts_4 = rows[0].avg_tele_high_attempts;
-          avg_tele_low_made_4 = rows[0].avg_tele_low_made;
-          max_tele_low_made_4 = rows[0].max_tele_low_made;
-          avg_tele_low_attempts_4 = rows[0].avg_tele_low_attempts;
-          avg_tele_gears_scored_4 = rows[0].avg_tele_gears_scored;
-          max_tele_gears_scored_4 = rows[0].max_tele_gears_scored;
-          avg_tele_gears_attempts_4 = rows[0].avg_tele_gears_attempts;
-          avg_tele_floor_ball_intake_4 = rows[0].avg_tele_floor_ball_intake;
-          avg_tele_floor_gear_intake_4 = rows[0].avg_tele_floor_gear_intake;
-          avg_tele_hopper_intake_4 = rows[0].avg_tele_hopper_intake;
-          avg_hp_gear_intake_4 = rows[0].avg_hp_gear_intake;
-          avg_hp_gear_intake_miss_4 = rows[0].avg_hp_gear_intake_miss;
-          avg_tele_gears_dropped_4 = rows[0].avg_tele_gears_dropped;
-          tot_tele_gear_knockouts_4 = rows[0].tot_tele_gear_knockouts;
-          tot_climb_4 = rows[0].tot_climb;
-          tot_climb_attempts_4 = rows[0].tot_climb_attempts;
-          avg_climb_rating_4 = rows[0].avg_climb_rating;
-          avg_climb_time_4 = rows[0].avg_climb_time;
-          avg_mobility_rating_4 = rows[0].avg_mobility_rating;
+          tot_auto_cross_4 = rows[0].tot_auto_cross;
+          tot_auto_left_4 = rows[0].tot_auto_left;
+          tot_auto_center_4 = rows[0].tot_auto_center;
+          tot_auto_right_4 = rows[0].tot_auto_right;
+          tot_auto_pyramid_intake_4 = rows[0].tot_auto_pyramid_intake;
+          tot_auto_unprotected_intake_4 = rows[0].tot_auto_unprotected_intake;
+          tot_auto_near_switch_made_4 = rows[0].tot_auto_near_switch_made;
+          tot_auto_near_switch_attempts_4 = rows[0].tot_auto_near_switch_attempts;
+          tot_auto_exchange_made_4 = rows[0].tot_auto_exchange_made;
+          tot_auto_exchange_attempts_4 = rows[0].tot_auto_exchange_attempts;
+          tot_auto_scale_high_made_4 = rows[0].tot_auto_scale_high_made;
+          tot_auto_scale_high_attempts_4 = rows[0].tot_auto_scale_high_attempts;
+          tot_auto_scale_low_made_4 = rows[0].tot_auto_scale_low_made;
+          tot_auto_scale_low_attempts_4 = rows[0].tot_auto_scale_low_attempts;
+          avg_tele_cubes_scored_4 = rows[0].avg_tele_cubes_scored;
+          max_tele_cubes_scored_4 = rows[0].max_tele_cubes_scored;
+          avg_tele_exchange_made_4 = rows[0].avg_tele_exchange_made;
+          avg_tele_exchange_attempts_4 = rows[0].avg_tele_exchange_attempts;
+          avg_tele_near_switch_made_4 = rows[0].avg_tele_near_switch_made;
+          avg_tele_near_switch_attempts_4 = rows[0].avg_tele_near_switch_attempts;
+          avg_tele_far_switch_made_4 = rows[0].avg_tele_far_switch_made;
+          avg_tele_far_switch_attempts_4 = rows[0].avg_tele_far_switch_attempts;
+          avg_tele_scale_high_made_4 = rows[0].avg_tele_scale_high_made;
+          avg_tele_scale_high_attempts_4 = rows[0].avg_tele_scale_high_attempts;
+          avg_tele_scale_low_made_4 = rows[0].avg_tele_scale_low_made;
+          avg_tele_scale_low_attempts_4 = rows[0].avg_tele_scale_low_attempts;
+          avg_tele_knockouts_4 = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_dropped_4 = rows[0].avg_tele_cubes_dropped;
+          avg_tele_intake_4 = rows[0].avg_tele_intake;
+          max_tele_intake_4 = rows[0].max_tele_intake;
+          avg_tele_portal_intake_made_4 = rows[0].avg_tele_portal_intake_made;
+          avg_tele_portal_intake_attempts_4 = rows[0].avg_tele_portal_intake_attempts;
+          avg_tele_pyramid_intake_4 = rows[0].avg_tele_pyramid_intake;
+          avg_tele_unprotected_intake_4 = rows[0].avg_tele_unprotected_intake;
+          avg_tele_floor_intake_4 = rows[0].avg_tele_floor_intake;
+          tot_tele_orderly_4 = rows[0].tot_tele_orderly;
+          max_tele_highest_level_4 = rows[0].max_tele_highest_level;
+          frq_tele_highest_level_4 = rows[0].frq_tele_highest_level;
+          tot_tele_climb_4 = rows[0].tot_tele_climb;
+          tot_tele_climb_attempts_4 = rows[0].tot_tele_climb_attempts;
+          tot_tele_climb_assisted_4 = rows[0].tot_tele_climb_assisted;
+          tot_tele_plus_one_4 = rows[0].tot_tele_plus_one;
+          tot_tele_plus_one_attempts_4 = rows[0].tot_tele_plus_one_attempts;
+          tot_tele_plus_two_4 = rows[0].tot_tele_plus_two;
+          tot_tele_plus_two_attempts_4 = rows[0].tot_tele_plus_two_attempts;
+          avg_driver_rating_4 = rows[0].avg_driver_rating;
           avg_defense_rating_4 = rows[0].avg_defense_rating;
-          drive_type_4 = rows[0].drive_type;
-          avg_contrib_kpa_4 = rows[0].avg_contrib_kpa;
-          max_contrib_kpa_4 = rows[0].max_contrib_kpa;
   			});
 
-        var no_auto_sql_4 = "SELECT * FROM matches WHERE team_num='"+ team_num_4 +"'";
-        connection.query(no_auto_sql_4, function(err, rows, fields) {
-          for(var x in rows)
-          {
-            if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
-            {
-              no_autos_4++;
-            }
-          }
-  			});
+        // var no_auto_sql_4 = "SELECT * FROM matches WHERE team_num='"+ team_num_4 +"'";
+        // connection.query(no_auto_sql_4, function(err, rows, fields) {
+        //   for(var x in rows)
+        //   {
+        //     if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
+        //     {
+        //       no_autos_4++;
+        //     }
+        //   }
+  			// });
       }
       if(team_num_5 != 0) {
         updateTeams(team_num_5);
@@ -1004,60 +1058,65 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
           // console.log(rows[0] != undefined);
           team_name_5 = rows[0].team_name;
           num_matches_5 = rows[0].num_matches;
-          tot_auto_gears_scored_fdr_5 = rows[0].tot_auto_gears_scored_fdr;
-          tot_auto_gears_scored_mid_5 = rows[0].tot_auto_gears_scored_mid;
-          tot_auto_gears_scored_boi_5 = rows[0].tot_auto_gears_scored_boi;
-          tot_auto_gears_scored_5 = rows[0].tot_auto_gears_scored;
-          max_auto_gears_scored_5 = rows[0].max_auto_gears_scored;
-          tot_auto_gears_attempts_5 = rows[0].tot_auto_gears_attempts;
-          avg_auto_high_made_5 = rows[0].avg_auto_high_made;
-          max_auto_high_made_5 = rows[0].max_auto_high_made;
-          avg_auto_high_attempts_5 = rows[0].avg_auto_high_attempts;
-          avg_auto_low_made_5 = rows[0].avg_auto_low_made;
-          max_auto_low_made_5 = rows[0].max_auto_low_made;
-          avg_auto_low_attempts_5 = rows[0].avg_auto_low_attempts;
-          tot_baseline_cross_5 = rows[0].tot_baseline_cross;
-          avg_auto_hopper_intake_5 = rows[0].avg_auto_hopper_intake;
-          avg_auto_contrib_kpa_5 = rows[0].avg_auto_contrib_kpa;
-          max_auto_contrib_kpa_5 = rows[0].max_auto_contrib_kpa;
-
-          avg_tele_high_made_5 = rows[0].avg_tele_high_made;
-          max_tele_high_made_5 = rows[0].avg_tele_high_made;
-          avg_tele_high_attempts_5 = rows[0].avg_tele_high_attempts;
-          avg_tele_low_made_5 = rows[0].avg_tele_low_made;
-          max_tele_low_made_5 = rows[0].max_tele_low_made;
-          avg_tele_low_attempts_5 = rows[0].avg_tele_low_attempts;
-          avg_tele_gears_scored_5 = rows[0].avg_tele_gears_scored;
-          max_tele_gears_scored_5 = rows[0].max_tele_gears_scored;
-          avg_tele_gears_attempts_5 = rows[0].avg_tele_gears_attempts;
-          avg_tele_floor_ball_intake_5 = rows[0].avg_tele_floor_ball_intake;
-          avg_tele_floor_gear_intake_5 = rows[0].avg_tele_floor_gear_intake;
-          avg_tele_hopper_intake_5 = rows[0].avg_tele_hopper_intake;
-          avg_hp_gear_intake_5 = rows[0].avg_hp_gear_intake;
-          avg_hp_gear_intake_miss_5 = rows[0].avg_hp_gear_intake_miss;
-          avg_tele_gears_dropped_5 = rows[0].avg_tele_gears_dropped;
-          tot_tele_gear_knockouts_5 = rows[0].tot_tele_gear_knockouts;
-          tot_climb_5 = rows[0].tot_climb;
-          tot_climb_attempts_5 = rows[0].tot_climb_attempts;
-          avg_climb_rating_5 = rows[0].avg_climb_rating;
-          avg_climb_time_5 = rows[0].avg_climb_time;
-          avg_mobility_rating_5 = rows[0].avg_mobility_rating;
+          tot_auto_cross_5 = rows[0].tot_auto_cross;
+          tot_auto_left_5 = rows[0].tot_auto_left;
+          tot_auto_center_5 = rows[0].tot_auto_center;
+          tot_auto_right_5 = rows[0].tot_auto_right;
+          tot_auto_pyramid_intake_5 = rows[0].tot_auto_pyramid_intake;
+          tot_auto_unprotected_intake_5 = rows[0].tot_auto_unprotected_intake;
+          tot_auto_near_switch_made_5 = rows[0].tot_auto_near_switch_made;
+          tot_auto_near_switch_attempts_5 = rows[0].tot_auto_near_switch_attempts;
+          tot_auto_exchange_made_5 = rows[0].tot_auto_exchange_made;
+          tot_auto_exchange_attempts_5 = rows[0].tot_auto_exchange_attempts;
+          tot_auto_scale_high_made_5 = rows[0].tot_auto_scale_high_made;
+          tot_auto_scale_high_attempts_5 = rows[0].tot_auto_scale_high_attempts;
+          tot_auto_scale_low_made_5 = rows[0].tot_auto_scale_low_made;
+          tot_auto_scale_low_attempts_5 = rows[0].tot_auto_scale_low_attempts;
+          avg_tele_cubes_scored_5 = rows[0].avg_tele_cubes_scored;
+          max_tele_cubes_scored_5 = rows[0].max_tele_cubes_scored;
+          avg_tele_exchange_made_5 = rows[0].avg_tele_exchange_made;
+          avg_tele_exchange_attempts_5 = rows[0].avg_tele_exchange_attempts;
+          avg_tele_near_switch_made_5 = rows[0].avg_tele_near_switch_made;
+          avg_tele_near_switch_attempts_5 = rows[0].avg_tele_near_switch_attempts;
+          avg_tele_far_switch_made_5 = rows[0].avg_tele_far_switch_made;
+          avg_tele_far_switch_attempts_5 = rows[0].avg_tele_far_switch_attempts;
+          avg_tele_scale_high_made_5 = rows[0].avg_tele_scale_high_made;
+          avg_tele_scale_high_attempts_5 = rows[0].avg_tele_scale_high_attempts;
+          avg_tele_scale_low_made_5 = rows[0].avg_tele_scale_low_made;
+          avg_tele_scale_low_attempts_5 = rows[0].avg_tele_scale_low_attempts;
+          avg_tele_knockouts_5 = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_dropped_5 = rows[0].avg_tele_cubes_dropped;
+          avg_tele_intake_5 = rows[0].avg_tele_intake;
+          max_tele_intake_5 = rows[0].max_tele_intake;
+          avg_tele_portal_intake_made_5 = rows[0].avg_tele_portal_intake_made;
+          avg_tele_portal_intake_attempts_5 = rows[0].avg_tele_portal_intake_attempts;
+          avg_tele_pyramid_intake_5 = rows[0].avg_tele_pyramid_intake;
+          avg_tele_unprotected_intake_5 = rows[0].avg_tele_unprotected_intake;
+          avg_tele_floor_intake_5 = rows[0].avg_tele_floor_intake;
+          tot_tele_orderly_5 = rows[0].tot_tele_orderly;
+          max_tele_highest_level_5 = rows[0].max_tele_highest_level;
+          frq_tele_highest_level_5 = rows[0].frq_tele_highest_level;
+          tot_tele_climb_5 = rows[0].tot_tele_climb;
+          tot_tele_climb_attempts_5 = rows[0].tot_tele_climb_attempts;
+          tot_tele_climb_assisted_5 = rows[0].tot_tele_climb_assisted;
+          tot_tele_plus_one_5 = rows[0].tot_tele_plus_one;
+          tot_tele_plus_one_attempts_5 = rows[0].tot_tele_plus_one_attempts;
+          tot_tele_plus_two_5 = rows[0].tot_tele_plus_two;
+          tot_tele_plus_two_attempts_5 = rows[0].tot_tele_plus_two_attempts;
+          avg_driver_rating_5 = rows[0].avg_driver_rating;
           avg_defense_rating_5 = rows[0].avg_defense_rating;
-          drive_type_5 = rows[0].drive_type;
-          avg_contrib_kpa_5 = rows[0].avg_contrib_kpa;
-          max_contrib_kpa_5 = rows[0].max_contrib_kpa;
   			});
 
-        var no_auto_sql_5 = "SELECT * FROM matches WHERE team_num='"+ team_num_5 +"'";
-        connection.query(no_auto_sql_5, function(err, rows, fields) {
-          for(var x in rows)
-          {
-            if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
-            {
-              no_autos_5++;
-            }
-          }
-  			});
+        // var no_auto_sql_5 = "SELECT * FROM matches WHERE team_num='"+ team_num_5 +"'";
+        // connection.query(no_auto_sql_5, function(err, rows, fields) {
+        //   for(var x in rows)
+        //   {
+        //     if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
+        //     {
+        //       no_autos_5++;
+        //     }
+        //   }
+  			// });
       }
       if(team_num_6 != 0) {
         updateTeams(team_num_6);
@@ -1068,60 +1127,65 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
           // console.log(rows[0] != undefined);
           team_name_6 = rows[0].team_name;
           num_matches_6 = rows[0].num_matches;
-          tot_auto_gears_scored_fdr_6 = rows[0].tot_auto_gears_scored_fdr;
-          tot_auto_gears_scored_mid_6 = rows[0].tot_auto_gears_scored_mid;
-          tot_auto_gears_scored_boi_6 = rows[0].tot_auto_gears_scored_boi;
-          tot_auto_gears_scored_6 = rows[0].tot_auto_gears_scored;
-          max_auto_gears_scored_6 = rows[0].max_auto_gears_scored;
-          tot_auto_gears_attempts_6 = rows[0].tot_auto_gears_attempts;
-          avg_auto_high_made_6 = rows[0].avg_auto_high_made;
-          max_auto_high_made_6 = rows[0].max_auto_high_made;
-          avg_auto_high_attempts_6 = rows[0].avg_auto_high_attempts;
-          avg_auto_low_made_6 = rows[0].avg_auto_low_made;
-          max_auto_low_made_6 = rows[0].max_auto_low_made;
-          avg_auto_low_attempts_6 = rows[0].avg_auto_low_attempts;
-          tot_baseline_cross_6 = rows[0].tot_baseline_cross;
-          avg_auto_hopper_intake_6 = rows[0].avg_auto_hopper_intake;
-          avg_auto_contrib_kpa_6 = rows[0].avg_auto_contrib_kpa;
-          max_auto_contrib_kpa_6 = rows[0].max_auto_contrib_kpa;
-
-          avg_tele_high_made_6 = rows[0].avg_tele_high_made;
-          max_tele_high_made_6 = rows[0].avg_tele_high_made;
-          avg_tele_high_attempts_6 = rows[0].avg_tele_high_attempts;
-          avg_tele_low_made_6 = rows[0].avg_tele_low_made;
-          max_tele_low_made_6 = rows[0].max_tele_low_made;
-          avg_tele_low_attempts_6 = rows[0].avg_tele_low_attempts;
-          avg_tele_gears_scored_6 = rows[0].avg_tele_gears_scored;
-          max_tele_gears_scored_6 = rows[0].max_tele_gears_scored;
-          avg_tele_gears_attempts_6 = rows[0].avg_tele_gears_attempts;
-          avg_tele_floor_ball_intake_6 = rows[0].avg_tele_floor_ball_intake;
-          avg_tele_floor_gear_intake_6 = rows[0].avg_tele_floor_gear_intake;
-          avg_tele_hopper_intake_6 = rows[0].avg_tele_hopper_intake;
-          avg_hp_gear_intake_6 = rows[0].avg_hp_gear_intake;
-          avg_hp_gear_intake_miss_6 = rows[0].avg_hp_gear_intake_miss;
-          avg_tele_gears_dropped_6 = rows[0].avg_tele_gears_dropped;
-          tot_tele_gear_knockouts_6 = rows[0].tot_tele_gear_knockouts;
-          tot_climb_6 = rows[0].tot_climb;
-          tot_climb_attempts_6 = rows[0].tot_climb_attempts;
-          avg_climb_rating_6 = rows[0].avg_climb_rating;
-          avg_climb_time_6 = rows[0].avg_climb_time;
-          avg_mobility_rating_6 = rows[0].avg_mobility_rating;
+          tot_auto_cross_6 = rows[0].tot_auto_cross;
+          tot_auto_left_6 = rows[0].tot_auto_left;
+          tot_auto_center_6 = rows[0].tot_auto_center;
+          tot_auto_right_6 = rows[0].tot_auto_right;
+          tot_auto_pyramid_intake_6 = rows[0].tot_auto_pyramid_intake;
+          tot_auto_unprotected_intake_6 = rows[0].tot_auto_unprotected_intake;
+          tot_auto_near_switch_made_6 = rows[0].tot_auto_near_switch_made;
+          tot_auto_near_switch_attempts_6 = rows[0].tot_auto_near_switch_attempts;
+          tot_auto_exchange_made_6 = rows[0].tot_auto_exchange_made;
+          tot_auto_exchange_attempts_6 = rows[0].tot_auto_exchange_attempts;
+          tot_auto_scale_high_made_6 = rows[0].tot_auto_scale_high_made;
+          tot_auto_scale_high_attempts_6 = rows[0].tot_auto_scale_high_attempts;
+          tot_auto_scale_low_made_6 = rows[0].tot_auto_scale_low_made;
+          tot_auto_scale_low_attempts_6 = rows[0].tot_auto_scale_low_attempts;
+          avg_tele_cubes_scored_6 = rows[0].avg_tele_cubes_scored;
+          max_tele_cubes_scored_6 = rows[0].max_tele_cubes_scored;
+          avg_tele_exchange_made_6 = rows[0].avg_tele_exchange_made;
+          avg_tele_exchange_attempts_6 = rows[0].avg_tele_exchange_attempts;
+          avg_tele_near_switch_made_6 = rows[0].avg_tele_near_switch_made;
+          avg_tele_near_switch_attempts_6 = rows[0].avg_tele_near_switch_attempts;
+          avg_tele_far_switch_made_6 = rows[0].avg_tele_far_switch_made;
+          avg_tele_far_switch_attempts_6 = rows[0].avg_tele_far_switch_attempts;
+          avg_tele_scale_high_made_6 = rows[0].avg_tele_scale_high_made;
+          avg_tele_scale_high_attempts_6 = rows[0].avg_tele_scale_high_attempts;
+          avg_tele_scale_low_made_6 = rows[0].avg_tele_scale_low_made;
+          avg_tele_scale_low_attempts_6 = rows[0].avg_tele_scale_low_attempts;
+          avg_tele_knockouts_6 = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_dropped_6 = rows[0].avg_tele_cubes_dropped;
+          avg_tele_intake_6 = rows[0].avg_tele_intake;
+          max_tele_intake_6 = rows[0].max_tele_intake;
+          avg_tele_portal_intake_made_6 = rows[0].avg_tele_portal_intake_made;
+          avg_tele_portal_intake_attempts_6 = rows[0].avg_tele_portal_intake_attempts;
+          avg_tele_pyramid_intake_6 = rows[0].avg_tele_pyramid_intake;
+          avg_tele_unprotected_intake_6 = rows[0].avg_tele_unprotected_intake;
+          avg_tele_floor_intake_6 = rows[0].avg_tele_floor_intake;
+          tot_tele_orderly_6 = rows[0].tot_tele_orderly;
+          max_tele_highest_level_6 = rows[0].max_tele_highest_level;
+          frq_tele_highest_level_6 = rows[0].frq_tele_highest_level;
+          tot_tele_climb_6 = rows[0].tot_tele_climb;
+          tot_tele_climb_attempts_6 = rows[0].tot_tele_climb_attempts;
+          tot_tele_climb_assisted_6 = rows[0].tot_tele_climb_assisted;
+          tot_tele_plus_one_6 = rows[0].tot_tele_plus_one;
+          tot_tele_plus_one_attempts_6 = rows[0].tot_tele_plus_one_attempts;
+          tot_tele_plus_two_6 = rows[0].tot_tele_plus_two;
+          tot_tele_plus_two_attempts_6 = rows[0].tot_tele_plus_two_attempts;
+          avg_driver_rating_6 = rows[0].avg_driver_rating;
           avg_defense_rating_6 = rows[0].avg_defense_rating;
-          drive_type_6 = rows[0].drive_type;
-          avg_contrib_kpa_6 = rows[0].avg_contrib_kpa;
-          max_contrib_kpa_6 = rows[0].max_contrib_kpa;
   			});
 
-        var no_auto_sql_6 = "SELECT * FROM matches WHERE team_num='"+ team_num_6 +"'";
-        connection.query(no_auto_sql_6, function(err, rows, fields) {
-          for(var x in rows)
-          {
-            if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
-            {
-              no_autos_6++;
-            }
-          }
-  			});
+        // var no_auto_sql_6 = "SELECT * FROM matches WHERE team_num='"+ team_num_6 +"'";
+        // connection.query(no_auto_sql_6, function(err, rows, fields) {
+        //   for(var x in rows)
+        //   {
+        //     if(rows[x].auto_contrib_kpa == 0 && rows[x].auto_gears_scored == 0 && rows[x].baseline_cross == 0)
+        //     {
+        //       no_autos_6++;
+        //     }
+        //   }
+  			// });
       }
 
       var dir = __dirname + "\\public\\videos";
@@ -1275,144 +1339,184 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
               value: team_num_1
             },
             {
-              key: "avg_auto_contrib_kpa_1",
-              value: avg_auto_contrib_kpa_1
+              key: "avg_tele_intake_1",
+              value: avg_tele_intake_1
             },
             {
-              key: "avg_contrib_kpa_1",
-              value: avg_contrib_kpa_1
+              key: "max_tele_intake_1",
+              value: max_tele_intake_1
             },
             {
-              key: "max_contrib_kpa_1",
-              value: max_contrib_kpa_1
+              key: "avg_tele_cubes_scored_1",
+              value: avg_tele_cubes_scored_1
+            },
+            {
+              key: "max_tele_cubes_scored_1",
+              value: max_tele_cubes_scored_1
             },
             {
               key: "num_matches_1",
               value: num_matches_1
             },
             {
-              key: "tot_baseline_cross_1",
-              value: tot_baseline_cross_1
+              key: "tot_auto_cross_1",
+              value: tot_auto_cross_1
             },
             {
-              key: "avg_auto_high_made_1",
-              value: avg_auto_high_made_1
+              key: "tot_auto_scale_high_made_1",
+              value: tot_auto_scale_high_made_1
             },
             {
-              key: "avg_auto_high_attempts_1",
-              value: avg_auto_high_attempts_1
+              key: "tot_auto_scale_high_attempts_1",
+              value: tot_auto_scale_high_attempts_1
             },
             {
-              key: "max_auto_high_made_1",
-              value: max_auto_high_made_1
+              key: "tot_auto_scale_low_made_1",
+              value: tot_auto_scale_low_made_1
             },
             {
-              key: "avg_auto_low_made_1",
-              value: avg_auto_low_made_1
+              key: "tot_auto_scale_low_attempts_1",
+              value: tot_auto_scale_low_attempts_1
             },
             {
-              key: "avg_auto_low_attempts_1",
-              value: avg_auto_low_attempts_1
+              key: "tot_auto_near_switch_made_1",
+              value: tot_auto_near_switch_made_1
             },
             {
-              key: "max_auto_low_made_1",
-              value: max_auto_low_made_1
+              key: "tot_auto_near_switch_attempts_1",
+              value: tot_auto_near_switch_attempts_1
             },
             {
-              key: "avg_auto_hopper_intake_1",
-              value: avg_auto_hopper_intake_1
+              key: "tot_auto_exchange_made_1",
+              value: tot_auto_exchange_made_1
             },
             {
-              key: "tot_auto_gears_scored_fdr_1",
-              value: tot_auto_gears_scored_fdr_1
+              key: "tot_auto_exchange_attempts_1",
+              value: tot_auto_exchange_attempts_1
             },
             {
-              key: "tot_auto_gears_scored_mid_1",
-              value: tot_auto_gears_scored_mid_1
+              key: "tot_auto_pyramid_intake_1",
+              value: tot_auto_pyramid_intake_1
             },
             {
-              key: "tot_auto_gears_scored_boi_1",
-              value: tot_auto_gears_scored_boi_1
+              key: "tot_auto_unprotected_intake_1",
+              value: tot_auto_unprotected_intake_1
             },
             {
-              key: "tot_auto_gears_scored_1",
-              value: tot_auto_gears_scored_1
+              key: "tot_auto_left_1",
+              value: tot_auto_left_1
             },
             {
-              key: "tot_auto_gears_attempts_1",
-              value: tot_auto_gears_attempts_1
+              key: "tot_auto_center_1",
+              value: tot_auto_center_1
             },
             {
-              key: "max_auto_gears_scored_1",
-              value: max_auto_gears_scored_1
+              key: "tot_auto_right_1",
+              value: tot_auto_right_1
             },
             {
-              key: "avg_tele_high_made_1",
-              value: avg_tele_high_made_1
+              key: "avg_tele_exchange_made_1",
+              value: avg_tele_exchange_made_1
             },
             {
-              key: "avg_tele_high_attempts_1",
-              value: avg_tele_high_attempts_1
+              key: "avg_tele_exchange_attempts_1",
+              value: avg_tele_exchange_attempts_1
             },
             {
-              key: "max_tele_high_made_1",
-              value: max_tele_high_made_1
+              key: "avg_tele_near_switch_made_1",
+              value: avg_tele_near_switch_made_1
             },
             {
-              key: "avg_tele_low_made_1",
-              value: avg_tele_low_made_1
+              key: "avg_tele_near_switch_attempts_1",
+              value: avg_tele_near_switch_attempts_1
             },
             {
-              key: "avg_tele_low_attempts_1",
-              value: avg_tele_low_attempts_1
+              key: "avg_tele_far_switch_made_1",
+              value: avg_tele_far_switch_made_1
             },
             {
-              key: "max_tele_low_made_1",
-              value: max_tele_low_made_1
+              key: "avg_tele_far_switch_attempts_1",
+              value: avg_tele_far_switch_attempts_1
             },
             {
-              key: "avg_tele_gears_scored_1",
-              value: avg_tele_gears_scored_1
+              key: "avg_tele_scale_high_made_1",
+              value: avg_tele_scale_high_made_1
             },
             {
-              key: "avg_tele_gears_attempts_1",
-              value: avg_tele_gears_attempts_1
+              key: "avg_tele_scale_high_attempts_1",
+              value: avg_tele_scale_high_attempts_1
             },
             {
-              key: "max_tele_gears_scored_1",
-              value: max_tele_gears_scored_1
+              key: "avg_tele_scale_low_made_1",
+              value: avg_tele_scale_low_made_1
             },
             {
-              key: "tot_tele_gear_knockouts_1",
-              value: tot_tele_gear_knockouts_1
+              key: "avg_tele_scale_low_attempts_1",
+              value: avg_tele_scale_low_attempts_1
             },
             {
-              key: "avg_tele_floor_ball_intake_1",
-              value: avg_tele_floor_ball_intake_1
+              key: "avg_tele_portal_intake_made_1",
+              value: avg_tele_portal_intake_made_1
             },
             {
-              key: "avg_tele_hopper_intake_1",
-              value: avg_tele_hopper_intake_1
+              key: "avg_tele_portal_intake_attempts_1",
+              value: avg_tele_portal_intake_attempts_1
             },
             {
-              key: "avg_tele_floor_gear_intake_1",
-              value: avg_tele_floor_gear_intake_1
+              key: "avg_tele_pyramid_intake_1",
+              value: avg_tele_pyramid_intake_1
             },
             {
-              key: "avg_hp_gear_intake_1",
-              value: avg_hp_gear_intake_1
+              key: "avg_tele_unprotected_intake_1",
+              value: avg_tele_unprotected_intake_1
             },
             {
-              key: "avg_hp_gear_intake_miss_1",
-              value: avg_hp_gear_intake_miss_1
+              key: "avg_tele_floor_intake_1",
+              value: avg_tele_floor_intake_1
             },
             {
-              key: "tot_climb_1",
-              value: tot_climb_1
+              key: "avg_tele_knockouts_1",
+              value: avg_tele_knockouts_1
             },
             {
-              key: "tot_climb_attempts_1",
-              value: tot_climb_attempts_1
+              key: "avg_tele_cubes_dropped_1",
+              value: avg_tele_cubes_dropped_1
+            },
+            {
+              key: "tot_tele_orderly_1",
+              value: tot_tele_orderly_1
+            },
+            {
+              key: "max_tele_highest_level_1",
+              value: max_tele_highest_level_1
+            },
+            {
+              key: "tot_tele_climb_1",
+              value: tot_tele_climb_1
+            },
+            {
+              key: "tot_tele_climb_attempts_1",
+              value: tot_tele_climb_attempts_1
+            },
+            {
+              key: "tot_tele_climb_assisted_1",
+              value: tot_tele_climb_assisted_1
+            },
+            {
+              key: "tot_tele_plus_one_1",
+              value: tot_tele_plus_one_1
+            },
+            {
+              key: "tot_tele_plus_one_attempts_1",
+              value: tot_tele_plus_one_attempts_1
+            },
+            {
+              key: "tot_tele_plus_two_1",
+              value: tot_tele_plus_two_1
+            },
+            {
+              key: "tot_tele_plus_two_attempts_1",
+              value: tot_tele_plus_two_attempts_1
             },
             {
               key: "avg_defense_rating_1",
@@ -1420,151 +1524,191 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
             },
             {
               key: "avg_mobility_rating_1",
-              value: avg_mobility_rating_1
+              value: avg_driver_rating_1
             },
             {
               key: "team_num_2",
               value: team_num_2
             },
             {
-              key: "avg_auto_contrib_kpa_2",
-              value: avg_auto_contrib_kpa_2
+              key: "avg_tele_intake_2",
+              value: avg_tele_intake_2
             },
             {
-              key: "avg_contrib_kpa_2",
-              value: avg_contrib_kpa_2
+              key: "max_tele_intake_2",
+              value: max_tele_intake_2
             },
             {
-              key: "max_contrib_kpa_2",
-              value: max_contrib_kpa_2
+              key: "avg_tele_cubes_scored_2",
+              value: avg_tele_cubes_scored_2
+            },
+            {
+              key: "max_tele_cubes_scored_2",
+              value: max_tele_cubes_scored_2
             },
             {
               key: "num_matches_2",
               value: num_matches_2
             },
             {
-              key: "tot_baseline_cross_2",
-              value: tot_baseline_cross_2
+              key: "tot_auto_cross_2",
+              value: tot_auto_cross_2
             },
             {
-              key: "avg_auto_high_made_2",
-              value: avg_auto_high_made_2
+              key: "tot_auto_scale_high_made_2",
+              value: tot_auto_scale_high_made_2
             },
             {
-              key: "avg_auto_high_attempts_2",
-              value: avg_auto_high_attempts_2
+              key: "tot_auto_scale_high_attempts_2",
+              value: tot_auto_scale_high_attempts_2
             },
             {
-              key: "max_auto_high_made_2",
-              value: max_auto_high_made_2
+              key: "tot_auto_scale_low_made_2",
+              value: tot_auto_scale_low_made_2
             },
             {
-              key: "avg_auto_low_made_2",
-              value: avg_auto_low_made_2
+              key: "tot_auto_scale_low_attempts_2",
+              value: tot_auto_scale_low_attempts_2
             },
             {
-              key: "avg_auto_low_attempts_2",
-              value: avg_auto_low_attempts_2
+              key: "tot_auto_near_switch_made_2",
+              value: tot_auto_near_switch_made_2
             },
             {
-              key: "max_auto_low_made_2",
-              value: max_auto_low_made_2
+              key: "tot_auto_near_switch_attempts_2",
+              value: tot_auto_near_switch_attempts_2
             },
             {
-              key: "avg_auto_hopper_intake_2",
-              value: avg_auto_hopper_intake_2
+              key: "tot_auto_exchange_made_2",
+              value: tot_auto_exchange_made_2
             },
             {
-              key: "tot_auto_gears_scored_fdr_2",
-              value: tot_auto_gears_scored_fdr_2
+              key: "tot_auto_exchange_attempts_2",
+              value: tot_auto_exchange_attempts_2
             },
             {
-              key: "tot_auto_gears_scored_mid_2",
-              value: tot_auto_gears_scored_mid_2
+              key: "tot_auto_pyramid_intake_2",
+              value: tot_auto_pyramid_intake_2
             },
             {
-              key: "tot_auto_gears_scored_boi_2",
-              value: tot_auto_gears_scored_boi_2
+              key: "tot_auto_unprotected_intake_2",
+              value: tot_auto_unprotected_intake_2
             },
             {
-              key: "tot_auto_gears_scored_2",
-              value: tot_auto_gears_scored_2
+              key: "tot_auto_left_2",
+              value: tot_auto_left_2
             },
             {
-              key: "tot_auto_gears_attempts_2",
-              value: tot_auto_gears_attempts_2
+              key: "tot_auto_center_2",
+              value: tot_auto_center_2
             },
             {
-              key: "max_auto_gears_scored_2",
-              value: max_auto_gears_scored_2
+              key: "tot_auto_right_2",
+              value: tot_auto_right_2
             },
             {
-              key: "avg_tele_high_made_2",
-              value: avg_tele_high_made_2
+              key: "avg_tele_exchange_made_2",
+              value: avg_tele_exchange_made_2
             },
             {
-              key: "avg_tele_high_attempts_2",
-              value: avg_tele_high_attempts_2
+              key: "avg_tele_exchange_attempts_2",
+              value: avg_tele_exchange_attempts_2
             },
             {
-              key: "max_tele_high_made_2",
-              value: max_tele_high_made_2
+              key: "avg_tele_near_switch_made_2",
+              value: avg_tele_near_switch_made_2
             },
             {
-              key: "avg_tele_low_made_2",
-              value: avg_tele_low_made_2
+              key: "avg_tele_near_switch_attempts_2",
+              value: avg_tele_near_switch_attempts_2
             },
             {
-              key: "avg_tele_low_attempts_2",
-              value: avg_tele_low_attempts_2
+              key: "avg_tele_far_switch_made_2",
+              value: avg_tele_far_switch_made_2
             },
             {
-              key: "max_tele_low_made_2",
-              value: max_tele_low_made_2
+              key: "avg_tele_far_switch_attempts_2",
+              value: avg_tele_far_switch_attempts_2
             },
             {
-              key: "avg_tele_gears_scored_2",
-              value: avg_tele_gears_scored_2
+              key: "avg_tele_scale_high_made_2",
+              value: avg_tele_scale_high_made_2
             },
             {
-              key: "avg_tele_gears_attempts_2",
-              value: avg_tele_gears_attempts_2
+              key: "avg_tele_scale_high_attempts_2",
+              value: avg_tele_scale_high_attempts_2
             },
             {
-              key: "max_tele_gears_scored_2",
-              value: max_tele_gears_scored_2
+              key: "avg_tele_scale_low_made_2",
+              value: avg_tele_scale_low_made_2
             },
             {
-              key: "tot_tele_gear_knockouts_2",
-              value: tot_tele_gear_knockouts_2
+              key: "avg_tele_scale_low_attempts_2",
+              value: avg_tele_scale_low_attempts_2
             },
             {
-              key: "avg_tele_floor_ball_intake_2",
-              value: avg_tele_floor_ball_intake_2
+              key: "avg_tele_portal_intake_made_2",
+              value: avg_tele_portal_intake_made_2
             },
             {
-              key: "avg_tele_hopper_intake_2",
-              value: avg_tele_hopper_intake_2
+              key: "avg_tele_portal_intake_attempts_2",
+              value: avg_tele_portal_intake_attempts_2
             },
             {
-              key: "avg_tele_floor_gear_intake_2",
-              value: avg_tele_floor_gear_intake_2
+              key: "avg_tele_pyramid_intake_2",
+              value: avg_tele_pyramid_intake_2
             },
             {
-              key: "avg_hp_gear_intake_2",
-              value: avg_hp_gear_intake_2
+              key: "avg_tele_unprotected_intake_2",
+              value: avg_tele_unprotected_intake_2
             },
             {
-              key: "avg_hp_gear_intake_miss_2",
-              value: avg_hp_gear_intake_miss_2
+              key: "avg_tele_floor_intake_2",
+              value: avg_tele_floor_intake_2
             },
             {
-              key: "tot_climb_2",
-              value: tot_climb_2
+              key: "avg_tele_knockouts_2",
+              value: avg_tele_knockouts_2
             },
             {
-              key: "tot_climb_attempts_2",
-              value: tot_climb_attempts_2
+              key: "avg_tele_cubes_dropped_2",
+              value: avg_tele_cubes_dropped_2
+            },
+            {
+              key: "tot_tele_orderly_2",
+              value: tot_tele_orderly_2
+            },
+            {
+              key: "max_tele_highest_level_2",
+              value: max_tele_highest_level_2
+            },
+            {
+              key: "tot_tele_climb_2",
+              value: tot_tele_climb_2
+            },
+            {
+              key: "tot_tele_climb_attempts_2",
+              value: tot_tele_climb_attempts_2
+            },
+            {
+              key: "tot_tele_climb_assisted_2",
+              value: tot_tele_climb_assisted_2
+            },
+            {
+              key: "tot_tele_plus_one_2",
+              value: tot_tele_plus_one_2
+            },
+            {
+              key: "tot_tele_plus_one_attempts_2",
+              value: tot_tele_plus_one_attempts_2
+            },
+            {
+              key: "tot_tele_plus_two_2",
+              value: tot_tele_plus_two_2
+            },
+            {
+              key: "tot_tele_plus_two_attempts_2",
+              value: tot_tele_plus_two_attempts_2
             },
             {
               key: "avg_defense_rating_2",
@@ -1572,151 +1716,191 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
             },
             {
               key: "avg_mobility_rating_2",
-              value: avg_mobility_rating_2
+              value: avg_driver_rating_2
             },
             {
               key: "team_num_3",
               value: team_num_3
             },
             {
-              key: "avg_auto_contrib_kpa_3",
-              value: avg_auto_contrib_kpa_3
+              key: "avg_tele_intake_3",
+              value: avg_tele_intake_3
             },
             {
-              key: "avg_contrib_kpa_3",
-              value: avg_contrib_kpa_3
+              key: "max_tele_intake_3",
+              value: max_tele_intake_3
             },
             {
-              key: "max_contrib_kpa_3",
-              value: max_contrib_kpa_3
+              key: "avg_tele_cubes_scored_3",
+              value: avg_tele_cubes_scored_3
+            },
+            {
+              key: "max_tele_cubes_scored_3",
+              value: max_tele_cubes_scored_3
             },
             {
               key: "num_matches_3",
               value: num_matches_3
             },
             {
-              key: "tot_baseline_cross_3",
-              value: tot_baseline_cross_3
+              key: "tot_auto_cross_3",
+              value: tot_auto_cross_3
             },
             {
-              key: "avg_auto_high_made_3",
-              value: avg_auto_high_made_3
+              key: "tot_auto_scale_high_made_3",
+              value: tot_auto_scale_high_made_3
             },
             {
-              key: "avg_auto_high_attempts_3",
-              value: avg_auto_high_attempts_3
+              key: "tot_auto_scale_high_attempts_3",
+              value: tot_auto_scale_high_attempts_3
             },
             {
-              key: "max_auto_high_made_3",
-              value: max_auto_high_made_3
+              key: "tot_auto_scale_low_made_3",
+              value: tot_auto_scale_low_made_3
             },
             {
-              key: "avg_auto_low_made_3",
-              value: avg_auto_low_made_3
+              key: "tot_auto_scale_low_attempts_3",
+              value: tot_auto_scale_low_attempts_3
             },
             {
-              key: "avg_auto_low_attempts_3",
-              value: avg_auto_low_attempts_3
+              key: "tot_auto_near_switch_made_3",
+              value: tot_auto_near_switch_made_3
             },
             {
-              key: "max_auto_low_made_3",
-              value: max_auto_low_made_3
+              key: "tot_auto_near_switch_attempts_3",
+              value: tot_auto_near_switch_attempts_3
             },
             {
-              key: "avg_auto_hopper_intake_3",
-              value: avg_auto_hopper_intake_3
+              key: "tot_auto_exchange_made_3",
+              value: tot_auto_exchange_made_3
             },
             {
-              key: "tot_auto_gears_scored_fdr_3",
-              value: tot_auto_gears_scored_fdr_3
+              key: "tot_auto_exchange_attempts_3",
+              value: tot_auto_exchange_attempts_3
             },
             {
-              key: "tot_auto_gears_scored_mid_3",
-              value: tot_auto_gears_scored_mid_3
+              key: "tot_auto_pyramid_intake_3",
+              value: tot_auto_pyramid_intake_3
             },
             {
-              key: "tot_auto_gears_scored_boi_3",
-              value: tot_auto_gears_scored_boi_3
+              key: "tot_auto_unprotected_intake_3",
+              value: tot_auto_unprotected_intake_3
             },
             {
-              key: "tot_auto_gears_scored_3",
-              value: tot_auto_gears_scored_3
+              key: "tot_auto_left_3",
+              value: tot_auto_left_3
             },
             {
-              key: "tot_auto_gears_attempts_3",
-              value: tot_auto_gears_attempts_3
+              key: "tot_auto_center_3",
+              value: tot_auto_center_3
             },
             {
-              key: "max_auto_gears_scored_3",
-              value: max_auto_gears_scored_3
+              key: "tot_auto_right_3",
+              value: tot_auto_right_3
             },
             {
-              key: "avg_tele_high_made_3",
-              value: avg_tele_high_made_3
+              key: "avg_tele_exchange_made_3",
+              value: avg_tele_exchange_made_3
             },
             {
-              key: "avg_tele_high_attempts_3",
-              value: avg_tele_high_attempts_3
+              key: "avg_tele_exchange_attempts_3",
+              value: avg_tele_exchange_attempts_3
             },
             {
-              key: "max_tele_high_made_3",
-              value: max_tele_high_made_3
+              key: "avg_tele_near_switch_made_3",
+              value: avg_tele_near_switch_made_3
             },
             {
-              key: "avg_tele_low_made_3",
-              value: avg_tele_low_made_3
+              key: "avg_tele_near_switch_attempts_3",
+              value: avg_tele_near_switch_attempts_3
             },
             {
-              key: "avg_tele_low_attempts_3",
-              value: avg_tele_low_attempts_3
+              key: "avg_tele_far_switch_made_3",
+              value: avg_tele_far_switch_made_3
             },
             {
-              key: "max_tele_low_made_3",
-              value: max_tele_low_made_3
+              key: "avg_tele_far_switch_attempts_3",
+              value: avg_tele_far_switch_attempts_3
             },
             {
-              key: "avg_tele_gears_scored_3",
-              value: avg_tele_gears_scored_3
+              key: "avg_tele_scale_high_made_3",
+              value: avg_tele_scale_high_made_3
             },
             {
-              key: "avg_tele_gears_attempts_3",
-              value: avg_tele_gears_attempts_3
+              key: "avg_tele_scale_high_attempts_3",
+              value: avg_tele_scale_high_attempts_3
             },
             {
-              key: "max_tele_gears_scored_3",
-              value: max_tele_gears_scored_3
+              key: "avg_tele_scale_low_made_3",
+              value: avg_tele_scale_low_made_3
             },
             {
-              key: "tot_tele_gear_knockouts_3",
-              value: tot_tele_gear_knockouts_3
+              key: "avg_tele_scale_low_attempts_3",
+              value: avg_tele_scale_low_attempts_3
             },
             {
-              key: "avg_tele_floor_ball_intake_3",
-              value: avg_tele_floor_ball_intake_3
+              key: "avg_tele_portal_intake_made_3",
+              value: avg_tele_portal_intake_made_3
             },
             {
-              key: "avg_tele_hopper_intake_3",
-              value: avg_tele_hopper_intake_3
+              key: "avg_tele_portal_intake_attempts_3",
+              value: avg_tele_portal_intake_attempts_3
             },
             {
-              key: "avg_tele_floor_gear_intake_3",
-              value: avg_tele_floor_gear_intake_3
+              key: "avg_tele_pyramid_intake_3",
+              value: avg_tele_pyramid_intake_3
             },
             {
-              key: "avg_hp_gear_intake_3",
-              value: avg_hp_gear_intake_3
+              key: "avg_tele_unprotected_intake_3",
+              value: avg_tele_unprotected_intake_3
             },
             {
-              key: "avg_hp_gear_intake_miss_3",
-              value: avg_hp_gear_intake_miss_3
+              key: "avg_tele_floor_intake_3",
+              value: avg_tele_floor_intake_3
             },
             {
-              key: "tot_climb_3",
-              value: tot_climb_3
+              key: "avg_tele_knockouts_3",
+              value: avg_tele_knockouts_3
             },
             {
-              key: "tot_climb_attempts_3",
-              value: tot_climb_attempts_3
+              key: "avg_tele_cubes_dropped_3",
+              value: avg_tele_cubes_dropped_3
+            },
+            {
+              key: "tot_tele_orderly_3",
+              value: tot_tele_orderly_3
+            },
+            {
+              key: "max_tele_highest_level_3",
+              value: max_tele_highest_level_3
+            },
+            {
+              key: "tot_tele_climb_3",
+              value: tot_tele_climb_3
+            },
+            {
+              key: "tot_tele_climb_attempts_3",
+              value: tot_tele_climb_attempts_3
+            },
+            {
+              key: "tot_tele_climb_assisted_3",
+              value: tot_tele_climb_assisted_3
+            },
+            {
+              key: "tot_tele_plus_one_3",
+              value: tot_tele_plus_one_3
+            },
+            {
+              key: "tot_tele_plus_one_attempts_3",
+              value: tot_tele_plus_one_attempts_3
+            },
+            {
+              key: "tot_tele_plus_two_3",
+              value: tot_tele_plus_two_3
+            },
+            {
+              key: "tot_tele_plus_two_attempts_3",
+              value: tot_tele_plus_two_attempts_3
             },
             {
               key: "avg_defense_rating_3",
@@ -1724,151 +1908,191 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
             },
             {
               key: "avg_mobility_rating_3",
-              value: avg_mobility_rating_3
+              value: avg_driver_rating_3
             },
             {
               key: "team_num_4",
               value: team_num_4
             },
             {
-              key: "avg_auto_contrib_kpa_4",
-              value: avg_auto_contrib_kpa_4
+              key: "avg_tele_intake_4",
+              value: avg_tele_intake_4
             },
             {
-              key: "avg_contrib_kpa_4",
-              value: avg_contrib_kpa_4
+              key: "max_tele_intake_4",
+              value: max_tele_intake_4
             },
             {
-              key: "max_contrib_kpa_4",
-              value: max_contrib_kpa_4
+              key: "avg_tele_cubes_scored_4",
+              value: avg_tele_cubes_scored_4
+            },
+            {
+              key: "max_tele_cubes_scored_4",
+              value: max_tele_cubes_scored_4
             },
             {
               key: "num_matches_4",
               value: num_matches_4
             },
             {
-              key: "tot_baseline_cross_4",
-              value: tot_baseline_cross_4
+              key: "tot_auto_cross_4",
+              value: tot_auto_cross_4
             },
             {
-              key: "avg_auto_high_made_4",
-              value: avg_auto_high_made_4
+              key: "tot_auto_scale_high_made_4",
+              value: tot_auto_scale_high_made_4
             },
             {
-              key: "avg_auto_high_attempts_4",
-              value: avg_auto_high_attempts_4
+              key: "tot_auto_scale_high_attempts_4",
+              value: tot_auto_scale_high_attempts_4
             },
             {
-              key: "max_auto_high_made_4",
-              value: max_auto_high_made_4
+              key: "tot_auto_scale_low_made_4",
+              value: tot_auto_scale_low_made_4
             },
             {
-              key: "avg_auto_low_made_4",
-              value: avg_auto_low_made_4
+              key: "tot_auto_scale_low_attempts_4",
+              value: tot_auto_scale_low_attempts_4
             },
             {
-              key: "avg_auto_low_attempts_4",
-              value: avg_auto_low_attempts_4
+              key: "tot_auto_near_switch_made_4",
+              value: tot_auto_near_switch_made_4
             },
             {
-              key: "max_auto_low_made_4",
-              value: max_auto_low_made_4
+              key: "tot_auto_near_switch_attempts_4",
+              value: tot_auto_near_switch_attempts_4
             },
             {
-              key: "avg_auto_hopper_intake_4",
-              value: avg_auto_hopper_intake_4
+              key: "tot_auto_exchange_made_4",
+              value: tot_auto_exchange_made_4
             },
             {
-              key: "tot_auto_gears_scored_fdr_4",
-              value: tot_auto_gears_scored_fdr_4
+              key: "tot_auto_exchange_attempts_4",
+              value: tot_auto_exchange_attempts_4
             },
             {
-              key: "tot_auto_gears_scored_mid_4",
-              value: tot_auto_gears_scored_mid_4
+              key: "tot_auto_pyramid_intake_4",
+              value: tot_auto_pyramid_intake_4
             },
             {
-              key: "tot_auto_gears_scored_boi_4",
-              value: tot_auto_gears_scored_boi_4
+              key: "tot_auto_unprotected_intake_4",
+              value: tot_auto_unprotected_intake_4
             },
             {
-              key: "tot_auto_gears_scored_4",
-              value: tot_auto_gears_scored_4
+              key: "tot_auto_left_4",
+              value: tot_auto_left_4
             },
             {
-              key: "tot_auto_gears_attempts_4",
-              value: tot_auto_gears_attempts_4
+              key: "tot_auto_center_4",
+              value: tot_auto_center_4
             },
             {
-              key: "max_auto_gears_scored_4",
-              value: max_auto_gears_scored_4
+              key: "tot_auto_right_4",
+              value: tot_auto_right_4
             },
             {
-              key: "avg_tele_high_made_4",
-              value: avg_tele_high_made_4
+              key: "avg_tele_exchange_made_4",
+              value: avg_tele_exchange_made_4
             },
             {
-              key: "avg_tele_high_attempts_4",
-              value: avg_tele_high_attempts_4
+              key: "avg_tele_exchange_attempts_4",
+              value: avg_tele_exchange_attempts_4
             },
             {
-              key: "max_tele_high_made_4",
-              value: max_tele_high_made_4
+              key: "avg_tele_near_switch_made_4",
+              value: avg_tele_near_switch_made_4
             },
             {
-              key: "avg_tele_low_made_4",
-              value: avg_tele_low_made_4
+              key: "avg_tele_near_switch_attempts_4",
+              value: avg_tele_near_switch_attempts_4
             },
             {
-              key: "avg_tele_low_attempts_4",
-              value: avg_tele_low_attempts_4
+              key: "avg_tele_far_switch_made_4",
+              value: avg_tele_far_switch_made_4
             },
             {
-              key: "max_tele_low_made_4",
-              value: max_tele_low_made_4
+              key: "avg_tele_far_switch_attempts_4",
+              value: avg_tele_far_switch_attempts_4
             },
             {
-              key: "avg_tele_gears_scored_4",
-              value: avg_tele_gears_scored_4
+              key: "avg_tele_scale_high_made_4",
+              value: avg_tele_scale_high_made_4
             },
             {
-              key: "avg_tele_gears_attempts_4",
-              value: avg_tele_gears_attempts_4
+              key: "avg_tele_scale_high_attempts_4",
+              value: avg_tele_scale_high_attempts_4
             },
             {
-              key: "max_tele_gears_scored_4",
-              value: max_tele_gears_scored_4
+              key: "avg_tele_scale_low_made_4",
+              value: avg_tele_scale_low_made_4
             },
             {
-              key: "tot_tele_gear_knockouts_4",
-              value: tot_tele_gear_knockouts_4
+              key: "avg_tele_scale_low_attempts_4",
+              value: avg_tele_scale_low_attempts_4
             },
             {
-              key: "avg_tele_floor_ball_intake_4",
-              value: avg_tele_floor_ball_intake_4
+              key: "avg_tele_portal_intake_made_4",
+              value: avg_tele_portal_intake_made_4
             },
             {
-              key: "avg_tele_hopper_intake_4",
-              value: avg_tele_hopper_intake_4
+              key: "avg_tele_portal_intake_attempts_4",
+              value: avg_tele_portal_intake_attempts_4
             },
             {
-              key: "avg_tele_floor_gear_intake_4",
-              value: avg_tele_floor_gear_intake_4
+              key: "avg_tele_pyramid_intake_4",
+              value: avg_tele_pyramid_intake_4
             },
             {
-              key: "avg_hp_gear_intake_4",
-              value: avg_hp_gear_intake_4
+              key: "avg_tele_unprotected_intake_4",
+              value: avg_tele_unprotected_intake_4
             },
             {
-              key: "avg_hp_gear_intake_miss_4",
-              value: avg_hp_gear_intake_miss_4
+              key: "avg_tele_floor_intake_4",
+              value: avg_tele_floor_intake_4
             },
             {
-              key: "tot_climb_4",
-              value: tot_climb_4
+              key: "avg_tele_knockouts_4",
+              value: avg_tele_knockouts_4
             },
             {
-              key: "tot_climb_attempts_4",
-              value: tot_climb_attempts_4
+              key: "avg_tele_cubes_dropped_4",
+              value: avg_tele_cubes_dropped_4
+            },
+            {
+              key: "tot_tele_orderly_4",
+              value: tot_tele_orderly_4
+            },
+            {
+              key: "max_tele_highest_level_4",
+              value: max_tele_highest_level_4
+            },
+            {
+              key: "tot_tele_climb_4",
+              value: tot_tele_climb_4
+            },
+            {
+              key: "tot_tele_climb_attempts_4",
+              value: tot_tele_climb_attempts_4
+            },
+            {
+              key: "tot_tele_climb_assisted_4",
+              value: tot_tele_climb_assisted_4
+            },
+            {
+              key: "tot_tele_plus_one_4",
+              value: tot_tele_plus_one_4
+            },
+            {
+              key: "tot_tele_plus_one_attempts_4",
+              value: tot_tele_plus_one_attempts_4
+            },
+            {
+              key: "tot_tele_plus_two_4",
+              value: tot_tele_plus_two_4
+            },
+            {
+              key: "tot_tele_plus_two_attempts_4",
+              value: tot_tele_plus_two_attempts_4
             },
             {
               key: "avg_defense_rating_4",
@@ -1876,151 +2100,191 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
             },
             {
               key: "avg_mobility_rating_4",
-              value: avg_mobility_rating_4
+              value: avg_driver_rating_4
             },
             {
               key: "team_num_5",
               value: team_num_5
             },
             {
-              key: "avg_auto_contrib_kpa_5",
-              value: avg_auto_contrib_kpa_5
+              key: "avg_tele_intake_5",
+              value: avg_tele_intake_5
             },
             {
-              key: "avg_contrib_kpa_5",
-              value: avg_contrib_kpa_5
+              key: "max_tele_intake_5",
+              value: max_tele_intake_5
             },
             {
-              key: "max_contrib_kpa_5",
-              value: max_contrib_kpa_5
+              key: "avg_tele_cubes_scored_5",
+              value: avg_tele_cubes_scored_5
+            },
+            {
+              key: "max_tele_cubes_scored_5",
+              value: max_tele_cubes_scored_5
             },
             {
               key: "num_matches_5",
               value: num_matches_5
             },
             {
-              key: "tot_baseline_cross_5",
-              value: tot_baseline_cross_5
+              key: "tot_auto_cross_5",
+              value: tot_auto_cross_5
             },
             {
-              key: "avg_auto_high_made_5",
-              value: avg_auto_high_made_5
+              key: "tot_auto_scale_high_made_5",
+              value: tot_auto_scale_high_made_5
             },
             {
-              key: "avg_auto_high_attempts_5",
-              value: avg_auto_high_attempts_5
+              key: "tot_auto_scale_high_attempts_5",
+              value: tot_auto_scale_high_attempts_5
             },
             {
-              key: "max_auto_high_made_5",
-              value: max_auto_high_made_5
+              key: "tot_auto_scale_low_made_5",
+              value: tot_auto_scale_low_made_5
             },
             {
-              key: "avg_auto_low_made_5",
-              value: avg_auto_low_made_5
+              key: "tot_auto_scale_low_attempts_5",
+              value: tot_auto_scale_low_attempts_5
             },
             {
-              key: "avg_auto_low_attempts_5",
-              value: avg_auto_low_attempts_5
+              key: "tot_auto_near_switch_made_5",
+              value: tot_auto_near_switch_made_5
             },
             {
-              key: "max_auto_low_made_5",
-              value: max_auto_low_made_5
+              key: "tot_auto_near_switch_attempts_5",
+              value: tot_auto_near_switch_attempts_5
             },
             {
-              key: "avg_auto_hopper_intake_5",
-              value: avg_auto_hopper_intake_5
+              key: "tot_auto_exchange_made_5",
+              value: tot_auto_exchange_made_5
             },
             {
-              key: "tot_auto_gears_scored_fdr_5",
-              value: tot_auto_gears_scored_fdr_5
+              key: "tot_auto_exchange_attempts_5",
+              value: tot_auto_exchange_attempts_5
             },
             {
-              key: "tot_auto_gears_scored_mid_5",
-              value: tot_auto_gears_scored_mid_5
+              key: "tot_auto_pyramid_intake_5",
+              value: tot_auto_pyramid_intake_5
             },
             {
-              key: "tot_auto_gears_scored_boi_5",
-              value: tot_auto_gears_scored_boi_5
+              key: "tot_auto_unprotected_intake_5",
+              value: tot_auto_unprotected_intake_5
             },
             {
-              key: "tot_auto_gears_scored_5",
-              value: tot_auto_gears_scored_5
+              key: "tot_auto_left_5",
+              value: tot_auto_left_5
             },
             {
-              key: "tot_auto_gears_attempts_5",
-              value: tot_auto_gears_attempts_5
+              key: "tot_auto_center_5",
+              value: tot_auto_center_5
             },
             {
-              key: "max_auto_gears_scored_5",
-              value: max_auto_gears_scored_5
+              key: "tot_auto_right_5",
+              value: tot_auto_right_5
             },
             {
-              key: "avg_tele_high_made_5",
-              value: avg_tele_high_made_5
+              key: "avg_tele_exchange_made_5",
+              value: avg_tele_exchange_made_5
             },
             {
-              key: "avg_tele_high_attempts_5",
-              value: avg_tele_high_attempts_5
+              key: "avg_tele_exchange_attempts_5",
+              value: avg_tele_exchange_attempts_5
             },
             {
-              key: "max_tele_high_made_5",
-              value: max_tele_high_made_5
+              key: "avg_tele_near_switch_made_5",
+              value: avg_tele_near_switch_made_5
             },
             {
-              key: "avg_tele_low_made_5",
-              value: avg_tele_low_made_5
+              key: "avg_tele_near_switch_attempts_5",
+              value: avg_tele_near_switch_attempts_5
             },
             {
-              key: "avg_tele_low_attempts_5",
-              value: avg_tele_low_attempts_5
+              key: "avg_tele_far_switch_made_5",
+              value: avg_tele_far_switch_made_5
             },
             {
-              key: "max_tele_low_made_5",
-              value: max_tele_low_made_5
+              key: "avg_tele_far_switch_attempts_5",
+              value: avg_tele_far_switch_attempts_5
             },
             {
-              key: "avg_tele_gears_scored_5",
-              value: avg_tele_gears_scored_5
+              key: "avg_tele_scale_high_made_5",
+              value: avg_tele_scale_high_made_5
             },
             {
-              key: "avg_tele_gears_attempts_5",
-              value: avg_tele_gears_attempts_5
+              key: "avg_tele_scale_high_attempts_5",
+              value: avg_tele_scale_high_attempts_5
             },
             {
-              key: "max_tele_gears_scored_5",
-              value: max_tele_gears_scored_5
+              key: "avg_tele_scale_low_made_5",
+              value: avg_tele_scale_low_made_5
             },
             {
-              key: "tot_tele_gear_knockouts_5",
-              value: tot_tele_gear_knockouts_5
+              key: "avg_tele_scale_low_attempts_5",
+              value: avg_tele_scale_low_attempts_5
             },
             {
-              key: "avg_tele_floor_ball_intake_5",
-              value: avg_tele_floor_ball_intake_5
+              key: "avg_tele_portal_intake_made_5",
+              value: avg_tele_portal_intake_made_5
             },
             {
-              key: "avg_tele_hopper_intake_5",
-              value: avg_tele_hopper_intake_5
+              key: "avg_tele_portal_intake_attempts_5",
+              value: avg_tele_portal_intake_attempts_5
             },
             {
-              key: "avg_tele_floor_gear_intake_5",
-              value: avg_tele_floor_gear_intake_5
+              key: "avg_tele_pyramid_intake_5",
+              value: avg_tele_pyramid_intake_5
             },
             {
-              key: "avg_hp_gear_intake_5",
-              value: avg_hp_gear_intake_5
+              key: "avg_tele_unprotected_intake_5",
+              value: avg_tele_unprotected_intake_5
             },
             {
-              key: "avg_hp_gear_intake_miss_5",
-              value: avg_hp_gear_intake_miss_5
+              key: "avg_tele_floor_intake_5",
+              value: avg_tele_floor_intake_5
             },
             {
-              key: "tot_climb_5",
-              value: tot_climb_5
+              key: "avg_tele_knockouts_5",
+              value: avg_tele_knockouts_5
             },
             {
-              key: "tot_climb_attempts_5",
-              value: tot_climb_attempts_5
+              key: "avg_tele_cubes_dropped_5",
+              value: avg_tele_cubes_dropped_5
+            },
+            {
+              key: "tot_tele_orderly_5",
+              value: tot_tele_orderly_5
+            },
+            {
+              key: "max_tele_highest_level_5",
+              value: max_tele_highest_level_5
+            },
+            {
+              key: "tot_tele_climb_5",
+              value: tot_tele_climb_5
+            },
+            {
+              key: "tot_tele_climb_attempts_5",
+              value: tot_tele_climb_attempts_5
+            },
+            {
+              key: "tot_tele_climb_assisted_5",
+              value: tot_tele_climb_assisted_5
+            },
+            {
+              key: "tot_tele_plus_one_5",
+              value: tot_tele_plus_one_5
+            },
+            {
+              key: "tot_tele_plus_one_attempts_5",
+              value: tot_tele_plus_one_attempts_5
+            },
+            {
+              key: "tot_tele_plus_two_5",
+              value: tot_tele_plus_two_5
+            },
+            {
+              key: "tot_tele_plus_two_attempts_5",
+              value: tot_tele_plus_two_attempts_5
             },
             {
               key: "avg_defense_rating_5",
@@ -2028,151 +2292,191 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
             },
             {
               key: "avg_mobility_rating_5",
-              value: avg_mobility_rating_5
+              value: avg_driver_rating_5
             },
             {
               key: "team_num_6",
               value: team_num_6
             },
             {
-              key: "avg_auto_contrib_kpa_6",
-              value: avg_auto_contrib_kpa_6
+              key: "avg_tele_intake_6",
+              value: avg_tele_intake_6
             },
             {
-              key: "avg_contrib_kpa_6",
-              value: avg_contrib_kpa_6
+              key: "max_tele_intake_6",
+              value: max_tele_intake_6
             },
             {
-              key: "max_contrib_kpa_6",
-              value: max_contrib_kpa_6
+              key: "avg_tele_cubes_scored_6",
+              value: avg_tele_cubes_scored_6
+            },
+            {
+              key: "max_tele_cubes_scored_6",
+              value: max_tele_cubes_scored_6
             },
             {
               key: "num_matches_6",
               value: num_matches_6
             },
             {
-              key: "tot_baseline_cross_6",
-              value: tot_baseline_cross_6
+              key: "tot_auto_cross_6",
+              value: tot_auto_cross_6
             },
             {
-              key: "avg_auto_high_made_6",
-              value: avg_auto_high_made_6
+              key: "tot_auto_scale_high_made_6",
+              value: tot_auto_scale_high_made_6
             },
             {
-              key: "avg_auto_high_attempts_6",
-              value: avg_auto_high_attempts_6
+              key: "tot_auto_scale_high_attempts_6",
+              value: tot_auto_scale_high_attempts_6
             },
             {
-              key: "max_auto_high_made_6",
-              value: max_auto_high_made_6
+              key: "tot_auto_scale_low_made_6",
+              value: tot_auto_scale_low_made_6
             },
             {
-              key: "avg_auto_low_made_6",
-              value: avg_auto_low_made_6
+              key: "tot_auto_scale_low_attempts_6",
+              value: tot_auto_scale_low_attempts_6
             },
             {
-              key: "avg_auto_low_attempts_6",
-              value: avg_auto_low_attempts_6
+              key: "tot_auto_near_switch_made_6",
+              value: tot_auto_near_switch_made_6
             },
             {
-              key: "max_auto_low_made_6",
-              value: max_auto_low_made_6
+              key: "tot_auto_near_switch_attempts_6",
+              value: tot_auto_near_switch_attempts_6
             },
             {
-              key: "avg_auto_hopper_intake_6",
-              value: avg_auto_hopper_intake_6
+              key: "tot_auto_exchange_made_6",
+              value: tot_auto_exchange_made_6
             },
             {
-              key: "tot_auto_gears_scored_fdr_6",
-              value: tot_auto_gears_scored_fdr_6
+              key: "tot_auto_exchange_attempts_6",
+              value: tot_auto_exchange_attempts_6
             },
             {
-              key: "tot_auto_gears_scored_mid_6",
-              value: tot_auto_gears_scored_mid_6
+              key: "tot_auto_pyramid_intake_6",
+              value: tot_auto_pyramid_intake_6
             },
             {
-              key: "tot_auto_gears_scored_boi_6",
-              value: tot_auto_gears_scored_boi_6
+              key: "tot_auto_unprotected_intake_6",
+              value: tot_auto_unprotected_intake_6
             },
             {
-              key: "tot_auto_gears_scored_6",
-              value: tot_auto_gears_scored_6
+              key: "tot_auto_left_6",
+              value: tot_auto_left_6
             },
             {
-              key: "tot_auto_gears_attempts_6",
-              value: tot_auto_gears_attempts_6
+              key: "tot_auto_center_6",
+              value: tot_auto_center_6
             },
             {
-              key: "max_auto_gears_scored_6",
-              value: max_auto_gears_scored_6
+              key: "tot_auto_right_6",
+              value: tot_auto_right_6
             },
             {
-              key: "avg_tele_high_made_6",
-              value: avg_tele_high_made_6
+              key: "avg_tele_exchange_made_6",
+              value: avg_tele_exchange_made_6
             },
             {
-              key: "avg_tele_high_attempts_6",
-              value: avg_tele_high_attempts_6
+              key: "avg_tele_exchange_attempts_6",
+              value: avg_tele_exchange_attempts_6
             },
             {
-              key: "max_tele_high_made_6",
-              value: max_tele_high_made_6
+              key: "avg_tele_near_switch_made_6",
+              value: avg_tele_near_switch_made_6
             },
             {
-              key: "avg_tele_low_made_6",
-              value: avg_tele_low_made_6
+              key: "avg_tele_near_switch_attempts_6",
+              value: avg_tele_near_switch_attempts_6
             },
             {
-              key: "avg_tele_low_attempts_6",
-              value: avg_tele_low_attempts_6
+              key: "avg_tele_far_switch_made_6",
+              value: avg_tele_far_switch_made_6
             },
             {
-              key: "max_tele_low_made_6",
-              value: max_tele_low_made_6
+              key: "avg_tele_far_switch_attempts_6",
+              value: avg_tele_far_switch_attempts_6
             },
             {
-              key: "avg_tele_gears_scored_6",
-              value: avg_tele_gears_scored_6
+              key: "avg_tele_scale_high_made_6",
+              value: avg_tele_scale_high_made_6
             },
             {
-              key: "avg_tele_gears_attempts_6",
-              value: avg_tele_gears_attempts_6
+              key: "avg_tele_scale_high_attempts_6",
+              value: avg_tele_scale_high_attempts_6
             },
             {
-              key: "max_tele_gears_scored_6",
-              value: max_tele_gears_scored_6
+              key: "avg_tele_scale_low_made_6",
+              value: avg_tele_scale_low_made_6
             },
             {
-              key: "tot_tele_gear_knockouts_6",
-              value: tot_tele_gear_knockouts_6
+              key: "avg_tele_scale_low_attempts_6",
+              value: avg_tele_scale_low_attempts_6
             },
             {
-              key: "avg_tele_floor_ball_intake_6",
-              value: avg_tele_floor_ball_intake_6
+              key: "avg_tele_portal_intake_made_6",
+              value: avg_tele_portal_intake_made_6
             },
             {
-              key: "avg_tele_hopper_intake_6",
-              value: avg_tele_hopper_intake_6
+              key: "avg_tele_portal_intake_attempts_6",
+              value: avg_tele_portal_intake_attempts_6
             },
             {
-              key: "avg_tele_floor_gear_intake_6",
-              value: avg_tele_floor_gear_intake_6
+              key: "avg_tele_pyramid_intake_6",
+              value: avg_tele_pyramid_intake_6
             },
             {
-              key: "avg_hp_gear_intake_6",
-              value: avg_hp_gear_intake_6
+              key: "avg_tele_unprotected_intake_6",
+              value: avg_tele_unprotected_intake_6
             },
             {
-              key: "avg_hp_gear_intake_miss_6",
-              value: avg_hp_gear_intake_miss_6
+              key: "avg_tele_floor_intake_6",
+              value: avg_tele_floor_intake_6
             },
             {
-              key: "tot_climb_6",
-              value: tot_climb_6
+              key: "avg_tele_knockouts_6",
+              value: avg_tele_knockouts_6
             },
             {
-              key: "tot_climb_attempts_6",
-              value: tot_climb_attempts_6
+              key: "avg_tele_cubes_dropped_6",
+              value: avg_tele_cubes_dropped_6
+            },
+            {
+              key: "tot_tele_orderly_6",
+              value: tot_tele_orderly_6
+            },
+            {
+              key: "max_tele_highest_level_6",
+              value: max_tele_highest_level_6
+            },
+            {
+              key: "tot_tele_climb_6",
+              value: tot_tele_climb_6
+            },
+            {
+              key: "tot_tele_climb_attempts_6",
+              value: tot_tele_climb_attempts_6
+            },
+            {
+              key: "tot_tele_climb_assisted_6",
+              value: tot_tele_climb_assisted_6
+            },
+            {
+              key: "tot_tele_plus_one_6",
+              value: tot_tele_plus_one_6
+            },
+            {
+              key: "tot_tele_plus_one_attempts_6",
+              value: tot_tele_plus_one_attempts_6
+            },
+            {
+              key: "tot_tele_plus_two_6",
+              value: tot_tele_plus_two_6
+            },
+            {
+              key: "tot_tele_plus_two_attempts_6",
+              value: tot_tele_plus_two_attempts_6
             },
             {
               key: "avg_defense_rating_6",
@@ -2180,7 +2484,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
             },
             {
               key: "avg_mobility_rating_6",
-              value: avg_mobility_rating_6
+              value: avg_driver_rating_6
             }
           ]);
           var video1 = myPres.getSlide(3);
@@ -2225,286 +2529,321 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, passport)
                           + team_num_4 + "_" + team_num_5 + "_" + team_num_6 + ".pptx");
 
           res.render('pages/alliance', {
-	    req: req,
+      	    req: req,
             team_num_1: team_num_1,
             team_name_1: team_name_1,
-            tot_auto_gears_scored_fdr_1: tot_auto_gears_scored_fdr_1,
-            tot_auto_gears_scored_mid_1: tot_auto_gears_scored_mid_1,
-            tot_auto_gears_scored_boi_1: tot_auto_gears_scored_boi_1,
-            tot_auto_gears_scored_1: tot_auto_gears_scored_1,
-            max_auto_gears_scored_1: max_auto_gears_scored_1,
-            tot_auto_gears_attempts_1: tot_auto_gears_attempts_1,
-            avg_auto_high_made_1: avg_auto_high_made_1,
-            max_auto_high_made_1: max_auto_high_made_1,
-            avg_auto_high_attempts_1: avg_auto_high_attempts_1,
-            avg_auto_low_made_1: avg_auto_low_made_1,
-            max_auto_low_made_1: max_auto_low_made_1,
-            avg_auto_low_attempts_1: avg_auto_low_attempts_1,
-            tot_baseline_cross_1: tot_baseline_cross_1,
-            avg_auto_hopper_intake_1: avg_auto_hopper_intake_1,
-            avg_auto_contrib_kpa_1: avg_auto_contrib_kpa_1,
-            max_auto_contrib_kpa_1: max_auto_contrib_kpa_1,
-            avg_tele_high_made_1: avg_tele_high_made_1,
-            max_tele_high_made_1: max_tele_high_made_1,
-            avg_tele_high_attempts_1: avg_tele_high_attempts_1,
-            avg_tele_low_made_1: avg_tele_low_made_1,
-            max_tele_low_made_1: max_tele_low_made_1,
-            avg_tele_low_attempts_1: avg_tele_low_attempts_1,
-            avg_tele_gears_scored_1: avg_tele_gears_scored_1,
-            max_tele_gears_scored_1: max_tele_gears_scored_1,
-            avg_tele_gears_attempts_1: avg_tele_gears_attempts_1,
-            avg_tele_floor_ball_intake_1: avg_tele_floor_ball_intake_1,
-            avg_tele_floor_gear_intake_1: avg_tele_floor_gear_intake_1,
-            avg_tele_hopper_intake_1: avg_tele_hopper_intake_1,
-            avg_hp_gear_intake_1: avg_hp_gear_intake_1,
-            avg_hp_gear_intake_miss_1: avg_hp_gear_intake_miss_1,
-            avg_tele_gears_dropped_1: avg_tele_gears_dropped_1,
-            tot_tele_gear_knockouts_1: tot_tele_gear_knockouts_1,
-            tot_climb_1: tot_climb_1,
-            tot_climb_attempts_1: tot_climb_attempts_1,
-            avg_climb_rating_1: avg_climb_rating_1,
-            avg_climb_time_1: avg_climb_time_1,
-            avg_mobility_rating_1: avg_mobility_rating_1,
+            num_matches_1: num_matches_1,
+            tot_auto_cross_1: tot_auto_cross_1,
+            tot_auto_left_1: tot_auto_left_1,
+            tot_auto_center_1: tot_auto_center_1,
+            tot_auto_right_1: tot_auto_right_1,
+            tot_auto_pyramid_intake_1: tot_auto_pyramid_intake_1,
+            tot_auto_unprotected_intake_1: tot_auto_unprotected_intake_1,
+            tot_auto_near_switch_made_1: tot_auto_near_switch_made_1,
+            tot_auto_near_switch_attempts_1: tot_auto_near_switch_attempts_1,
+            tot_auto_exchange_made_1: tot_auto_exchange_made_1,
+            tot_auto_exchange_attempts_1: tot_auto_exchange_attempts_1,
+            tot_auto_scale_high_made_1: tot_auto_scale_high_made_1,
+            tot_auto_scale_high_attempts_1: tot_auto_scale_high_attempts_1,
+            tot_auto_scale_low_made_1: tot_auto_scale_low_made_1,
+            tot_auto_scale_low_attempts_1: tot_auto_scale_low_attempts_1,
+            avg_tele_cubes_scored_1: avg_tele_cubes_scored_1,
+            max_tele_cubes_scored_1: max_tele_cubes_scored_1,
+            avg_tele_exchange_made_1: avg_tele_exchange_made_1,
+            avg_tele_exchange_attempts_1: avg_tele_exchange_attempts_1,
+            avg_tele_near_switch_made_1: avg_tele_near_switch_made_1,
+            avg_tele_near_switch_attempts_1: avg_tele_near_switch_attempts_1,
+            avg_tele_far_switch_made_1: avg_tele_far_switch_made_1,
+            avg_tele_far_switch_attempts_1: avg_tele_far_switch_attempts_1,
+            avg_tele_scale_high_made_1: avg_tele_scale_high_made_1,
+            avg_tele_scale_high_attempts_1: avg_tele_scale_high_attempts_1,
+            avg_tele_scale_low_made_1: avg_tele_scale_low_made_1,
+            avg_tele_scale_low_attempts_1: avg_tele_scale_low_attempts_1,
+            avg_tele_knockouts_1: avg_tele_knockouts_1,
+            avg_tele_cubes_dropped_1: avg_tele_cubes_dropped_1,
+            avg_tele_intake_1: avg_tele_intake_1,
+            max_tele_intake_1: max_tele_intake_1,
+            avg_tele_portal_intake_made_1: avg_tele_portal_intake_made_1,
+            avg_tele_portal_intake_attempts_1: avg_tele_portal_intake_attempts_1,
+            avg_tele_pyramid_intake_1: avg_tele_pyramid_intake_1,
+            avg_tele_unprotected_intake_1: avg_tele_unprotected_intake_1,
+            avg_tele_floor_intake_1: avg_tele_floor_intake_1,
+            tot_tele_orderly_1: tot_tele_orderly_1,
+            max_tele_highest_level_1: max_tele_highest_level_1,
+            frq_tele_highest_level_1: frq_tele_highest_level_1,
+            tot_tele_climb_1: tot_tele_climb_1,
+            tot_tele_climb_attempts_1: tot_tele_climb_attempts_1,
+            tot_tele_climb_assisted_1: tot_tele_climb_assisted_1,
+            tot_tele_plus_one_1: tot_tele_plus_one_1,
+            tot_tele_plus_one_attempts_1: tot_tele_plus_one_attempts_1,
+            tot_tele_plus_two_1: tot_tele_plus_two_1,
+            tot_tele_plus_two_attempts_1: tot_tele_plus_two_attempts_1,
+            avg_driver_rating_1: avg_driver_rating_1,
             avg_defense_rating_1: avg_defense_rating_1,
-            avg_contrib_kpa_1: avg_contrib_kpa_1,
-            max_contrib_kpa_1: max_contrib_kpa_1,
-            drive_type_1: drive_type_1,
-            no_autos_1: no_autos_1,
             most_recent_match_1: most_recent_match_1,
 
             team_num_2: team_num_2,
             team_name_2: team_name_2,
-            tot_auto_gears_scored_fdr_2: tot_auto_gears_scored_fdr_2,
-            tot_auto_gears_scored_mid_2: tot_auto_gears_scored_mid_2,
-            tot_auto_gears_scored_boi_2: tot_auto_gears_scored_boi_2,
-            tot_auto_gears_scored_2: tot_auto_gears_scored_2,
-            max_auto_gears_scored_2: max_auto_gears_scored_2,
-            tot_auto_gears_attempts_2: tot_auto_gears_attempts_2,
-            avg_auto_high_made_2: avg_auto_high_made_2,
-            max_auto_high_made_2: max_auto_high_made_2,
-            avg_auto_high_attempts_2: avg_auto_high_attempts_2,
-            avg_auto_low_made_2: avg_auto_low_made_2,
-            max_auto_low_made_2: max_auto_low_made_2,
-            avg_auto_low_attempts_2: avg_auto_low_attempts_2,
-            tot_baseline_cross_2: tot_baseline_cross_2,
-            avg_auto_hopper_intake_2: avg_auto_hopper_intake_2,
-            avg_auto_contrib_kpa_2: avg_auto_contrib_kpa_2,
-            max_auto_contrib_kpa_2: max_auto_contrib_kpa_2,
-            avg_tele_high_made_2: avg_tele_high_made_2,
-            max_tele_high_made_2: max_tele_high_made_2,
-            avg_tele_high_attempts_2: avg_tele_high_attempts_2,
-            avg_tele_low_made_2: avg_tele_low_made_2,
-            max_tele_low_made_2: max_tele_low_made_2,
-            avg_tele_low_attempts_2: avg_tele_low_attempts_2,
-            avg_tele_gears_scored_2: avg_tele_gears_scored_2,
-            max_tele_gears_scored_2: max_tele_gears_scored_2,
-            avg_tele_gears_attempts_2: avg_tele_gears_attempts_2,
-            avg_tele_floor_ball_intake_2: avg_tele_floor_ball_intake_2,
-            avg_tele_floor_gear_intake_2: avg_tele_floor_gear_intake_2,
-            avg_tele_hopper_intake_2: avg_tele_hopper_intake_2,
-            avg_hp_gear_intake_2: avg_hp_gear_intake_2,
-            avg_hp_gear_intake_miss_2: avg_hp_gear_intake_miss_2,
-            avg_tele_gears_dropped_2: avg_tele_gears_dropped_2,
-            tot_tele_gear_knockouts_2: tot_tele_gear_knockouts_2,
-            tot_climb_2: tot_climb_2,
-            tot_climb_attempts_2: tot_climb_attempts_2,
-            avg_climb_rating_2: avg_climb_rating_2,
-            avg_climb_time_2: avg_climb_time_2,
-            avg_mobility_rating_2: avg_mobility_rating_2,
+            num_matches_2: num_matches_2,
+            tot_auto_cross_2: tot_auto_cross_2,
+            tot_auto_left_2: tot_auto_left_2,
+            tot_auto_center_2: tot_auto_center_2,
+            tot_auto_right_2: tot_auto_right_2,
+            tot_auto_pyramid_intake_2: tot_auto_pyramid_intake_2,
+            tot_auto_unprotected_intake_2: tot_auto_unprotected_intake_2,
+            tot_auto_near_switch_made_2: tot_auto_near_switch_made_2,
+            tot_auto_near_switch_attempts_2: tot_auto_near_switch_attempts_2,
+            tot_auto_exchange_made_2: tot_auto_exchange_made_2,
+            tot_auto_exchange_attempts_2: tot_auto_exchange_attempts_2,
+            tot_auto_scale_high_made_2: tot_auto_scale_high_made_2,
+            tot_auto_scale_high_attempts_2: tot_auto_scale_high_attempts_2,
+            tot_auto_scale_low_made_2: tot_auto_scale_low_made_2,
+            tot_auto_scale_low_attempts_2: tot_auto_scale_low_attempts_2,
+            avg_tele_cubes_scored_2: avg_tele_cubes_scored_2,
+            max_tele_cubes_scored_2: max_tele_cubes_scored_2,
+            avg_tele_exchange_made_2: avg_tele_exchange_made_2,
+            avg_tele_exchange_attempts_2: avg_tele_exchange_attempts_2,
+            avg_tele_near_switch_made_2: avg_tele_near_switch_made_2,
+            avg_tele_near_switch_attempts_2: avg_tele_near_switch_attempts_2,
+            avg_tele_far_switch_made_2: avg_tele_far_switch_made_2,
+            avg_tele_far_switch_attempts_2: avg_tele_far_switch_attempts_2,
+            avg_tele_scale_high_made_2: avg_tele_scale_high_made_2,
+            avg_tele_scale_high_attempts_2: avg_tele_scale_high_attempts_2,
+            avg_tele_scale_low_made_2: avg_tele_scale_low_made_2,
+            avg_tele_scale_low_attempts_2: avg_tele_scale_low_attempts_2,
+            avg_tele_knockouts_2: avg_tele_knockouts_2,
+            avg_tele_cubes_dropped_2: avg_tele_cubes_dropped_2,
+            avg_tele_intake_2: avg_tele_intake_2,
+            max_tele_intake_2: max_tele_intake_2,
+            avg_tele_portal_intake_made_2: avg_tele_portal_intake_made_2,
+            avg_tele_portal_intake_attempts_2: avg_tele_portal_intake_attempts_2,
+            avg_tele_pyramid_intake_2: avg_tele_pyramid_intake_2,
+            avg_tele_unprotected_intake_2: avg_tele_unprotected_intake_2,
+            avg_tele_floor_intake_2: avg_tele_floor_intake_2,
+            tot_tele_orderly_2: tot_tele_orderly_2,
+            max_tele_highest_level_2: max_tele_highest_level_2,
+            frq_tele_highest_level_2: frq_tele_highest_level_2,
+            tot_tele_climb_2: tot_tele_climb_2,
+            tot_tele_climb_attempts_2: tot_tele_climb_attempts_2,
+            tot_tele_climb_assisted_2: tot_tele_climb_assisted_2,
+            tot_tele_plus_one_2: tot_tele_plus_one_2,
+            tot_tele_plus_one_attempts_2: tot_tele_plus_one_attempts_2,
+            tot_tele_plus_two_2: tot_tele_plus_two_2,
+            tot_tele_plus_two_attempts_2: tot_tele_plus_two_attempts_2,
+            avg_driver_rating_2: avg_driver_rating_2,
             avg_defense_rating_2: avg_defense_rating_2,
-            avg_contrib_kpa_2: avg_contrib_kpa_2,
-            max_contrib_kpa_2: max_contrib_kpa_2,
-            drive_type_2: drive_type_2,
-            no_autos_2: no_autos_2,
             most_recent_match_2: most_recent_match_2,
 
             team_num_3: team_num_3,
             team_name_3: team_name_3,
-            tot_auto_gears_scored_fdr_3: tot_auto_gears_scored_fdr_3,
-            tot_auto_gears_scored_mid_3: tot_auto_gears_scored_mid_3,
-            tot_auto_gears_scored_boi_3: tot_auto_gears_scored_boi_3,
-            tot_auto_gears_scored_3: tot_auto_gears_scored_3,
-            max_auto_gears_scored_3: max_auto_gears_scored_3,
-            tot_auto_gears_attempts_3: tot_auto_gears_attempts_3,
-            avg_auto_high_made_3: avg_auto_high_made_3,
-            max_auto_high_made_3: max_auto_high_made_3,
-            avg_auto_high_attempts_3: avg_auto_high_attempts_3,
-            avg_auto_low_made_3: avg_auto_low_made_3,
-            max_auto_low_made_3: max_auto_low_made_3,
-            avg_auto_low_attempts_3: avg_auto_low_attempts_3,
-            tot_baseline_cross_3: tot_baseline_cross_3,
-            avg_auto_hopper_intake_3: avg_auto_hopper_intake_3,
-            avg_auto_contrib_kpa_3: avg_auto_contrib_kpa_3,
-            max_auto_contrib_kpa_3: max_auto_contrib_kpa_3,
-            avg_tele_high_made_3: avg_tele_high_made_3,
-            max_tele_high_made_3: max_tele_high_made_3,
-            avg_tele_high_attempts_3: avg_tele_high_attempts_3,
-            avg_tele_low_made_3: avg_tele_low_made_3,
-            max_tele_low_made_3: max_tele_low_made_3,
-            avg_tele_low_attempts_3: avg_tele_low_attempts_3,
-            avg_tele_gears_scored_3: avg_tele_gears_scored_3,
-            max_tele_gears_scored_3: max_tele_gears_scored_3,
-            avg_tele_gears_attempts_3: avg_tele_gears_attempts_3,
-            avg_tele_floor_ball_intake_3: avg_tele_floor_ball_intake_3,
-            avg_tele_floor_gear_intake_3: avg_tele_floor_gear_intake_3,
-            avg_tele_hopper_intake_3: avg_tele_hopper_intake_3,
-            avg_hp_gear_intake_3: avg_hp_gear_intake_3,
-            avg_hp_gear_intake_miss_3: avg_hp_gear_intake_miss_3,
-            avg_tele_gears_dropped_3: avg_tele_gears_dropped_3,
-            tot_tele_gear_knockouts_3: tot_tele_gear_knockouts_3,
-            tot_climb_3: tot_climb_3,
-            tot_climb_attempts_3: tot_climb_attempts_3,
-            avg_climb_rating_3: avg_climb_rating_3,
-            avg_climb_time_3: avg_climb_time_3,
-            avg_mobility_rating_3: avg_mobility_rating_3,
+            num_matches_3: num_matches_3,
+            tot_auto_cross_3: tot_auto_cross_3,
+            tot_auto_left_3: tot_auto_left_3,
+            tot_auto_center_3: tot_auto_center_3,
+            tot_auto_right_3: tot_auto_right_3,
+            tot_auto_pyramid_intake_3: tot_auto_pyramid_intake_3,
+            tot_auto_unprotected_intake_3: tot_auto_unprotected_intake_3,
+            tot_auto_near_switch_made_3: tot_auto_near_switch_made_3,
+            tot_auto_near_switch_attempts_3: tot_auto_near_switch_attempts_3,
+            tot_auto_exchange_made_3: tot_auto_exchange_made_3,
+            tot_auto_exchange_attempts_3: tot_auto_exchange_attempts_3,
+            tot_auto_scale_high_made_3: tot_auto_scale_high_made_3,
+            tot_auto_scale_high_attempts_3: tot_auto_scale_high_attempts_3,
+            tot_auto_scale_low_made_3: tot_auto_scale_low_made_3,
+            tot_auto_scale_low_attempts_3: tot_auto_scale_low_attempts_3,
+            avg_tele_cubes_scored_3: avg_tele_cubes_scored_3,
+            max_tele_cubes_scored_3: max_tele_cubes_scored_3,
+            avg_tele_exchange_made_3: avg_tele_exchange_made_3,
+            avg_tele_exchange_attempts_3: avg_tele_exchange_attempts_3,
+            avg_tele_near_switch_made_3: avg_tele_near_switch_made_3,
+            avg_tele_near_switch_attempts_3: avg_tele_near_switch_attempts_3,
+            avg_tele_far_switch_made_3: avg_tele_far_switch_made_3,
+            avg_tele_far_switch_attempts_3: avg_tele_far_switch_attempts_3,
+            avg_tele_scale_high_made_3: avg_tele_scale_high_made_3,
+            avg_tele_scale_high_attempts_3: avg_tele_scale_high_attempts_3,
+            avg_tele_scale_low_made_3: avg_tele_scale_low_made_3,
+            avg_tele_scale_low_attempts_3: avg_tele_scale_low_attempts_3,
+            avg_tele_knockouts_3: avg_tele_knockouts_3,
+            avg_tele_cubes_dropped_3: avg_tele_cubes_dropped_3,
+            avg_tele_intake_3: avg_tele_intake_3,
+            max_tele_intake_3: max_tele_intake_3,
+            avg_tele_portal_intake_made_3: avg_tele_portal_intake_made_3,
+            avg_tele_portal_intake_attempts_3: avg_tele_portal_intake_attempts_3,
+            avg_tele_pyramid_intake_3: avg_tele_pyramid_intake_3,
+            avg_tele_unprotected_intake_3: avg_tele_unprotected_intake_3,
+            avg_tele_floor_intake_3: avg_tele_floor_intake_3,
+            tot_tele_orderly_3: tot_tele_orderly_3,
+            max_tele_highest_level_3: max_tele_highest_level_3,
+            frq_tele_highest_level_3: frq_tele_highest_level_3,
+            tot_tele_climb_3: tot_tele_climb_3,
+            tot_tele_climb_attempts_3: tot_tele_climb_attempts_3,
+            tot_tele_climb_assisted_3: tot_tele_climb_assisted_3,
+            tot_tele_plus_one_3: tot_tele_plus_one_3,
+            tot_tele_plus_one_attempts_3: tot_tele_plus_one_attempts_3,
+            tot_tele_plus_two_3: tot_tele_plus_two_3,
+            tot_tele_plus_two_attempts_3: tot_tele_plus_two_attempts_3,
+            avg_driver_rating_3: avg_driver_rating_3,
             avg_defense_rating_3: avg_defense_rating_3,
-            avg_contrib_kpa_3: avg_contrib_kpa_3,
-            max_contrib_kpa_3: max_contrib_kpa_3,
-            drive_type_3: drive_type_3,
-            no_autos_3: no_autos_3,
             most_recent_match_3: most_recent_match_3,
 
             team_num_4: team_num_4,
             team_name_4: team_name_4,
-            tot_auto_gears_scored_fdr_4: tot_auto_gears_scored_fdr_4,
-            tot_auto_gears_scored_mid_4: tot_auto_gears_scored_mid_4,
-            tot_auto_gears_scored_boi_4: tot_auto_gears_scored_boi_4,
-            tot_auto_gears_scored_4: tot_auto_gears_scored_4,
-            max_auto_gears_scored_4: max_auto_gears_scored_4,
-            tot_auto_gears_attempts_4: tot_auto_gears_attempts_4,
-            avg_auto_high_made_4: avg_auto_high_made_4,
-            max_auto_high_made_4: max_auto_high_made_4,
-            avg_auto_high_attempts_4: avg_auto_high_attempts_4,
-            avg_auto_low_made_4: avg_auto_low_made_4,
-            max_auto_low_made_4: max_auto_low_made_4,
-            avg_auto_low_attempts_4: avg_auto_low_attempts_4,
-            tot_baseline_cross_4: tot_baseline_cross_4,
-            avg_auto_hopper_intake_4: avg_auto_hopper_intake_4,
-            avg_auto_contrib_kpa_4: avg_auto_contrib_kpa_4,
-            max_auto_contrib_kpa_4: max_auto_contrib_kpa_4,
-            avg_tele_high_made_4: avg_tele_high_made_4,
-            max_tele_high_made_4: max_tele_high_made_4,
-            avg_tele_high_attempts_4: avg_tele_high_attempts_4,
-            avg_tele_low_made_4: avg_tele_low_made_4,
-            max_tele_low_made_4: max_tele_low_made_4,
-            avg_tele_low_attempts_4: avg_tele_low_attempts_4,
-            avg_tele_gears_scored_4: avg_tele_gears_scored_4,
-            max_tele_gears_scored_4: max_tele_gears_scored_4,
-            avg_tele_gears_attempts_4: avg_tele_gears_attempts_4,
-            avg_tele_floor_ball_intake_4: avg_tele_floor_ball_intake_4,
-            avg_tele_floor_gear_intake_4: avg_tele_floor_gear_intake_4,
-            avg_tele_hopper_intake_4: avg_tele_hopper_intake_4,
-            avg_hp_gear_intake_4: avg_hp_gear_intake_4,
-            avg_hp_gear_intake_miss_4: avg_hp_gear_intake_miss_4,
-            avg_tele_gears_dropped_4: avg_tele_gears_dropped_4,
-            tot_tele_gear_knockouts_4: tot_tele_gear_knockouts_4,
-            tot_climb_4: tot_climb_4,
-            tot_climb_attempts_4: tot_climb_attempts_4,
-            avg_climb_rating_4: avg_climb_rating_4,
-            avg_climb_time_4: avg_climb_time_4,
-            avg_mobility_rating_4: avg_mobility_rating_4,
+            num_matches_4: num_matches_4,
+            tot_auto_cross_4: tot_auto_cross_4,
+            tot_auto_left_4: tot_auto_left_4,
+            tot_auto_center_4: tot_auto_center_4,
+            tot_auto_right_4: tot_auto_right_4,
+            tot_auto_pyramid_intake_4: tot_auto_pyramid_intake_4,
+            tot_auto_unprotected_intake_4: tot_auto_unprotected_intake_4,
+            tot_auto_near_switch_made_4: tot_auto_near_switch_made_4,
+            tot_auto_near_switch_attempts_4: tot_auto_near_switch_attempts_4,
+            tot_auto_exchange_made_4: tot_auto_exchange_made_4,
+            tot_auto_exchange_attempts_4: tot_auto_exchange_attempts_4,
+            tot_auto_scale_high_made_4: tot_auto_scale_high_made_4,
+            tot_auto_scale_high_attempts_4: tot_auto_scale_high_attempts_4,
+            tot_auto_scale_low_made_4: tot_auto_scale_low_made_4,
+            tot_auto_scale_low_attempts_4: tot_auto_scale_low_attempts_4,
+            avg_tele_cubes_scored_4: avg_tele_cubes_scored_4,
+            max_tele_cubes_scored_4: max_tele_cubes_scored_4,
+            avg_tele_exchange_made_4: avg_tele_exchange_made_4,
+            avg_tele_exchange_attempts_4: avg_tele_exchange_attempts_4,
+            avg_tele_near_switch_made_4: avg_tele_near_switch_made_4,
+            avg_tele_near_switch_attempts_4: avg_tele_near_switch_attempts_4,
+            avg_tele_far_switch_made_4: avg_tele_far_switch_made_4,
+            avg_tele_far_switch_attempts_4: avg_tele_far_switch_attempts_4,
+            avg_tele_scale_high_made_4: avg_tele_scale_high_made_4,
+            avg_tele_scale_high_attempts_4: avg_tele_scale_high_attempts_4,
+            avg_tele_scale_low_made_4: avg_tele_scale_low_made_4,
+            avg_tele_scale_low_attempts_4: avg_tele_scale_low_attempts_4,
+            avg_tele_knockouts_4: avg_tele_knockouts_4,
+            avg_tele_cubes_dropped_4: avg_tele_cubes_dropped_4,
+            avg_tele_intake_4: avg_tele_intake_4,
+            max_tele_intake_4: max_tele_intake_4,
+            avg_tele_portal_intake_made_4: avg_tele_portal_intake_made_4,
+            avg_tele_portal_intake_attempts_4: avg_tele_portal_intake_attempts_4,
+            avg_tele_pyramid_intake_4: avg_tele_pyramid_intake_4,
+            avg_tele_unprotected_intake_4: avg_tele_unprotected_intake_4,
+            avg_tele_floor_intake_4: avg_tele_floor_intake_4,
+            tot_tele_orderly_4: tot_tele_orderly_4,
+            max_tele_highest_level_4: max_tele_highest_level_4,
+            frq_tele_highest_level_4: frq_tele_highest_level_4,
+            tot_tele_climb_4: tot_tele_climb_4,
+            tot_tele_climb_attempts_4: tot_tele_climb_attempts_4,
+            tot_tele_climb_assisted_4: tot_tele_climb_assisted_4,
+            tot_tele_plus_one_4: tot_tele_plus_one_4,
+            tot_tele_plus_one_attempts_4: tot_tele_plus_one_attempts_4,
+            tot_tele_plus_two_4: tot_tele_plus_two_4,
+            tot_tele_plus_two_attempts_4: tot_tele_plus_two_attempts_4,
+            avg_driver_rating_4: avg_driver_rating_4,
             avg_defense_rating_4: avg_defense_rating_4,
-            avg_contrib_kpa_4: avg_contrib_kpa_4,
-            max_contrib_kpa_4: max_contrib_kpa_4,
-            drive_type_4: drive_type_4,
-            no_autos_4: no_autos_4,
             most_recent_match_4: most_recent_match_4,
 
             team_num_5: team_num_5,
             team_name_5: team_name_5,
-            tot_auto_gears_scored_fdr_5: tot_auto_gears_scored_fdr_5,
-            tot_auto_gears_scored_mid_5: tot_auto_gears_scored_mid_5,
-            tot_auto_gears_scored_boi_5: tot_auto_gears_scored_boi_5,
-            tot_auto_gears_scored_5: tot_auto_gears_scored_5,
-            max_auto_gears_scored_5: max_auto_gears_scored_5,
-            tot_auto_gears_attempts_5: tot_auto_gears_attempts_5,
-            avg_auto_high_made_5: avg_auto_high_made_5,
-            max_auto_high_made_5: max_auto_high_made_5,
-            avg_auto_high_attempts_5: avg_auto_high_attempts_5,
-            avg_auto_low_made_5: avg_auto_low_made_5,
-            max_auto_low_made_5: max_auto_low_made_5,
-            avg_auto_low_attempts_5: avg_auto_low_attempts_5,
-            tot_baseline_cross_5: tot_baseline_cross_5,
-            avg_auto_hopper_intake_5: avg_auto_hopper_intake_5,
-            avg_auto_contrib_kpa_5: avg_auto_contrib_kpa_5,
-            max_auto_contrib_kpa_5: max_auto_contrib_kpa_5,
-            avg_tele_high_made_5: avg_tele_high_made_5,
-            max_tele_high_made_5: max_tele_high_made_5,
-            avg_tele_high_attempts_5: avg_tele_high_attempts_5,
-            avg_tele_low_made_5: avg_tele_low_made_5,
-            max_tele_low_made_5: max_tele_low_made_5,
-            avg_tele_low_attempts_5: avg_tele_low_attempts_5,
-            avg_tele_gears_scored_5: avg_tele_gears_scored_5,
-            max_tele_gears_scored_5: max_tele_gears_scored_5,
-            avg_tele_gears_attempts_5: avg_tele_gears_attempts_5,
-            avg_tele_floor_ball_intake_5: avg_tele_floor_ball_intake_5,
-            avg_tele_floor_gear_intake_5: avg_tele_floor_gear_intake_5,
-            avg_tele_hopper_intake_5: avg_tele_hopper_intake_5,
-            avg_hp_gear_intake_5: avg_hp_gear_intake_5,
-            avg_hp_gear_intake_miss_5: avg_hp_gear_intake_miss_5,
-            avg_tele_gears_dropped_5: avg_tele_gears_dropped_5,
-            tot_tele_gear_knockouts_5: tot_tele_gear_knockouts_5,
-            tot_climb_5: tot_climb_5,
-            tot_climb_attempts_5: tot_climb_attempts_5,
-            avg_climb_rating_5: avg_climb_rating_5,
-            avg_climb_time_5: avg_climb_time_5,
-            avg_mobility_rating_5: avg_mobility_rating_5,
+            num_matches_5: num_matches_5,
+            tot_auto_cross_5: tot_auto_cross_5,
+            tot_auto_left_5: tot_auto_left_5,
+            tot_auto_center_5: tot_auto_center_5,
+            tot_auto_right_5: tot_auto_right_5,
+            tot_auto_pyramid_intake_5: tot_auto_pyramid_intake_5,
+            tot_auto_unprotected_intake_5: tot_auto_unprotected_intake_5,
+            tot_auto_near_switch_made_5: tot_auto_near_switch_made_5,
+            tot_auto_near_switch_attempts_5: tot_auto_near_switch_attempts_5,
+            tot_auto_exchange_made_5: tot_auto_exchange_made_5,
+            tot_auto_exchange_attempts_5: tot_auto_exchange_attempts_5,
+            tot_auto_scale_high_made_5: tot_auto_scale_high_made_5,
+            tot_auto_scale_high_attempts_5: tot_auto_scale_high_attempts_5,
+            tot_auto_scale_low_made_5: tot_auto_scale_low_made_5,
+            tot_auto_scale_low_attempts_5: tot_auto_scale_low_attempts_5,
+            avg_tele_cubes_scored_5: avg_tele_cubes_scored_5,
+            max_tele_cubes_scored_5: max_tele_cubes_scored_5,
+            avg_tele_exchange_made_5: avg_tele_exchange_made_5,
+            avg_tele_exchange_attempts_5: avg_tele_exchange_attempts_5,
+            avg_tele_near_switch_made_5: avg_tele_near_switch_made_5,
+            avg_tele_near_switch_attempts_5: avg_tele_near_switch_attempts_5,
+            avg_tele_far_switch_made_5: avg_tele_far_switch_made_5,
+            avg_tele_far_switch_attempts_5: avg_tele_far_switch_attempts_5,
+            avg_tele_scale_high_made_5: avg_tele_scale_high_made_5,
+            avg_tele_scale_high_attempts_5: avg_tele_scale_high_attempts_5,
+            avg_tele_scale_low_made_5: avg_tele_scale_low_made_5,
+            avg_tele_scale_low_attempts_5: avg_tele_scale_low_attempts_5,
+            avg_tele_knockouts_5: avg_tele_knockouts_5,
+            avg_tele_cubes_dropped_5: avg_tele_cubes_dropped_5,
+            avg_tele_intake_5: avg_tele_intake_5,
+            max_tele_intake_5: max_tele_intake_5,
+            avg_tele_portal_intake_made_5: avg_tele_portal_intake_made_5,
+            avg_tele_portal_intake_attempts_5: avg_tele_portal_intake_attempts_5,
+            avg_tele_pyramid_intake_5: avg_tele_pyramid_intake_5,
+            avg_tele_unprotected_intake_5: avg_tele_unprotected_intake_5,
+            avg_tele_floor_intake_5: avg_tele_floor_intake_5,
+            tot_tele_orderly_5: tot_tele_orderly_5,
+            max_tele_highest_level_5: max_tele_highest_level_5,
+            frq_tele_highest_level_5: frq_tele_highest_level_5,
+            tot_tele_climb_5: tot_tele_climb_5,
+            tot_tele_climb_attempts_5: tot_tele_climb_attempts_5,
+            tot_tele_climb_assisted_5: tot_tele_climb_assisted_5,
+            tot_tele_plus_one_5: tot_tele_plus_one_5,
+            tot_tele_plus_one_attempts_5: tot_tele_plus_one_attempts_5,
+            tot_tele_plus_two_5: tot_tele_plus_two_5,
+            tot_tele_plus_two_attempts_5: tot_tele_plus_two_attempts_5,
+            avg_driver_rating_5: avg_driver_rating_5,
             avg_defense_rating_5: avg_defense_rating_5,
-            avg_contrib_kpa_5: avg_contrib_kpa_5,
-            max_contrib_kpa_5: max_contrib_kpa_5,
-            drive_type_5: drive_type_5,
-            no_autos_5: no_autos_5,
             most_recent_match_5: most_recent_match_5,
 
             team_num_6: team_num_6,
             team_name_6: team_name_6,
-            tot_auto_gears_scored_fdr_6: tot_auto_gears_scored_fdr_6,
-            tot_auto_gears_scored_mid_6: tot_auto_gears_scored_mid_6,
-            tot_auto_gears_scored_boi_6: tot_auto_gears_scored_boi_6,
-            tot_auto_gears_scored_6: tot_auto_gears_scored_6,
-            max_auto_gears_scored_6: max_auto_gears_scored_6,
-            tot_auto_gears_attempts_6: tot_auto_gears_attempts_6,
-            avg_auto_high_made_6: avg_auto_high_made_6,
-            max_auto_high_made_6: max_auto_high_made_6,
-            avg_auto_high_attempts_6: avg_auto_high_attempts_6,
-            avg_auto_low_made_6: avg_auto_low_made_6,
-            max_auto_low_made_6: max_auto_low_made_6,
-            avg_auto_low_attempts_6: avg_auto_low_attempts_6,
-            tot_baseline_cross_6: tot_baseline_cross_6,
-            avg_auto_hopper_intake_6: avg_auto_hopper_intake_6,
-            avg_auto_contrib_kpa_6: avg_auto_contrib_kpa_6,
-            max_auto_contrib_kpa_6: max_auto_contrib_kpa_6,
-            avg_tele_high_made_6: avg_tele_high_made_6,
-            max_tele_high_made_6: max_tele_high_made_6,
-            avg_tele_high_attempts_6: avg_tele_high_attempts_6,
-            avg_tele_low_made_6: avg_tele_low_made_6,
-            max_tele_low_made_6: max_tele_low_made_6,
-            avg_tele_low_attempts_6: avg_tele_low_attempts_6,
-            avg_tele_gears_scored_6: avg_tele_gears_scored_6,
-            max_tele_gears_scored_6: max_tele_gears_scored_6,
-            avg_tele_gears_attempts_6: avg_tele_gears_attempts_6,
-            avg_tele_floor_ball_intake_6: avg_tele_floor_ball_intake_6,
-            avg_tele_floor_gear_intake_6: avg_tele_floor_gear_intake_6,
-            avg_tele_hopper_intake_6: avg_tele_hopper_intake_6,
-            avg_hp_gear_intake_6: avg_hp_gear_intake_6,
-            avg_hp_gear_intake_miss_6: avg_hp_gear_intake_miss_6,
-            avg_tele_gears_dropped_6: avg_tele_gears_dropped_6,
-            tot_tele_gear_knockouts_6: tot_tele_gear_knockouts_6,
-            tot_climb_6: tot_climb_6,
-            tot_climb_attempts_6: tot_climb_attempts_6,
-            avg_climb_rating_6: avg_climb_rating_6,
-            avg_climb_time_6: avg_climb_time_6,
-            avg_mobility_rating_6: avg_mobility_rating_6,
+            num_matches_6: num_matches_6,
+            tot_auto_cross_6: tot_auto_cross_6,
+            tot_auto_left_6: tot_auto_left_6,
+            tot_auto_center_6: tot_auto_center_6,
+            tot_auto_right_6: tot_auto_right_6,
+            tot_auto_pyramid_intake_6: tot_auto_pyramid_intake_6,
+            tot_auto_unprotected_intake_6: tot_auto_unprotected_intake_6,
+            tot_auto_near_switch_made_6: tot_auto_near_switch_made_6,
+            tot_auto_near_switch_attempts_6: tot_auto_near_switch_attempts_6,
+            tot_auto_exchange_made_6: tot_auto_exchange_made_6,
+            tot_auto_exchange_attempts_6: tot_auto_exchange_attempts_6,
+            tot_auto_scale_high_made_6: tot_auto_scale_high_made_6,
+            tot_auto_scale_high_attempts_6: tot_auto_scale_high_attempts_6,
+            tot_auto_scale_low_made_6: tot_auto_scale_low_made_6,
+            tot_auto_scale_low_attempts_6: tot_auto_scale_low_attempts_6,
+            avg_tele_cubes_scored_6: avg_tele_cubes_scored_6,
+            max_tele_cubes_scored_6: max_tele_cubes_scored_6,
+            avg_tele_exchange_made_6: avg_tele_exchange_made_6,
+            avg_tele_exchange_attempts_6: avg_tele_exchange_attempts_6,
+            avg_tele_near_switch_made_6: avg_tele_near_switch_made_6,
+            avg_tele_near_switch_attempts_6: avg_tele_near_switch_attempts_6,
+            avg_tele_far_switch_made_6: avg_tele_far_switch_made_6,
+            avg_tele_far_switch_attempts_6: avg_tele_far_switch_attempts_6,
+            avg_tele_scale_high_made_6: avg_tele_scale_high_made_6,
+            avg_tele_scale_high_attempts_6: avg_tele_scale_high_attempts_6,
+            avg_tele_scale_low_made_6: avg_tele_scale_low_made_6,
+            avg_tele_scale_low_attempts_6: avg_tele_scale_low_attempts_6,
+            avg_tele_knockouts_6: avg_tele_knockouts_6,
+            avg_tele_cubes_dropped_6: avg_tele_cubes_dropped_6,
+            avg_tele_intake_6: avg_tele_intake_6,
+            max_tele_intake_6: max_tele_intake_6,
+            avg_tele_portal_intake_made_6: avg_tele_portal_intake_made_6,
+            avg_tele_portal_intake_attempts_6: avg_tele_portal_intake_attempts_6,
+            avg_tele_pyramid_intake_6: avg_tele_pyramid_intake_6,
+            avg_tele_unprotected_intake_6: avg_tele_unprotected_intake_6,
+            avg_tele_floor_intake_6: avg_tele_floor_intake_6,
+            tot_tele_orderly_6: tot_tele_orderly_6,
+            max_tele_highest_level_6: max_tele_highest_level_6,
+            frq_tele_highest_level_6: frq_tele_highest_level_6,
+            tot_tele_climb_6: tot_tele_climb_6,
+            tot_tele_climb_attempts_6: tot_tele_climb_attempts_6,
+            tot_tele_climb_assisted_6: tot_tele_climb_assisted_6,
+            tot_tele_plus_one_6: tot_tele_plus_one_6,
+            tot_tele_plus_one_attempts_6: tot_tele_plus_one_attempts_6,
+            tot_tele_plus_two_6: tot_tele_plus_two_6,
+            tot_tele_plus_two_attempts_6: tot_tele_plus_two_attempts_6,
+            avg_driver_rating_6: avg_driver_rating_6,
             avg_defense_rating_6: avg_defense_rating_6,
-            avg_contrib_kpa_6: avg_contrib_kpa_6,
-            max_contrib_kpa_6: max_contrib_kpa_6,
-            drive_type_6: drive_type_6,
-            no_autos_6: no_autos_6,
             most_recent_match_6: most_recent_match_6
           });
         });
       }, 2500);
-		// });
 	});
 
   router.get("/alliance-ppt/:team_1,:team_2,:team_3,:team_4,:team_5,:team_6", ensureLogin.ensureLoggedIn('/login'), function(req, res) {
