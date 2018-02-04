@@ -3699,7 +3699,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       			// });
           }
 
-          setTimeout(() -> {
+          setTimeout(() => {
             res.render('pages/alliance', {
         	    req: req,
               team_num_1: team_num_1,
