@@ -10,7 +10,8 @@ var md5 = require("md5");
 var express = require('express');
 var bodyParser = require("body-parser"); // Body parser for fetch posted data
 var app = express();
-var connection = null;
+var connectionLocal = null;
+var connectionRemote = null;
 
 app.set('view engine', 'ejs');
 
@@ -18,13 +19,26 @@ app.use(express.static("public"));
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    connection.query("SELECT * FROM users WHERE password=" + JSON.stringify(md5(password)) + "", function(err, rows) {
-      if(err) { return done(err); }
-      if(!rows[0]) { return done(null, false, { message: 'Invalid username or password' }); }
-      if(rows[0].password != md5(password)) { return done(null, false, { message: 'Invalid username or password' }); }
-      rows[0].username = username;
-      return done(null, rows[0]);
-    });
+    if(process.argv[2] && (process.argv[2] === 'local' || process.argv[2] === 'tee'))
+    {
+      connectionLocal.query("SELECT * FROM users WHERE password=" + JSON.stringify(md5(password)) + "", function(err, rows) {
+        if(err) { return done(err); }
+        if(!rows[0]) { return done(null, false, { message: 'Invalid username or password' }); }
+        if(rows[0].password != md5(password)) { return done(null, false, { message: 'Invalid username or password' }); }
+        rows[0].username = username;
+        return done(null, rows[0]);
+      });
+    }
+    else
+    {
+      connectionRemote.query("SELECT * FROM users WHERE password=" + JSON.stringify(md5(password)) + "", function(err, rows) {
+        if(err) { return done(err); }
+        if(!rows[0]) { return done(null, false, { message: 'Invalid username or password' }); }
+        if(rows[0].password != md5(password)) { return done(null, false, { message: 'Invalid username or password' }); }
+        rows[0].username = username;
+        return done(null, rows[0]);
+      });
+    }
   }
 ));
 
@@ -52,11 +66,13 @@ REST.prototype.connectMysql = function()
 {
     var self = this;
 
-    var pool = null;
+    var poolLocal = null;
+    var poolRemote = null;
+
     if(process.argv[2] && process.argv[2] === "local")
     {
       console.log("Connecting to local DB");
-      pool = mysql.createPool({
+      poolLocal = mysql.createPool({
           connectionLimit: 100,
           host     : '127.0.0.1',
           user     : 'root',
@@ -64,12 +80,26 @@ REST.prototype.connectMysql = function()
           database : 'frcscout2018',
           debug    : false
       });
+      poolLocal.getConnection(function(err, connection) {
+        if(err)
+          self.stop(err);
+        else
+          connectionLocal = connection;
+        self.configureExpress(connectionLocal, connectionRemote);
+      });
     }
-    else
+    else if(process.argv[2] && process.argv[2] === 'tee')
     {
-      console.log("Connecting to remote DB");
-      /* DEPLOY ONLY*/
-      pool = mysql.createPool({
+      console.log("Connecting to both DBs");
+      poolLocal = mysql.createPool({
+          connectionLimit: 100,
+          host     : '127.0.0.1',
+          user     : 'root',
+          password : '',
+          database : 'frcscout2018',
+          debug    : false
+      });
+      poolRemote = mysql.createPool({
         connectionLimit: 100,
         host     : 'sql9.freesqldatabase.com',
         user     : 'sql9207328',
@@ -77,19 +107,45 @@ REST.prototype.connectMysql = function()
         database : 'sql9207328',
         debug    : false
       });
-    }
-    pool.getConnection(function(err, connection) {
+      poolLocal.getConnection(function(err, connection) {
         if(err)
-            self.stop(err);
+          self.stop(err);
         else
-            self.configureExpress(connection);
-    });
+          connectionLocal = connection;
+      });
+      poolRemote.getConnection(function(err, connection) {
+        if(err)
+          self.stop(err);
+        else
+          connectionRemote = connection;
+        self.configureExpress(connectionLocal, connectionRemote);
+      });
+    }
+    else
+    {
+      console.log("Connecting to remote DB");
+      /* DEPLOY ONLY*/
+      poolRemote = mysql.createPool({
+        connectionLimit: 100,
+        host     : 'sql9.freesqldatabase.com',
+        user     : 'sql9207328',
+        password : 'WaNG8mTXnN',
+        database : 'sql9207328',
+        debug    : false
+      });
+      poolRemote.getConnection(function(err, connection) {
+        if(err)
+          self.stop(err);
+        else
+          connectionRemote = connection;
+        self.configureExpress(connectionLocal, connectionRemote);
+      });
+    }
 }
 
-REST.prototype.configureExpress = function(connect)
+REST.prototype.configureExpress = function()
 {
     var self = this;
-    connection = connect;
     app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -99,7 +155,7 @@ REST.prototype.configureExpress = function(connect)
     // app.use(multer({dest: "public/images"}));
     var router = express.Router();
     app.use('/', router);
-    var rest_router = new rest(router, connection, passport);
+    var rest_router = new rest(router, connectionLocal, connectionRemote, passport);
     self.startServer();
 }
 
