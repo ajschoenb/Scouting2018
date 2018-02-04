@@ -233,12 +233,12 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         {
           rating_list += "<tr class='clickable-row' data-href='/team/"+ rows[x].team_num +"'><td>"+ rows[x].team_num +"</td><td>"+ rows[x].alliance_rating + "</td></tr>";
         }
-      });
-      res.render('pages/index', {
-        req: req,
-        team_list: team_list,
-        score_list: score_list,
-        rating_list: rating_list
+        res.render('pages/index', {
+          req: req,
+          team_list: team_list,
+          score_list: score_list,
+          rating_list: rating_list
+        });
       });
     }
   });
