@@ -78,8 +78,8 @@
             <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly %></h5></td>
           </tr>
           <tr>
-            <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level %></h5></td>
-            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Frq. of Max Highest Level: <%= frq_tele_highest_level %></h5></td>
+            <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level %> (Frq: <%= frq_tele_highest_level %>)</h5></td>
+            <td style="text-align:right; padding-right:50px;"><h5 style="margin-top:0;">Platform: <%= tot_tele_platform %></h5></td>
           </tr>
           <tr>
             <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb %> / <%= tot_tele_climb_attempts %></h5></td>
@@ -306,13 +306,7 @@
       </div>
     </div>
     <div id="spoiler" style="display: none;">
-      <!-- <- videos %> -->
-
-      <!-- <div class="col-lg-6">
-        <video width="480" height="360" controls>
-          <source src="../videos/F1M2.mp4" type="video/mp4">
-        </video>
-      </div> -->
+      <%- videos %>
     </div>
     <button title="Click to show/hide videos" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/Hide Videos</button>
   </main>

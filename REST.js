@@ -4036,7 +4036,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
 
   router.get('/team/:team_num', ensureLogin.ensureLoggedIn('/login'), function(req,res) {
     // stdevGears(req.params.team_num);
-    updateRanks();
+    //updateRanks();
 
     var team_num = Number(req.params.team_num);
     var team_name = "";
@@ -4083,6 +4083,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var frq_tele_highest_level = 0;
     var tot_tele_climb = 0;
     var tot_tele_climb_attempts = 0;
+    var tot_tele_platform = 0;
     var tot_tele_climb_assisted = 0;
     var tot_tele_plus_one = 0;
     var tot_tele_plus_one_attempts = 0;
@@ -4159,6 +4160,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         frq_tele_highest_level = rows[0].frq_tele_highest_level;
         tot_tele_climb = rows[0].tot_tele_climb;
         tot_tele_climb_attempts = rows[0].tot_tele_climb_attempts;
+        tot_tele_platform = rows[0].tot_tele_platform;
         tot_tele_climb_assisted = rows[0].tot_tele_climb_assisted;
         tot_tele_plus_one = rows[0].tot_tele_plus_one;
         tot_tele_plus_one_attempts = rows[0].tot_tele_plus_one_attempts;
@@ -4166,7 +4168,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
         avg_driver_rating = rows[0].avg_driver_rating;
         avg_defense_rating = rows[0].avg_defense_rating;
-
+      });
       /*var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
       connection.query(no_auto_sql, function(err, rows, fields) {
         for(var x in rows)
@@ -4229,24 +4231,25 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
 
       var dir = __dirname + "\\public\\videos";
       var files = null;
+      var videos = "";
 
       fs.readdir(dir, function(err, files) {
+        //console.log(files);
         if(err) { console.log(err); return; }
         files = files.map(function (fileName) {
           return {
             name: fileName,
-            time: fs.statSync(dir + '/' + fileName).mtime.getTime()
+            time: fs.statSync(dir + '\\' + fileName).mtime.getTime()
           };
         })
         .sort(function (a, b) {
           return Number(Number(a.name.substring(4,8)) - Number(b.name.substring(4,8))); })
         .map(function (v) {
           return v.name; });
-        });
 
-        // console.log(files);
+        //console.log(dir + ", " + files);
 
-        var match_sql = "SELECT match_num FROM matches WHERE team_num = " + team_num;
+        var match_sql = "SELECT * FROM matches WHERE team_num = " + team_num;
         connectionLocal.query(match_sql, function(err, rows, fields) {
           for(var x in rows) {
             // console.log(x % 2 === 0);// + ", " + x % 2 === 1 + ", " + x + 1 >= rows.size + ", " + rows.size + ", " + x);
@@ -4258,20 +4261,23 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               // console.log("first in a row");
               videos += "<div class=\"row\">";
             }
-            videos += "<div class=\"col-lg-6\"><video width=\"480\" height=\"360\" controls><source src=\"../videos/" + files[rows[x].match_num] + "\" type=\"video/mp4\"/></video><h4>Match " + rows[x].match_num + "</h4></div>";
+            if(files && rows[x].match_num < files.length)
+            {
+              videos += "<div class=\"col-lg-6\"><video width=\"480\" height=\"360\" controls><source src=\"../videos/" + files[rows[x].match_num] + "\" type=\"video/mp4\"/></video><h4>Match " + rows[x].match_num + "</h4></div>";
+            }
             if(x % 2 === 1 || (Number(x) + 1) >= rows.length) {
               // console.log("last in a row");
               videos += "</div>";
             }
           }
 
-          // var tele_gear_ranked = tele_gear_rank[team_num];
-          // var auto_gear_ranked = auto_gear_rank[team_num];
-          // var climb_ranked = climb_rank[team_num];
+        // var tele_gear_ranked = tele_gear_rank[team_num];
+        // var auto_gear_ranked = auto_gear_rank[team_num];
+        // var climb_ranked = climb_rank[team_num];
 
-          // console.log(videos);
+        // console.log(videos);
           res.render('pages/team', {
-        	  req: req,
+            req: req,
             team_num: team_num,
             team_name: team_name,
             previous_team_num: previous_team_num,
@@ -4318,6 +4324,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             tot_tele_climb: tot_tele_climb,
             tot_tele_climb_attempts: tot_tele_climb_attempts,
             tot_tele_climb_assisted: tot_tele_climb_assisted,
+            tot_tele_platform: tot_tele_platform,
             tot_tele_plus_one: tot_tele_plus_one,
             tot_tele_plus_one_attempts: tot_tele_plus_one_attempts,
             tot_tele_plus_two: tot_tele_plus_two,
@@ -4336,7 +4343,8 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             scale_low_cubes_trend: scale_low_cubes_trend,
             exchange_cubes_trend: exchange_cubes_trend,
             total_cubes_trend: total_cubes_trend,
-            trend_labels: trend_labels
+            trend_labels: trend_labels,
+            videos: videos
           });
         });
       });
@@ -4388,13 +4396,14 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         tot_tele_climb = rows[0].tot_tele_climb;
         tot_tele_climb_attempts = rows[0].tot_tele_climb_attempts;
         tot_tele_climb_assisted = rows[0].tot_tele_climb_assisted;
+        tot_tele_platform = rows[0].tot_tele_platform;
         tot_tele_plus_one = rows[0].tot_tele_plus_one;
         tot_tele_plus_one_attempts = rows[0].tot_tele_plus_one_attempts;
         tot_tele_plus_two = rows[0].tot_tele_plus_two;
         tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
         avg_driver_rating = rows[0].avg_driver_rating;
         avg_defense_rating = rows[0].avg_defense_rating;
-
+      });
       /*var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
       connection.query(no_auto_sql, function(err, rows, fields) {
         for(var x in rows)
@@ -4453,10 +4462,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         // console.log(total_intake_trend);
         // console.log();
 
-      });
 
       var dir = __dirname + "\\public\\videos";
       var files = null;
+      var videos = "";
 
   /*    fs.readdir(dir, function(err, files) {
         if(err) { console.log(err); return; }
@@ -4548,6 +4557,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             tot_tele_climb: tot_tele_climb,
             tot_tele_climb_attempts: tot_tele_climb_attempts,
             tot_tele_climb_assisted: tot_tele_climb_assisted,
+            tot_tele_platform: tot_tele_platform,
             tot_tele_plus_one: tot_tele_plus_one,
             tot_tele_plus_one_attempts: tot_tele_plus_one_attempts,
             tot_tele_plus_two: tot_tele_plus_two,
@@ -4566,7 +4576,8 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             scale_low_cubes_trend: scale_low_cubes_trend,
             exchange_cubes_trend: exchange_cubes_trend,
             total_cubes_trend: total_cubes_trend,
-            trend_labels: trend_labels
+            trend_labels: trend_labels,
+            videos: videos
           });
         });
       // });
@@ -4629,6 +4640,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tele_plus_two = Number(req.body.tele_plus_two);
     var tele_plus_two_failed = Number(req.body.tele_plus_two_failed);
     var tele_climb_assisted = Number(req.body.tele_climb_assisted);
+    var tele_platform = Number(req.body.tele_platform);
     var driver_rating = Number(req.body.driver_rating);
     var defense_rating = Number(req.body.defense_rating);
 
@@ -4639,7 +4651,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       + "`tele_exchange_made`, `tele_exchange_missed`, `tele_scale_high_made`, `tele_scale_high_missed`, `tele_scale_low_made`, "
       + "`tele_scale_low_missed`, `tele_near_switch_made`, `tele_near_switch_missed`, `tele_far_switch_made`, `tele_far_switch_missed`, "
       + "`tele_knockouts`, `tele_cubes_dropped`, `tele_highest_level`, `tele_orderly`, `tele_climb`, `tele_climb_failed`, "
-      + "`tele_plus_one`, `tele_plus_one_failed`, `tele_plus_two`, `tele_plus_two_failed`, `tele_climb_assisted`, `driver_rating`, "
+      + "`tele_plus_one`, `tele_plus_one_failed`, `tele_plus_two`, `tele_plus_two_failed`, `tele_climb_assisted`, `tele_platform`, `driver_rating`, "
       + "`defense_rating`) VALUES (" + match_num + ", " + team_num + ", '" + auto_position + "', " + auto_cross + ", "
       + auto_pyramid_intake + ", " + auto_unprotected_intake + ", " + auto_near_switch_made + ", " + auto_near_switch_missed + ", "
       + auto_scale_high_made + ", " + auto_scale_high_missed + ", " + auto_scale_low_made + ", " + auto_scale_low_missed + ", "
@@ -4649,7 +4661,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       + tele_scale_low_missed + ", " + tele_near_switch_made + ", " + tele_near_switch_missed + ", " + tele_far_switch_made + ", "
       + tele_far_switch_missed + ", " + tele_knockouts + ", " + tele_cubes_dropped + ", " + tele_highest_level + ", "
       + tele_orderly + ", " + tele_climb + ", " + tele_climb_failed + ", " + tele_plus_one + ", " + tele_plus_one_failed + ", "
-      + tele_plus_two + ", " + tele_plus_two_failed + ", " + tele_climb_assisted + ", " + driver_rating + ", " + defense_rating + ")";
+      + tele_plus_two + ", " + tele_plus_two_failed + ", " + tele_climb_assisted + ", " + tele_platform + ", " + driver_rating + ", " + defense_rating + ")";
       // console.log(matches_sql_v2);
     if(process.argv[2] && process.argv[2] === 'local')
     {
@@ -4738,8 +4750,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
   });
 
 
-  function stdevGears(team_num)
-  {
+  function stdevGears(team_num) {
     var stdev1 = 0;
     var stdev2 = 0;
     var mean = 0;
@@ -4770,8 +4781,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     });
   }
 
-  function updateRanks()
-  {
+  function updateRanks() {
     var tele_gear_sql = "SELECT * FROM teams ORDER BY avg_tele_gears_scored DESC";
     connection.query(tele_gear_sql, function(err, rows) {
       for(var x in rows)
@@ -4803,8 +4813,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     });
   }
 
-  function updateTeams(team_num)
-  {
+  function updateTeams(team_num) {
     //  console.log("updating data into teams for team: " + team_num);
       var team_sql = "UPDATE teams SET num_matches=(SELECT COUNT(*) FROM matches WHERE team_num=" + team_num + "), " +
       "tot_auto_left=(SELECT COUNT(*) FROM matches WHERE auto_position=\"Left\" AND team_num=" + team_num + "), " +
@@ -4908,10 +4917,11 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       "avg_tele_cubes_dropped=(SELECT AVG(tele_cubes_dropped) FROM matches WHERE team_num=" + team_num + "), " +
 
       "max_tele_highest_level=(SELECT tele_highest_level FROM matches WHERE team_num=" + team_num + " ORDER BY tele_highest_level DESC LIMIT 1), " +
-      "frq_tele_highest_level=(SELECT COUNT(*) FROM matches WHERE tele_highest_level=max_tele_highest_level AND team_num=" + team_num + "), " +
+      "frq_tele_highest_level=(SELECT COUNT(*) FROM matches WHERE tele_highest_level=max_tele_highest_level AND max_tele_highest_level<>0 AND team_num=" + team_num + "), " +
 
       "tot_tele_orderly=(SELECT SUM(tele_orderly) FROM matches WHERE team_num=" + team_num + "), " +
 
+      "tot_tele_platform=(SELECT SUM(tele_platform) FROM matches WHERE team_num=" + team_num + "), " +
       "perc_tele_climb=100*((SELECT SUM(tele_climb) FROM matches WHERE team_num=" + team_num + ")/(SELECT SUM(tele_climb)+SUM(tele_climb_failed) FROM matches WHERE team_num=" + team_num + ")), " +
       "tot_tele_climb=(SELECT SUM(tele_climb) FROM matches WHERE team_num=" + team_num + "), " +
       "tot_tele_climb_attempts=(SELECT SUM(tele_climb+tele_climb_failed)+SUM(tele_climb) FROM matches WHERE team_num=" + team_num + "), " +
@@ -4964,8 +4974,6 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       //
       // });
   }
-
-
 }
 
 
