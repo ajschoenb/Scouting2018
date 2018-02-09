@@ -4103,6 +4103,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var scale_low_cubes_trend = "";
     var exchange_cubes_trend = "";
     var total_cubes_trend = "";
+    var pyramid_radar_trend = "";
+    var unprotected_radar_trend = "";
+    var portal_radar_trend = "";
+    var floor_radar_trend = "";
     var trend_labels = "";
 
 //updateContribScores(team_num);
@@ -4168,6 +4172,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
         avg_driver_rating = rows[0].avg_driver_rating;
         avg_defense_rating = rows[0].avg_defense_rating;
+        pyramid_radar_trend = rows[0].avg_tele_pyramid_scale_cycle + ", " + rows[0].avg_tele_pyramid_near_switch_cycle + ", " + rows[0].avg_tele_pyramid_far_switch_cycle + ", " + rows[0].avg_tele_pyramid_exchange_cycle;
+        unprotected_radar_trend = rows[0].avg_tele_unprotected_scale_cycle + ", " + rows[0].avg_tele_unprotected_near_switch_cycle + ", " + rows[0].avg_tele_unprotected_far_switch_cycle + ", " + rows[0].avg_tele_unprotected_exchange_cycle;
+        portal_radar_trend = rows[0].avg_tele_portal_scale_cycle + ", " + rows[0].avg_tele_portal_near_switch_cycle + ", " + rows[0].avg_tele_portal_far_switch_cycle + ", " + rows[0].avg_tele_portal_exchange_cycle;
+        floor_radar_trend = rows[0].avg_tele_floor_scale_cycle + ", " + rows[0].avg_tele_floor_near_switch_cycle + ", " + rows[0].avg_tele_floor_far_switch_cycle + ", " + rows[0].avg_tele_floor_exchange_cycle;
       });
       /*var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
       connection.query(no_auto_sql, function(err, rows, fields) {
@@ -4343,6 +4351,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             scale_low_cubes_trend: scale_low_cubes_trend,
             exchange_cubes_trend: exchange_cubes_trend,
             total_cubes_trend: total_cubes_trend,
+            pyramid_radar_trend: pyramid_radar_trend,
+            portal_radar_trend: portal_radar_trend,
+            floor_radar_trend: floor_radar_trend,
+            unprotected_radar_trend: unprotected_radar_trend,
             trend_labels: trend_labels,
             videos: videos
           });
@@ -4403,6 +4415,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
         avg_driver_rating = rows[0].avg_driver_rating;
         avg_defense_rating = rows[0].avg_defense_rating;
+        pyramid_radar_trend = rows[0].avg_tele_pyramid_scale_cycle + ", " + rows[0].avg_tele_pyramid_near_switch_cycle + ", " + rows[0].avg_tele_pyramid_far_switch_cycle + ", " + rows[0].avg_tele_pyramid_exchange_cycle;
+        unprotected_radar_trend = rows[0].avg_tele_unprotected_scale_cycle + ", " + rows[0].avg_tele_unprotected_near_switch_cycle + ", " + rows[0].avg_tele_unprotected_far_switch_cycle + ", " + rows[0].avg_tele_unprotected_exchange_cycle;
+        portal_radar_trend = rows[0].avg_tele_portal_scale_cycle + ", " + rows[0].avg_tele_portal_near_switch_cycle + ", " + rows[0].avg_tele_portal_far_switch_cycle + ", " + rows[0].avg_tele_portal_exchange_cycle;
+        floor_radar_trend = rows[0].avg_tele_floor_scale_cycle + ", " + rows[0].avg_tele_floor_near_switch_cycle + ", " + rows[0].avg_tele_floor_far_switch_cycle + ", " + rows[0].avg_tele_floor_exchange_cycle;
       });
       /*var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
       connection.query(no_auto_sql, function(err, rows, fields) {
@@ -4576,6 +4592,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             scale_low_cubes_trend: scale_low_cubes_trend,
             exchange_cubes_trend: exchange_cubes_trend,
             total_cubes_trend: total_cubes_trend,
+            pyramid_radar_trend: pyramid_radar_trend,
+            portal_radar_trend: portal_radar_trend,
+            floor_radar_trend: floor_radar_trend,
+            unprotected_radar_trend: unprotected_radar_trend,
             trend_labels: trend_labels,
             videos: videos
           });
@@ -4641,6 +4661,22 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tele_plus_two_failed = Number(req.body.tele_plus_two_failed);
     var tele_climb_assisted = Number(req.body.tele_climb_assisted);
     var tele_platform = Number(req.body.tele_platform);
+    var tele_pyramid_scale_cycle = Number(req.body.tele_pyramid_scale_cycle);
+    var tele_pyramid_near_switch_cycle = Number(req.body.tele_pyramid_near_switch_cycle);
+    var tele_pyramid_far_switch_cycle = Number(req.body.tele_pyramid_far_switch_cycle);
+    var tele_pyramid_exchange_cycle = Number(req.body.tele_pyramid_exchange_cycle);
+    var tele_unprotected_scale_cycle = Number(req.body.tele_unprotected_scale_cycle);
+    var tele_unprotected_near_switch_cycle = Number(req.body.tele_unprotected_near_switch_cycle);
+    var tele_unprotected_far_switch_cycle = Number(req.body.tele_unprotected_far_switch_cycle);
+    var tele_unprotected_exchange_cycle = Number(req.body.tele_unprotected_exchange_cycle);
+    var tele_portal_scale_cycle = Number(req.body.tele_portal_scale_cycle);
+    var tele_portal_near_switch_cycle = Number(req.body.tele_portal_near_switch_cycle);
+    var tele_portal_far_switch_cycle = Number(req.body.tele_portal_far_switch_cycle);
+    var tele_portal_exchange_cycle = Number(req.body.tele_portal_exchange_cycle);
+    var tele_floor_scale_cycle = Number(req.body.tele_floor_scale_cycle);
+    var tele_floor_near_switch_cycle = Number(req.body.tele_floor_near_switch_cycle);
+    var tele_floor_far_switch_cycle = Number(req.body.tele_floor_far_switch_cycle);
+    var tele_floor_exchange_cycle = Number(req.body.tele_floor_exchange_cycle);
     var driver_rating = Number(req.body.driver_rating);
     var defense_rating = Number(req.body.defense_rating);
 
@@ -4651,17 +4687,26 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       + "`tele_exchange_made`, `tele_exchange_missed`, `tele_scale_high_made`, `tele_scale_high_missed`, `tele_scale_low_made`, "
       + "`tele_scale_low_missed`, `tele_near_switch_made`, `tele_near_switch_missed`, `tele_far_switch_made`, `tele_far_switch_missed`, "
       + "`tele_knockouts`, `tele_cubes_dropped`, `tele_highest_level`, `tele_orderly`, `tele_climb`, `tele_climb_failed`, "
-      + "`tele_plus_one`, `tele_plus_one_failed`, `tele_plus_two`, `tele_plus_two_failed`, `tele_climb_assisted`, `tele_platform`, `driver_rating`, "
-      + "`defense_rating`) VALUES (" + match_num + ", " + team_num + ", '" + auto_position + "', " + auto_cross + ", "
-      + auto_pyramid_intake + ", " + auto_unprotected_intake + ", " + auto_near_switch_made + ", " + auto_near_switch_missed + ", "
-      + auto_scale_high_made + ", " + auto_scale_high_missed + ", " + auto_scale_low_made + ", " + auto_scale_low_missed + ", "
-      + auto_exchange_made + ", " + auto_exchange_missed + ", " + tele_floor_intake + ", " + tele_portal_intake_made + ", "
-      + tele_portal_intake_missed + ", " + tele_pyramid_intake + ", " + tele_unprotected_intake + ", " + tele_exchange_made + ", "
-      + tele_exchange_missed + ", " + tele_scale_high_made + ", " + tele_scale_high_missed + ", " + tele_scale_low_made + ", "
-      + tele_scale_low_missed + ", " + tele_near_switch_made + ", " + tele_near_switch_missed + ", " + tele_far_switch_made + ", "
-      + tele_far_switch_missed + ", " + tele_knockouts + ", " + tele_cubes_dropped + ", " + tele_highest_level + ", "
-      + tele_orderly + ", " + tele_climb + ", " + tele_climb_failed + ", " + tele_plus_one + ", " + tele_plus_one_failed + ", "
-      + tele_plus_two + ", " + tele_plus_two_failed + ", " + tele_climb_assisted + ", " + tele_platform + ", " + driver_rating + ", " + defense_rating + ")";
+      + "`tele_plus_one`, `tele_plus_one_failed`, `tele_plus_two`, `tele_plus_two_failed`, `tele_climb_assisted`, `tele_platform`, "
+      + "`tele_pyramid_scale_cycle`, `tele_pyramid_near_switch_cycle`, `tele_pyramid_far_switch_cycle`, `tele_pyramid_exchange_cycle`, "
+      + "`tele_unprotected_scale_cycle`, `tele_unprotected_near_switch_cycle`, `tele_unprotected_far_switch_cycle`, `tele_unprotected_exchange_cycle`, "
+      + "`tele_portal_scale_cycle`, `tele_portal_near_switch_cycle`, `tele_portal_far_switch_cycle`, `tele_portal_exchange_cycle`, "
+      + "`tele_floor_scale_cycle`, `tele_floor_near_switch_cycle`, `tele_floor_far_switch_cycle`, `tele_floor_exchange_cycle`, `driver_rating`, `defense_rating`) "
+      + "VALUES (" + match_num + ", " + team_num + ", '" + auto_position + "', " + auto_cross + ", " + auto_pyramid_intake + ", " 
+      + auto_unprotected_intake + ", " + auto_near_switch_made + ", " + auto_near_switch_missed + ", " + auto_scale_high_made + ", " 
+      + auto_scale_high_missed + ", " + auto_scale_low_made + ", " + auto_scale_low_missed + ", " + auto_exchange_made + ", " 
+      + auto_exchange_missed + ", " + tele_floor_intake + ", " + tele_portal_intake_made + ", " + tele_portal_intake_missed + ", " 
+      + tele_pyramid_intake + ", " + tele_unprotected_intake + ", " + tele_exchange_made + ", " + tele_exchange_missed + ", " 
+      + tele_scale_high_made + ", " + tele_scale_high_missed + ", " + tele_scale_low_made + ", " + tele_scale_low_missed + ", " 
+      + tele_near_switch_made + ", " + tele_near_switch_missed + ", " + tele_far_switch_made + ", " + tele_far_switch_missed + ", " 
+      + tele_knockouts + ", " + tele_cubes_dropped + ", " + tele_highest_level + ", " + tele_orderly + ", " + tele_climb + ", " 
+      + tele_climb_failed + ", " + tele_plus_one + ", " + tele_plus_one_failed + ", " + tele_plus_two + ", " + tele_plus_two_failed + ", " 
+      + tele_climb_assisted + ", " + tele_platform + ", " + tele_pyramid_scale_cycle + ", " + tele_pyramid_near_switch_cycle + ", " 
+      + tele_pyramid_far_switch_cycle + ", " + tele_pyramid_exchange_cycle + ", " + tele_unprotected_scale_cycle + ", " 
+      + tele_unprotected_near_switch_cycle + ", " + tele_unprotected_far_switch_cycle + ", " + tele_unprotected_exchange_cycle + ", " 
+      + tele_portal_scale_cycle + ", " + tele_portal_near_switch_cycle + ", " + tele_portal_far_switch_cycle + ", " + tele_portal_exchange_cycle + ", " 
+      + tele_floor_scale_cycle + ", " + tele_floor_near_switch_cycle + ", " + tele_floor_far_switch_cycle + ", " + tele_floor_exchange_cycle + ", " 
+      + driver_rating + ", " + defense_rating + ")";
       // console.log(matches_sql_v2);
     if(process.argv[2] && process.argv[2] === 'local')
     {
@@ -4935,6 +4980,23 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       "tot_tele_plus_two_attempts=(SELECT SUM(tele_plus_two+tele_plus_two_failed) FROM matches WHERE team_num=" + team_num + "), " +
 
       "tot_tele_climb_assisted=(SELECT AVG(tele_climb_assisted) FROM matches WHERE team_num=" + team_num + "), " +
+ 
+      "avg_tele_pyramid_scale_cycle=(SELECT AVG(tele_pyramid_scale_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_pyramid_near_switch_cycle=(SELECT AVG(tele_pyramid_near_switch_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_pyramid_far_switch_cycle=(SELECT AVG(tele_pyramid_far_switch_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_pyramid_exchange_cycle=(SELECT AVG(tele_pyramid_exchange_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_unprotected_scale_cycle=(SELECT AVG(tele_unprotected_scale_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_unprotected_near_switch_cycle=(SELECT AVG(tele_unprotected_near_switch_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_unprotected_far_switch_cycle=(SELECT AVG(tele_unprotected_far_switch_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_unprotected_exchange_cycle=(SELECT AVG(tele_unprotected_exchange_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_portal_scale_cycle=(SELECT AVG(tele_portal_scale_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_portal_near_switch_cycle=(SELECT AVG(tele_portal_near_switch_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_portal_far_switch_cycle=(SELECT AVG(tele_portal_far_switch_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_portal_exchange_cycle=(SELECT AVG(tele_portal_exchange_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_floor_scale_cycle=(SELECT AVG(tele_floor_scale_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_floor_near_switch_cycle=(SELECT AVG(tele_floor_near_switch_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_floor_far_switch_cycle=(SELECT AVG(tele_floor_far_switch_cycle) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_floor_exchange_cycle=(SELECT AVG(tele_floor_exchange_cycle) FROM matches WHERE team_num=" + team_num + "), " +
 
       "avg_driver_rating=(SELECT AVG(driver_rating) FROM matches WHERE team_num=" + team_num + "), " +
       "avg_defense_rating=(SELECT AVG(defense_rating) FROM matches WHERE team_num=" + team_num + " AND defense_rating<>0), " +

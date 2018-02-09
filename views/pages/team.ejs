@@ -97,79 +97,13 @@
       </div>
       <div class="col-lg-7 col-lg-offset-0 col-md-6 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-sm-12 col-xs-12" style="font-size: 14px; top: 15px;">
         <div class="row">
-          <h4><strong>Intake Trend</strong></h4>
-          <div class="col-lg-9">
-            <canvas id="intake_trend"></canvas>
-          </div>
-          <div class="col-lg-3" id="legend" style="top: 15px;">
-            <ul style="list-style-type: none;">
-              <li>
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(255,166,158,1);"></div>
-                <strong>Pyramid</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(201,235,148,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(201,235,148,1);"></div>
-                <strong>Unprotected</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(151,187,205,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(151,187,205,1);"></div>
-                <strong>Portal</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(247,239,118,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(247,239,118,1);"></div>
-                <strong>Floor</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(228,156,255,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(228,156,255,1);"></div>
-                <strong>Total</strong>
-              </li>
-            </ul>
-          </div>
+          <!--<h4><strong>Intake Trend</strong></h4>-->
+          <canvas id="intake_trend"></canvas>
         </div>
 
         <div class="row">
-          <h4><strong>Cubes Trend</strong></h4>
-          <div class="col-lg-9">
-            <canvas id="cubes_trend"></canvas>
-          </div>
-          <div class="col-lg-3" id="legend" style="top: 15px;">
-            <ul style="list-style: none;">
-              <li>
-                <!-- <span style="background-color: rgba(255,166,158,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(255,166,158,1);"></div>
-                <strong>Near Switch</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(201,235,148,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(201,235,148,1);"></div>
-                <strong>Far Switch</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(151,187,205,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(151,187,205,1);"></div>
-                <strong>Scale High</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(168,254,254,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(168,254,254,1);"></div>
-                <strong>Scale Low</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(247,239,118,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(247,239,118,1);"></div>
-                <strong>Exchange</strong>
-              </li>
-              <li>
-                <!-- <span style="background-color: rgba(228,156,255,1)" /> -->
-                <div id="legend_rect" style="float: left; position: relative; width: 16px; height: 16px; background: rgba(228,156,255,1);"></div>
-                <strong>Total</strong>
-              </li>
-            </ul>
-          </div>
+          <!--<h4><strong>Cubes Trend</strong></h4>-->
+          <canvas id="cubes_trend"></canvas>
         </div>
 
         <script type="text/javascript">
@@ -178,52 +112,32 @@
             datasets: [
               {
                 label: "Pyramid",
-                fillColor: "rgba(255,166,158,0.2)",
-                strokeColor: "rgba(255,166,158,1)",
-                pointColor: "rgba(255,166,158,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(255,166,158,1)",
+                backgroundColor: "rgba(255,166,158,0.2)",
+                borderColor: "rgba(255,166,158,1)",
                 data: [<%= pyramid_intake_trend %>]
               },
               {
                 label: "Unprotected",
-                fillColor: "rgba(201,235,148,0.2)",
-                strokeColor: "rgba(201,235,148,1)",
-                pointColor: "rgba(201,235,148,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(201,235,148,1)",
+                backgroundColor: "rgba(201,235,148,0.2)",
+                borderColor: "rgba(201,235,148,1)",
                 data: [<%= unprotected_intake_trend %>]
               },
               {
                 label: "Portal",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(151,187,205,1)",
+                backgroundColor: "rgba(151,187,205,0.2)",
+                borderColor: "rgba(151,187,205,1)",
                 data: [<%= portal_intake_trend %>]
               },
               {
                 label: "Floor",
-                fillColor: "rgba(247,239,118,0.2)",
-                strokeColor: "rgba(247,239,118,1)",
-                pointColor: "rgba(247,239,118,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(247,239,118,1)",
+                backgroundColor: "rgba(247,239,118,0.2)",
+                borderColor: "rgba(247,239,118,1)",
                 data: [<%= floor_intake_trend %>]
               },
               {
                 label: "Total",
-                fillColor: "rgba(228,156,255,0.2)",
-                strokeColor: "rgba(228,156,255,1)",
-                pointColor: "rgba(228,156,255,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(228,156,255,1)",
+                backgroundColor: "rgba(228,156,255,0.2)",
+                borderColor: "rgba(228,156,255,1)",
                 data: [<%= total_intake_trend %>]
               }
             ]
@@ -234,73 +148,139 @@
             datasets: [
               {
                 label: "Near Switch",
-                fillColor: "rgba(255,166,158,0.2)",
-                strokeColor: "rgba(255,166,158,1)",
-                pointColor: "rgba(255,166,158,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(255,166,158,1)",
+                backgroundColor: "rgba(255,166,158,0.2)",
+                borderColor: "rgba(255,166,158,1)",
                 data: [<%= near_switch_cubes_trend %>]
               },
               {
                 label: "Far Switch",
-                fillColor: "rgba(201,235,148,0.2)",
-                strokeColor: "rgba(201,235,148,1)",
-                pointColor: "rgba(201,235,148,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(201,235,148,1)",
+                backgroundColor: "rgba(201,235,148,0.2)",
+                borderColor: "rgba(201,235,148,1)",
                 data: [<%= far_switch_cubes_trend %>]
               },
               {
                 label: "Scale High",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(151,187,205,1)",
+                backgroundColor: "rgba(151,187,205,0.2)",
+                borderColor: "rgba(151,187,205,1)",
                 data: [<%= scale_high_cubes_trend %>]
               },
               {
                 label: "Scale Low",
-                fillColor: "rgba(168,254,254,0.2)",
-                strokeColor: "rgba(168,254,254,1)",
-                pointColor: "rgba(168,254,254,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(168,254,254,1)",
+                backgroundColor: "rgba(168,254,254,0.2)",
+                borderColor: "rgba(168,254,254,1)",
                 data: [<%= scale_low_cubes_trend %>]
               },
               {
                 label: "Exchange",
-                fillColor: "rgba(247,239,118,0.2)",
-                strokeColor: "rgba(247,239,118,1)",
-                pointColor: "rgba(247,239,118,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(247,239,118,1)",
+                backgroundColor: "rgba(247,239,118,0.2)",
+                borderColor: "rgba(247,239,118,1)",
                 data: [<%= exchange_cubes_trend %>]
               },
               {
                 label: "Total",
-                fillColor: "rgba(228,156,255,0.2)",
-                strokeColor: "rgba(228,156,255,1)",
-                pointColor: "rgba(228,156,255,1)",
-                pointStrokeColor: "#000",
-                pointHighlightFill: "#000",
-                pointHighlightStroke: "rgba(228,156,255,1)",
+                backgroundColor: "rgba(228,156,255,0.2)",
+                borderColor: "rgba(228,156,255,1)",
                 data: [<%= total_cubes_trend %>]
+              }
+            ]
+          };
+            
+          var ctx = document.getElementById("intake_trend").getContext("2d");
+          var ctx1 = document.getElementById("cubes_trend").getContext("2d");
+          var myLineChart = new Chart(ctx, { 
+            type: 'line',
+            data: intake_data,
+            options: {
+              title: {
+                display: true,
+                text: 'Intake Trend',
+                fontSize: 16
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 32,
+                    stepSize: 4
+                  }
+                }]
+              }
+            }
+          });
+          var myLineChart1 = new Chart(ctx1, { 
+            type: 'line',
+            data: cubes_data,
+            options: {
+              title: {
+                display: true,
+                text: 'Cubes Trend',
+                fontSize: 16
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 32,
+                    stepSize: 4
+                  }
+                }]
+              }
+            }
+          });
+        </script>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <!--<h4><strong>Fancy Radar</strong></h4>-->
+            <canvas id="radar_plot"></canvas>
+          </div>
+        </div>
+        <script type="text/javascript">
+          var radar_data = {
+            labels: ['Scale', 'Near Switch', 'Far Switch', 'Exchange'],
+            datasets: [
+              {
+                label: "Pyramid",
+                backgroundColor: "rgba(255,166,158,0.2)",
+                borderColor: "rgba(255,166,158,1)",
+                data: [<%= pyramid_radar_trend %>]
+              },
+              {
+                label: "Unprotected",
+                backgroundColor: "rgba(201,235,148,0.2)",
+                borderColor: "rgba(201,235,148,1)",
+                data: [<%= unprotected_radar_trend %>]
+              },
+              {
+                label: "Portal",
+                backgroundColor: "rgba(151,187,205,0.2)",
+                borderColor: "rgba(151,187,205,1)",
+                data: [<%= portal_radar_trend %>]
+              },
+              {
+                label: "Floor",
+                backgroundColor: "rgba(247,239,118,0.2)",
+                borderColor: "rgba(247,239,118,1)",
+                data: [<%= floor_radar_trend %>]
               }
             ]
           };
 
           window.onload = function()
           {
-            var ctx = document.getElementById("intake_trend").getContext("2d");
-            var ctx1 = document.getElementById("cubes_trend").getContext("2d");
-            var myLineChart = new Chart(ctx).Line(intake_data,  {responsive: true, scaleOverride: true, scaleSteps: 8, scaleStepWidth: 4, scaleStartValue: 0});
-            var myLineChart1 = new Chart(ctx1).Line(cubes_data,  {responsive: true, scaleOverride: true, scaleSteps: 8, scaleStepWidth: 4, scaleStartValue: 0});
+            var ctx1 = document.getElementById("radar_plot").getContext("2d");
+            var myLineChart1 = new Chart(ctx1, { 
+              type: 'radar',
+              data: radar_data,
+              options: {
+                title: {
+                  display: true,
+                  text: 'Radar Plot',
+                  fontSize: 16
+                }
+              }
+            });
           }
         </script>
       </div>
