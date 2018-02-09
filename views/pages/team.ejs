@@ -114,30 +114,35 @@
                 label: "Pyramid",
                 backgroundColor: "rgba(255,166,158,0.2)",
                 borderColor: "rgba(255,166,158,1)",
+                pointBorderColor: "#000",
                 data: [<%= pyramid_intake_trend %>]
               },
               {
                 label: "Unprotected",
                 backgroundColor: "rgba(201,235,148,0.2)",
                 borderColor: "rgba(201,235,148,1)",
+                pointBorderColor: "#000",
                 data: [<%= unprotected_intake_trend %>]
               },
               {
                 label: "Portal",
                 backgroundColor: "rgba(151,187,205,0.2)",
                 borderColor: "rgba(151,187,205,1)",
+                pointBorderColor: "#000",
                 data: [<%= portal_intake_trend %>]
               },
               {
                 label: "Floor",
                 backgroundColor: "rgba(247,239,118,0.2)",
                 borderColor: "rgba(247,239,118,1)",
+                pointBorderColor: "#000",
                 data: [<%= floor_intake_trend %>]
               },
               {
                 label: "Total",
                 backgroundColor: "rgba(228,156,255,0.2)",
                 borderColor: "rgba(228,156,255,1)",
+                pointBorderColor: "#000",
                 data: [<%= total_intake_trend %>]
               }
             ]
@@ -150,36 +155,42 @@
                 label: "Near Switch",
                 backgroundColor: "rgba(255,166,158,0.2)",
                 borderColor: "rgba(255,166,158,1)",
+                pointBorderColor: "#000",
                 data: [<%= near_switch_cubes_trend %>]
               },
               {
                 label: "Far Switch",
                 backgroundColor: "rgba(201,235,148,0.2)",
                 borderColor: "rgba(201,235,148,1)",
+                pointBorderColor: "#000",
                 data: [<%= far_switch_cubes_trend %>]
               },
               {
                 label: "Scale High",
                 backgroundColor: "rgba(151,187,205,0.2)",
                 borderColor: "rgba(151,187,205,1)",
+                pointBorderColor: "#000",
                 data: [<%= scale_high_cubes_trend %>]
               },
               {
                 label: "Scale Low",
                 backgroundColor: "rgba(168,254,254,0.2)",
                 borderColor: "rgba(168,254,254,1)",
+                pointBorderColor: "#000",
                 data: [<%= scale_low_cubes_trend %>]
               },
               {
                 label: "Exchange",
                 backgroundColor: "rgba(247,239,118,0.2)",
                 borderColor: "rgba(247,239,118,1)",
+                pointBorderColor: "#000",
                 data: [<%= exchange_cubes_trend %>]
               },
               {
                 label: "Total",
                 backgroundColor: "rgba(228,156,255,0.2)",
                 borderColor: "rgba(228,156,255,1)",
+                pointBorderColor: "#000",
                 data: [<%= total_cubes_trend %>]
               }
             ]
@@ -204,6 +215,18 @@
                     stepSize: 4
                   }
                 }]
+              },
+              tooltips: {
+                intersect: false,
+                mode: 'index',
+                callbacks: {
+                  labelColor: function(tooltipItem, chart) {
+                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                    return {
+                      backgroundColor : dataset.borderColor
+                    }
+                  }
+                }
               }
             }
           });
@@ -224,66 +247,260 @@
                     stepSize: 4
                   }
                 }]
+              },
+              tooltips: {
+                intersect: false,
+                mode: 'index',
+                callbacks: {
+                  labelColor: function(tooltipItem, chart) {
+                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                    return {
+                      backgroundColor : dataset.borderColor
+                    }
+                  }
+                }
               }
             }
           });
         </script>
       </div>
+    </div>
+    <div class="row">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="row">
-            <!--<h4><strong>Fancy Radar</strong></h4>-->
-            <canvas id="radar_plot"></canvas>
-          </div>
-        </div>
-        <script type="text/javascript">
-          var radar_data = {
-            labels: ['Scale', 'Near Switch', 'Far Switch', 'Exchange'],
-            datasets: [
-              {
-                label: "Pyramid",
-                backgroundColor: "rgba(255,166,158,0.2)",
-                borderColor: "rgba(255,166,158,1)",
-                data: [<%= pyramid_radar_trend %>]
-              },
-              {
-                label: "Unprotected",
-                backgroundColor: "rgba(201,235,148,0.2)",
-                borderColor: "rgba(201,235,148,1)",
-                data: [<%= unprotected_radar_trend %>]
-              },
-              {
-                label: "Portal",
-                backgroundColor: "rgba(151,187,205,0.2)",
-                borderColor: "rgba(151,187,205,1)",
-                data: [<%= portal_radar_trend %>]
-              },
-              {
-                label: "Floor",
-                backgroundColor: "rgba(247,239,118,0.2)",
-                borderColor: "rgba(247,239,118,1)",
-                data: [<%= floor_radar_trend %>]
-              }
-            ]
-          };
+        <div class="col-lg-6"><canvas id="scale_plot"></canvas></div>
+        <div class="col-lg-6"><canvas id="exchange_plot"></canvas></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6"><canvas id="near_switch_plot"></canvas></div>
+        <div class="col-lg-6"><canvas id="far_switch_plot"></canvas></div>
+      </div>
+      <script type="text/javascript">
+        var polar_scale_data = {
+          labels: ['Pyramid', 'Unprotected', 'Portal', 'Floor'],
+          datasets: [
+            {
+              label: "Scale",
+              backgroundColor: [
+                "rgba(255,166,158,5)",
+                "rgba(201,235,148,.5)",
+                "rgba(151,187,205,.5)",
+                "rgba(247,239,118,.5)"
+              ],
+              borderColor: [
+                "rgba(255,166,158,1)",
+                "rgba(201,235,148,1)",
+                "rgba(151,187,205,1)",
+                "rgba(247,239,118,1)"
+              ],
+              data: [<%= pyramid_scale_trend %>, <%= unprotected_scale_trend %>, <%= portal_scale_trend %>, <%= floor_scale_trend %>]
+            }
+          ]
+        };
+        
+        var polar_exchange_data = {
+          labels: ['Pyramid', 'Unprotected', 'Portal', 'Floor'],
+          datasets: [
+            {
+              label: "Scale",
+              backgroundColor: [
+                "rgba(255,166,158,5)",
+                "rgba(201,235,148,.5)",
+                "rgba(151,187,205,.5)",
+                "rgba(247,239,118,.5)"
+              ],
+              borderColor: [
+                "rgba(255,166,158,1)",
+                "rgba(201,235,148,1)",
+                "rgba(151,187,205,1)",
+                "rgba(247,239,118,1)"
+              ],
+              data: [<%= pyramid_exchange_trend %>, <%= unprotected_exchange_trend %>, <%= portal_exchange_trend %>, <%= floor_exchange_trend %>]
+            }
+          ]
+        };
+      
+        var polar_near_switch_data = {
+          labels: ['Pyramid', 'Unprotected', 'Portal', 'Floor'],
+          datasets: [
+            {
+              label: "Scale",
+              backgroundColor: [
+                "rgba(255,166,158,5)",
+                "rgba(201,235,148,.5)",
+                "rgba(151,187,205,.5)",
+                "rgba(247,239,118,.5)"
+              ],
+              borderColor: [
+                "rgba(255,166,158,1)",
+                "rgba(201,235,148,1)",
+                "rgba(151,187,205,1)",
+                "rgba(247,239,118,1)"
+              ],
+              data: [<%= pyramid_near_switch_trend %>, <%= unprotected_near_switch_trend %>, <%= portal_near_switch_trend %>, <%= floor_near_switch_trend %>]
+            }
+          ]
+        };
+        
+        var polar_far_switch_data = {
+          labels: ['Pyramid', 'Unprotected', 'Portal', 'Floor'],
+          datasets: [
+            {
+              label: "Scale",
+              backgroundColor: [
+                "rgba(255,166,158,5)",
+                "rgba(201,235,148,.5)",
+                "rgba(151,187,205,.5)",
+                "rgba(247,239,118,.5)"
+              ],
+              borderColor: [
+                "rgba(255,166,158,1)",
+                "rgba(201,235,148,1)",
+                "rgba(151,187,205,1)",
+                "rgba(247,239,118,1)"
+              ],
+              data: [<%= pyramid_far_switch_trend %>, <%= unprotected_far_switch_trend %>, <%= portal_far_switch_trend %>, <%= floor_far_switch_trend %>]
+            }
+          ]
+        };
+      
+        var radar_data = {
+          labels: ['Scale', 'Near Switch', 'Far Switch', 'Exchange'],
+          datasets: [
+            {
+              label: "Pyramid",
+              backgroundColor: "rgba(255,166,158,0.2)",
+              borderColor: "rgba(255,166,158,1)",
+              pointBorderColor: "#000",
+              pointRadius: 3,
+              pointHitRadius: 27,
+              data: [<%= pyramid_radar_trend %>]
+            },
+            {
+              label: "Unprotected",
+              backgroundColor: "rgba(201,235,148,0.2)",
+              borderColor: "rgba(201,235,148,1)",
+              pointBorderColor: "#000",
+              pointRadius: 3,
+              pointHitRadius: 27,
+              data: [<%= unprotected_radar_trend %>]
+            },
+            {
+              label: "Portal",
+              backgroundColor: "rgba(151,187,205,0.2)",
+              borderColor: "rgba(151,187,205,1)",
+              pointBorderColor: "#000",
+              pointRadius: 3,
+              pointHitRadius: 27,
+              data: [<%= portal_radar_trend %>]
+            },
+            {
+              label: "Floor",
+              backgroundColor: "rgba(247,239,118,0.2)",
+              borderColor: "rgba(247,239,118,1)",
+              pointBorderColor: "#000",
+              pointRadius: 3,
+              pointHitRadius: 27,
+              data: [<%= floor_radar_trend %>]
+            }
+          ]
+        };
 
-          window.onload = function()
-          {
-            var ctx1 = document.getElementById("radar_plot").getContext("2d");
-            var myLineChart1 = new Chart(ctx1, { 
-              type: 'radar',
-              data: radar_data,
-              options: {
-                title: {
-                  display: true,
-                  text: 'Radar Plot',
-                  fontSize: 16
+        window.onload = function()
+        {
+          var ctx = document.getElementById("scale_plot").getContext("2d");
+          var myLineChart = new Chart(ctx, { 
+            type: 'polarArea',
+            data: polar_scale_data,
+            options: {
+              startAngle: 0.25 * Math.PI,
+              title: {
+                display: true,
+                text: 'Scale',
+                fontSize: 16
+              },
+              tooltips: {
+                intersect: true,
+                displayColors: true,
+                mode: 'index'
+              },
+              scale: {
+                pointLabels: {
+                  display: false
                 }
               }
-            });
-          }
-        </script>
-      </div>
+            }
+          });
+          var ctx1 = document.getElementById("exchange_plot").getContext("2d");
+          var myLineChart1 = new Chart(ctx1, { 
+            type: 'polarArea',
+            data: polar_exchange_data,
+            options: {
+              startAngle: 0.25 * Math.PI,
+              title: {
+                display: true,
+                text: 'Exchange',
+                fontSize: 16
+              },
+              tooltips: {
+                intersect: true,
+                displayColors: true,
+                mode: 'index'
+              },
+              scale: {
+                pointLabels: {
+                  display: false
+                }
+              }
+            }
+          });
+          var ctx2 = document.getElementById("near_switch_plot").getContext("2d");
+          var myLineChart2 = new Chart(ctx2, { 
+            type: 'polarArea',
+            data: polar_near_switch_data,
+            options: {
+              startAngle: 0.25 * Math.PI,
+              title: {
+                display: true,
+                text: 'Near Switch',
+                fontSize: 16
+              },
+              tooltips: {
+                intersect: true,
+                displayColors: true,
+                mode: 'index'
+              },
+              scale: {
+                pointLabels: {
+                  display: false
+                }
+              }
+            }
+          });
+          var ctx3 = document.getElementById("far_switch_plot").getContext("2d");
+          var myLineChart3 = new Chart(ctx3, { 
+            type: 'polarArea',
+            data: polar_far_switch_data,
+            options: {
+              startAngle: 0.25 * Math.PI,
+              title: {
+                display: true,
+                text: 'Far Switch',
+                fontSize: 16
+              },
+              tooltips: {
+                intersect: true,
+                displayColors: true,
+                mode: 'index'
+              },
+              scale: {
+                pointLabels: {
+                  display: false
+                }
+              }
+            }
+          });
+        }
+      </script>
     </div>
     <div id="spoiler" style="display: none;">
       <%- videos %>

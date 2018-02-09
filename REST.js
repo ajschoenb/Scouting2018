@@ -4107,7 +4107,23 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var unprotected_radar_trend = "";
     var portal_radar_trend = "";
     var floor_radar_trend = "";
-    var trend_labels = "";
+    var pyramid_scale_trend = 0;
+    var pyramid_near_switch_trend = 0;
+    var pyramid_far_switch_trend = 0;
+    var pyramid_exchange_trend = 0;
+    var unprotected_scale_trend = 0;
+    var unprotected_near_switch_trend = 0;
+    var unprotected_far_switch_trend = 0;
+    var unprotected_exchange_trend = 0;
+    var portal_scale_trend = 0;
+    var portal_near_switch_trend = 0;
+    var portal_far_switch_trend = 0;
+    var portal_exchange_trend = 0;
+    var floor_scale_trend = 0;
+    var floor_near_switch_trend = 0;
+    var floor_far_switch_trend = 0;
+    var floor_exchange_trend = 0;
+    var trend_labels = 0;
 
 //updateContribScores(team_num);
     updateTeams(team_num);
@@ -4176,6 +4192,22 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         unprotected_radar_trend = rows[0].avg_tele_unprotected_scale_cycle + ", " + rows[0].avg_tele_unprotected_near_switch_cycle + ", " + rows[0].avg_tele_unprotected_far_switch_cycle + ", " + rows[0].avg_tele_unprotected_exchange_cycle;
         portal_radar_trend = rows[0].avg_tele_portal_scale_cycle + ", " + rows[0].avg_tele_portal_near_switch_cycle + ", " + rows[0].avg_tele_portal_far_switch_cycle + ", " + rows[0].avg_tele_portal_exchange_cycle;
         floor_radar_trend = rows[0].avg_tele_floor_scale_cycle + ", " + rows[0].avg_tele_floor_near_switch_cycle + ", " + rows[0].avg_tele_floor_far_switch_cycle + ", " + rows[0].avg_tele_floor_exchange_cycle;
+        pyramid_scale_trend = rows[0].avg_tele_pyramid_scale_cycle;
+        pyramid_near_switch_trend = rows[0].avg_tele_pyramid_near_switch_cycle;
+        pyramid_far_switch_trend = rows[0].avg_tele_pyramid_far_switch_cycle;
+        pyramid_exchange_trend = rows[0].avg_tele_pyramid_exchange_cycle;
+        unprotected_scale_trend = rows[0].avg_tele_unprotected_scale_cycle;
+        unprotected_near_switch_trend = rows[0].avg_tele_unprotected_near_switch_cycle;
+        unprotected_far_switch_trend = rows[0].avg_tele_unprotected_far_switch_cycle;
+        unprotected_exchange_trend = rows[0].avg_tele_unprotected_exchange_cycle;
+        portal_scale_trend = rows[0].avg_tele_portal_scale_cycle;
+        portal_near_switch_trend = rows[0].avg_tele_portal_near_switch_cycle;
+        portal_far_switch_trend = rows[0].avg_tele_portal_far_switch_cycle;
+        portal_exchange_trend = rows[0].avg_tele_portal_exchange_cycle;
+        floor_scale_trend = rows[0].avg_tele_floor_scale_cycle;
+        floor_near_switch_trend = rows[0].avg_tele_floor_near_switch_cycle;
+        floor_far_switch_trend = rows[0].avg_tele_floor_far_switch_cycle;
+        floor_exchange_trend = rows[0].avg_tele_floor_exchange_cycle;
       });
       /*var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
       connection.query(no_auto_sql, function(err, rows, fields) {
@@ -4284,6 +4316,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         // var climb_ranked = climb_rank[team_num];
 
         // console.log(videos);
+          console.log(pyramid_scale_trend);
+          console.log(unprotected_scale_trend);
+          console.log(portal_scale_trend);
+          console.log(floor_scale_trend);
           res.render('pages/team', {
             req: req,
             team_num: team_num,
@@ -4355,6 +4391,22 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             portal_radar_trend: portal_radar_trend,
             floor_radar_trend: floor_radar_trend,
             unprotected_radar_trend: unprotected_radar_trend,
+            pyramid_scale_trend: pyramid_scale_trend,
+            pyramid_near_switch_trend: pyramid_near_switch_trend,
+            pyramid_far_switch_trend: pyramid_far_switch_trend,
+            pyramid_exchange_trend: pyramid_exchange_trend,
+            unprotected_scale_trend: unprotected_scale_trend,
+            unprotected_near_switch_trend: unprotected_near_switch_trend,
+            unprotected_far_switch_trend: unprotected_far_switch_trend,
+            unprotected_exchange_trend: unprotected_exchange_trend,
+            portal_scale_trend: portal_scale_trend,
+            portal_near_switch_trend: portal_near_switch_trend,
+            portal_far_switch_trend: portal_far_switch_trend,
+            portal_exchange_trend: portal_exchange_trend,
+            floor_scale_trend: floor_scale_trend,
+            floor_near_switch_trend: floor_near_switch_trend,
+            floor_far_switch_trend: floor_far_switch_trend,
+            floor_exchange_trend: floor_exchange_trend,
             trend_labels: trend_labels,
             videos: videos
           });
