@@ -266,6 +266,59 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-lg-12">
+        <h3><u>Cycle Data</u></h3>
+        <table class="table">
+          <tr>
+            <td><h5 style="margin-top:0;">Total Pyramid Scale: <%= tot_pyramid_scale_cycles %> (Max: <%= max_pyramid_scale_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Pyramid Scale: <%= avg_pyramid_scale_cycles %></h5></td>
+            <td><h5 style="margin-top:0;">Total Pyramid Exchange: <%= tot_pyramid_far_switch_cycles %> (Max: <%= max_pyramid_exchange_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Pyramid Exchange: <%= avg_pyramid_exchange_cycles %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Total Unprotected Scale: <%= tot_unprotected_scale_cycles %> (Max: <%= max_unprotected_scale_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Unprotected Scale: <%= avg_unprotected_scale_cycles %></h5></td>
+            <td><h5 style="margin-top:0;">Total Unprotected Exchange: <%= tot_unprotected_far_switch_cycles %> (Max: <%= max_unprotected_exchange_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Unprotected Exchange: <%= avg_unprotected_exchange_cycles %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Total Portal Scale: <%= tot_portal_scale_cycles %> (Max: <%= max_portal_scale_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Portal Scale: <%= avg_portal_scale_cycles %></h5></td>
+            <td><h5 style="margin-top:0;">Total Portal Exchange: <%= tot_portal_far_switch_cycles %> (Max: <%= max_portal_exchange_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Portal Exchange: <%= avg_portal_exchange_cycles %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Total Floor Scale: <%= tot_floor_scale_cycles %> (Max: <%= max_floor_scale_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Floor Scale: <%= avg_floor_scale_cycles %></h5></td>
+            <td><h5 style="margin-top:0;">Total Floor Exchange: <%= tot_floor_far_switch_cycles %> (Max: <%= max_floor_exchange_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Floor Exchange: <%= avg_floor_exchange_cycles %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Total Pyramid Near Switch: <%= tot_pyramid_near_switch_cycles %> (Max: <%= max_pyramid_near_switch_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Pyramid Near Switch: <%= avg_pyramid_near_switch_cycles %></h5></td>
+            <td><h5 style="margin-top:0;">Total Pyramid Far Switch: <%= tot_pyramid_far_switch_cycles %> (Max: <%= max_pyramid_far_switch_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Pyramid Far Switch: <%= avg_pyramid_far_switch_cycles %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Total Unprotected Near Switch: <%= tot_unprotected_near_switch_cycles %> (Max: <%= max_unprotected_near_switch_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Unprotected Near Switch: <%= avg_unprotected_near_switch_cycles %></h5></td>
+            <td><h5 style="margin-top:0;">Total Unprotected Far Switch: <%= tot_unprotected_far_switch_cycles %> (Max: <%= max_unprotected_far_switch_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Unprotected Far Switch: <%= avg_unprotected_far_switch_cycles %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Total Portal Near Switch: <%= tot_portal_near_switch_cycles %> (Max: <%= max_portal_near_switch_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Portal Near Switch: <%= avg_portal_near_switch_cycles %></h5></td>
+            <td><h5 style="margin-top:0;">Total Portal Far Switch: <%= tot_portal_far_switch_cycles %> (Max: <%= max_portal_far_switch_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Portal Far Switch: <%= avg_portal_far_switch_cycles %></h5></td>
+          </tr>
+          <tr>
+            <td><h5 style="margin-top:0;">Total Floor Near Switch: <%= tot_floor_near_switch_cycles %> (Max: <%= max_floor_near_switch_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Floor Near Switch: <%= avg_floor_near_switch_cycles %></h5></td>
+            <td><h5 style="margin-top:0;">Total Floor Far Switch: <%= tot_floor_far_switch_cycles %> (Max: <%= max_floor_far_switch_cycles %>)</h5></td>
+            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Floor Far Switch: <%= avg_floor_far_switch_cycles %></h5></td>
+          </tr>
+        </table>
+      </div>
       <div class="row">
         <div class="col-lg-6"><canvas id="scale_plot"></canvas></div>
         <div class="col-lg-6"><canvas id="exchange_plot"></canvas></div>
@@ -281,7 +334,7 @@
             {
               label: "Scale",
               backgroundColor: [
-                "rgba(255,166,158,5)",
+                "rgba(255,166,158,.5)",
                 "rgba(201,235,148,.5)",
                 "rgba(151,187,205,.5)",
                 "rgba(247,239,118,.5)"
@@ -292,7 +345,7 @@
                 "rgba(151,187,205,1)",
                 "rgba(247,239,118,1)"
               ],
-              data: [<%= pyramid_scale_trend %>, <%= unprotected_scale_trend %>, <%= portal_scale_trend %>, <%= floor_scale_trend %>]
+              data: [<%= avg_pyramid_scale_cycles %>, <%= avg_unprotected_scale_cycles %>, <%= avg_portal_scale_cycles %>, <%= avg_floor_scale_cycles %>]
             }
           ]
         };
@@ -303,7 +356,7 @@
             {
               label: "Scale",
               backgroundColor: [
-                "rgba(255,166,158,5)",
+                "rgba(255,166,158,.5)",
                 "rgba(201,235,148,.5)",
                 "rgba(151,187,205,.5)",
                 "rgba(247,239,118,.5)"
@@ -314,7 +367,7 @@
                 "rgba(151,187,205,1)",
                 "rgba(247,239,118,1)"
               ],
-              data: [<%= pyramid_exchange_trend %>, <%= unprotected_exchange_trend %>, <%= portal_exchange_trend %>, <%= floor_exchange_trend %>]
+              data: [<%= avg_pyramid_exchange_cycles %>, <%= avg_unprotected_exchange_cycles %>, <%= avg_portal_exchange_cycles %>, <%= avg_floor_exchange_cycles %>]
             }
           ]
         };
@@ -325,7 +378,7 @@
             {
               label: "Scale",
               backgroundColor: [
-                "rgba(255,166,158,5)",
+                "rgba(255,166,158,.5)",
                 "rgba(201,235,148,.5)",
                 "rgba(151,187,205,.5)",
                 "rgba(247,239,118,.5)"
@@ -336,7 +389,7 @@
                 "rgba(151,187,205,1)",
                 "rgba(247,239,118,1)"
               ],
-              data: [<%= pyramid_near_switch_trend %>, <%= unprotected_near_switch_trend %>, <%= portal_near_switch_trend %>, <%= floor_near_switch_trend %>]
+              data: [<%= avg_pyramid_near_switch_cycles %>, <%= avg_unprotected_near_switch_cycles %>, <%= avg_portal_near_switch_cycles %>, <%= avg_floor_near_switch_cycles %>]
             }
           ]
         };
@@ -347,7 +400,7 @@
             {
               label: "Scale",
               backgroundColor: [
-                "rgba(255,166,158,5)",
+                "rgba(255,166,158,.5)",
                 "rgba(201,235,148,.5)",
                 "rgba(151,187,205,.5)",
                 "rgba(247,239,118,.5)"
@@ -358,7 +411,7 @@
                 "rgba(151,187,205,1)",
                 "rgba(247,239,118,1)"
               ],
-              data: [<%= pyramid_far_switch_trend %>, <%= unprotected_far_switch_trend %>, <%= portal_far_switch_trend %>, <%= floor_far_switch_trend %>]
+              data: [<%= avg_pyramid_far_switch_cycles %>, <%= avg_unprotected_far_switch_cycles %>, <%= avg_portal_far_switch_cycles %>, <%= avg_floor_far_switch_cycles %>]
             }
           ]
         };
@@ -407,11 +460,26 @@
 
         window.onload = function()
         {
+          //alert(<%= tot_pyramid_scale_cycles %>);
+          var total_scale_scored = Number(<%= tot_pyramid_scale_cycles %>) + Number(<%= tot_unprotected_scale_cycles %>) + Number(<%= tot_portal_scale_cycles %>) + Number(<%= tot_floor_scale_cycles %>);
+          var total_near_switch_scored = Number(<%= tot_pyramid_near_switch_cycles %>) + Number(<%= tot_unprotected_near_switch_cycles %>) + Number(<%= tot_portal_near_switch_cycles %>) + Number(<%= tot_floor_near_switch_cycles %>);
+          var total_far_switch_scored = Number(<%= tot_pyramid_far_switch_cycles %>) + Number(<%= tot_unprotected_far_switch_cycles %>) + Number(<%= tot_portal_far_switch_cycles %>) + Number(<%= tot_floor_far_switch_cycles %>);
+          var total_exchange_scored = Number(<%= tot_pyramid_exchange_cycles %>) + Number(<%= tot_unprotected_exchange_cycles %>) + Number(<%= tot_portal_exchange_cycles %>) + Number(<%= tot_floor_exchange_cycles %>);
+          //alert(total_scale_scored);
+          //alert(total_near_switch_scored);
+          //alert(total_far_switch_scored);
+          //alert(total_exchange_scored);
           var ctx = document.getElementById("scale_plot").getContext("2d");
           var myLineChart = new Chart(ctx, { 
             type: 'polarArea',
             data: polar_scale_data,
             options: {
+              customAngles: [
+                <%= tot_pyramid_scale_cycles %> * 2 * Math.PI / total_scale_scored,
+                <%= tot_unprotected_scale_cycles %> * 2 * Math.PI / total_scale_scored,
+                <%= tot_portal_scale_cycles %> * 2 * Math.PI / total_scale_scored,
+                <%= tot_floor_scale_cycles %> * 2 * Math.PI / total_scale_scored
+              ],
               startAngle: 0.25 * Math.PI,
               title: {
                 display: true,
@@ -421,11 +489,26 @@
               tooltips: {
                 intersect: true,
                 displayColors: true,
-                mode: 'index'
+                mode: 'dataset',
+                callbacks: {
+                  labelColor: function(tooltipItem, chart) {
+                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                    return {
+                      backgroundColor : dataset.borderColor[tooltipItem.index]
+                    }
+                  }
+                }
               },
               scale: {
                 pointLabels: {
                   display: false
+                },
+                ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 8,
+                  callback: function(value, index, values) {
+                    return (value);
+                  }
                 }
               }
             }
@@ -435,6 +518,12 @@
             type: 'polarArea',
             data: polar_exchange_data,
             options: {
+              customAngles: [
+                <%= tot_pyramid_exchange_cycles %> * 2 * Math.PI / total_exchange_scored,
+                <%= tot_unprotected_exchange_cycles %> * 2 * Math.PI / total_exchange_scored,
+                <%= tot_portal_exchange_cycles %> * 2 * Math.PI / total_exchange_scored,
+                <%= tot_floor_exchange_cycles %> * 2 * Math.PI / total_exchange_scored
+              ],
               startAngle: 0.25 * Math.PI,
               title: {
                 display: true,
@@ -444,11 +533,23 @@
               tooltips: {
                 intersect: true,
                 displayColors: true,
-                mode: 'index'
+                mode: 'dataset',
+                callbacks: {
+                  labelColor: function(tooltipItem, chart) {
+                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                    return {
+                      backgroundColor : dataset.borderColor[tooltipItem.index]
+                    }
+                  }
+                }
               },
               scale: {
                 pointLabels: {
                   display: false
+                },
+                ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 8
                 }
               }
             }
@@ -458,6 +559,12 @@
             type: 'polarArea',
             data: polar_near_switch_data,
             options: {
+              customAngles: [
+                <%= tot_pyramid_near_switch_cycles %> * 2 * Math.PI / total_near_switch_scored,
+                <%= tot_unprotected_near_switch_cycles %> * 2 * Math.PI / total_near_switch_scored,
+                <%= tot_portal_near_switch_cycles %> * 2 * Math.PI / total_near_switch_scored,
+                <%= tot_floor_near_switch_cycles %> * 2 * Math.PI / total_near_switch_scored
+              ],
               startAngle: 0.25 * Math.PI,
               title: {
                 display: true,
@@ -467,11 +574,23 @@
               tooltips: {
                 intersect: true,
                 displayColors: true,
-                mode: 'index'
+                mode: 'dataset',
+                callbacks: {
+                  labelColor: function(tooltipItem, chart) {
+                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                    return {
+                      backgroundColor : dataset.borderColor[tooltipItem.index]
+                    }
+                  }
+                }
               },
               scale: {
                 pointLabels: {
                   display: false
+                },
+                ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 8
                 }
               }
             }
@@ -481,6 +600,12 @@
             type: 'polarArea',
             data: polar_far_switch_data,
             options: {
+              customAngles: [
+                <%= tot_pyramid_far_switch_cycles %> * 2 * Math.PI / total_far_switch_scored,
+                <%= tot_unprotected_far_switch_cycles %> * 2 * Math.PI / total_far_switch_scored,
+                <%= tot_portal_far_switch_cycles %> * 2 * Math.PI / total_far_switch_scored,
+                <%= tot_floor_far_switch_cycles %> * 2 * Math.PI / total_far_switch_scored
+              ],
               startAngle: 0.25 * Math.PI,
               title: {
                 display: true,
@@ -490,11 +615,23 @@
               tooltips: {
                 intersect: true,
                 displayColors: true,
-                mode: 'index'
+                mode: 'dataset',
+                callbacks: {
+                  labelColor: function(tooltipItem, chart) {
+                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                    return {
+                      backgroundColor : dataset.borderColor[tooltipItem.index]
+                    }
+                  }
+                }
               },
               scale: {
                 pointLabels: {
                   display: false
+                },
+                ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 8
                 }
               }
             }
