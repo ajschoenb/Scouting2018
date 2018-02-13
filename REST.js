@@ -938,6 +938,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tot_tele_orderly_1 = 0;
     var max_tele_highest_level_1 = 0;
     var frq_tele_highest_level_1 = 0;
+    var tot_tele_platform_1 = 0;
     var tot_tele_climb_1 = 0;
     var tot_tele_climb_attempts_1 = 0;
     var tot_tele_climb_assisted_1 = 0;
@@ -1038,6 +1039,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tot_tele_orderly_2 = 0;
     var max_tele_highest_level_2 = 0;
     var frq_tele_highest_level_2 = 0;
+    var tot_tele_platform_2 = 0;
     var tot_tele_climb_2 = 0;
     var tot_tele_climb_attempts_2 = 0;
     var tot_tele_climb_assisted_2 = 0;
@@ -1138,6 +1140,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tot_tele_orderly_3 = 0;
     var max_tele_highest_level_3 = 0;
     var frq_tele_highest_level_3 = 0;
+    var tot_tele_platform_3 = 0;
     var tot_tele_climb_3 = 0;
     var tot_tele_climb_attempts_3 = 0;
     var tot_tele_climb_assisted_3 = 0;
@@ -1238,6 +1241,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tot_tele_orderly_4 = 0;
     var max_tele_highest_level_4 = 0;
     var frq_tele_highest_level_4 = 0;
+    var tot_tele_platform_4 = 0;
     var tot_tele_climb_4 = 0;
     var tot_tele_climb_attempts_4 = 0;
     var tot_tele_climb_assisted_4 = 0;
@@ -1338,6 +1342,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tot_tele_orderly_5 = 0;
     var max_tele_highest_level_5 = 0;
     var frq_tele_highest_level_5 = 0;
+    var tot_tele_platform_5 = 0;
     var tot_tele_climb_5 = 0;
     var tot_tele_climb_attempts_5 = 0;
     var tot_tele_climb_assisted_5 = 0;
@@ -1438,6 +1443,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tot_tele_orderly_6 = 0;
     var max_tele_highest_level_6 = 0;
     var frq_tele_highest_level_6 = 0;
+    var tot_tele_platform_6 = 0;
     var tot_tele_climb_6 = 0;
     var tot_tele_climb_attempts_6 = 0;
     var tot_tele_climb_assisted_6 = 0;
@@ -1554,6 +1560,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
           tot_tele_orderly_1 = rows[0].tot_tele_orderly;
           max_tele_highest_level_1 = rows[0].max_tele_highest_level;
           frq_tele_highest_level_1 = rows[0].frq_tele_highest_level;
+          tot_tele_platform_1 = rows[0].tot_tele_platform;
           tot_tele_climb_1 = rows[0].tot_tele_climb;
           tot_tele_climb_attempts_1 = rows[0].tot_tele_climb_attempts;
           tot_tele_climb_assisted_1 = rows[0].tot_tele_climb_assisted;
@@ -1673,6 +1680,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             tot_tele_orderly_2 = rows[0].tot_tele_orderly;
             max_tele_highest_level_2 = rows[0].max_tele_highest_level;
             frq_tele_highest_level_2 = rows[0].frq_tele_highest_level;
+            tot_tele_platform_2 = rows[0].tot_tele_platform;
             tot_tele_climb_2 = rows[0].tot_tele_climb;
             tot_tele_climb_attempts_2 = rows[0].tot_tele_climb_attempts;
             tot_tele_climb_assisted_2 = rows[0].tot_tele_climb_assisted;
@@ -1791,6 +1799,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             tot_tele_orderly_3 = rows[0].tot_tele_orderly;
             max_tele_highest_level_3 = rows[0].max_tele_highest_level;
             frq_tele_highest_level_3 = rows[0].frq_tele_highest_level;
+            tot_tele_platform_3 = rows[0].tot_tele_platform;
             tot_tele_climb_3 = rows[0].tot_tele_climb;
             tot_tele_climb_attempts_3 = rows[0].tot_tele_climb_attempts;
             tot_tele_climb_assisted_3 = rows[0].tot_tele_climb_assisted;
@@ -1910,6 +1919,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             tot_tele_orderly_4 = rows[0].tot_tele_orderly;
             max_tele_highest_level_4 = rows[0].max_tele_highest_level;
             frq_tele_highest_level_4 = rows[0].frq_tele_highest_level;
+            tot_tele_platform_4 = rows[0].tot_tele_platform;
             tot_tele_climb_4 = rows[0].tot_tele_climb;
             tot_tele_climb_attempts_4 = rows[0].tot_tele_climb_attempts;
             tot_tele_climb_assisted_4 = rows[0].tot_tele_climb_assisted;
@@ -2027,6 +2037,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             tot_tele_orderly_5 = rows[0].tot_tele_orderly;
             max_tele_highest_level_5 = rows[0].max_tele_highest_level;
             frq_tele_highest_level_5 = rows[0].frq_tele_highest_level;
+            tot_tele_platform_5 = rows[0].tot_tele_platform;
             tot_tele_climb_5 = rows[0].tot_tele_climb;
             tot_tele_climb_attempts_5 = rows[0].tot_tele_climb_attempts;
             tot_tele_climb_assisted_5 = rows[0].tot_tele_climb_assisted;
@@ -2144,6 +2155,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             tot_tele_orderly_6 = rows[0].tot_tele_orderly;
             max_tele_highest_level_6 = rows[0].max_tele_highest_level;
             frq_tele_highest_level_6 = rows[0].frq_tele_highest_level;
+            tot_tele_platform_6 = rows[0].tot_tele_platform;
             tot_tele_climb_6 = rows[0].tot_tele_climb;
             tot_tele_climb_attempts_6 = rows[0].tot_tele_climb_attempts;
             tot_tele_climb_assisted_6 = rows[0].tot_tele_climb_assisted;
@@ -3598,6 +3610,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_1: tot_tele_orderly_1,
               max_tele_highest_level_1: max_tele_highest_level_1,
               frq_tele_highest_level_1: frq_tele_highest_level_1,
+              tot_tele_platform_1: tot_tele_platform_1,
               tot_tele_climb_1: tot_tele_climb_1,
               tot_tele_climb_attempts_1: tot_tele_climb_attempts_1,
               tot_tele_climb_assisted_1: tot_tele_climb_assisted_1,
@@ -3698,6 +3711,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_2: tot_tele_orderly_2,
               max_tele_highest_level_2: max_tele_highest_level_2,
               frq_tele_highest_level_2: frq_tele_highest_level_2,
+              tot_tele_platform_2: tot_tele_platform_2,
               tot_tele_climb_2: tot_tele_climb_2,
               tot_tele_climb_attempts_2: tot_tele_climb_attempts_2,
               tot_tele_climb_assisted_2: tot_tele_climb_assisted_2,
@@ -3798,6 +3812,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_3: tot_tele_orderly_3,
               max_tele_highest_level_3: max_tele_highest_level_3,
               frq_tele_highest_level_3: frq_tele_highest_level_3,
+              tot_tele_platform_3: tot_tele_platform_3,
               tot_tele_climb_3: tot_tele_climb_3,
               tot_tele_climb_attempts_3: tot_tele_climb_attempts_3,
               tot_tele_climb_assisted_3: tot_tele_climb_assisted_3,
@@ -3898,6 +3913,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_4: tot_tele_orderly_4,
               max_tele_highest_level_4: max_tele_highest_level_4,
               frq_tele_highest_level_4: frq_tele_highest_level_4,
+              tot_tele_platform_4: tot_tele_platform_4,
               tot_tele_climb_4: tot_tele_climb_4,
               tot_tele_climb_attempts_4: tot_tele_climb_attempts_4,
               tot_tele_climb_assisted_4: tot_tele_climb_assisted_4,
@@ -3998,6 +4014,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_5: tot_tele_orderly_5,
               max_tele_highest_level_5: max_tele_highest_level_5,
               frq_tele_highest_level_5: frq_tele_highest_level_5,
+              tot_tele_platform_5: tot_tele_platform_5,
               tot_tele_climb_5: tot_tele_climb_5,
               tot_tele_climb_attempts_5: tot_tele_climb_attempts_5,
               tot_tele_climb_assisted_5: tot_tele_climb_assisted_5,
@@ -4098,6 +4115,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_6: tot_tele_orderly_6,
               max_tele_highest_level_6: max_tele_highest_level_6,
               frq_tele_highest_level_6: frq_tele_highest_level_6,
+              tot_tele_platform_6: tot_tele_platform_6,
               tot_tele_climb_6: tot_tele_climb_6,
               tot_tele_climb_attempts_6: tot_tele_climb_attempts_6,
               tot_tele_climb_assisted_6: tot_tele_climb_assisted_6,
@@ -4217,6 +4235,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
             tot_tele_orderly_1 = rows[0].tot_tele_orderly;
             max_tele_highest_level_1 = rows[0].max_tele_highest_level;
             frq_tele_highest_level_1 = rows[0].frq_tele_highest_level;
+            tot_tele_platform_1 = rows[0].tot_tele_platform;
             tot_tele_climb_1 = rows[0].tot_tele_climb;
             tot_tele_climb_attempts_1 = rows[0].tot_tele_climb_attempts;
             tot_tele_climb_assisted_1 = rows[0].tot_tele_climb_assisted;
@@ -4336,6 +4355,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_2 = rows[0].tot_tele_orderly;
               max_tele_highest_level_2 = rows[0].max_tele_highest_level;
               frq_tele_highest_level_2 = rows[0].frq_tele_highest_level;
+              tot_tele_platform_2 = rows[0].tot_tele_platform;
               tot_tele_climb_2 = rows[0].tot_tele_climb;
               tot_tele_climb_attempts_2 = rows[0].tot_tele_climb_attempts;
               tot_tele_climb_assisted_2 = rows[0].tot_tele_climb_assisted;
@@ -4454,6 +4474,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_3 = rows[0].tot_tele_orderly;
               max_tele_highest_level_3 = rows[0].max_tele_highest_level;
               frq_tele_highest_level_3 = rows[0].frq_tele_highest_level;
+              tot_tele_platform_3 = rows[0].tot_tele_platform;
               tot_tele_climb_3 = rows[0].tot_tele_climb;
               tot_tele_climb_attempts_3 = rows[0].tot_tele_climb_attempts;
               tot_tele_climb_assisted_3 = rows[0].tot_tele_climb_assisted;
@@ -4573,6 +4594,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_4 = rows[0].tot_tele_orderly;
               max_tele_highest_level_4 = rows[0].max_tele_highest_level;
               frq_tele_highest_level_4 = rows[0].frq_tele_highest_level;
+              tot_tele_platform_4 = rows[0].tot_tele_platform;
               tot_tele_climb_4 = rows[0].tot_tele_climb;
               tot_tele_climb_attempts_4 = rows[0].tot_tele_climb_attempts;
               tot_tele_climb_assisted_4 = rows[0].tot_tele_climb_assisted;
@@ -4690,6 +4712,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_5 = rows[0].tot_tele_orderly;
               max_tele_highest_level_5 = rows[0].max_tele_highest_level;
               frq_tele_highest_level_5 = rows[0].frq_tele_highest_level;
+              tot_tele_platform_5 = rows[0].tot_tele_platform;
               tot_tele_climb_5 = rows[0].tot_tele_climb;
               tot_tele_climb_attempts_5 = rows[0].tot_tele_climb_attempts;
               tot_tele_climb_assisted_5 = rows[0].tot_tele_climb_assisted;
@@ -4807,6 +4830,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_6 = rows[0].tot_tele_orderly;
               max_tele_highest_level_6 = rows[0].max_tele_highest_level;
               frq_tele_highest_level_6 = rows[0].frq_tele_highest_level;
+              tot_tele_platform_6 = rows[0].tot_tele_platform;
               tot_tele_climb_6 = rows[0].tot_tele_climb;
               tot_tele_climb_attempts_6 = rows[0].tot_tele_climb_attempts;
               tot_tele_climb_assisted_6 = rows[0].tot_tele_climb_assisted;
@@ -4922,6 +4946,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_1: tot_tele_orderly_1,
               max_tele_highest_level_1: max_tele_highest_level_1,
               frq_tele_highest_level_1: frq_tele_highest_level_1,
+              tot_tele_platform_1: tot_tele_platform_1,
               tot_tele_climb_1: tot_tele_climb_1,
               tot_tele_climb_attempts_1: tot_tele_climb_attempts_1,
               tot_tele_climb_assisted_1: tot_tele_climb_assisted_1,
@@ -5022,6 +5047,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_2: tot_tele_orderly_2,
               max_tele_highest_level_2: max_tele_highest_level_2,
               frq_tele_highest_level_2: frq_tele_highest_level_2,
+              tot_tele_platform_2: tot_tele_platform_2,
               tot_tele_climb_2: tot_tele_climb_2,
               tot_tele_climb_attempts_2: tot_tele_climb_attempts_2,
               tot_tele_climb_assisted_2: tot_tele_climb_assisted_2,
@@ -5122,6 +5148,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_3: tot_tele_orderly_3,
               max_tele_highest_level_3: max_tele_highest_level_3,
               frq_tele_highest_level_3: frq_tele_highest_level_3,
+              tot_tele_platform_3: tot_tele_platform_3,
               tot_tele_climb_3: tot_tele_climb_3,
               tot_tele_climb_attempts_3: tot_tele_climb_attempts_3,
               tot_tele_climb_assisted_3: tot_tele_climb_assisted_3,
@@ -5222,6 +5249,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_4: tot_tele_orderly_4,
               max_tele_highest_level_4: max_tele_highest_level_4,
               frq_tele_highest_level_4: frq_tele_highest_level_4,
+              tot_tele_platform_4: tot_tele_platform_4,
               tot_tele_climb_4: tot_tele_climb_4,
               tot_tele_climb_attempts_4: tot_tele_climb_attempts_4,
               tot_tele_climb_assisted_4: tot_tele_climb_assisted_4,
@@ -5322,6 +5350,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_5: tot_tele_orderly_5,
               max_tele_highest_level_5: max_tele_highest_level_5,
               frq_tele_highest_level_5: frq_tele_highest_level_5,
+              tot_tele_platform_5: tot_tele_platform_5,
               tot_tele_climb_5: tot_tele_climb_5,
               tot_tele_climb_attempts_5: tot_tele_climb_attempts_5,
               tot_tele_climb_assisted_5: tot_tele_climb_assisted_5,
@@ -5422,6 +5451,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               tot_tele_orderly_6: tot_tele_orderly_6,
               max_tele_highest_level_6: max_tele_highest_level_6,
               frq_tele_highest_level_6: frq_tele_highest_level_6,
+              tot_tele_platform_6: tot_tele_platform_6,
               tot_tele_climb_6: tot_tele_climb_6,
               tot_tele_climb_attempts_6: tot_tele_climb_attempts_6,
               tot_tele_climb_assisted_6: tot_tele_climb_assisted_6,
