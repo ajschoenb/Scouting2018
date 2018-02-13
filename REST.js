@@ -5653,6 +5653,8 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var max_floor_far_switch_cycles = 0;
     var max_floor_exchange_cycles = 0; 
     var trend_labels = 0;
+    
+    var skip_render = false;
 
 //updateContribScores(team_num);
     updateTeams(team_num);
@@ -5666,109 +5668,114 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     if(process.argv[2])
     {
       connectionLocal.query(get_data, function(err, rows, fields) {
-        // console.log(rows);
-        team_name = rows[0].team_name;
-        num_matches = rows[0].num_matches;
-        tot_auto_cross = rows[0].tot_auto_cross;
-        tot_auto_left = rows[0].tot_auto_left;
-        tot_auto_center = rows[0].tot_auto_center;
-        tot_auto_right = rows[0].tot_auto_right;
-        tot_auto_pyramid_intake = rows[0].tot_auto_pyramid_intake;
-        tot_auto_unprotected_intake = rows[0].tot_auto_unprotected_intake;
-        tot_auto_near_switch_made = rows[0].tot_auto_near_switch_made;
-        tot_auto_near_switch_attempts = rows[0].tot_auto_near_switch_attempts;
-        tot_auto_exchange_made = rows[0].tot_auto_exchange_made;
-        tot_auto_exchange_attempts = rows[0].tot_auto_exchange_attempts;
-        tot_auto_scale_high_made = rows[0].tot_auto_scale_high_made;
-        tot_auto_scale_high_attempts = rows[0].tot_auto_scale_high_attempts;
-        tot_auto_scale_low_made = rows[0].tot_auto_scale_low_made;
-        tot_auto_scale_low_attempts = rows[0].tot_auto_scale_low_attempts;
-        avg_tele_cubes_scored = rows[0].avg_tele_cubes_scored;
-        max_tele_cubes_scored = rows[0].max_tele_cubes_scored;
-        avg_tele_exchange_made = rows[0].avg_tele_exchange_made;
-        avg_tele_exchange_attempts = rows[0].avg_tele_exchange_attempts;
-        avg_tele_near_switch_made = rows[0].avg_tele_near_switch_made;
-        avg_tele_near_switch_attempts = rows[0].avg_tele_near_switch_attempts;
-        avg_tele_far_switch_made = rows[0].avg_tele_far_switch_made;
-        avg_tele_far_switch_attempts = rows[0].avg_tele_far_switch_attempts;
-        avg_tele_scale_high_made = rows[0].avg_tele_scale_high_made;
-        avg_tele_scale_high_attempts = rows[0].avg_tele_scale_high_attempts;
-        avg_tele_scale_low_made = rows[0].avg_tele_scale_low_made;
-        avg_tele_scale_low_attempts = rows[0].avg_tele_scale_low_attempts;
-        avg_tele_knockouts = rows[0].avg_tele_knockouts;
-        avg_tele_cubes_dropped = rows[0].avg_tele_cubes_dropped;
-        avg_tele_intake = rows[0].avg_tele_intake;
-        max_tele_intake = rows[0].max_tele_intake;
-        avg_tele_portal_intake_made = rows[0].avg_tele_portal_intake_made;
-        avg_tele_portal_intake_attempts = rows[0].avg_tele_portal_intake_attempts;
-        avg_tele_pyramid_intake = rows[0].avg_tele_pyramid_intake;
-        avg_tele_unprotected_intake = rows[0].avg_tele_unprotected_intake;
-        avg_tele_floor_intake = rows[0].avg_tele_floor_intake;
-        tot_tele_orderly = rows[0].tot_tele_orderly;
-        max_tele_highest_level = rows[0].max_tele_highest_level;
-        frq_tele_highest_level = rows[0].frq_tele_highest_level;
-        tot_tele_climb = rows[0].tot_tele_climb;
-        tot_tele_climb_attempts = rows[0].tot_tele_climb_attempts;
-        tot_tele_platform = rows[0].tot_tele_platform;
-        tot_tele_climb_assisted = rows[0].tot_tele_climb_assisted;
-        tot_tele_plus_one = rows[0].tot_tele_plus_one;
-        tot_tele_plus_one_attempts = rows[0].tot_tele_plus_one_attempts;
-        tot_tele_plus_two = rows[0].tot_tele_plus_two;
-        tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
-        avg_driver_rating = rows[0].avg_driver_rating;
-        avg_defense_rating = rows[0].avg_defense_rating;
-        pyramid_radar_trend = rows[0].avg_tele_pyramid_scale_cycle + ", " + rows[0].avg_tele_pyramid_near_switch_cycle + ", " + rows[0].avg_tele_pyramid_far_switch_cycle + ", " + rows[0].avg_tele_pyramid_exchange_cycle;
-        unprotected_radar_trend = rows[0].avg_tele_unprotected_scale_cycle + ", " + rows[0].avg_tele_unprotected_near_switch_cycle + ", " + rows[0].avg_tele_unprotected_far_switch_cycle + ", " + rows[0].avg_tele_unprotected_exchange_cycle;
-        portal_radar_trend = rows[0].avg_tele_portal_scale_cycle + ", " + rows[0].avg_tele_portal_near_switch_cycle + ", " + rows[0].avg_tele_portal_far_switch_cycle + ", " + rows[0].avg_tele_portal_exchange_cycle;
-        floor_radar_trend = rows[0].avg_tele_floor_scale_cycle + ", " + rows[0].avg_tele_floor_near_switch_cycle + ", " + rows[0].avg_tele_floor_far_switch_cycle + ", " + rows[0].avg_tele_floor_exchange_cycle;
-        avg_pyramid_scale_cycles = rows[0].avg_tele_pyramid_scale_cycle;
-        avg_pyramid_near_switch_cycles = rows[0].avg_tele_pyramid_near_switch_cycle;
-        avg_pyramid_far_switch_cycles = rows[0].avg_tele_pyramid_far_switch_cycle;
-        avg_pyramid_exchange_cycles = rows[0].avg_tele_pyramid_exchange_cycle;
-        avg_unprotected_scale_cycles = rows[0].avg_tele_unprotected_scale_cycle;
-        avg_unprotected_near_switch_cycles = rows[0].avg_tele_unprotected_near_switch_cycle;
-        avg_unprotected_far_switch_cycles = rows[0].avg_tele_unprotected_far_switch_cycle;
-        avg_unprotected_exchange_cycles = rows[0].avg_tele_unprotected_exchange_cycle;
-        avg_portal_scale_cycles = rows[0].avg_tele_portal_scale_cycle;
-        avg_portal_near_switch_cycles = rows[0].avg_tele_portal_near_switch_cycle;
-        avg_portal_far_switch_cycles = rows[0].avg_tele_portal_far_switch_cycle;
-        avg_portal_exchange_cycles = rows[0].avg_tele_portal_exchange_cycle;
-        avg_floor_scale_cycles = rows[0].avg_tele_floor_scale_cycle;
-        avg_floor_near_switch_cycles = rows[0].avg_tele_floor_near_switch_cycle;
-        avg_floor_far_switch_cycles = rows[0].avg_tele_floor_far_switch_cycle;
-        avg_floor_exchange_cycles = rows[0].avg_tele_floor_exchange_cycle;
-        tot_pyramid_scale_cycles = rows[0].tot_tele_pyramid_scale_cycle;
-        tot_pyramid_near_switch_cycles = rows[0].tot_tele_pyramid_near_switch_cycle;
-        tot_pyramid_far_switch_cycles = rows[0].tot_tele_pyramid_far_switch_cycle;
-        tot_pyramid_exchange_cycles = rows[0].tot_tele_pyramid_exchange_cycle;
-        tot_unprotected_scale_cycles = rows[0].tot_tele_unprotected_scale_cycle;
-        tot_unprotected_near_switch_cycles = rows[0].tot_tele_unprotected_near_switch_cycle;
-        tot_unprotected_far_switch_cycles = rows[0].tot_tele_unprotected_far_switch_cycle;
-        tot_unprotected_exchange_cycles = rows[0].tot_tele_unprotected_exchange_cycle;
-        tot_portal_scale_cycles = rows[0].tot_tele_portal_scale_cycle;
-        tot_portal_near_switch_cycles = rows[0].tot_tele_portal_near_switch_cycle;
-        tot_portal_far_switch_cycles = rows[0].tot_tele_portal_far_switch_cycle;
-        tot_portal_exchange_cycles = rows[0].tot_tele_portal_exchange_cycle;
-        tot_floor_scale_cycles = rows[0].tot_tele_floor_scale_cycle;
-        tot_floor_near_switch_cycles = rows[0].tot_tele_floor_near_switch_cycle;
-        tot_floor_far_switch_cycles = rows[0].tot_tele_floor_far_switch_cycle;
-        tot_floor_exchange_cycles = rows[0].tot_tele_floor_exchange_cycle;
-        max_pyramid_scale_cycles = rows[0].max_tele_pyramid_scale_cycle;
-        max_pyramid_near_switch_cycles = rows[0].max_tele_pyramid_near_switch_cycle;
-        max_pyramid_far_switch_cycles = rows[0].max_tele_pyramid_far_switch_cycle;
-        max_pyramid_exchange_cycles = rows[0].max_tele_pyramid_exchange_cycle;
-        max_unprotected_scale_cycles = rows[0].max_tele_unprotected_scale_cycle;
-        max_unprotected_near_switch_cycles = rows[0].max_tele_unprotected_near_switch_cycle;
-        max_unprotected_far_switch_cycles = rows[0].max_tele_unprotected_far_switch_cycle;
-        max_unprotected_exchange_cycles = rows[0].max_tele_unprotected_exchange_cycle;
-        max_portal_scale_cycles = rows[0].max_tele_portal_scale_cycle;
-        max_portal_near_switch_cycles = rows[0].max_tele_portal_near_switch_cycle;
-        max_portal_far_switch_cycles = rows[0].max_tele_portal_far_switch_cycle;
-        max_portal_exchange_cycles = rows[0].max_tele_portal_exchange_cycle;
-        max_floor_scale_cycles = rows[0].max_tele_floor_scale_cycle;
-        max_floor_near_switch_cycles = rows[0].max_tele_floor_near_switch_cycle;
-        max_floor_far_switch_cycles = rows[0].max_tele_floor_far_switch_cycle;
-        max_floor_exchange_cycles = rows[0].max_tele_floor_exchange_cycle;
+        if(err || rows[0] === undefined) {
+          skip_render = true;
+          console.log("returning to home page, bad team entered");
+        }
+        else {
+          team_name = rows[0].team_name;
+          num_matches = rows[0].num_matches;
+          tot_auto_cross = rows[0].tot_auto_cross;
+          tot_auto_left = rows[0].tot_auto_left;
+          tot_auto_center = rows[0].tot_auto_center;
+          tot_auto_right = rows[0].tot_auto_right;
+          tot_auto_pyramid_intake = rows[0].tot_auto_pyramid_intake;
+          tot_auto_unprotected_intake = rows[0].tot_auto_unprotected_intake;
+          tot_auto_near_switch_made = rows[0].tot_auto_near_switch_made;
+          tot_auto_near_switch_attempts = rows[0].tot_auto_near_switch_attempts;
+          tot_auto_exchange_made = rows[0].tot_auto_exchange_made;
+          tot_auto_exchange_attempts = rows[0].tot_auto_exchange_attempts;
+          tot_auto_scale_high_made = rows[0].tot_auto_scale_high_made;
+          tot_auto_scale_high_attempts = rows[0].tot_auto_scale_high_attempts;
+          tot_auto_scale_low_made = rows[0].tot_auto_scale_low_made;
+          tot_auto_scale_low_attempts = rows[0].tot_auto_scale_low_attempts;
+          avg_tele_cubes_scored = rows[0].avg_tele_cubes_scored;
+          max_tele_cubes_scored = rows[0].max_tele_cubes_scored;
+          avg_tele_exchange_made = rows[0].avg_tele_exchange_made;
+          avg_tele_exchange_attempts = rows[0].avg_tele_exchange_attempts;
+          avg_tele_near_switch_made = rows[0].avg_tele_near_switch_made;
+          avg_tele_near_switch_attempts = rows[0].avg_tele_near_switch_attempts;
+          avg_tele_far_switch_made = rows[0].avg_tele_far_switch_made;
+          avg_tele_far_switch_attempts = rows[0].avg_tele_far_switch_attempts;
+          avg_tele_scale_high_made = rows[0].avg_tele_scale_high_made;
+          avg_tele_scale_high_attempts = rows[0].avg_tele_scale_high_attempts;
+          avg_tele_scale_low_made = rows[0].avg_tele_scale_low_made;
+          avg_tele_scale_low_attempts = rows[0].avg_tele_scale_low_attempts;
+          avg_tele_knockouts = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_dropped = rows[0].avg_tele_cubes_dropped;
+          avg_tele_intake = rows[0].avg_tele_intake;
+          max_tele_intake = rows[0].max_tele_intake;
+          avg_tele_portal_intake_made = rows[0].avg_tele_portal_intake_made;
+          avg_tele_portal_intake_attempts = rows[0].avg_tele_portal_intake_attempts;
+          avg_tele_pyramid_intake = rows[0].avg_tele_pyramid_intake;
+          avg_tele_unprotected_intake = rows[0].avg_tele_unprotected_intake;
+          avg_tele_floor_intake = rows[0].avg_tele_floor_intake;
+          tot_tele_orderly = rows[0].tot_tele_orderly;
+          max_tele_highest_level = rows[0].max_tele_highest_level;
+          frq_tele_highest_level = rows[0].frq_tele_highest_level;
+          tot_tele_climb = rows[0].tot_tele_climb;
+          tot_tele_climb_attempts = rows[0].tot_tele_climb_attempts;
+          tot_tele_platform = rows[0].tot_tele_platform;
+          tot_tele_climb_assisted = rows[0].tot_tele_climb_assisted;
+          tot_tele_plus_one = rows[0].tot_tele_plus_one;
+          tot_tele_plus_one_attempts = rows[0].tot_tele_plus_one_attempts;
+          tot_tele_plus_two = rows[0].tot_tele_plus_two;
+          tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
+          avg_driver_rating = rows[0].avg_driver_rating;
+          avg_defense_rating = rows[0].avg_defense_rating;
+          pyramid_radar_trend = rows[0].avg_tele_pyramid_scale_cycle + ", " + rows[0].avg_tele_pyramid_near_switch_cycle + ", " + rows[0].avg_tele_pyramid_far_switch_cycle + ", " + rows[0].avg_tele_pyramid_exchange_cycle;
+          unprotected_radar_trend = rows[0].avg_tele_unprotected_scale_cycle + ", " + rows[0].avg_tele_unprotected_near_switch_cycle + ", " + rows[0].avg_tele_unprotected_far_switch_cycle + ", " + rows[0].avg_tele_unprotected_exchange_cycle;
+          portal_radar_trend = rows[0].avg_tele_portal_scale_cycle + ", " + rows[0].avg_tele_portal_near_switch_cycle + ", " + rows[0].avg_tele_portal_far_switch_cycle + ", " + rows[0].avg_tele_portal_exchange_cycle;
+          floor_radar_trend = rows[0].avg_tele_floor_scale_cycle + ", " + rows[0].avg_tele_floor_near_switch_cycle + ", " + rows[0].avg_tele_floor_far_switch_cycle + ", " + rows[0].avg_tele_floor_exchange_cycle;
+          avg_pyramid_scale_cycles = rows[0].avg_tele_pyramid_scale_cycle;
+          avg_pyramid_near_switch_cycles = rows[0].avg_tele_pyramid_near_switch_cycle;
+          avg_pyramid_far_switch_cycles = rows[0].avg_tele_pyramid_far_switch_cycle;
+          avg_pyramid_exchange_cycles = rows[0].avg_tele_pyramid_exchange_cycle;
+          avg_unprotected_scale_cycles = rows[0].avg_tele_unprotected_scale_cycle;
+          avg_unprotected_near_switch_cycles = rows[0].avg_tele_unprotected_near_switch_cycle;
+          avg_unprotected_far_switch_cycles = rows[0].avg_tele_unprotected_far_switch_cycle;
+          avg_unprotected_exchange_cycles = rows[0].avg_tele_unprotected_exchange_cycle;
+          avg_portal_scale_cycles = rows[0].avg_tele_portal_scale_cycle;
+          avg_portal_near_switch_cycles = rows[0].avg_tele_portal_near_switch_cycle;
+          avg_portal_far_switch_cycles = rows[0].avg_tele_portal_far_switch_cycle;
+          avg_portal_exchange_cycles = rows[0].avg_tele_portal_exchange_cycle;
+          avg_floor_scale_cycles = rows[0].avg_tele_floor_scale_cycle;
+          avg_floor_near_switch_cycles = rows[0].avg_tele_floor_near_switch_cycle;
+          avg_floor_far_switch_cycles = rows[0].avg_tele_floor_far_switch_cycle;
+          avg_floor_exchange_cycles = rows[0].avg_tele_floor_exchange_cycle;
+          tot_pyramid_scale_cycles = rows[0].tot_tele_pyramid_scale_cycle;
+          tot_pyramid_near_switch_cycles = rows[0].tot_tele_pyramid_near_switch_cycle;
+          tot_pyramid_far_switch_cycles = rows[0].tot_tele_pyramid_far_switch_cycle;
+          tot_pyramid_exchange_cycles = rows[0].tot_tele_pyramid_exchange_cycle;
+          tot_unprotected_scale_cycles = rows[0].tot_tele_unprotected_scale_cycle;
+          tot_unprotected_near_switch_cycles = rows[0].tot_tele_unprotected_near_switch_cycle;
+          tot_unprotected_far_switch_cycles = rows[0].tot_tele_unprotected_far_switch_cycle;
+          tot_unprotected_exchange_cycles = rows[0].tot_tele_unprotected_exchange_cycle;
+          tot_portal_scale_cycles = rows[0].tot_tele_portal_scale_cycle;
+          tot_portal_near_switch_cycles = rows[0].tot_tele_portal_near_switch_cycle;
+          tot_portal_far_switch_cycles = rows[0].tot_tele_portal_far_switch_cycle;
+          tot_portal_exchange_cycles = rows[0].tot_tele_portal_exchange_cycle;
+          tot_floor_scale_cycles = rows[0].tot_tele_floor_scale_cycle;
+          tot_floor_near_switch_cycles = rows[0].tot_tele_floor_near_switch_cycle;
+          tot_floor_far_switch_cycles = rows[0].tot_tele_floor_far_switch_cycle;
+          tot_floor_exchange_cycles = rows[0].tot_tele_floor_exchange_cycle;
+          max_pyramid_scale_cycles = rows[0].max_tele_pyramid_scale_cycle;
+          max_pyramid_near_switch_cycles = rows[0].max_tele_pyramid_near_switch_cycle;
+          max_pyramid_far_switch_cycles = rows[0].max_tele_pyramid_far_switch_cycle;
+          max_pyramid_exchange_cycles = rows[0].max_tele_pyramid_exchange_cycle;
+          max_unprotected_scale_cycles = rows[0].max_tele_unprotected_scale_cycle;
+          max_unprotected_near_switch_cycles = rows[0].max_tele_unprotected_near_switch_cycle;
+          max_unprotected_far_switch_cycles = rows[0].max_tele_unprotected_far_switch_cycle;
+          max_unprotected_exchange_cycles = rows[0].max_tele_unprotected_exchange_cycle;
+          max_portal_scale_cycles = rows[0].max_tele_portal_scale_cycle;
+          max_portal_near_switch_cycles = rows[0].max_tele_portal_near_switch_cycle;
+          max_portal_far_switch_cycles = rows[0].max_tele_portal_far_switch_cycle;
+          max_portal_exchange_cycles = rows[0].max_tele_portal_exchange_cycle;
+          max_floor_scale_cycles = rows[0].max_tele_floor_scale_cycle;
+          max_floor_near_switch_cycles = rows[0].max_tele_floor_near_switch_cycle;
+          max_floor_far_switch_cycles = rows[0].max_tele_floor_far_switch_cycle;
+          max_floor_exchange_cycles = rows[0].max_tele_floor_exchange_cycle;
+        }
       });
       /*var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
       connection.query(no_auto_sql, function(err, rows, fields) {
@@ -5877,128 +5884,133 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         // var climb_ranked = climb_rank[team_num];
 
         // console.log(videos);
-          res.render('pages/team', {
-            req: req,
-            team_num: team_num,
-            team_name: team_name,
-            previous_team_num: previous_team_num,
-            next_team_num: next_team_num,
-            num_matches: num_matches,
-            tot_auto_cross: tot_auto_cross,
-            tot_auto_left: tot_auto_left,
-            tot_auto_center: tot_auto_center,
-            tot_auto_right: tot_auto_right,
-            tot_auto_pyramid_intake: tot_auto_pyramid_intake,
-            tot_auto_unprotected_intake: tot_auto_unprotected_intake,
-            tot_auto_near_switch_made: tot_auto_near_switch_made,
-            tot_auto_near_switch_attempts: tot_auto_near_switch_attempts,
-            tot_auto_exchange_made: tot_auto_exchange_made,
-            tot_auto_exchange_attempts: tot_auto_exchange_attempts,
-            tot_auto_scale_high_made: tot_auto_scale_high_made,
-            tot_auto_scale_high_attempts: tot_auto_scale_high_attempts,
-            tot_auto_scale_low_made: tot_auto_scale_low_made,
-            tot_auto_scale_low_attempts: tot_auto_scale_low_attempts,
-            avg_tele_cubes_scored: avg_tele_cubes_scored,
-            max_tele_cubes_scored: max_tele_cubes_scored,
-            avg_tele_exchange_made: avg_tele_exchange_made,
-            avg_tele_exchange_attempts: avg_tele_exchange_attempts,
-            avg_tele_near_switch_made: avg_tele_near_switch_made,
-            avg_tele_near_switch_attempts: avg_tele_near_switch_attempts,
-            avg_tele_far_switch_made: avg_tele_far_switch_made,
-            avg_tele_far_switch_attempts: avg_tele_far_switch_attempts,
-            avg_tele_scale_high_made: avg_tele_scale_high_made,
-            avg_tele_scale_high_attempts: avg_tele_scale_high_attempts,
-            avg_tele_scale_low_made: avg_tele_scale_low_made,
-            avg_tele_scale_low_attempts: avg_tele_scale_low_attempts,
-            avg_tele_knockouts: avg_tele_knockouts,
-            avg_tele_cubes_dropped: avg_tele_cubes_dropped,
-            avg_tele_intake: avg_tele_intake,
-            max_tele_intake: max_tele_intake,
-            avg_tele_portal_intake_made: avg_tele_portal_intake_made,
-            avg_tele_portal_intake_attempts: avg_tele_portal_intake_attempts,
-            avg_tele_pyramid_intake: avg_tele_pyramid_intake,
-            avg_tele_unprotected_intake: avg_tele_unprotected_intake,
-            avg_tele_floor_intake: avg_tele_floor_intake,
-            tot_tele_orderly: tot_tele_orderly,
-            max_tele_highest_level: max_tele_highest_level,
-            frq_tele_highest_level: frq_tele_highest_level,
-            tot_tele_climb: tot_tele_climb,
-            tot_tele_climb_attempts: tot_tele_climb_attempts,
-            tot_tele_climb_assisted: tot_tele_climb_assisted,
-            tot_tele_platform: tot_tele_platform,
-            tot_tele_plus_one: tot_tele_plus_one,
-            tot_tele_plus_one_attempts: tot_tele_plus_one_attempts,
-            tot_tele_plus_two: tot_tele_plus_two,
-            tot_tele_plus_two_attempts: tot_tele_plus_two_attempts,
-            avg_driver_rating: avg_driver_rating,
-            avg_defense_rating: avg_defense_rating,
+          if(skip_render) {
+            res.redirect("/");
+          }
+          else {
+            res.render('pages/team', {
+              req: req,
+              team_num: team_num,
+              team_name: team_name,
+              previous_team_num: previous_team_num,
+              next_team_num: next_team_num,
+              num_matches: num_matches,
+              tot_auto_cross: tot_auto_cross,
+              tot_auto_left: tot_auto_left,
+              tot_auto_center: tot_auto_center,
+              tot_auto_right: tot_auto_right,
+              tot_auto_pyramid_intake: tot_auto_pyramid_intake,
+              tot_auto_unprotected_intake: tot_auto_unprotected_intake,
+              tot_auto_near_switch_made: tot_auto_near_switch_made,
+              tot_auto_near_switch_attempts: tot_auto_near_switch_attempts,
+              tot_auto_exchange_made: tot_auto_exchange_made,
+              tot_auto_exchange_attempts: tot_auto_exchange_attempts,
+              tot_auto_scale_high_made: tot_auto_scale_high_made,
+              tot_auto_scale_high_attempts: tot_auto_scale_high_attempts,
+              tot_auto_scale_low_made: tot_auto_scale_low_made,
+              tot_auto_scale_low_attempts: tot_auto_scale_low_attempts,
+              avg_tele_cubes_scored: avg_tele_cubes_scored,
+              max_tele_cubes_scored: max_tele_cubes_scored,
+              avg_tele_exchange_made: avg_tele_exchange_made,
+              avg_tele_exchange_attempts: avg_tele_exchange_attempts,
+              avg_tele_near_switch_made: avg_tele_near_switch_made,
+              avg_tele_near_switch_attempts: avg_tele_near_switch_attempts,
+              avg_tele_far_switch_made: avg_tele_far_switch_made,
+              avg_tele_far_switch_attempts: avg_tele_far_switch_attempts,
+              avg_tele_scale_high_made: avg_tele_scale_high_made,
+              avg_tele_scale_high_attempts: avg_tele_scale_high_attempts,
+              avg_tele_scale_low_made: avg_tele_scale_low_made,
+              avg_tele_scale_low_attempts: avg_tele_scale_low_attempts,
+              avg_tele_knockouts: avg_tele_knockouts,
+              avg_tele_cubes_dropped: avg_tele_cubes_dropped,
+              avg_tele_intake: avg_tele_intake,
+              max_tele_intake: max_tele_intake,
+              avg_tele_portal_intake_made: avg_tele_portal_intake_made,
+              avg_tele_portal_intake_attempts: avg_tele_portal_intake_attempts,
+              avg_tele_pyramid_intake: avg_tele_pyramid_intake,
+              avg_tele_unprotected_intake: avg_tele_unprotected_intake,
+              avg_tele_floor_intake: avg_tele_floor_intake,
+              tot_tele_orderly: tot_tele_orderly,
+              max_tele_highest_level: max_tele_highest_level,
+              frq_tele_highest_level: frq_tele_highest_level,
+              tot_tele_climb: tot_tele_climb,
+              tot_tele_climb_attempts: tot_tele_climb_attempts,
+              tot_tele_climb_assisted: tot_tele_climb_assisted,
+              tot_tele_platform: tot_tele_platform,
+              tot_tele_plus_one: tot_tele_plus_one,
+              tot_tele_plus_one_attempts: tot_tele_plus_one_attempts,
+              tot_tele_plus_two: tot_tele_plus_two,
+              tot_tele_plus_two_attempts: tot_tele_plus_two_attempts,
+              avg_driver_rating: avg_driver_rating,
+              avg_defense_rating: avg_defense_rating,
 
-            pyramid_intake_trend: pyramid_intake_trend,
-            unprotected_intake_trend: unprotected_intake_trend,
-            portal_intake_trend: portal_intake_trend,
-            floor_intake_trend: floor_intake_trend,
-            total_intake_trend: total_intake_trend,
-            near_switch_cubes_trend: near_switch_cubes_trend,
-            far_switch_cubes_trend: far_switch_cubes_trend,
-            scale_high_cubes_trend: scale_high_cubes_trend,
-            scale_low_cubes_trend: scale_low_cubes_trend,
-            exchange_cubes_trend: exchange_cubes_trend,
-            total_cubes_trend: total_cubes_trend,
-            pyramid_radar_trend: pyramid_radar_trend,
-            portal_radar_trend: portal_radar_trend,
-            floor_radar_trend: floor_radar_trend,
-            unprotected_radar_trend: unprotected_radar_trend,
-            avg_pyramid_scale_cycles: avg_pyramid_scale_cycles,
-            avg_pyramid_near_switch_cycles: avg_pyramid_near_switch_cycles,
-            avg_pyramid_far_switch_cycles: avg_pyramid_far_switch_cycles,
-            avg_pyramid_exchange_cycles: avg_pyramid_exchange_cycles,
-            avg_unprotected_scale_cycles: avg_unprotected_scale_cycles,
-            avg_unprotected_near_switch_cycles: avg_unprotected_near_switch_cycles,
-            avg_unprotected_far_switch_cycles: avg_unprotected_far_switch_cycles,
-            avg_unprotected_exchange_cycles: avg_unprotected_exchange_cycles,
-            avg_portal_scale_cycles: avg_portal_scale_cycles,
-            avg_portal_near_switch_cycles: avg_portal_near_switch_cycles,
-            avg_portal_far_switch_cycles: avg_portal_far_switch_cycles,
-            avg_portal_exchange_cycles: avg_portal_exchange_cycles,
-            avg_floor_scale_cycles: avg_floor_scale_cycles,
-            avg_floor_near_switch_cycles: avg_floor_near_switch_cycles,
-            avg_floor_far_switch_cycles: avg_floor_far_switch_cycles,
-            avg_floor_exchange_cycles: avg_floor_exchange_cycles,
-            tot_pyramid_scale_cycles: tot_pyramid_scale_cycles,
-            tot_pyramid_near_switch_cycles: tot_pyramid_near_switch_cycles,
-            tot_pyramid_far_switch_cycles: tot_pyramid_far_switch_cycles,
-            tot_pyramid_exchange_cycles: tot_pyramid_exchange_cycles,
-            tot_unprotected_scale_cycles: tot_unprotected_scale_cycles,
-            tot_unprotected_near_switch_cycles: tot_unprotected_near_switch_cycles,
-            tot_unprotected_far_switch_cycles: tot_unprotected_far_switch_cycles,
-            tot_unprotected_exchange_cycles: tot_unprotected_exchange_cycles,
-            tot_portal_scale_cycles: tot_portal_scale_cycles,
-            tot_portal_near_switch_cycles: tot_portal_near_switch_cycles,
-            tot_portal_far_switch_cycles: tot_portal_far_switch_cycles,
-            tot_portal_exchange_cycles: tot_portal_exchange_cycles,
-            tot_floor_scale_cycles: tot_floor_scale_cycles,
-            tot_floor_near_switch_cycles: tot_floor_near_switch_cycles,
-            tot_floor_far_switch_cycles: tot_floor_far_switch_cycles,
-            tot_floor_exchange_cycles: tot_floor_exchange_cycles,
-            max_pyramid_scale_cycles: max_pyramid_scale_cycles,
-            max_pyramid_near_switch_cycles: max_pyramid_near_switch_cycles,
-            max_pyramid_far_switch_cycles: max_pyramid_far_switch_cycles,
-            max_pyramid_exchange_cycles: max_pyramid_exchange_cycles,
-            max_unprotected_scale_cycles: max_unprotected_scale_cycles,
-            max_unprotected_near_switch_cycles: max_unprotected_near_switch_cycles,
-            max_unprotected_far_switch_cycles: max_unprotected_far_switch_cycles,
-            max_unprotected_exchange_cycles: max_unprotected_exchange_cycles,
-            max_portal_scale_cycles: max_portal_scale_cycles,
-            max_portal_near_switch_cycles: max_portal_near_switch_cycles,
-            max_portal_far_switch_cycles: max_portal_far_switch_cycles,
-            max_portal_exchange_cycles: max_portal_exchange_cycles,
-            max_floor_scale_cycles: max_floor_scale_cycles,
-            max_floor_near_switch_cycles: max_floor_near_switch_cycles,
-            max_floor_far_switch_cycles: max_floor_far_switch_cycles,
-            max_floor_exchange_cycles: max_floor_exchange_cycles,
-            trend_labels: trend_labels,
-            videos: videos
-          });
+              pyramid_intake_trend: pyramid_intake_trend,
+              unprotected_intake_trend: unprotected_intake_trend,
+              portal_intake_trend: portal_intake_trend,
+              floor_intake_trend: floor_intake_trend,
+              total_intake_trend: total_intake_trend,
+              near_switch_cubes_trend: near_switch_cubes_trend,
+              far_switch_cubes_trend: far_switch_cubes_trend,
+              scale_high_cubes_trend: scale_high_cubes_trend,
+              scale_low_cubes_trend: scale_low_cubes_trend,
+              exchange_cubes_trend: exchange_cubes_trend,
+              total_cubes_trend: total_cubes_trend,
+              pyramid_radar_trend: pyramid_radar_trend,
+              portal_radar_trend: portal_radar_trend,
+              floor_radar_trend: floor_radar_trend,
+              unprotected_radar_trend: unprotected_radar_trend,
+              avg_pyramid_scale_cycles: avg_pyramid_scale_cycles,
+              avg_pyramid_near_switch_cycles: avg_pyramid_near_switch_cycles,
+              avg_pyramid_far_switch_cycles: avg_pyramid_far_switch_cycles,
+              avg_pyramid_exchange_cycles: avg_pyramid_exchange_cycles,
+              avg_unprotected_scale_cycles: avg_unprotected_scale_cycles,
+              avg_unprotected_near_switch_cycles: avg_unprotected_near_switch_cycles,
+              avg_unprotected_far_switch_cycles: avg_unprotected_far_switch_cycles,
+              avg_unprotected_exchange_cycles: avg_unprotected_exchange_cycles,
+              avg_portal_scale_cycles: avg_portal_scale_cycles,
+              avg_portal_near_switch_cycles: avg_portal_near_switch_cycles,
+              avg_portal_far_switch_cycles: avg_portal_far_switch_cycles,
+              avg_portal_exchange_cycles: avg_portal_exchange_cycles,
+              avg_floor_scale_cycles: avg_floor_scale_cycles,
+              avg_floor_near_switch_cycles: avg_floor_near_switch_cycles,
+              avg_floor_far_switch_cycles: avg_floor_far_switch_cycles,
+              avg_floor_exchange_cycles: avg_floor_exchange_cycles,
+              tot_pyramid_scale_cycles: tot_pyramid_scale_cycles,
+              tot_pyramid_near_switch_cycles: tot_pyramid_near_switch_cycles,
+              tot_pyramid_far_switch_cycles: tot_pyramid_far_switch_cycles,
+              tot_pyramid_exchange_cycles: tot_pyramid_exchange_cycles,
+              tot_unprotected_scale_cycles: tot_unprotected_scale_cycles,
+              tot_unprotected_near_switch_cycles: tot_unprotected_near_switch_cycles,
+              tot_unprotected_far_switch_cycles: tot_unprotected_far_switch_cycles,
+              tot_unprotected_exchange_cycles: tot_unprotected_exchange_cycles,
+              tot_portal_scale_cycles: tot_portal_scale_cycles,
+              tot_portal_near_switch_cycles: tot_portal_near_switch_cycles,
+              tot_portal_far_switch_cycles: tot_portal_far_switch_cycles,
+              tot_portal_exchange_cycles: tot_portal_exchange_cycles,
+              tot_floor_scale_cycles: tot_floor_scale_cycles,
+              tot_floor_near_switch_cycles: tot_floor_near_switch_cycles,
+              tot_floor_far_switch_cycles: tot_floor_far_switch_cycles,
+              tot_floor_exchange_cycles: tot_floor_exchange_cycles,
+              max_pyramid_scale_cycles: max_pyramid_scale_cycles,
+              max_pyramid_near_switch_cycles: max_pyramid_near_switch_cycles,
+              max_pyramid_far_switch_cycles: max_pyramid_far_switch_cycles,
+              max_pyramid_exchange_cycles: max_pyramid_exchange_cycles,
+              max_unprotected_scale_cycles: max_unprotected_scale_cycles,
+              max_unprotected_near_switch_cycles: max_unprotected_near_switch_cycles,
+              max_unprotected_far_switch_cycles: max_unprotected_far_switch_cycles,
+              max_unprotected_exchange_cycles: max_unprotected_exchange_cycles,
+              max_portal_scale_cycles: max_portal_scale_cycles,
+              max_portal_near_switch_cycles: max_portal_near_switch_cycles,
+              max_portal_far_switch_cycles: max_portal_far_switch_cycles,
+              max_portal_exchange_cycles: max_portal_exchange_cycles,
+              max_floor_scale_cycles: max_floor_scale_cycles,
+              max_floor_near_switch_cycles: max_floor_near_switch_cycles,
+              max_floor_far_switch_cycles: max_floor_far_switch_cycles,
+              max_floor_exchange_cycles: max_floor_exchange_cycles,
+              trend_labels: trend_labels,
+              videos: videos
+            });
+          }
         });
       });
     }
@@ -6006,108 +6018,114 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     {
       connectionRemote.query(get_data, function(err, rows, fields) {
         // console.log(rows);
-        team_name = rows[0].team_name;
-        num_matches = rows[0].num_matches;
-        tot_auto_cross = rows[0].tot_auto_cross;
-        tot_auto_left = rows[0].tot_auto_left;
-        tot_auto_center = rows[0].tot_auto_center;
-        tot_auto_right = rows[0].tot_auto_right;
-        tot_auto_pyramid_intake = rows[0].tot_auto_pyramid_intake;
-        tot_auto_unprotected_intake = rows[0].tot_auto_unprotected_intake;
-        tot_auto_near_switch_made = rows[0].tot_auto_near_switch_made;
-        tot_auto_near_switch_attempts = rows[0].tot_auto_near_switch_attempts;
-        tot_auto_exchange_made = rows[0].tot_auto_exchange_made;
-        tot_auto_exchange_attempts = rows[0].tot_auto_exchange_attempts;
-        tot_auto_scale_high_made = rows[0].tot_auto_scale_high_made;
-        tot_auto_scale_high_attempts = rows[0].tot_auto_scale_high_attempts;
-        tot_auto_scale_low_made = rows[0].tot_auto_scale_low_made;
-        tot_auto_scale_low_attempts = rows[0].tot_auto_scale_low_attempts;
-        avg_tele_cubes_scored = rows[0].avg_tele_cubes_scored;
-        max_tele_cubes_scored = rows[0].max_tele_cubes_scored;
-        avg_tele_exchange_made = rows[0].avg_tele_exchange_made;
-        avg_tele_exchange_attempts = rows[0].avg_tele_exchange_attempts;
-        avg_tele_near_switch_made = rows[0].avg_tele_near_switch_made;
-        avg_tele_near_switch_attempts = rows[0].avg_tele_near_switch_attempts;
-        avg_tele_far_switch_made = rows[0].avg_tele_far_switch_made;
-        avg_tele_far_switch_attempts = rows[0].avg_tele_far_switch_attempts;
-        avg_tele_scale_high_made = rows[0].avg_tele_scale_high_made;
-        avg_tele_scale_high_attempts = rows[0].avg_tele_scale_high_attempts;
-        avg_tele_scale_low_made = rows[0].avg_tele_scale_low_made;
-        avg_tele_scale_low_attempts = rows[0].avg_tele_scale_low_attempts;
-        avg_tele_knockouts = rows[0].avg_tele_knockouts;
-        avg_tele_cubes_dropped = rows[0].avg_tele_cubes_dropped;
-        avg_tele_intake = rows[0].avg_tele_intake;
-        max_tele_intake = rows[0].max_tele_intake;
-        avg_tele_portal_intake_made = rows[0].avg_tele_portal_intake_made;
-        avg_tele_portal_intake_attempts = rows[0].avg_tele_portal_intake_attempts;
-        avg_tele_pyramid_intake = rows[0].avg_tele_pyramid_intake;
-        avg_tele_unprotected_intake = rows[0].avg_tele_unprotected_intake;
-        avg_tele_floor_intake = rows[0].avg_tele_floor_intake;
-        tot_tele_orderly = rows[0].tot_tele_orderly;
-        max_tele_highest_level = rows[0].max_tele_highest_level;
-        frq_tele_highest_level = rows[0].frq_tele_highest_level;
-        tot_tele_climb = rows[0].tot_tele_climb;
-        tot_tele_climb_attempts = rows[0].tot_tele_climb_attempts;
-        tot_tele_climb_assisted = rows[0].tot_tele_climb_assisted;
-        tot_tele_platform = rows[0].tot_tele_platform;
-        tot_tele_plus_one = rows[0].tot_tele_plus_one;
-        tot_tele_plus_one_attempts = rows[0].tot_tele_plus_one_attempts;
-        tot_tele_plus_two = rows[0].tot_tele_plus_two;
-        tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
-        avg_driver_rating = rows[0].avg_driver_rating;
-        avg_defense_rating = rows[0].avg_defense_rating;
-        pyramid_radar_trend = rows[0].avg_tele_pyramid_scale_cycle + ", " + rows[0].avg_tele_pyramid_near_switch_cycle + ", " + rows[0].avg_tele_pyramid_far_switch_cycle + ", " + rows[0].avg_tele_pyramid_exchange_cycle;
-        unprotected_radar_trend = rows[0].avg_tele_unprotected_scale_cycle + ", " + rows[0].avg_tele_unprotected_near_switch_cycle + ", " + rows[0].avg_tele_unprotected_far_switch_cycle + ", " + rows[0].avg_tele_unprotected_exchange_cycle;
-        portal_radar_trend = rows[0].avg_tele_portal_scale_cycle + ", " + rows[0].avg_tele_portal_near_switch_cycle + ", " + rows[0].avg_tele_portal_far_switch_cycle + ", " + rows[0].avg_tele_portal_exchange_cycle;
-        floor_radar_trend = rows[0].avg_tele_floor_scale_cycle + ", " + rows[0].avg_tele_floor_near_switch_cycle + ", " + rows[0].avg_tele_floor_far_switch_cycle + ", " + rows[0].avg_tele_floor_exchange_cycle;
-        avg_pyramid_scale_cycles = rows[0].avg_tele_pyramid_scale_cycle;
-        avg_pyramid_near_switch_cycles = rows[0].avg_tele_pyramid_near_switch_cycle;
-        avg_pyramid_far_switch_cycles = rows[0].avg_tele_pyramid_far_switch_cycle;
-        avg_pyramid_exchange_cycles = rows[0].avg_tele_pyramid_exchange_cycle;
-        avg_unprotected_scale_cycles = rows[0].avg_tele_unprotected_scale_cycle;
-        avg_unprotected_near_switch_cycles = rows[0].avg_tele_unprotected_near_switch_cycle;
-        avg_unprotected_far_switch_cycles = rows[0].avg_tele_unprotected_far_switch_cycle;
-        avg_unprotected_exchange_cycles = rows[0].avg_tele_unprotected_exchange_cycle;
-        avg_portal_scale_cycles = rows[0].avg_tele_portal_scale_cycle;
-        avg_portal_near_switch_cycles = rows[0].avg_tele_portal_near_switch_cycle;
-        avg_portal_far_switch_cycles = rows[0].avg_tele_portal_far_switch_cycle;
-        avg_portal_exchange_cycles = rows[0].avg_tele_portal_exchange_cycle;
-        avg_floor_scale_cycles = rows[0].avg_tele_floor_scale_cycle;
-        avg_floor_near_switch_cycles = rows[0].avg_tele_floor_near_switch_cycle;
-        avg_floor_far_switch_cycles = rows[0].avg_tele_floor_far_switch_cycle;
-        avg_floor_exchange_cycles = rows[0].avg_tele_floor_exchange_cycle;
-        tot_pyramid_scale_cycles = rows[0].tot_tele_pyramid_scale_cycle;
-        tot_pyramid_near_switch_cycles = rows[0].tot_tele_pyramid_near_switch_cycle;
-        tot_pyramid_far_switch_cycles = rows[0].tot_tele_pyramid_far_switch_cycle;
-        tot_pyramid_exchange_cycles = rows[0].tot_tele_pyramid_exchange_cycle;
-        tot_unprotected_scale_cycles = rows[0].tot_tele_unprotected_scale_cycle;
-        tot_unprotected_near_switch_cycles = rows[0].tot_tele_unprotected_near_switch_cycle;
-        tot_unprotected_far_switch_cycles = rows[0].tot_tele_unprotected_far_switch_cycle;
-        tot_unprotected_exchange_cycles = rows[0].tot_tele_unprotected_exchange_cycle;
-        tot_portal_scale_cycles = rows[0].tot_tele_portal_scale_cycle;
-        tot_portal_near_switch_cycles = rows[0].tot_tele_portal_near_switch_cycle;
-        tot_portal_far_switch_cycles = rows[0].tot_tele_portal_far_switch_cycle;
-        tot_portal_exchange_cycles = rows[0].tot_tele_portal_exchange_cycle;
-        tot_floor_scale_cycles = rows[0].tot_tele_floor_scale_cycle;
-        tot_floor_near_switch_cycles = rows[0].tot_tele_floor_near_switch_cycle;
-        tot_floor_far_switch_cycles = rows[0].tot_tele_floor_far_switch_cycle;
-        tot_floor_exchange_cycles = rows[0].tot_tele_floor_exchange_cycle;
-        max_pyramid_scale_cycles = rows[0].max_tele_pyramid_scale_cycle;
-        max_pyramid_near_switch_cycles = rows[0].max_tele_pyramid_near_switch_cycle;
-        max_pyramid_far_switch_cycles = rows[0].max_tele_pyramid_far_switch_cycle;
-        max_pyramid_exchange_cycles = rows[0].max_tele_pyramid_exchange_cycle;
-        max_unprotected_scale_cycles = rows[0].max_tele_unprotected_scale_cycle;
-        max_unprotected_near_switch_cycles = rows[0].max_tele_unprotected_near_switch_cycle;
-        max_unprotected_far_switch_cycles = rows[0].max_tele_unprotected_far_switch_cycle;
-        max_unprotected_exchange_cycles = rows[0].max_tele_unprotected_exchange_cycle;
-        max_portal_scale_cycles = rows[0].max_tele_portal_scale_cycle;
-        max_portal_near_switch_cycles = rows[0].max_tele_portal_near_switch_cycle;
-        max_portal_far_switch_cycles = rows[0].max_tele_portal_far_switch_cycle;
-        max_portal_exchange_cycles = rows[0].max_tele_portal_exchange_cycle;
-        max_floor_scale_cycles = rows[0].max_tele_floor_scale_cycle;
-        max_floor_near_switch_cycles = rows[0].max_tele_floor_near_switch_cycle;
-        max_floor_far_switch_cycles = rows[0].max_tele_floor_far_switch_cycle;
-        max_floor_exchange_cycles = rows[0].max_tele_floor_exchange_cycle;
+        if(err || rows[0] === undefined) {
+          skip_render = true;
+          console.log("returning to home page, bad team entered");
+        }
+        else {
+          team_name = rows[0].team_name;
+          num_matches = rows[0].num_matches;
+          tot_auto_cross = rows[0].tot_auto_cross;
+          tot_auto_left = rows[0].tot_auto_left;
+          tot_auto_center = rows[0].tot_auto_center;
+          tot_auto_right = rows[0].tot_auto_right;
+          tot_auto_pyramid_intake = rows[0].tot_auto_pyramid_intake;
+          tot_auto_unprotected_intake = rows[0].tot_auto_unprotected_intake;
+          tot_auto_near_switch_made = rows[0].tot_auto_near_switch_made;
+          tot_auto_near_switch_attempts = rows[0].tot_auto_near_switch_attempts;
+          tot_auto_exchange_made = rows[0].tot_auto_exchange_made;
+          tot_auto_exchange_attempts = rows[0].tot_auto_exchange_attempts;
+          tot_auto_scale_high_made = rows[0].tot_auto_scale_high_made;
+          tot_auto_scale_high_attempts = rows[0].tot_auto_scale_high_attempts;
+          tot_auto_scale_low_made = rows[0].tot_auto_scale_low_made;
+          tot_auto_scale_low_attempts = rows[0].tot_auto_scale_low_attempts;
+          avg_tele_cubes_scored = rows[0].avg_tele_cubes_scored;
+          max_tele_cubes_scored = rows[0].max_tele_cubes_scored;
+          avg_tele_exchange_made = rows[0].avg_tele_exchange_made;
+          avg_tele_exchange_attempts = rows[0].avg_tele_exchange_attempts;
+          avg_tele_near_switch_made = rows[0].avg_tele_near_switch_made;
+          avg_tele_near_switch_attempts = rows[0].avg_tele_near_switch_attempts;
+          avg_tele_far_switch_made = rows[0].avg_tele_far_switch_made;
+          avg_tele_far_switch_attempts = rows[0].avg_tele_far_switch_attempts;
+          avg_tele_scale_high_made = rows[0].avg_tele_scale_high_made;
+          avg_tele_scale_high_attempts = rows[0].avg_tele_scale_high_attempts;
+          avg_tele_scale_low_made = rows[0].avg_tele_scale_low_made;
+          avg_tele_scale_low_attempts = rows[0].avg_tele_scale_low_attempts;
+          avg_tele_knockouts = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_dropped = rows[0].avg_tele_cubes_dropped;
+          avg_tele_intake = rows[0].avg_tele_intake;
+          max_tele_intake = rows[0].max_tele_intake;
+          avg_tele_portal_intake_made = rows[0].avg_tele_portal_intake_made;
+          avg_tele_portal_intake_attempts = rows[0].avg_tele_portal_intake_attempts;
+          avg_tele_pyramid_intake = rows[0].avg_tele_pyramid_intake;
+          avg_tele_unprotected_intake = rows[0].avg_tele_unprotected_intake;
+          avg_tele_floor_intake = rows[0].avg_tele_floor_intake;
+          tot_tele_orderly = rows[0].tot_tele_orderly;
+          max_tele_highest_level = rows[0].max_tele_highest_level;
+          frq_tele_highest_level = rows[0].frq_tele_highest_level;
+          tot_tele_climb = rows[0].tot_tele_climb;
+          tot_tele_climb_attempts = rows[0].tot_tele_climb_attempts;
+          tot_tele_climb_assisted = rows[0].tot_tele_climb_assisted;
+          tot_tele_platform = rows[0].tot_tele_platform;
+          tot_tele_plus_one = rows[0].tot_tele_plus_one;
+          tot_tele_plus_one_attempts = rows[0].tot_tele_plus_one_attempts;
+          tot_tele_plus_two = rows[0].tot_tele_plus_two;
+          tot_tele_plus_two_attempts = rows[0].tot_tele_plus_two_attempts;
+          avg_driver_rating = rows[0].avg_driver_rating;
+          avg_defense_rating = rows[0].avg_defense_rating;
+          pyramid_radar_trend = rows[0].avg_tele_pyramid_scale_cycle + ", " + rows[0].avg_tele_pyramid_near_switch_cycle + ", " + rows[0].avg_tele_pyramid_far_switch_cycle + ", " + rows[0].avg_tele_pyramid_exchange_cycle;
+          unprotected_radar_trend = rows[0].avg_tele_unprotected_scale_cycle + ", " + rows[0].avg_tele_unprotected_near_switch_cycle + ", " + rows[0].avg_tele_unprotected_far_switch_cycle + ", " + rows[0].avg_tele_unprotected_exchange_cycle;
+          portal_radar_trend = rows[0].avg_tele_portal_scale_cycle + ", " + rows[0].avg_tele_portal_near_switch_cycle + ", " + rows[0].avg_tele_portal_far_switch_cycle + ", " + rows[0].avg_tele_portal_exchange_cycle;
+          floor_radar_trend = rows[0].avg_tele_floor_scale_cycle + ", " + rows[0].avg_tele_floor_near_switch_cycle + ", " + rows[0].avg_tele_floor_far_switch_cycle + ", " + rows[0].avg_tele_floor_exchange_cycle;
+          avg_pyramid_scale_cycles = rows[0].avg_tele_pyramid_scale_cycle;
+          avg_pyramid_near_switch_cycles = rows[0].avg_tele_pyramid_near_switch_cycle;
+          avg_pyramid_far_switch_cycles = rows[0].avg_tele_pyramid_far_switch_cycle;
+          avg_pyramid_exchange_cycles = rows[0].avg_tele_pyramid_exchange_cycle;
+          avg_unprotected_scale_cycles = rows[0].avg_tele_unprotected_scale_cycle;
+          avg_unprotected_near_switch_cycles = rows[0].avg_tele_unprotected_near_switch_cycle;
+          avg_unprotected_far_switch_cycles = rows[0].avg_tele_unprotected_far_switch_cycle;
+          avg_unprotected_exchange_cycles = rows[0].avg_tele_unprotected_exchange_cycle;
+          avg_portal_scale_cycles = rows[0].avg_tele_portal_scale_cycle;
+          avg_portal_near_switch_cycles = rows[0].avg_tele_portal_near_switch_cycle;
+          avg_portal_far_switch_cycles = rows[0].avg_tele_portal_far_switch_cycle;
+          avg_portal_exchange_cycles = rows[0].avg_tele_portal_exchange_cycle;
+          avg_floor_scale_cycles = rows[0].avg_tele_floor_scale_cycle;
+          avg_floor_near_switch_cycles = rows[0].avg_tele_floor_near_switch_cycle;
+          avg_floor_far_switch_cycles = rows[0].avg_tele_floor_far_switch_cycle;
+          avg_floor_exchange_cycles = rows[0].avg_tele_floor_exchange_cycle;
+          tot_pyramid_scale_cycles = rows[0].tot_tele_pyramid_scale_cycle;
+          tot_pyramid_near_switch_cycles = rows[0].tot_tele_pyramid_near_switch_cycle;
+          tot_pyramid_far_switch_cycles = rows[0].tot_tele_pyramid_far_switch_cycle;
+          tot_pyramid_exchange_cycles = rows[0].tot_tele_pyramid_exchange_cycle;
+          tot_unprotected_scale_cycles = rows[0].tot_tele_unprotected_scale_cycle;
+          tot_unprotected_near_switch_cycles = rows[0].tot_tele_unprotected_near_switch_cycle;
+          tot_unprotected_far_switch_cycles = rows[0].tot_tele_unprotected_far_switch_cycle;
+          tot_unprotected_exchange_cycles = rows[0].tot_tele_unprotected_exchange_cycle;
+          tot_portal_scale_cycles = rows[0].tot_tele_portal_scale_cycle;
+          tot_portal_near_switch_cycles = rows[0].tot_tele_portal_near_switch_cycle;
+          tot_portal_far_switch_cycles = rows[0].tot_tele_portal_far_switch_cycle;
+          tot_portal_exchange_cycles = rows[0].tot_tele_portal_exchange_cycle;
+          tot_floor_scale_cycles = rows[0].tot_tele_floor_scale_cycle;
+          tot_floor_near_switch_cycles = rows[0].tot_tele_floor_near_switch_cycle;
+          tot_floor_far_switch_cycles = rows[0].tot_tele_floor_far_switch_cycle;
+          tot_floor_exchange_cycles = rows[0].tot_tele_floor_exchange_cycle;
+          max_pyramid_scale_cycles = rows[0].max_tele_pyramid_scale_cycle;
+          max_pyramid_near_switch_cycles = rows[0].max_tele_pyramid_near_switch_cycle;
+          max_pyramid_far_switch_cycles = rows[0].max_tele_pyramid_far_switch_cycle;
+          max_pyramid_exchange_cycles = rows[0].max_tele_pyramid_exchange_cycle;
+          max_unprotected_scale_cycles = rows[0].max_tele_unprotected_scale_cycle;
+          max_unprotected_near_switch_cycles = rows[0].max_tele_unprotected_near_switch_cycle;
+          max_unprotected_far_switch_cycles = rows[0].max_tele_unprotected_far_switch_cycle;
+          max_unprotected_exchange_cycles = rows[0].max_tele_unprotected_exchange_cycle;
+          max_portal_scale_cycles = rows[0].max_tele_portal_scale_cycle;
+          max_portal_near_switch_cycles = rows[0].max_tele_portal_near_switch_cycle;
+          max_portal_far_switch_cycles = rows[0].max_tele_portal_far_switch_cycle;
+          max_portal_exchange_cycles = rows[0].max_tele_portal_exchange_cycle;
+          max_floor_scale_cycles = rows[0].max_tele_floor_scale_cycle;
+          max_floor_near_switch_cycles = rows[0].max_tele_floor_near_switch_cycle;
+          max_floor_far_switch_cycles = rows[0].max_tele_floor_far_switch_cycle;
+          max_floor_exchange_cycles = rows[0].max_tele_floor_exchange_cycle;
+        }
       });
       /*var no_auto_sql = "SELECT * FROM matches WHERE team_num='"+ team_num +"'";
       connection.query(no_auto_sql, function(err, rows, fields) {
@@ -6214,128 +6232,133 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
           // var climb_ranked = climb_rank[team_num];
 
           // console.log(videos);
-          res.render('pages/team', {
-            req: req,
-            team_num: team_num,
-            team_name: team_name,
-            previous_team_num: previous_team_num,
-            next_team_num: next_team_num,
-            num_matches: num_matches,
-            tot_auto_cross: tot_auto_cross,
-            tot_auto_left: tot_auto_left,
-            tot_auto_center: tot_auto_center,
-            tot_auto_right: tot_auto_right,
-            tot_auto_pyramid_intake: tot_auto_pyramid_intake,
-            tot_auto_unprotected_intake: tot_auto_unprotected_intake,
-            tot_auto_near_switch_made: tot_auto_near_switch_made,
-            tot_auto_near_switch_attempts: tot_auto_near_switch_attempts,
-            tot_auto_exchange_made: tot_auto_exchange_made,
-            tot_auto_exchange_attempts: tot_auto_exchange_attempts,
-            tot_auto_scale_high_made: tot_auto_scale_high_made,
-            tot_auto_scale_high_attempts: tot_auto_scale_high_attempts,
-            tot_auto_scale_low_made: tot_auto_scale_low_made,
-            tot_auto_scale_low_attempts: tot_auto_scale_low_attempts,
-            avg_tele_cubes_scored: avg_tele_cubes_scored,
-            max_tele_cubes_scored: max_tele_cubes_scored,
-            avg_tele_exchange_made: avg_tele_exchange_made,
-            avg_tele_exchange_attempts: avg_tele_exchange_attempts,
-            avg_tele_near_switch_made: avg_tele_near_switch_made,
-            avg_tele_near_switch_attempts: avg_tele_near_switch_attempts,
-            avg_tele_far_switch_made: avg_tele_far_switch_made,
-            avg_tele_far_switch_attempts: avg_tele_far_switch_attempts,
-            avg_tele_scale_high_made: avg_tele_scale_high_made,
-            avg_tele_scale_high_attempts: avg_tele_scale_high_attempts,
-            avg_tele_scale_low_made: avg_tele_scale_low_made,
-            avg_tele_scale_low_attempts: avg_tele_scale_low_attempts,
-            avg_tele_knockouts: avg_tele_knockouts,
-            avg_tele_cubes_dropped: avg_tele_cubes_dropped,
-            avg_tele_intake: avg_tele_intake,
-            max_tele_intake: max_tele_intake,
-            avg_tele_portal_intake_made: avg_tele_portal_intake_made,
-            avg_tele_portal_intake_attempts: avg_tele_portal_intake_attempts,
-            avg_tele_pyramid_intake: avg_tele_pyramid_intake,
-            avg_tele_unprotected_intake: avg_tele_unprotected_intake,
-            avg_tele_floor_intake: avg_tele_floor_intake,
-            tot_tele_orderly: tot_tele_orderly,
-            max_tele_highest_level: max_tele_highest_level,
-            frq_tele_highest_level: frq_tele_highest_level,
-            tot_tele_climb: tot_tele_climb,
-            tot_tele_climb_attempts: tot_tele_climb_attempts,
-            tot_tele_climb_assisted: tot_tele_climb_assisted,
-            tot_tele_platform: tot_tele_platform,
-            tot_tele_plus_one: tot_tele_plus_one,
-            tot_tele_plus_one_attempts: tot_tele_plus_one_attempts,
-            tot_tele_plus_two: tot_tele_plus_two,
-            tot_tele_plus_two_attempts: tot_tele_plus_two_attempts,
-            avg_driver_rating: avg_driver_rating,
-            avg_defense_rating: avg_defense_rating,
+          if(skip_render) {
+            res.redirect("/");
+          }
+          else {
+            res.render('pages/team', {
+              req: req,
+              team_num: team_num,
+              team_name: team_name,
+              previous_team_num: previous_team_num,
+              next_team_num: next_team_num,
+              num_matches: num_matches,
+              tot_auto_cross: tot_auto_cross,
+              tot_auto_left: tot_auto_left,
+              tot_auto_center: tot_auto_center,
+              tot_auto_right: tot_auto_right,
+              tot_auto_pyramid_intake: tot_auto_pyramid_intake,
+              tot_auto_unprotected_intake: tot_auto_unprotected_intake,
+              tot_auto_near_switch_made: tot_auto_near_switch_made,
+              tot_auto_near_switch_attempts: tot_auto_near_switch_attempts,
+              tot_auto_exchange_made: tot_auto_exchange_made,
+              tot_auto_exchange_attempts: tot_auto_exchange_attempts,
+              tot_auto_scale_high_made: tot_auto_scale_high_made,
+              tot_auto_scale_high_attempts: tot_auto_scale_high_attempts,
+              tot_auto_scale_low_made: tot_auto_scale_low_made,
+              tot_auto_scale_low_attempts: tot_auto_scale_low_attempts,
+              avg_tele_cubes_scored: avg_tele_cubes_scored,
+              max_tele_cubes_scored: max_tele_cubes_scored,
+              avg_tele_exchange_made: avg_tele_exchange_made,
+              avg_tele_exchange_attempts: avg_tele_exchange_attempts,
+              avg_tele_near_switch_made: avg_tele_near_switch_made,
+              avg_tele_near_switch_attempts: avg_tele_near_switch_attempts,
+              avg_tele_far_switch_made: avg_tele_far_switch_made,
+              avg_tele_far_switch_attempts: avg_tele_far_switch_attempts,
+              avg_tele_scale_high_made: avg_tele_scale_high_made,
+              avg_tele_scale_high_attempts: avg_tele_scale_high_attempts,
+              avg_tele_scale_low_made: avg_tele_scale_low_made,
+              avg_tele_scale_low_attempts: avg_tele_scale_low_attempts,
+              avg_tele_knockouts: avg_tele_knockouts,
+              avg_tele_cubes_dropped: avg_tele_cubes_dropped,
+              avg_tele_intake: avg_tele_intake,
+              max_tele_intake: max_tele_intake,
+              avg_tele_portal_intake_made: avg_tele_portal_intake_made,
+              avg_tele_portal_intake_attempts: avg_tele_portal_intake_attempts,
+              avg_tele_pyramid_intake: avg_tele_pyramid_intake,
+              avg_tele_unprotected_intake: avg_tele_unprotected_intake,
+              avg_tele_floor_intake: avg_tele_floor_intake,
+              tot_tele_orderly: tot_tele_orderly,
+              max_tele_highest_level: max_tele_highest_level,
+              frq_tele_highest_level: frq_tele_highest_level,
+              tot_tele_climb: tot_tele_climb,
+              tot_tele_climb_attempts: tot_tele_climb_attempts,
+              tot_tele_climb_assisted: tot_tele_climb_assisted,
+              tot_tele_platform: tot_tele_platform,
+              tot_tele_plus_one: tot_tele_plus_one,
+              tot_tele_plus_one_attempts: tot_tele_plus_one_attempts,
+              tot_tele_plus_two: tot_tele_plus_two,
+              tot_tele_plus_two_attempts: tot_tele_plus_two_attempts,
+              avg_driver_rating: avg_driver_rating,
+              avg_defense_rating: avg_defense_rating,
 
-            pyramid_intake_trend: pyramid_intake_trend,
-            unprotected_intake_trend: unprotected_intake_trend,
-            portal_intake_trend: portal_intake_trend,
-            floor_intake_trend: floor_intake_trend,
-            total_intake_trend: total_intake_trend,
-            near_switch_cubes_trend: near_switch_cubes_trend,
-            far_switch_cubes_trend: far_switch_cubes_trend,
-            scale_high_cubes_trend: scale_high_cubes_trend,
-            scale_low_cubes_trend: scale_low_cubes_trend,
-            exchange_cubes_trend: exchange_cubes_trend,
-            total_cubes_trend: total_cubes_trend,
-            pyramid_radar_trend: pyramid_radar_trend,
-            portal_radar_trend: portal_radar_trend,
-            floor_radar_trend: floor_radar_trend,
-            unprotected_radar_trend: unprotected_radar_trend,
-            avg_pyramid_scale_cycles: avg_pyramid_scale_cycles,
-            avg_pyramid_near_switch_cycles: avg_pyramid_near_switch_cycles,
-            avg_pyramid_far_switch_cycles: avg_pyramid_far_switch_cycles,
-            avg_pyramid_exchange_cycles: avg_pyramid_exchange_cycles,
-            avg_unprotected_scale_cycles: avg_unprotected_scale_cycles,
-            avg_unprotected_near_switch_cycles: avg_unprotected_near_switch_cycles,
-            avg_unprotected_far_switch_cycles: avg_unprotected_far_switch_cycles,
-            avg_unprotected_exchange_cycles: avg_unprotected_exchange_cycles,
-            avg_portal_scale_cycles: avg_portal_scale_cycles,
-            avg_portal_near_switch_cycles: avg_portal_near_switch_cycles,
-            avg_portal_far_switch_cycles: avg_portal_far_switch_cycles,
-            avg_portal_exchange_cycles: avg_portal_exchange_cycles,
-            avg_floor_scale_cycles: avg_floor_scale_cycles,
-            avg_floor_near_switch_cycles: avg_floor_near_switch_cycles,
-            avg_floor_far_switch_cycles: avg_floor_far_switch_cycles,
-            avg_floor_exchange_cycles: avg_floor_exchange_cycles,
-            tot_pyramid_scale_cycles: tot_pyramid_scale_cycles,
-            tot_pyramid_near_switch_cycles: tot_pyramid_near_switch_cycles,
-            tot_pyramid_far_switch_cycles: tot_pyramid_far_switch_cycles,
-            tot_pyramid_exchange_cycles: tot_pyramid_exchange_cycles,
-            tot_unprotected_scale_cycles: tot_unprotected_scale_cycles,
-            tot_unprotected_near_switch_cycles: tot_unprotected_near_switch_cycles,
-            tot_unprotected_far_switch_cycles: tot_unprotected_far_switch_cycles,
-            tot_unprotected_exchange_cycles: tot_unprotected_exchange_cycles,
-            tot_portal_scale_cycles: tot_portal_scale_cycles,
-            tot_portal_near_switch_cycles: tot_portal_near_switch_cycles,
-            tot_portal_far_switch_cycles: tot_portal_far_switch_cycles,
-            tot_portal_exchange_cycles: tot_portal_exchange_cycles,
-            tot_floor_scale_cycles: tot_floor_scale_cycles,
-            tot_floor_near_switch_cycles: tot_floor_near_switch_cycles,
-            tot_floor_far_switch_cycles: tot_floor_far_switch_cycles,
-            tot_floor_exchange_cycles: tot_floor_exchange_cycles,
-            max_pyramid_scale_cycles: max_pyramid_scale_cycles,
-            max_pyramid_near_switch_cycles: max_pyramid_near_switch_cycles,
-            max_pyramid_far_switch_cycles: max_pyramid_far_switch_cycles,
-            max_pyramid_exchange_cycles: max_pyramid_exchange_cycles,
-            max_unprotected_scale_cycles: max_unprotected_scale_cycles,
-            max_unprotected_near_switch_cycles: max_unprotected_near_switch_cycles,
-            max_unprotected_far_switch_cycles: max_unprotected_far_switch_cycles,
-            max_unprotected_exchange_cycles: max_unprotected_exchange_cycles,
-            max_portal_scale_cycles: max_portal_scale_cycles,
-            max_portal_near_switch_cycles: max_portal_near_switch_cycles,
-            max_portal_far_switch_cycles: max_portal_far_switch_cycles,
-            max_portal_exchange_cycles: max_portal_exchange_cycles,
-            max_floor_scale_cycles: max_floor_scale_cycles,
-            max_floor_near_switch_cycles: max_floor_near_switch_cycles,
-            max_floor_far_switch_cycles: max_floor_far_switch_cycles,
-            max_floor_exchange_cycles: max_floor_exchange_cycles,
-            trend_labels: trend_labels,
-            videos: videos
-          });
+              pyramid_intake_trend: pyramid_intake_trend,
+              unprotected_intake_trend: unprotected_intake_trend,
+              portal_intake_trend: portal_intake_trend,
+              floor_intake_trend: floor_intake_trend,
+              total_intake_trend: total_intake_trend,
+              near_switch_cubes_trend: near_switch_cubes_trend,
+              far_switch_cubes_trend: far_switch_cubes_trend,
+              scale_high_cubes_trend: scale_high_cubes_trend,
+              scale_low_cubes_trend: scale_low_cubes_trend,
+              exchange_cubes_trend: exchange_cubes_trend,
+              total_cubes_trend: total_cubes_trend,
+              pyramid_radar_trend: pyramid_radar_trend,
+              portal_radar_trend: portal_radar_trend,
+              floor_radar_trend: floor_radar_trend,
+              unprotected_radar_trend: unprotected_radar_trend,
+              avg_pyramid_scale_cycles: avg_pyramid_scale_cycles,
+              avg_pyramid_near_switch_cycles: avg_pyramid_near_switch_cycles,
+              avg_pyramid_far_switch_cycles: avg_pyramid_far_switch_cycles,
+              avg_pyramid_exchange_cycles: avg_pyramid_exchange_cycles,
+              avg_unprotected_scale_cycles: avg_unprotected_scale_cycles,
+              avg_unprotected_near_switch_cycles: avg_unprotected_near_switch_cycles,
+              avg_unprotected_far_switch_cycles: avg_unprotected_far_switch_cycles,
+              avg_unprotected_exchange_cycles: avg_unprotected_exchange_cycles,
+              avg_portal_scale_cycles: avg_portal_scale_cycles,
+              avg_portal_near_switch_cycles: avg_portal_near_switch_cycles,
+              avg_portal_far_switch_cycles: avg_portal_far_switch_cycles,
+              avg_portal_exchange_cycles: avg_portal_exchange_cycles,
+              avg_floor_scale_cycles: avg_floor_scale_cycles,
+              avg_floor_near_switch_cycles: avg_floor_near_switch_cycles,
+              avg_floor_far_switch_cycles: avg_floor_far_switch_cycles,
+              avg_floor_exchange_cycles: avg_floor_exchange_cycles,
+              tot_pyramid_scale_cycles: tot_pyramid_scale_cycles,
+              tot_pyramid_near_switch_cycles: tot_pyramid_near_switch_cycles,
+              tot_pyramid_far_switch_cycles: tot_pyramid_far_switch_cycles,
+              tot_pyramid_exchange_cycles: tot_pyramid_exchange_cycles,
+              tot_unprotected_scale_cycles: tot_unprotected_scale_cycles,
+              tot_unprotected_near_switch_cycles: tot_unprotected_near_switch_cycles,
+              tot_unprotected_far_switch_cycles: tot_unprotected_far_switch_cycles,
+              tot_unprotected_exchange_cycles: tot_unprotected_exchange_cycles,
+              tot_portal_scale_cycles: tot_portal_scale_cycles,
+              tot_portal_near_switch_cycles: tot_portal_near_switch_cycles,
+              tot_portal_far_switch_cycles: tot_portal_far_switch_cycles,
+              tot_portal_exchange_cycles: tot_portal_exchange_cycles,
+              tot_floor_scale_cycles: tot_floor_scale_cycles,
+              tot_floor_near_switch_cycles: tot_floor_near_switch_cycles,
+              tot_floor_far_switch_cycles: tot_floor_far_switch_cycles,
+              tot_floor_exchange_cycles: tot_floor_exchange_cycles,
+              max_pyramid_scale_cycles: max_pyramid_scale_cycles,
+              max_pyramid_near_switch_cycles: max_pyramid_near_switch_cycles,
+              max_pyramid_far_switch_cycles: max_pyramid_far_switch_cycles,
+              max_pyramid_exchange_cycles: max_pyramid_exchange_cycles,
+              max_unprotected_scale_cycles: max_unprotected_scale_cycles,
+              max_unprotected_near_switch_cycles: max_unprotected_near_switch_cycles,
+              max_unprotected_far_switch_cycles: max_unprotected_far_switch_cycles,
+              max_unprotected_exchange_cycles: max_unprotected_exchange_cycles,
+              max_portal_scale_cycles: max_portal_scale_cycles,
+              max_portal_near_switch_cycles: max_portal_near_switch_cycles,
+              max_portal_far_switch_cycles: max_portal_far_switch_cycles,
+              max_portal_exchange_cycles: max_portal_exchange_cycles,
+              max_floor_scale_cycles: max_floor_scale_cycles,
+              max_floor_near_switch_cycles: max_floor_near_switch_cycles,
+              max_floor_far_switch_cycles: max_floor_far_switch_cycles,
+              max_floor_exchange_cycles: max_floor_exchange_cycles,
+              trend_labels: trend_labels,
+              videos: videos
+            });
+          }
         });
       // });
     }
