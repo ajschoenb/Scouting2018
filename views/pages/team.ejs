@@ -27,7 +27,7 @@
         <h3><u>Autonomous Data</u></h3>
         <table class="table">
           <tr>
-            <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross %></h5></td>
+            <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross %> / <%= num_matches %></h5></td>
             <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left %></h5></td>
           </tr>
           <tr>
@@ -95,18 +95,40 @@
           </tr>
         </table>
       </div>
-      <div class="col-lg-7 col-lg-offset-0 col-md-6 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-sm-12 col-xs-12" style="font-size: 14px; top: 15px;">
+      <div class="col-lg-7 col-lg-offset-0 col-md-6 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-sm-12 col-xs-12" style="font-size: 14px; top: 0px;">
+        <div class="row">
+          <canvas id="auto_made_trend" style="width:100px; height:38px;"></canvas>
+        </div>
         <div class="row">
           <!--<h4><strong>Intake Trend</strong></h4>-->
-          <canvas id="intake_trend"></canvas>
+          <canvas id="intake_trend" style="width:100px; height:38px;"></canvas>
         </div>
-
         <div class="row">
           <!--<h4><strong>Cubes Trend</strong></h4>-->
-          <canvas id="cubes_trend"></canvas>
+          <canvas id="cubes_trend" style="width:100px; height:38px;"></canvas>
         </div>
 
         <script type="text/javascript">
+          var auto_data = {
+            labels: ['Left Switch', 'Left Scale', 'Center Switch', 'Center Scale', 'Right Switch', 'Right Scale'],
+            datasets: [
+              {
+                label: 'Auto Made',
+                backgroundColor: "rgba(201,235,148,0.75)",
+                borderColor: "rgba(201,235,148,1)",
+                borderWidth: 2,
+                data: [<%= auto_made_trend %>]
+              },
+              {
+                label: 'Auto Missed',
+                backgroundColor: "rgba(255,166,158,0.75)",
+                borderColor: "rgba(255,166,158,1)",
+                borderWidth: 2,
+                data: [<%= auto_missed_trend %>]
+              }
+            ]
+          };
+        
           var intake_data = {
             labels: [<%= trend_labels %> 'Next'],
             datasets: [
@@ -198,6 +220,39 @@
             
           var ctx = document.getElementById("intake_trend").getContext("2d");
           var ctx1 = document.getElementById("cubes_trend").getContext("2d");
+          var ctx2 = document.getElementById("auto_made_trend").getContext("2d");
+          var myBarChart = new Chart(ctx2, { 
+            type: 'bar',
+            data: auto_data,
+            options: {
+              title: {
+                display: true,
+                text: 'Auto Trend',
+                fontSize: 16
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 12,
+                    stepSize: 2
+                  }
+                }]
+              },
+              tooltips: {
+                intersect: false,
+                mode: 'index',
+                callbacks: {
+                  labelColor: function(tooltipItem, chart) {
+                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                    return {
+                      backgroundColor : dataset.borderColor
+                    }
+                  }
+                }
+              }
+            }
+          });
           var myLineChart = new Chart(ctx, { 
             type: 'line',
             data: intake_data,
@@ -211,7 +266,7 @@
                 yAxes: [{
                   ticks: {
                     suggestedMin: 0,
-                    suggestedMax: 32,
+                    suggestedMax: 24,
                     stepSize: 4
                   }
                 }]
@@ -243,7 +298,7 @@
                 yAxes: [{
                   ticks: {
                     suggestedMin: 0,
-                    suggestedMax: 32,
+                    suggestedMax: 24,
                     stepSize: 4
                   }
                 }]
@@ -270,52 +325,94 @@
         <h3><u>Cycle Data</u></h3>
         <table class="table">
           <tr>
-            <td><h5 style="margin-top:0;">Total Pyramid Scale: <%= tot_pyramid_scale_cycles %> (Max: <%= max_pyramid_scale_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Pyramid Scale: <%= avg_pyramid_scale_cycles %></h5></td>
-            <td><h5 style="margin-top:0;">Total Pyramid Exchange: <%= tot_pyramid_far_switch_cycles %> (Max: <%= max_pyramid_exchange_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Pyramid Exchange: <%= avg_pyramid_exchange_cycles %></h5></td>
+            <th>Path</th>
+            <th>Avg Per Match</th>
+            <th>Max Per Match</th>
+            <th>Avg Time</th>
+            <th>Path</th>
+            <th>Avg Per Match</th>
+            <th>Max Per Match</th>
+            <th>Avg Time</th>
           </tr>
           <tr>
-            <td><h5 style="margin-top:0;">Total Unprotected Scale: <%= tot_unprotected_scale_cycles %> (Max: <%= max_unprotected_scale_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Unprotected Scale: <%= avg_unprotected_scale_cycles %></h5></td>
-            <td><h5 style="margin-top:0;">Total Unprotected Exchange: <%= tot_unprotected_far_switch_cycles %> (Max: <%= max_unprotected_exchange_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Unprotected Exchange: <%= avg_unprotected_exchange_cycles %></h5></td>
+            <th>Pyramid Scale</th>
+            <td><%= tot_pyramid_scale_cycles %></td> <!-- tot is really per match :| -->
+            <td><%= max_pyramid_scale_cycles %></td>
+            <td><%= avg_pyramid_scale_cycles %></td>
+            <th>Pyramid Exchange</th>
+            <td><%= tot_pyramid_exchange_cycles %></td>
+            <td><%= max_pyramid_exchange_cycles %></td>
+            <td><%= avg_pyramid_exchange_cycles %></td>
           </tr>
           <tr>
-            <td><h5 style="margin-top:0;">Total Portal Scale: <%= tot_portal_scale_cycles %> (Max: <%= max_portal_scale_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Portal Scale: <%= avg_portal_scale_cycles %></h5></td>
-            <td><h5 style="margin-top:0;">Total Portal Exchange: <%= tot_portal_far_switch_cycles %> (Max: <%= max_portal_exchange_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Portal Exchange: <%= avg_portal_exchange_cycles %></h5></td>
+            <th>Unprotected Scale</th>
+            <td><%= tot_unprotected_scale_cycles %></td>
+            <td><%= max_unprotected_scale_cycles %></td>
+            <td><%= avg_unprotected_scale_cycles %></td>
+            <th>Unprotected Exchange</th>
+            <td><%= tot_unprotected_exchange_cycles %></td>
+            <td><%= max_unprotected_exchange_cycles %></td>
+            <td><%= avg_unprotected_exchange_cycles %></td>
           </tr>
           <tr>
-            <td><h5 style="margin-top:0;">Total Floor Scale: <%= tot_floor_scale_cycles %> (Max: <%= max_floor_scale_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Floor Scale: <%= avg_floor_scale_cycles %></h5></td>
-            <td><h5 style="margin-top:0;">Total Floor Exchange: <%= tot_floor_far_switch_cycles %> (Max: <%= max_floor_exchange_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Floor Exchange: <%= avg_floor_exchange_cycles %></h5></td>
+            <th>Portal Scale</th>
+            <td><%= tot_portal_scale_cycles %></td>
+            <td><%= max_portal_scale_cycles %></td>
+            <td><%= avg_portal_scale_cycles %></td>
+            <th>Portal Exchange</th>
+            <td><%= tot_portal_exchange_cycles %></td>
+            <td><%= max_portal_exchange_cycles %></td>
+            <td><%= avg_portal_exchange_cycles %></td>
           </tr>
           <tr>
-            <td><h5 style="margin-top:0;">Total Pyramid Near Switch: <%= tot_pyramid_near_switch_cycles %> (Max: <%= max_pyramid_near_switch_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Pyramid Near Switch: <%= avg_pyramid_near_switch_cycles %></h5></td>
-            <td><h5 style="margin-top:0;">Total Pyramid Far Switch: <%= tot_pyramid_far_switch_cycles %> (Max: <%= max_pyramid_far_switch_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Pyramid Far Switch: <%= avg_pyramid_far_switch_cycles %></h5></td>
+            <th>Floor Scale</th>
+            <td><%= tot_floor_scale_cycles %></td>
+            <td><%= max_floor_scale_cycles %></td>
+            <td><%= avg_floor_scale_cycles %></td>
+            <th>Floor Exchange</th>
+            <td><%= tot_floor_exchange_cycles %></td>
+            <td><%= max_floor_exchange_cycles %></td>
+            <td><%= avg_floor_exchange_cycles %></td>
           </tr>
           <tr>
-            <td><h5 style="margin-top:0;">Total Unprotected Near Switch: <%= tot_unprotected_near_switch_cycles %> (Max: <%= max_unprotected_near_switch_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Unprotected Near Switch: <%= avg_unprotected_near_switch_cycles %></h5></td>
-            <td><h5 style="margin-top:0;">Total Unprotected Far Switch: <%= tot_unprotected_far_switch_cycles %> (Max: <%= max_unprotected_far_switch_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Unprotected Far Switch: <%= avg_unprotected_far_switch_cycles %></h5></td>
+            <th>Pyramid Near Switch</th>
+            <td><%= tot_pyramid_near_switch_cycles %></td>
+            <td><%= max_pyramid_near_switch_cycles %></td>
+            <td><%= avg_pyramid_near_switch_cycles %></td>
+            <th>Pyramid Far Switch</th>
+            <td><%= tot_pyramid_far_switch_cycles %></td>
+            <td><%= max_pyramid_far_switch_cycles %></td>
+            <td><%= avg_pyramid_far_switch_cycles %></td>
           </tr>
           <tr>
-            <td><h5 style="margin-top:0;">Total Portal Near Switch: <%= tot_portal_near_switch_cycles %> (Max: <%= max_portal_near_switch_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Portal Near Switch: <%= avg_portal_near_switch_cycles %></h5></td>
-            <td><h5 style="margin-top:0;">Total Portal Far Switch: <%= tot_portal_far_switch_cycles %> (Max: <%= max_portal_far_switch_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Portal Far Switch: <%= avg_portal_far_switch_cycles %></h5></td>
+            <th>Unprotected Near Switch</th>
+            <td><%= tot_unprotected_near_switch_cycles %></td>
+            <td><%= max_unprotected_near_switch_cycles %></td>
+            <td><%= avg_unprotected_near_switch_cycles %></td>
+            <th>Unprotected Far Switch</th>
+            <td><%= tot_unprotected_far_switch_cycles %></td>
+            <td><%= max_unprotected_far_switch_cycles %></td>
+            <td><%= avg_unprotected_far_switch_cycles %></td>
           </tr>
           <tr>
-            <td><h5 style="margin-top:0;">Total Floor Near Switch: <%= tot_floor_near_switch_cycles %> (Max: <%= max_floor_near_switch_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Floor Near Switch: <%= avg_floor_near_switch_cycles %></h5></td>
-            <td><h5 style="margin-top:0;">Total Floor Far Switch: <%= tot_floor_far_switch_cycles %> (Max: <%= max_floor_far_switch_cycles %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Avg Floor Far Switch: <%= avg_floor_far_switch_cycles %></h5></td>
+            <th>Portal Near Switch</th>
+            <td><%= tot_portal_near_switch_cycles %></td>
+            <td><%= max_portal_near_switch_cycles %></td>
+            <td><%= avg_portal_near_switch_cycles %></td>
+            <th>Portal Far Switch</th>
+            <td><%= tot_portal_far_switch_cycles %></td>
+            <td><%= max_portal_far_switch_cycles %></td>
+            <td><%= avg_portal_far_switch_cycles %></td>
+          </tr>
+          <tr>
+            <th>Floor Near Switch</th>
+            <td><%= tot_floor_near_switch_cycles %></td>
+            <td><%= max_floor_near_switch_cycles %></td>
+            <td><%= avg_floor_near_switch_cycles %></td>
+            <th>Floor Far Switch</th>
+            <td><%= tot_floor_far_switch_cycles %></td>
+            <td><%= max_floor_far_switch_cycles %></td>
+            <td><%= avg_floor_far_switch_cycles %></td>
           </tr>
         </table>
       </div>
