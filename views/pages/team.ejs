@@ -11,317 +11,316 @@
 
   <main style="padding-top:60px;">
     <div class="row">
-      <div class="col-lg-6">
-        <h2>
-          <strong><%= team_num %> - <%= team_name %></strong>
-          <br />
-          <div class="btn-group" role="group" aria-label="..." style="top: 5px;">
-            <a href="/team/<%= previous_team_num %>" type="button" class="btn btn-default">Previous</a>
-            <a href="/team/<%= next_team_num %>" type="button" class="btn btn-default">Next</a>
-          </div>
-        </h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-5">
-        <h3><u>Autonomous Data</u></h3>
-        <table class="table">
-          <tr>
-            <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross %> / <%= num_matches %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made %> / <%= tot_auto_near_switch_attempts %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made %> / <%= tot_auto_exchange_attempts %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made %> / <%= tot_auto_scale_high_attempts %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made %> / <%= tot_auto_scale_low_attempts %></h5></td>
-          </tr>
-        </table>
-        <h3><u>Teleop Data</u></h3>
-        <table class="table">
-          <tr>
-            <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored %> (Max: <%= max_tele_cubes_scored %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made %> / <%= avg_tele_exchange_attempts %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made %> / <%= avg_tele_near_switch_attempts %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made %> / <%= avg_tele_far_switch_attempts %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made %> / <%= avg_tele_scale_high_attempts %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made %> / <%= avg_tele_scale_low_attempts %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Cubes Dropped: <%= avg_tele_cubes_dropped %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake %> (Max: <%= max_tele_intake %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made %> / <%= avg_tele_portal_intake_attempts %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level %> (Frq: <%= frq_tele_highest_level %>)</h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Platform: <%= tot_tele_platform %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb %> / <%= tot_tele_climb_attempts %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one %> / <%= tot_tele_plus_one_attempts %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two %> / <%= tot_tele_plus_two_attempts %></h5></td>
-          </tr>
-          <tr>
-            <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating %></h5></td>
-            <td style="text-align:right;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating %></h5></td>
-          </tr>
-        </table>
-      </div>
-      <div class="col-lg-7 col-lg-offset-0 col-md-6 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-sm-12 col-xs-12" style="font-size: 14px; top: 0px;">
-        <div class="row">
-          <canvas id="auto_made_trend" style="width:100px; height:38px;"></canvas>
+      <div class="row">
+        <div class="col-lg-6 col-xs-12">
+          <h2>
+            <strong><%= team_num %> - <%= team_name %></strong>
+            <br />
+            <div class="btn-group" role="group" aria-label="..." style="top: 5px;">
+              <a href="/team/<%= previous_team_num %>" type="button" class="btn btn-default">Previous</a>
+              <a href="/team/<%= next_team_num %>" type="button" class="btn btn-default">Next</a>
+            </div>
+          </h2>
         </div>
-        <div class="row">
+      </div>
+      <div class="row">
+        <div class="col-lg-5 col-xs-12">
+          <h3><u>Autonomous Data</u></h3>
+          <table class="table">
+            <tr>
+              <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross %> / <%= num_matches %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made %> / <%= tot_auto_near_switch_attempts %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made %> / <%= tot_auto_exchange_attempts %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made %> / <%= tot_auto_scale_high_attempts %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made %> / <%= tot_auto_scale_low_attempts %></h5></td>
+            </tr>
+          </table>
+          <h3><u>Teleop Data</u></h3>
+          <table class="table">
+            <tr>
+              <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored %> (Max: <%= max_tele_cubes_scored %>)</h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made %> / <%= avg_tele_exchange_attempts %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made %> / <%= avg_tele_near_switch_attempts %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made %> / <%= avg_tele_far_switch_attempts %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made %> / <%= avg_tele_scale_high_attempts %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made %> / <%= avg_tele_scale_low_attempts %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Cubes Dropped: <%= avg_tele_cubes_dropped %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake %> (Max: <%= max_tele_intake %>)</h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made %> / <%= avg_tele_portal_intake_attempts %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Total Orderly: <%= tot_tele_orderly %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level %> (Frq: <%= frq_tele_highest_level %>)</h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Platform: <%= tot_tele_platform %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb %> / <%= tot_tele_climb_attempts %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one %> / <%= tot_tele_plus_one_attempts %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two %> / <%= tot_tele_plus_two_attempts %></h5></td>
+            </tr>
+            <tr>
+              <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating %></h5></td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-7 col-lg-offset-0 col-xs-12" style="font-size: 14px; top: 0px;">
+            <canvas id="auto_made_trend"></canvas>
           <!--<h4><strong>Intake Trend</strong></h4>-->
-          <canvas id="intake_trend" style="width:100px; height:38px;"></canvas>
-        </div>
-        <div class="row">
+            <canvas id="intake_trend"></canvas>
           <!--<h4><strong>Cubes Trend</strong></h4>-->
-          <canvas id="cubes_trend" style="width:100px; height:38px;"></canvas>
+            <canvas id="cubes_trend"></canvas>
+
+          <script type="text/javascript">
+            var auto_data = {
+              labels: ['Left Switch', 'Left Scale', 'Center Switch', 'Center Scale', 'Right Switch', 'Right Scale'],
+              datasets: [
+                {
+                  label: 'Auto Made',
+                  backgroundColor: "rgba(201,235,148,0.75)",
+                  borderColor: "rgba(201,235,148,1)",
+                  borderWidth: 2,
+                  data: [<%= auto_made_trend %>]
+                },
+                {
+                  label: 'Auto Missed',
+                  backgroundColor: "rgba(255,166,158,0.75)",
+                  borderColor: "rgba(255,166,158,1)",
+                  borderWidth: 2,
+                  data: [<%= auto_missed_trend %>]
+                }
+              ]
+            };
+          
+            var intake_data = {
+              labels: [<%= trend_labels %> 'Next'],
+              datasets: [
+                {
+                  label: "Pyramid",
+                  backgroundColor: "rgba(255,166,158,0.2)",
+                  borderColor: "rgba(255,166,158,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= pyramid_intake_trend %>]
+                },
+                {
+                  label: "Unprotected",
+                  backgroundColor: "rgba(201,235,148,0.2)",
+                  borderColor: "rgba(201,235,148,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= unprotected_intake_trend %>]
+                },
+                {
+                  label: "Portal",
+                  backgroundColor: "rgba(151,187,205,0.2)",
+                  borderColor: "rgba(151,187,205,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= portal_intake_trend %>]
+                },
+                {
+                  label: "Floor",
+                  backgroundColor: "rgba(247,239,118,0.2)",
+                  borderColor: "rgba(247,239,118,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= floor_intake_trend %>]
+                },
+                {
+                  label: "Total",
+                  backgroundColor: "rgba(228,156,255,0.2)",
+                  borderColor: "rgba(228,156,255,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= total_intake_trend %>]
+                }
+              ]
+            };
+
+            var cubes_data = {
+              labels: [<%= trend_labels %> 'Next'],
+              datasets: [
+                {
+                  label: "Near Switch",
+                  backgroundColor: "rgba(255,166,158,0.2)",
+                  borderColor: "rgba(255,166,158,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= near_switch_cubes_trend %>]
+                },
+                {
+                  label: "Far Switch",
+                  backgroundColor: "rgba(201,235,148,0.2)",
+                  borderColor: "rgba(201,235,148,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= far_switch_cubes_trend %>]
+                },
+                {
+                  label: "Scale High",
+                  backgroundColor: "rgba(151,187,205,0.2)",
+                  borderColor: "rgba(151,187,205,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= scale_high_cubes_trend %>]
+                },
+                {
+                  label: "Scale Low",
+                  backgroundColor: "rgba(168,254,254,0.2)",
+                  borderColor: "rgba(168,254,254,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= scale_low_cubes_trend %>]
+                },
+                {
+                  label: "Exchange",
+                  backgroundColor: "rgba(247,239,118,0.2)",
+                  borderColor: "rgba(247,239,118,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= exchange_cubes_trend %>]
+                },
+                {
+                  label: "Total",
+                  backgroundColor: "rgba(228,156,255,0.2)",
+                  borderColor: "rgba(228,156,255,1)",
+                  pointBorderColor: "#000",
+                  data: [<%= total_cubes_trend %>]
+                }
+              ]
+            };
+              
+            var ctx = document.getElementById("intake_trend").getContext("2d");
+            var ctx1 = document.getElementById("cubes_trend").getContext("2d");
+            var ctx2 = document.getElementById("auto_made_trend").getContext("2d");
+            var myBarChart = new Chart(ctx2, { 
+              type: 'bar',
+              data: auto_data,
+              options: {
+                responsive: true,
+                title: {
+                  display: true,
+                  text: 'Auto Trend',
+                  fontSize: 16
+                },
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      suggestedMin: 0,
+                      suggestedMax: 12,
+                      stepSize: 2
+                    }
+                  }]
+                },
+                tooltips: {
+                  intersect: false,
+                  mode: 'index',
+                  callbacks: {
+                    labelColor: function(tooltipItem, chart) {
+                      var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                      return {
+                        backgroundColor : dataset.borderColor
+                      }
+                    }
+                  }
+                }
+              }
+            });
+            var myLineChart = new Chart(ctx, { 
+              type: 'line',
+              data: intake_data,
+              options: {
+                responsive: true,
+                title: {
+                  display: true,
+                  text: 'Intake Trend',
+                  fontSize: 16
+                },
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      suggestedMin: 0,
+                      suggestedMax: 24,
+                      stepSize: 4
+                    }
+                  }]
+                },
+                tooltips: {
+                  intersect: false,
+                  mode: 'index',
+                  callbacks: {
+                    labelColor: function(tooltipItem, chart) {
+                      var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                      return {
+                        backgroundColor : dataset.borderColor
+                      }
+                    }
+                  }
+                }
+              }
+            });
+            var myLineChart1 = new Chart(ctx1, { 
+              type: 'line',
+              data: cubes_data,
+              options: {
+                responsive: true,
+                title: {
+                  display: true,
+                  text: 'Cubes Trend',
+                  fontSize: 16
+                },
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      suggestedMin: 0,
+                      suggestedMax: 24,
+                      stepSize: 4
+                    }
+                  }]
+                },
+                tooltips: {
+                  intersect: false,
+                  mode: 'index',
+                  callbacks: {
+                    labelColor: function(tooltipItem, chart) {
+                      var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
+                      return {
+                        backgroundColor : dataset.borderColor
+                      }
+                    }
+                  }
+                }
+              }
+            });
+          </script>
         </div>
-
-        <script type="text/javascript">
-          var auto_data = {
-            labels: ['Left Switch', 'Left Scale', 'Center Switch', 'Center Scale', 'Right Switch', 'Right Scale'],
-            datasets: [
-              {
-                label: 'Auto Made',
-                backgroundColor: "rgba(201,235,148,0.75)",
-                borderColor: "rgba(201,235,148,1)",
-                borderWidth: 2,
-                data: [<%= auto_made_trend %>]
-              },
-              {
-                label: 'Auto Missed',
-                backgroundColor: "rgba(255,166,158,0.75)",
-                borderColor: "rgba(255,166,158,1)",
-                borderWidth: 2,
-                data: [<%= auto_missed_trend %>]
-              }
-            ]
-          };
-        
-          var intake_data = {
-            labels: [<%= trend_labels %> 'Next'],
-            datasets: [
-              {
-                label: "Pyramid",
-                backgroundColor: "rgba(255,166,158,0.2)",
-                borderColor: "rgba(255,166,158,1)",
-                pointBorderColor: "#000",
-                data: [<%= pyramid_intake_trend %>]
-              },
-              {
-                label: "Unprotected",
-                backgroundColor: "rgba(201,235,148,0.2)",
-                borderColor: "rgba(201,235,148,1)",
-                pointBorderColor: "#000",
-                data: [<%= unprotected_intake_trend %>]
-              },
-              {
-                label: "Portal",
-                backgroundColor: "rgba(151,187,205,0.2)",
-                borderColor: "rgba(151,187,205,1)",
-                pointBorderColor: "#000",
-                data: [<%= portal_intake_trend %>]
-              },
-              {
-                label: "Floor",
-                backgroundColor: "rgba(247,239,118,0.2)",
-                borderColor: "rgba(247,239,118,1)",
-                pointBorderColor: "#000",
-                data: [<%= floor_intake_trend %>]
-              },
-              {
-                label: "Total",
-                backgroundColor: "rgba(228,156,255,0.2)",
-                borderColor: "rgba(228,156,255,1)",
-                pointBorderColor: "#000",
-                data: [<%= total_intake_trend %>]
-              }
-            ]
-          };
-
-          var cubes_data = {
-            labels: [<%= trend_labels %> 'Next'],
-            datasets: [
-              {
-                label: "Near Switch",
-                backgroundColor: "rgba(255,166,158,0.2)",
-                borderColor: "rgba(255,166,158,1)",
-                pointBorderColor: "#000",
-                data: [<%= near_switch_cubes_trend %>]
-              },
-              {
-                label: "Far Switch",
-                backgroundColor: "rgba(201,235,148,0.2)",
-                borderColor: "rgba(201,235,148,1)",
-                pointBorderColor: "#000",
-                data: [<%= far_switch_cubes_trend %>]
-              },
-              {
-                label: "Scale High",
-                backgroundColor: "rgba(151,187,205,0.2)",
-                borderColor: "rgba(151,187,205,1)",
-                pointBorderColor: "#000",
-                data: [<%= scale_high_cubes_trend %>]
-              },
-              {
-                label: "Scale Low",
-                backgroundColor: "rgba(168,254,254,0.2)",
-                borderColor: "rgba(168,254,254,1)",
-                pointBorderColor: "#000",
-                data: [<%= scale_low_cubes_trend %>]
-              },
-              {
-                label: "Exchange",
-                backgroundColor: "rgba(247,239,118,0.2)",
-                borderColor: "rgba(247,239,118,1)",
-                pointBorderColor: "#000",
-                data: [<%= exchange_cubes_trend %>]
-              },
-              {
-                label: "Total",
-                backgroundColor: "rgba(228,156,255,0.2)",
-                borderColor: "rgba(228,156,255,1)",
-                pointBorderColor: "#000",
-                data: [<%= total_cubes_trend %>]
-              }
-            ]
-          };
-            
-          var ctx = document.getElementById("intake_trend").getContext("2d");
-          var ctx1 = document.getElementById("cubes_trend").getContext("2d");
-          var ctx2 = document.getElementById("auto_made_trend").getContext("2d");
-          var myBarChart = new Chart(ctx2, { 
-            type: 'bar',
-            data: auto_data,
-            options: {
-              title: {
-                display: true,
-                text: 'Auto Trend',
-                fontSize: 16
-              },
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    suggestedMin: 0,
-                    suggestedMax: 12,
-                    stepSize: 2
-                  }
-                }]
-              },
-              tooltips: {
-                intersect: false,
-                mode: 'index',
-                callbacks: {
-                  labelColor: function(tooltipItem, chart) {
-                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
-                    return {
-                      backgroundColor : dataset.borderColor
-                    }
-                  }
-                }
-              }
-            }
-          });
-          var myLineChart = new Chart(ctx, { 
-            type: 'line',
-            data: intake_data,
-            options: {
-              title: {
-                display: true,
-                text: 'Intake Trend',
-                fontSize: 16
-              },
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    suggestedMin: 0,
-                    suggestedMax: 24,
-                    stepSize: 4
-                  }
-                }]
-              },
-              tooltips: {
-                intersect: false,
-                mode: 'index',
-                callbacks: {
-                  labelColor: function(tooltipItem, chart) {
-                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
-                    return {
-                      backgroundColor : dataset.borderColor
-                    }
-                  }
-                }
-              }
-            }
-          });
-          var myLineChart1 = new Chart(ctx1, { 
-            type: 'line',
-            data: cubes_data,
-            options: {
-              title: {
-                display: true,
-                text: 'Cubes Trend',
-                fontSize: 16
-              },
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    suggestedMin: 0,
-                    suggestedMax: 24,
-                    stepSize: 4
-                  }
-                }]
-              },
-              tooltips: {
-                intersect: false,
-                mode: 'index',
-                callbacks: {
-                  labelColor: function(tooltipItem, chart) {
-                    var dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
-                    return {
-                      backgroundColor : dataset.borderColor
-                    }
-                  }
-                }
-              }
-            }
-          });
-        </script>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-12 col-xs-12">
         <h3><u>Cycle Data</u></h3>
         <table class="table">
           <tr>
@@ -571,6 +570,8 @@
             type: 'polarArea',
             data: polar_scale_data,
             options: {
+              responsive: true,
+              maintainAspectRatio: true,
               customAngles: [
                 <%= tot_pyramid_scale_cycles %> * 2 * Math.PI / total_scale_scored,
                 <%= tot_unprotected_scale_cycles %> * 2 * Math.PI / total_scale_scored,
@@ -615,6 +616,8 @@
             type: 'polarArea',
             data: polar_exchange_data,
             options: {
+              responsive: true,
+              maintainAspectRatio: true,
               customAngles: [
                 <%= tot_pyramid_exchange_cycles %> * 2 * Math.PI / total_exchange_scored,
                 <%= tot_unprotected_exchange_cycles %> * 2 * Math.PI / total_exchange_scored,
@@ -656,6 +659,8 @@
             type: 'polarArea',
             data: polar_near_switch_data,
             options: {
+              responsive: true,
+              maintainAspectRatio: true,
               customAngles: [
                 <%= tot_pyramid_near_switch_cycles %> * 2 * Math.PI / total_near_switch_scored,
                 <%= tot_unprotected_near_switch_cycles %> * 2 * Math.PI / total_near_switch_scored,
@@ -697,6 +702,8 @@
             type: 'polarArea',
             data: polar_far_switch_data,
             options: {
+              responsive: true,
+              maintainAspectRatio: true,
               customAngles: [
                 <%= tot_pyramid_far_switch_cycles %> * 2 * Math.PI / total_far_switch_scored,
                 <%= tot_unprotected_far_switch_cycles %> * 2 * Math.PI / total_far_switch_scored,
