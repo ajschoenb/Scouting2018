@@ -557,10 +557,14 @@
         window.onload = function()
         {
           //alert(<%= tot_pyramid_scale_cycles %>);
+          //alert(<%= tot_unprotected_scale_cycles %>);
+          //alert(<%= tot_portal_scale_cycles %>);
+          //alert(<%= tot_floor_scale_cycles %>);
           var total_scale_scored = Number(<%= tot_pyramid_scale_cycles %>) + Number(<%= tot_unprotected_scale_cycles %>) + Number(<%= tot_portal_scale_cycles %>) + Number(<%= tot_floor_scale_cycles %>);
           var total_near_switch_scored = Number(<%= tot_pyramid_near_switch_cycles %>) + Number(<%= tot_unprotected_near_switch_cycles %>) + Number(<%= tot_portal_near_switch_cycles %>) + Number(<%= tot_floor_near_switch_cycles %>);
           var total_far_switch_scored = Number(<%= tot_pyramid_far_switch_cycles %>) + Number(<%= tot_unprotected_far_switch_cycles %>) + Number(<%= tot_portal_far_switch_cycles %>) + Number(<%= tot_floor_far_switch_cycles %>);
           var total_exchange_scored = Number(<%= tot_pyramid_exchange_cycles %>) + Number(<%= tot_unprotected_exchange_cycles %>) + Number(<%= tot_portal_exchange_cycles %>) + Number(<%= tot_floor_exchange_cycles %>);
+          //alert(total_scale_scored);
           //alert(total_scale_scored);
           //alert(total_near_switch_scored);
           //alert(total_far_switch_scored);
