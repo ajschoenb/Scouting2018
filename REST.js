@@ -639,7 +639,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var teams_sql = "SELECT * FROM teams";
     var filename = "teams.csv";
     var data = "";
-    connection.query(teams_sql, function(err, rows, fields) {
+    connectionLocal.query(teams_sql, function(err, rows, fields) {
       for(var p in rows[0])
       {
         data += p + ", ";
