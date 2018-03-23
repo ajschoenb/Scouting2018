@@ -520,7 +520,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     }
   });
   router.post("/query", reqAdmin(), function(req, res) {
-    var sql = JSON.stringify(req.body.query);
+    var sql = req.body.query;
     query_res = "";
     if(process.argv[2] && process.argv[2] === 'local')
     {
@@ -6600,8 +6600,8 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var auto_near_switch_missed = Number(req.body.auto_near_switch_missed);
     var auto_scale_high_made = Number(req.body.auto_scale_high_made);
     var auto_scale_high_missed = Number(req.body.auto_scale_high_missed);
-    var auto_scale_low_made = Number(req.body.auto_scale_low_made);
-    var auto_scale_low_missed = Number(req.body.auto_scale_low_missed);
+    var auto_scale_low_made = 0;
+    var auto_scale_low_missed = 0;
     var auto_exchange_made = Number(req.body.auto_exchange_made);
     var auto_exchange_missed = Number(req.body.auto_exchange_missed);
     var tele_floor_intake = Number(req.body.tele_floor_intake);
@@ -6620,9 +6620,9 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tele_near_switch_made = Number(req.body.tele_near_switch_made);
     var tele_near_switch_missed = Number(req.body.tele_near_switch_missed);
     var tele_knockouts = Number(req.body.tele_knockouts);
-    var tele_cubes_dropped = Number(req.body.tele_cubes_dropped);
+    var tele_cubes_dropped = 0;
     var tele_highest_level = Number(req.body.tele_highest_level);
-    var tele_orderly = Number(req.body.tele_orderly);
+    var tele_orderly = 0;
     var tele_climb = Number(req.body.tele_climb);
     var tele_climb_failed = Number(req.body.tele_climb_failed);
     var tele_plus_one = Number(req.body.tele_plus_one);
