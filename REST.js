@@ -551,7 +551,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
         res.redirect("/sql");
       });
     }
-    if(process.argv[2] && process.argv[2] === 'tee')
+    else if(process.argv[2] && process.argv[2] === 'tee')
     {
       connectionLocal.query(sql, function(err, rows, fields) {
         if(err)
@@ -5720,9 +5720,12 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var avg_tele_far_switch_attempts = 0;
     var avg_tele_scale_high_made = 0;
     var avg_tele_scale_high_attempts = 0;
+    var avg_tele_scale_high_missed = 0;
     var avg_tele_scale_low_made = 0;
     var avg_tele_scale_low_attempts = 0;
+    var avg_tele_scale_low_missed = 0;
     var avg_tele_knockouts = 0;
+    var avg_tele_cubes_descored = 0;
     var avg_tele_cubes_dropped = 0;
     var avg_tele_intake = 0;
     var max_tele_intake = 0;
@@ -5755,6 +5758,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var scale_high_cubes_trend = "";
     var scale_low_cubes_trend = "";
     var exchange_cubes_trend = "";
+    var cubes_descored_trend = "";
     var total_cubes_trend = "";
     var pyramid_radar_trend = "";
     var unprotected_radar_trend = "";
@@ -5869,9 +5873,12 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
           avg_tele_far_switch_attempts = rows[0].avg_tele_far_switch_attempts;
           avg_tele_scale_high_made = rows[0].avg_tele_scale_high_made;
           avg_tele_scale_high_attempts = rows[0].avg_tele_scale_high_attempts;
+          avg_tele_scale_high_missed = rows[0].avg_tele_scale_high_missed;
           avg_tele_scale_low_made = rows[0].avg_tele_scale_low_made;
           avg_tele_scale_low_attempts = rows[0].avg_tele_scale_low_attempts;
+          avg_tele_scale_low_missed = rows[0].avg_tele_scale_low_missed;
           avg_tele_knockouts = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_descored = rows[0].avg_tele_cubes_descored;
           avg_tele_cubes_dropped = rows[0].avg_tele_cubes_dropped;
           avg_tele_intake = rows[0].avg_tele_intake;
           max_tele_intake = rows[0].max_tele_intake;
@@ -5999,6 +6006,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
           scale_high_cubes_trend += rows[x].tele_scale_high_made + ", ";
           scale_low_cubes_trend += rows[x].tele_scale_low_made + ", ";
           exchange_cubes_trend += rows[x].tele_exchange_made + ", ";
+          cubes_descored_trend += Number(rows[x].tele_scale_high_missed+rows[x].tele_scale_low_missed) + ", ";
           total_cubes_trend += Number(rows[x].tele_near_switch_made + rows[x].tele_far_switch_made + rows[x].tele_scale_high_made + rows[x].tele_scale_low_made + rows[x].tele_exchange_made) + ", ";
           trend_labels += rows[x].match_num + ", ";
           
@@ -6110,8 +6118,10 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               avg_tele_far_switch_attempts: avg_tele_far_switch_attempts,
               avg_tele_scale_high_made: avg_tele_scale_high_made,
               avg_tele_scale_high_attempts: avg_tele_scale_high_attempts,
+              avg_tele_scale_high_missed: avg_tele_scale_high_missed,
               avg_tele_scale_low_made: avg_tele_scale_low_made,
               avg_tele_scale_low_attempts: avg_tele_scale_low_attempts,
+              avg_tele_scale_low_missed: avg_tele_scale_low_missed,
               avg_tele_knockouts: avg_tele_knockouts,
               avg_tele_cubes_dropped: avg_tele_cubes_dropped,
               avg_tele_intake: avg_tele_intake,
@@ -6145,6 +6155,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
               scale_high_cubes_trend: scale_high_cubes_trend,
               scale_low_cubes_trend: scale_low_cubes_trend,
               exchange_cubes_trend: exchange_cubes_trend,
+              cubes_descored_trend: cubes_descored_trend,
               total_cubes_trend: total_cubes_trend,
               pyramid_radar_trend: pyramid_radar_trend,
               portal_radar_trend: portal_radar_trend,
@@ -6245,6 +6256,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
           avg_tele_scale_low_made = rows[0].avg_tele_scale_low_made;
           avg_tele_scale_low_attempts = rows[0].avg_tele_scale_low_attempts;
           avg_tele_knockouts = rows[0].avg_tele_knockouts;
+          avg_tele_cubes_descored = rows[0].avg_tele_cubes_descored;
           avg_tele_cubes_dropped = rows[0].avg_tele_cubes_dropped;
           avg_tele_intake = rows[0].avg_tele_intake;
           max_tele_intake = rows[0].max_tele_intake;
@@ -6620,6 +6632,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
     var tele_near_switch_made = Number(req.body.tele_near_switch_made);
     var tele_near_switch_missed = Number(req.body.tele_near_switch_missed);
     var tele_knockouts = Number(req.body.tele_knockouts);
+    var tele_cubes_descored = 0;
     var tele_cubes_dropped = 0;
     var tele_highest_level = Number(req.body.tele_highest_level);
     var tele_orderly = 0;
@@ -6688,7 +6701,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       + "`tele_portal_intake_made`, `tele_portal_intake_missed`, `tele_pyramid_intake`, `tele_unprotected_intake`, "
       + "`tele_exchange_made`, `tele_exchange_missed`, `tele_scale_high_made`, `tele_scale_high_missed`, `tele_scale_low_made`, "
       + "`tele_scale_low_missed`, `tele_near_switch_made`, `tele_near_switch_missed`, `tele_far_switch_made`, `tele_far_switch_missed`, "
-      + "`tele_knockouts`, `tele_cubes_dropped`, `tele_highest_level`, `tele_orderly`, `tele_climb`, `tele_climb_failed`, "
+      + "`tele_knockouts`, `tele_cubes_descored`, `tele_cubes_dropped`, `tele_highest_level`, `tele_orderly`, `tele_climb`, `tele_climb_failed`, "
       + "`tele_plus_one`, `tele_plus_one_failed`, `tele_plus_two`, `tele_plus_two_failed`, `tele_climb_assisted`, `tele_platform`, "
       + "`avg_tele_pyramid_scale_cycle`, `avg_tele_pyramid_near_switch_cycle`, `avg_tele_pyramid_far_switch_cycle`, `avg_tele_pyramid_exchange_cycle`, "
       + "`avg_tele_unprotected_scale_cycle`, `avg_tele_unprotected_near_switch_cycle`, `avg_tele_unprotected_far_switch_cycle`, `avg_tele_unprotected_exchange_cycle`, "
@@ -6705,7 +6718,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       + tele_pyramid_intake + ", " + tele_unprotected_intake + ", " + tele_exchange_made + ", " + tele_exchange_missed + ", " 
       + tele_scale_high_made + ", " + tele_scale_high_missed + ", " + tele_scale_low_made + ", " + tele_scale_low_missed + ", " 
       + tele_near_switch_made + ", " + tele_near_switch_missed + ", " + tele_far_switch_made + ", " + tele_far_switch_missed + ", " 
-      + tele_knockouts + ", " + tele_cubes_dropped + ", " + tele_highest_level + ", " + tele_orderly + ", " + tele_climb + ", " 
+      + tele_knockouts + ", " + tele_cubes_descored + ", " + tele_cubes_dropped + ", " + tele_highest_level + ", " + tele_orderly + ", " + tele_climb + ", " 
       + tele_climb_failed + ", " + tele_plus_one + ", " + tele_plus_one_failed + ", " + tele_plus_two + ", " + tele_plus_two_failed + ", " 
       + tele_climb_assisted + ", " + tele_platform + ", " + avg_tele_pyramid_scale_cycle + ", " + avg_tele_pyramid_near_switch_cycle + ", " 
       + avg_tele_pyramid_far_switch_cycle + ", " + avg_tele_pyramid_exchange_cycle + ", " + avg_tele_unprotected_scale_cycle + ", " 
@@ -6947,6 +6960,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       "tot_tele_scale_high_attempts=(SELECT SUM(tele_scale_high_made)+SUM(tele_scale_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
       "avg_tele_scale_high_made=(SELECT AVG(tele_scale_high_made) FROM matches WHERE team_num=" + team_num + "), " +
       "avg_tele_scale_high_attempts=(SELECT AVG(tele_scale_high_made+tele_scale_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_scale_high_missed=(SELECT AVG(tele_scale_high_missed) FROM matches WHERE team_num=" + team_num + "), " +
 //      "std_tele_gears_scored=(SELECT STD(tele_gears_scored) FROM matches WHERE team_num=" + team_num + "), " +
 //      "cst_tele_gears_scored=avg_tele_gears_scored/std_tele_gears_scored, " +
 
@@ -6955,6 +6969,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       "tot_tele_scale_low_attempts=(SELECT SUM(tele_scale_low_made)+SUM(tele_scale_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
       "avg_tele_scale_low_made=(SELECT AVG(tele_scale_low_made) FROM matches WHERE team_num=" + team_num + "), " +
       "avg_tele_scale_low_attempts=(SELECT AVG(tele_scale_low_made+tele_scale_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_scale_low_missed=(SELECT AVG(tele_scale_low_missed) FROM matches WHERE team_num=" + team_num + "), " +
 
       "perc_tele_exchange_made=100*(SELECT SUM(tele_exchange_made)/(SUM(tele_exchange_missed)+SUM(tele_exchange_made)) FROM matches WHERE team_num=" + team_num + "), " +
       "tot_tele_exchange_made=(SELECT SUM(tele_exchange_made) FROM matches WHERE team_num=" + team_num + "), " +
@@ -6968,6 +6983,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
 
       "tot_tele_knockouts=(SELECT SUM(tele_knockouts) FROM matches WHERE team_num=" + team_num + "), " +
       "avg_tele_knockouts=(SELECT AVG(tele_knockouts) FROM matches WHERE team_num=" + team_num + "), " +
+      "avg_tele_cubes_descored=(SELECT AVG(tele_cubes_descored) FROM matches WHERE team_num=" + team_num + "), " +
 
       "tot_tele_cubes_dropped=(SELECT SUM(tele_cubes_dropped) FROM matches WHERE team_num=" + team_num + "), " +
       "avg_tele_cubes_dropped=(SELECT AVG(tele_cubes_dropped) FROM matches WHERE team_num=" + team_num + "), " +
@@ -6980,7 +6996,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connectionLocal, connectio
       "tot_tele_platform=(SELECT SUM(tele_platform) FROM matches WHERE team_num=" + team_num + "), " +
       "perc_tele_climb=100*((SELECT SUM(tele_climb) FROM matches WHERE team_num=" + team_num + ")/(SELECT SUM(tele_climb)+SUM(tele_climb_failed) FROM matches WHERE team_num=" + team_num + ")), " +
       "tot_tele_climb=(SELECT SUM(tele_climb) FROM matches WHERE team_num=" + team_num + "), " +
-      "tot_tele_climb_attempts=(SELECT SUM(tele_climb+tele_climb_failed)+SUM(tele_climb) FROM matches WHERE team_num=" + team_num + "), " +
+      "tot_tele_climb_attempts=(SELECT SUM(tele_climb+tele_climb_failed) FROM matches WHERE team_num=" + team_num + "), " +
 
       "perc_tele_plus_one=100*((SELECT SUM(tele_plus_one) FROM matches WHERE team_num=" + team_num + ")/(SELECT SUM(tele_plus_one)+SUM(tele_plus_one_failed) FROM matches WHERE team_num=" + team_num + ")), " +
       "tot_tele_plus_one=(SELECT SUM(tele_plus_one) FROM matches WHERE team_num=" + team_num + "), " +
