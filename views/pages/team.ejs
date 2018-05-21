@@ -24,10 +24,10 @@
         </div>
       </div>
       <div class="row">
-      <div class="col-lg-7 col-lg-offset-0 col-xs-12" style="font-size: 14px; top: 0px;">
-        <canvas id="cubes_trend"></canvas>
-        <canvas id="intake_trend"></canvas>
-        <canvas id="auto_made_trend"></canvas>
+        <div class="col-lg-7 col-lg-offset-0 col-xs-12" style="font-size: 14px; top: 0px;">
+          <canvas id="cubes_trend"></canvas>
+          <canvas id="intake_trend"></canvas>
+          <canvas id="auto_made_trend"></canvas>
        
           <script type="text/javascript">
             var auto_data = {
@@ -249,7 +249,7 @@
               }
             });
           </script>
-        </div>
+      </div>
         <div class="col-lg-5 col-xs-12">
           <h3><u>Autonomous Data</u></h3>
           <table class="table">
@@ -290,7 +290,7 @@
             </tr>
             <tr>
               <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level %> (Frq: <%= frq_tele_highest_level %>)</h5></td>
-              <td style="text-align:right;"><h5 style="margin-top:0;">Tele Knockouts: <%= avg_tele_knockouts %></h5></td>
+              <td style="text-align:right;"><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts %></h5></td>
             </tr>
             <tr>
               <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake %> (Max: <%= max_tele_intake %>)</h5></td>
@@ -748,10 +748,6 @@
         }
       </script>
     </div>
-    <div id="spoiler" style="display: none;">
-      <%- videos %>
-    </div>
-    <button title="Click to show/hide videos" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/Hide Videos</button>
   </main>
 
   <footer>
