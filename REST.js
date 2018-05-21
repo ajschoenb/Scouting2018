@@ -3,7 +3,6 @@ var mysql = require("mysql");
 var fs = require("fs");
 var TBA = require('thebluealliance');
 var tba = new TBA('FRCScout2018','Software for scouting for 2018 season','1.1.1');
-var ensureLogin = require('connect-ensure-login');
 var message = "";
 
 function REST_ROUTER(router, connectionLocal)
