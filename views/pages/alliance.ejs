@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-lg-12 col-xs-12">
             <h2>
-              <strong><%= team_num_1 %> - <%= team_name_1 %></strong>
+              <strong><%= team_1.team_num %> - <%= team_1.team_name %></strong>
               <!-- <br /> -->
             </h2>
           </div>
@@ -27,67 +27,67 @@
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_1 %> / <%= num_matches_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= team_1.tot_auto_cross %> / <%= team_1.num_matches %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= team_1.tot_auto_left %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= team_1.tot_auto_center %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Right Starts: <%= team_1.tot_auto_right %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= team_1.tot_auto_pyramid_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= team_1.tot_auto_unprotected_intake %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_1 %> / <%= tot_auto_near_switch_attempts_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_1 %> / <%= tot_auto_exchange_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= team_1.tot_auto_near_switch_made %> / <%= team_1.tot_auto_near_switch_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= team_1.tot_auto_exchange_made %> / <%= team_1.tot_auto_exchange_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_1 %> / <%= tot_auto_scale_high_attempts_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_1 %> / <%= tot_auto_scale_low_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= team_1.tot_auto_scale_high_made %> / <%= team_1.tot_auto_scale_high_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= team_1.tot_auto_scale_low_made %> / <%= team_1.tot_auto_scale_low_attempts %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_1 %> (Max: <%= max_tele_cubes_scored_1 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_1 %> / <%= avg_tele_exchange_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= team_1.avg_tele_cubes_scored %> (Max: <%= team_1.max_tele_cubes_scored %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= team_1.avg_tele_exchange_made %> / <%= team_1.avg_tele_exchange_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_1 %> / <%= avg_tele_near_switch_attempts_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_1 %> / <%= avg_tele_far_switch_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= team_1.avg_tele_near_switch_made %> / <%= team_1.avg_tele_near_switch_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Far Switch: <%= team_1.avg_tele_far_switch_made %> / <%= team_1.avg_tele_far_switch_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_1 %> / <%= avg_tele_scale_high_attempts_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_1 %> / <%= avg_tele_scale_low_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= team_1.avg_tele_scale_high_made %> / <%= team_1.avg_tele_scale_high_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= team_1.avg_tele_scale_low_made %> / <%= team_1.avg_tele_scale_low_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_1 %> (Max: <%= max_tele_intake_1 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_1 %> / <%= avg_tele_portal_intake_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= team_1.avg_tele_intake %> (Max: <%= team_1.max_tele_intake %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Portal Intake: <%= team_1.avg_tele_portal_intake_made %> / <%= team_1.avg_tele_portal_intake_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= team_1.avg_tele_pyramid_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= team_1.avg_tele_unprotected_intake %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= team_1.avg_tele_floor_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Knockouts: <%= team_1.avg_tele_knockouts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_1 %> (Frq: <%= frq_tele_highest_level_1 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Platform: <%= tot_tele_platform_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= team_1.max_tele_highest_level %> (Frq: <%= team_1.frq_tele_highest_level %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Platform: <%= team_1.tot_tele_platform %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_1 %> / <%= tot_tele_climb_attempts_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= team_1.tot_tele_climb_ %> / <%= team_1.tot_tele_climb_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Assisted Climb: <%= team_1.tot_tele_climb_assisted %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_1 %> / <%= tot_tele_plus_one_attempts_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_1 %> / <%= tot_tele_plus_two_attempts_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Plus One: <%= team_1.tot_tele_plus_one %> / <%= team_1.tot_tele_plus_one_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Plus Two: <%= team_1.tot_tele_plus_two %> / <%= team_1.tot_tele_plus_two_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_1 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_1 %></h5></td>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= team_1.avg_driver_rating %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Defense Rating: <%= team_1.avg_defense_rating %></h5></td>
               </tr>
             </table>
           </div>
@@ -98,7 +98,7 @@
         <div class="row">
           <div class="col-lg-12 col-xs-12">
             <h2>
-              <strong><%= team_num_2 %> - <%= team_name_2 %></strong>
+              <strong><%= team_2.team_num %> - <%= team_2.team_name %></strong>
               <!-- <br /> -->
             </h2>
           </div>
@@ -108,67 +108,67 @@
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_2 %> / <%= num_matches_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= team_2.tot_auto_cross %> / <%= team_2.num_matches %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= team_2.tot_auto_left %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= team_2.tot_auto_center %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Right Starts: <%= team_2.tot_auto_right %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= team_2.tot_auto_pyramid_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= team_2.tot_auto_unprotected_intake %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_2 %> / <%= tot_auto_near_switch_attempts_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_2 %> / <%= tot_auto_exchange_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= team_2.tot_auto_near_switch_made %> / <%= team_2.tot_auto_near_switch_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= team_2.tot_auto_exchange_made %> / <%= team_2.tot_auto_exchange_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_2 %> / <%= tot_auto_scale_high_attempts_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_2 %> / <%= tot_auto_scale_low_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= team_2.tot_auto_scale_high_made %> / <%= team_2.tot_auto_scale_high_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= team_2.tot_auto_scale_low_made %> / <%= team_2.tot_auto_scale_low_attempts %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_2 %> (Max: <%= max_tele_cubes_scored_2 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_2 %> / <%= avg_tele_exchange_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= team_2.avg_tele_cubes_scored %> (Max: <%= team_2.max_tele_cubes_scored %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= team_2.avg_tele_exchange_made %> / <%= team_2.avg_tele_exchange_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_2 %> / <%= avg_tele_near_switch_attempts_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_2 %> / <%= avg_tele_far_switch_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= team_2.avg_tele_near_switch_made %> / <%= team_2.avg_tele_near_switch_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Far Switch: <%= team_2.avg_tele_far_switch_made %> / <%= team_2.avg_tele_far_switch_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_2 %> / <%= avg_tele_scale_high_attempts_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_2 %> / <%= avg_tele_scale_low_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= team_2.avg_tele_scale_high_made %> / <%= team_2.avg_tele_scale_high_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= team_2.avg_tele_scale_low_made %> / <%= team_2.avg_tele_scale_low_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_2 %> (Max: <%= max_tele_intake_2 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_2 %> / <%= avg_tele_portal_intake_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= team_2.avg_tele_intake %> (Max: <%= team_2.max_tele_intake %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Portal Intake: <%= team_2.avg_tele_portal_intake_made %> / <%= team_2.avg_tele_portal_intake_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= team_2.avg_tele_pyramid_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= team_2.avg_tele_unprotected_intake %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= team_2.avg_tele_floor_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Knockouts: <%= team_2.avg_tele_knockouts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_2 %> (Frq: <%= frq_tele_highest_level_2 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Platform: <%= tot_tele_platform_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= team_2.max_tele_highest_level %> (Frq: <%= team_2.frq_tele_highest_level %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Platform: <%= team_2.tot_tele_platform %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_2 %> / <%= tot_tele_climb_attempts_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= team_2.tot_tele_climb %> / <%= team_2.tot_tele_climb_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Assisted Climb: <%= team_2.tot_tele_climb_assisted %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_2 %> / <%= tot_tele_plus_one_attempts_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_2 %> / <%= tot_tele_plus_two_attempts_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Plus One: <%= team_2.tot_tele_plus_one %> / <%= team_2.tot_tele_plus_one_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Plus Two: <%= team_2.tot_tele_plus_two %> / <%= team_2.tot_tele_plus_two_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_2 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_2 %></h5></td>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= team_2.avg_driver_rating %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Defense Rating: <%= team_2.avg_defense_rating %></h5></td>
               </tr>
             </table>
           </div>
@@ -179,7 +179,7 @@
         <div class="row">
           <div class="col-lg-12 col-xs-12">
             <h2>
-              <strong><%= team_num_3 %> - <%= team_name_3 %></strong>
+              <strong><%= team_3.team_num %> - <%= team_3.team_name %></strong>
               <!-- <br /> -->
             </h2>
           </div>
@@ -189,67 +189,67 @@
             <h3><u>Autonomous Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">Cross: <%= tot_auto_cross_3 %> / <%= num_matches_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= tot_auto_left_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Cross: <%= team_3.tot_auto_cross %> / <%= team_3.num_matches %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Left Starts: <%= team_3.tot_auto_left %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Center Starts: <%= tot_auto_center_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Right Starts: <%= tot_auto_right_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Center Starts: <%= team_3.tot_auto_center %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Right Starts: <%= team_3.tot_auto_right %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Pyramid Intake: <%= tot_auto_pyramid_intake_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= tot_auto_unprotected_intake_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= team_3.tot_auto_pyramid_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= team_3.tot_auto_unprotected_intake %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Near Switch: <%= tot_auto_near_switch_made_3 %> / <%= tot_auto_near_switch_attempts_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= tot_auto_exchange_made_3 %> / <%= tot_auto_exchange_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= team_3.tot_auto_near_switch_made %> / <%= team_3.tot_auto_near_switch_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= team_3.tot_auto_exchange_made %> / <%= team_3.tot_auto_exchange_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Scale High: <%= tot_auto_scale_high_made_3 %> / <%= tot_auto_scale_high_attempts_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= tot_auto_scale_low_made_3 %> / <%= tot_auto_scale_low_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= team_3.tot_auto_scale_high_made %> / <%= team_3.tot_auto_scale_high_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= team_3.tot_auto_scale_low_made %> / <%= team_3.tot_auto_scale_low_attempts %></h5></td>
               </tr>
             </table>
             <h3><u>Teleop Data</u></h3>
             <table class="table">
               <tr>
-                <td><h5 style="margin-top:0;">Total Cubes: <%= avg_tele_cubes_scored_3 %> (Max: <%= max_tele_cubes_scored_3 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= avg_tele_exchange_made_3 %> / <%= avg_tele_exchange_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Cubes: <%= team_3.avg_tele_cubes_scored %> (Max: <%= team_3.max_tele_cubes_scored %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Exchange: <%= team_3.avg_tele_exchange_made %> / <%= team_3.avg_tele_exchange_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Near Switch: <%= avg_tele_near_switch_made_3 %> / <%= avg_tele_near_switch_attempts_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Far Switch: <%= avg_tele_far_switch_made_3 %> / <%= avg_tele_far_switch_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Near Switch: <%= team_3.avg_tele_near_switch_made %> / <%= team_3.avg_tele_near_switch_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Far Switch: <%= team_3.avg_tele_far_switch_made %> / <%= team_3.avg_tele_far_switch_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Scale High: <%= avg_tele_scale_high_made_3 %> / <%= avg_tele_scale_high_attempts_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= avg_tele_scale_low_made_3 %> / <%= avg_tele_scale_low_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Scale High: <%= team_3.avg_tele_scale_high_made %> / <%= team_3.avg_tele_scale_high_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Scale Low: <%= team_3.avg_tele_scale_low_made %> / <%= team_3.avg_tele_scale_low_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Total Intake: <%= avg_tele_intake_3 %> (Max: <%= max_tele_intake_3 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Portal Intake: <%= avg_tele_portal_intake_made_3 %> / <%= avg_tele_portal_intake_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Total Intake: <%= team_3.avg_tele_intake %> (Max: <%= team_3.max_tele_intake %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Portal Intake: <%= team_3.avg_tele_portal_intake_made %> / <%= team_3.avg_tele_portal_intake_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Pyramid Intake: <%= avg_tele_pyramid_intake_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= avg_tele_unprotected_intake_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Pyramid Intake: <%= team_3.avg_tele_pyramid_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Unprotected Intake: <%= team_3.avg_tele_unprotected_intake %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Floor Intake: <%= avg_tele_floor_intake_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Knockouts: <%= avg_tele_knockouts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Floor Intake: <%= team_3.avg_tele_floor_intake %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Knockouts: <%= team_3.avg_tele_knockouts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Max Highest Level: <%= max_tele_highest_level_3 %> (Frq: <%= frq_tele_highest_level_3 %>)</h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Platform: <%= tot_tele_platform_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Max Highest Level: <%= team_3.max_tele_highest_level %> (Frq: <%= team_3.frq_tele_highest_level %>)</h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Platform: <%= team_3.tot_tele_platform %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Self-Climb: <%= tot_tele_climb_3 %> / <%= tot_tele_climb_attempts_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Assisted Climb: <%= tot_tele_climb_assisted_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Self-Climb: <%= team_3.tot_tele_climb %> / <%= team_3.tot_tele_climb_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Assisted Climb: <%= team_3.tot_tele_climb_assisted %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Plus One: <%= tot_tele_plus_one_3 %> / <%= tot_tele_plus_one_attempts_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Plus Two: <%= tot_tele_plus_two_3 %> / <%= tot_tele_plus_two_attempts_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Plus One: <%= team_3.tot_tele_plus_one %> / <%= team_3.tot_tele_plus_one_attempts %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Plus Two: <%= team_3.tot_tele_plus_two %> / <%= team_3.tot_tele_plus_two_attempts %></h5></td>
               </tr>
               <tr>
-                <td><h5 style="margin-top:0;">Mobility Rating: <%= avg_driver_rating_3 %></h5></td>
-                <td style="text-align:right;"><h5 style="margin-top:0;">Defense Rating: <%= avg_defense_rating_3 %></h5></td>
+                <td><h5 style="margin-top:0;">Mobility Rating: <%= team_3.avg_driver_rating %></h5></td>
+                <td style="text-align:right;"><h5 style="margin-top:0;">Defense Rating: <%= team_3.avg_defense_rating %></h5></td>
               </tr>
             </table>
           </div>
@@ -263,15 +263,15 @@
           <tr>
             <th />
             <th />
-            <th><%= team_num_1 %></th>
+            <th><%= team_1.team_num %></th>
             <th />
             <th />
             <th />
-            <th><%= team_num_2 %></th>
+            <th><%= team_2.team_num %></th>
             <th />
             <th />
             <th />
-            <th><%= team_num_3 %></th>
+            <th><%= team_3.team_num %></th>
             <th />
           </tr>
           <tr>
@@ -290,227 +290,227 @@
           </tr>
           <tr>
             <th>Pyramid Scale</th>
-            <td><%= tot_pyramid_scale_cycles_1 %></td> <!-- tot is really per match :| -->
-            <td><%= max_pyramid_scale_cycles_1 %></td>
-            <td><%= avg_pyramid_scale_cycles_1 %></td>
+            <td><%= team_1.tot_pyramid_scale_cycles %></td> <!-- tot is really per match :| -->
+            <td><%= team_1.max_pyramid_scale_cycles %></td>
+            <td><%= team_1.avg_pyramid_scale_cycles %></td>
             <td />
-            <td><%= tot_pyramid_scale_cycles_2 %></td>
-            <td><%= max_pyramid_scale_cycles_2 %></td>
-            <td><%= avg_pyramid_scale_cycles_2 %></td>
+            <td><%= team_2.tot_pyramid_scale_cycles %></td>
+            <td><%= team_2.max_pyramid_scale_cycles %></td>
+            <td><%= team_2.avg_pyramid_scale_cycles %></td>
             <td />
-            <td><%= tot_pyramid_scale_cycles_3 %></td>
-            <td><%= max_pyramid_scale_cycles_3 %></td>
-            <td><%= avg_pyramid_scale_cycles_3 %></td>
+            <td><%= team_3.tot_pyramid_scale_cycles %></td>
+            <td><%= team_3.max_pyramid_scale_cycles %></td>
+            <td><%= team_3.avg_pyramid_scale_cycles %></td>
           </tr>
           <tr>
             <th>Unprotected Scale</th>
-            <td><%= tot_unprotected_scale_cycles_1 %></td>
-            <td><%= max_unprotected_scale_cycles_1 %></td>
-            <td><%= avg_unprotected_scale_cycles_1 %></td>
+            <td><%= team_1.tot_unprotected_scale_cycles %></td>
+            <td><%= team_1.max_unprotected_scale_cycles %></td>
+            <td><%= team_1.avg_unprotected_scale_cycles %></td>
             <td />
-            <td><%= tot_unprotected_scale_cycles_2 %></td>
-            <td><%= max_unprotected_scale_cycles_2 %></td>
-            <td><%= avg_unprotected_scale_cycles_2 %></td>
+            <td><%= team_2.tot_unprotected_scale_cycles %></td>
+            <td><%= team_2.max_unprotected_scale_cycles %></td>
+            <td><%= team_2.avg_unprotected_scale_cycles %></td>
             <td />
-            <td><%= tot_unprotected_scale_cycles_3 %></td>
-            <td><%= max_unprotected_scale_cycles_3 %></td>
-            <td><%= avg_unprotected_scale_cycles_3 %></td>
+            <td><%= team_3.tot_unprotected_scale_cycles %></td>
+            <td><%= team_3.max_unprotected_scale_cycles %></td>
+            <td><%= team_3.avg_unprotected_scale_cycles %></td>
           </tr>
           <tr>
             <th>Portal Scale</th>
-            <td><%= tot_portal_scale_cycles_1 %></td>
-            <td><%= max_portal_scale_cycles_1 %></td>
-            <td><%= avg_portal_scale_cycles_1 %></td>
+            <td><%= team_1.tot_portal_scale_cycles %></td>
+            <td><%= team_1.max_portal_scale_cycles %></td>
+            <td><%= team_1.avg_portal_scale_cycles %></td>
             <td />
-            <td><%= tot_portal_scale_cycles_2 %></td>
-            <td><%= max_portal_scale_cycles_2 %></td>
-            <td><%= avg_portal_scale_cycles_2 %></td>
+            <td><%= team_2.tot_portal_scale_cycles %></td>
+            <td><%= team_2.max_portal_scale_cycles %></td>
+            <td><%= team_2.avg_portal_scale_cycles %></td>
             <td />
-            <td><%= tot_portal_scale_cycles_3 %></td>
-            <td><%= max_portal_scale_cycles_3 %></td>
-            <td><%= avg_portal_scale_cycles_3 %></td>
+            <td><%= team_3.tot_portal_scale_cycles %></td>
+            <td><%= team_3.max_portal_scale_cycles %></td>
+            <td><%= team_3.avg_portal_scale_cycles %></td>
           </tr>
           <tr>
             <th>Floor Scale</th>
-            <td><%= tot_floor_scale_cycles_1 %></td>
-            <td><%= max_floor_scale_cycles_1 %></td>
-            <td><%= avg_floor_scale_cycles_1 %></td>
+            <td><%= team_1.tot_floor_scale_cycles %></td>
+            <td><%= team_1.max_floor_scale_cycles %></td>
+            <td><%= team_1.avg_floor_scale_cycles %></td>
             <td />
-            <td><%= tot_floor_scale_cycles_2 %></td>
-            <td><%= max_floor_scale_cycles_2 %></td>
-            <td><%= avg_floor_scale_cycles_2 %></td>
+            <td><%= team_2.tot_floor_scale_cycles %></td>
+            <td><%= team_2.max_floor_scale_cycles %></td>
+            <td><%= team_2.avg_floor_scale_cycles %></td>
             <td />
-            <td><%= tot_floor_scale_cycles_3 %></td>
-            <td><%= max_floor_scale_cycles_3 %></td>
-            <td><%= avg_floor_scale_cycles_3 %></td>
+            <td><%= team_3.tot_floor_scale_cycles %></td>
+            <td><%= team_3.max_floor_scale_cycles %></td>
+            <td><%= team_3.avg_floor_scale_cycles %></td>
           </tr>
           <tr>
             <th>Pyramid Near Switch</th>
-            <td><%= tot_pyramid_near_switch_cycles_1 %></td>
-            <td><%= max_pyramid_near_switch_cycles_1 %></td>
-            <td><%= avg_pyramid_near_switch_cycles_1 %></td>
+            <td><%= team_1.tot_pyramid_near_switch_cycles %></td>
+            <td><%= team_1.max_pyramid_near_switch_cycles %></td>
+            <td><%= team_1.avg_pyramid_near_switch_cycles %></td>
             <td />
-            <td><%= tot_pyramid_near_switch_cycles_2 %></td>
-            <td><%= max_pyramid_near_switch_cycles_2 %></td>
-            <td><%= avg_pyramid_near_switch_cycles_2 %></td>
+            <td><%= team_2.tot_pyramid_near_switch_cycles %></td>
+            <td><%= team_2.max_pyramid_near_switch_cycles %></td>
+            <td><%= team_2.avg_pyramid_near_switch_cycles %></td>
             <td />
-            <td><%= tot_pyramid_near_switch_cycles_3 %></td>
-            <td><%= max_pyramid_near_switch_cycles_3 %></td>
-            <td><%= avg_pyramid_near_switch_cycles_3 %></td>
+            <td><%= team_3.tot_pyramid_near_switch_cycles %></td>
+            <td><%= team_3.max_pyramid_near_switch_cycles %></td>
+            <td><%= team_3.avg_pyramid_near_switch_cycles %></td>
           </tr>
           <tr>
             <th>Unprotected Near Switch</th>
-            <td><%= tot_unprotected_near_switch_cycles_1 %></td>
-            <td><%= max_unprotected_near_switch_cycles_1 %></td>
-            <td><%= avg_unprotected_near_switch_cycles_1 %></td>
+            <td><%= team_1.tot_unprotected_near_switch_cycles %></td>
+            <td><%= team_1.max_unprotected_near_switch_cycles %></td>
+            <td><%= team_1.avg_unprotected_near_switch_cycles %></td>
             <td />
-            <td><%= tot_unprotected_near_switch_cycles_2 %></td>
-            <td><%= max_unprotected_near_switch_cycles_2 %></td>
-            <td><%= avg_unprotected_near_switch_cycles_2 %></td>
+            <td><%= team_2.tot_unprotected_near_switch_cycles %></td>
+            <td><%= team_2.max_unprotected_near_switch_cycles %></td>
+            <td><%= team_2.avg_unprotected_near_switch_cycles %></td>
             <td />
-            <td><%= tot_unprotected_near_switch_cycles_3 %></td>
-            <td><%= max_unprotected_near_switch_cycles_3 %></td>
-            <td><%= avg_unprotected_near_switch_cycles_3 %></td>
+            <td><%= team_3.tot_unprotected_near_switch_cycles %></td>
+            <td><%= team_3.max_unprotected_near_switch_cycles %></td>
+            <td><%= team_3.avg_unprotected_near_switch_cycles %></td>
           </tr>
           <tr>
             <th>Portal Near Switch</th>
-            <td><%= tot_portal_near_switch_cycles_1 %></td>
-            <td><%= max_portal_near_switch_cycles_1 %></td>
-            <td><%= avg_portal_near_switch_cycles_1 %></td>
+            <td><%= team_1.tot_portal_near_switch_cycles %></td>
+            <td><%= team_1.max_portal_near_switch_cycles %></td>
+            <td><%= team_1.avg_portal_near_switch_cycles %></td>
             <td />
-            <td><%= tot_portal_near_switch_cycles_2 %></td>
-            <td><%= max_portal_near_switch_cycles_2 %></td>
-            <td><%= avg_portal_near_switch_cycles_2 %></td>
+            <td><%= team_2.tot_portal_near_switch_cycles %></td>
+            <td><%= team_2.max_portal_near_switch_cycles %></td>
+            <td><%= team_2.avg_portal_near_switch_cycles %></td>
             <td />
-            <td><%= tot_portal_near_switch_cycles_3 %></td>
-            <td><%= max_portal_near_switch_cycles_3 %></td>
-            <td><%= avg_portal_near_switch_cycles_3 %></td>
+            <td><%= team_3.tot_portal_near_switch_cycles %></td>
+            <td><%= team_3.max_portal_near_switch_cycles %></td>
+            <td><%= team_3.avg_portal_near_switch_cycles %></td>
           </tr>
           <tr>
             <th>Floor Near Switch</th>
-            <td><%= tot_floor_near_switch_cycles_1 %></td>
-            <td><%= max_floor_near_switch_cycles_1 %></td>
-            <td><%= avg_floor_near_switch_cycles_1 %></td>
+            <td><%= team_1.tot_floor_near_switch_cycles %></td>
+            <td><%= team_1.max_floor_near_switch_cycles %></td>
+            <td><%= team_1.avg_floor_near_switch_cycles %></td>
             <td />
-            <td><%= tot_floor_near_switch_cycles_2 %></td>
-            <td><%= max_floor_near_switch_cycles_2 %></td>
-            <td><%= avg_floor_near_switch_cycles_2 %></td>
+            <td><%= team_2.tot_floor_near_switch_cycles %></td>
+            <td><%= team_2.max_floor_near_switch_cycles %></td>
+            <td><%= team_2.avg_floor_near_switch_cycles %></td>
             <td />
-            <td><%= tot_floor_near_switch_cycles_3 %></td>
-            <td><%= max_floor_near_switch_cycles_3 %></td>
-            <td><%= avg_floor_near_switch_cycles_3 %></td>
+            <td><%= team_3.tot_floor_near_switch_cycles %></td>
+            <td><%= team_3.max_floor_near_switch_cycles %></td>
+            <td><%= team_3.avg_floor_near_switch_cycles %></td>
           </tr>
           <tr>
             <th>Pyramid Far Switch</th>
-            <td><%= tot_pyramid_far_switch_cycles_1 %></td>
-            <td><%= max_pyramid_far_switch_cycles_1 %></td>
-            <td><%= avg_pyramid_far_switch_cycles_1 %></td>
+            <td><%= team_1.tot_pyramid_far_switch_cycles %></td>
+            <td><%= team_1.max_pyramid_far_switch_cycles %></td>
+            <td><%= team_1.avg_pyramid_far_switch_cycles %></td>
             <td />
-            <td><%= tot_pyramid_far_switch_cycles_2 %></td>
-            <td><%= max_pyramid_far_switch_cycles_2 %></td>
-            <td><%= avg_pyramid_far_switch_cycles_2 %></td>
+            <td><%= team_2.tot_pyramid_far_switch_cycles %></td>
+            <td><%= team_2.max_pyramid_far_switch_cycles %></td>
+            <td><%= team_2.avg_pyramid_far_switch_cycles %></td>
             <td />
-            <td><%= tot_pyramid_far_switch_cycles_3 %></td>
-            <td><%= max_pyramid_far_switch_cycles_3 %></td>
-            <td><%= avg_pyramid_far_switch_cycles_3 %></td>
+            <td><%= team_3.tot_pyramid_far_switch_cycles %></td>
+            <td><%= team_3.max_pyramid_far_switch_cycles %></td>
+            <td><%= team_3.avg_pyramid_far_switch_cycles %></td>
           </tr>
           <tr>
             <th>Unprotected Far Switch</th>
-            <td><%= tot_unprotected_far_switch_cycles_1 %></td>
-            <td><%= max_unprotected_far_switch_cycles_1 %></td>
-            <td><%= avg_unprotected_far_switch_cycles_1 %></td>
+            <td><%= team_1.tot_unprotected_far_switch_cycles %></td>
+            <td><%= team_1.max_unprotected_far_switch_cycles %></td>
+            <td><%= team_1.avg_unprotected_far_switch_cycles %></td>
             <td />
-            <td><%= tot_unprotected_far_switch_cycles_2 %></td>
-            <td><%= max_unprotected_far_switch_cycles_2 %></td>
-            <td><%= avg_unprotected_far_switch_cycles_2 %></td>
+            <td><%= team_2.tot_unprotected_far_switch_cycles %></td>
+            <td><%= team_2.max_unprotected_far_switch_cycles %></td>
+            <td><%= team_2.avg_unprotected_far_switch_cycles %></td>
             <td />
-            <td><%= tot_unprotected_far_switch_cycles_3 %></td>
-            <td><%= max_unprotected_far_switch_cycles_3 %></td>
-            <td><%= avg_unprotected_far_switch_cycles_3 %></td>
+            <td><%= team_3.tot_unprotected_far_switch_cycles %></td>
+            <td><%= team_3.max_unprotected_far_switch_cycles %></td>
+            <td><%= team_3.avg_unprotected_far_switch_cycles %></td>
           </tr>
           <tr>
             <th>Portal Far Switch</th>
-            <td><%= tot_portal_far_switch_cycles_1 %></td>
-            <td><%= max_portal_far_switch_cycles_1 %></td>
-            <td><%= avg_portal_far_switch_cycles_1 %></td>
+            <td><%= team_1.tot_portal_far_switch_cycles %></td>
+            <td><%= team_1.max_portal_far_switch_cycles %></td>
+            <td><%= team_1.avg_portal_far_switch_cycles %></td>
             <td />
-            <td><%= tot_portal_far_switch_cycles_2 %></td>
-            <td><%= max_portal_far_switch_cycles_2 %></td>
-            <td><%= avg_portal_far_switch_cycles_2 %></td>
+            <td><%= team_2.tot_portal_far_switch_cycles %></td>
+            <td><%= team_2.max_portal_far_switch_cycles %></td>
+            <td><%= team_2.avg_portal_far_switch_cycles %></td>
             <td />
-            <td><%= tot_portal_far_switch_cycles_3 %></td>
-            <td><%= max_portal_far_switch_cycles_3 %></td>
-            <td><%= avg_portal_far_switch_cycles_3 %></td>
+            <td><%= team_3.tot_portal_far_switch_cycles %></td>
+            <td><%= team_3.max_portal_far_switch_cycles %></td>
+            <td><%= team_3.avg_portal_far_switch_cycles %></td>
           </tr>
           <tr>
             <th>Floor Far Switch</th>
-            <td><%= tot_floor_far_switch_cycles_1 %></td>
-            <td><%= max_floor_far_switch_cycles_1 %></td>
-            <td><%= avg_floor_far_switch_cycles_1 %></td>
+            <td><%= team_1.tot_floor_far_switch_cycles %></td>
+            <td><%= team_1.max_floor_far_switch_cycles %></td>
+            <td><%= team_1.avg_floor_far_switch_cycles %></td>
             <td />
-            <td><%= tot_floor_far_switch_cycles_2 %></td>
-            <td><%= max_floor_far_switch_cycles_2 %></td>
-            <td><%= avg_floor_far_switch_cycles_2 %></td>
+            <td><%= team_2.tot_floor_far_switch_cycles %></td>
+            <td><%= team_2.max_floor_far_switch_cycles %></td>
+            <td><%= team_2.avg_floor_far_switch_cycles %></td>
             <td />
-            <td><%= tot_floor_far_switch_cycles_3 %></td>
-            <td><%= max_floor_far_switch_cycles_3 %></td>
-            <td><%= avg_floor_far_switch_cycles_3 %></td>
+            <td><%= team_3.tot_floor_far_switch_cycles %></td>
+            <td><%= team_3.max_floor_far_switch_cycles %></td>
+            <td><%= team_3.avg_floor_far_switch_cycles %></td>
           </tr>
           <tr>
             <th>Pyramid Exchange</th>
-            <td><%= tot_pyramid_exchange_cycles_1 %></td>
-            <td><%= max_pyramid_exchange_cycles_1 %></td>
-            <td><%= avg_pyramid_exchange_cycles_1 %></td>
+            <td><%= team_1.tot_pyramid_exchange_cycles %></td>
+            <td><%= team_1.max_pyramid_exchange_cycles %></td>
+            <td><%= team_1.avg_pyramid_exchange_cycles %></td>
             <td />
-            <td><%= tot_pyramid_exchange_cycles_2 %></td>
-            <td><%= max_pyramid_exchange_cycles_2 %></td>
-            <td><%= avg_pyramid_exchange_cycles_2 %></td>
+            <td><%= team_2.tot_pyramid_exchange_cycles %></td>
+            <td><%= team_2.max_pyramid_exchange_cycles %></td>
+            <td><%= team_2.avg_pyramid_exchange_cycles %></td>
             <td />
-            <td><%= tot_pyramid_exchange_cycles_3 %></td>
-            <td><%= max_pyramid_exchange_cycles_3 %></td>
-            <td><%= avg_pyramid_exchange_cycles_3 %></td>
+            <td><%= team_3.tot_pyramid_exchange_cycles %></td>
+            <td><%= team_3.max_pyramid_exchange_cycles %></td>
+            <td><%= team_3.avg_pyramid_exchange_cycles %></td>
           </tr>
           <tr>
             <th>Unprotected Exchange</th>
-            <td><%= tot_unprotected_exchange_cycles_1 %></td>
-            <td><%= max_unprotected_exchange_cycles_1 %></td>
-            <td><%= avg_unprotected_exchange_cycles_1 %></td>
+            <td><%= team_1.tot_unprotected_exchange_cycles %></td>
+            <td><%= team_1.max_unprotected_exchange_cycles %></td>
+            <td><%= team_1.avg_unprotected_exchange_cycles %></td>
             <td />
-            <td><%= tot_unprotected_exchange_cycles_2 %></td>
-            <td><%= max_unprotected_exchange_cycles_2 %></td>
-            <td><%= avg_unprotected_exchange_cycles_2 %></td>
+            <td><%= team_2.tot_unprotected_exchange_cycles %></td>
+            <td><%= team_2.max_unprotected_exchange_cycles %></td>
+            <td><%= team_2.avg_unprotected_exchange_cycles %></td>
             <td />
-            <td><%= tot_unprotected_exchange_cycles_3 %></td>
-            <td><%= max_unprotected_exchange_cycles_3 %></td>
-            <td><%= avg_unprotected_exchange_cycles_3 %></td>
+            <td><%= team_3.tot_unprotected_exchange_cycles %></td>
+            <td><%= team_3.max_unprotected_exchange_cycles %></td>
+            <td><%= team_3.avg_unprotected_exchange_cycles %></td>
           </tr>
           <tr>
             <th>Portal Exchange</th>
-            <td><%= tot_portal_exchange_cycles_1 %></td>
-            <td><%= max_portal_exchange_cycles_1 %></td>
-            <td><%= avg_portal_exchange_cycles_1 %></td>
+            <td><%= team_1.tot_portal_exchange_cycles %></td>
+            <td><%= team_1.max_portal_exchange_cycles %></td>
+            <td><%= team_1.avg_portal_exchange_cycles %></td>
             <td />
-            <td><%= tot_portal_exchange_cycles_2 %></td>
-            <td><%= max_portal_exchange_cycles_2 %></td>
-            <td><%= avg_portal_exchange_cycles_2 %></td>
+            <td><%= team_2.tot_portal_exchange_cycles %></td>
+            <td><%= team_2.max_portal_exchange_cycles %></td>
+            <td><%= team_2.avg_portal_exchange_cycles %></td>
             <td />
-            <td><%= tot_portal_exchange_cycles_3 %></td>
-            <td><%= max_portal_exchange_cycles_3 %></td>
-            <td><%= avg_portal_exchange_cycles_3 %></td>
+            <td><%= team_3.tot_portal_exchange_cycles %></td>
+            <td><%= team_3.max_portal_exchange_cycles %></td>
+            <td><%= team_3.avg_portal_exchange_cycles %></td>
           </tr>
           <tr>
             <th>Floor Exchange</th>
-            <td><%= tot_floor_exchange_cycles_1 %></td>
-            <td><%= max_floor_exchange_cycles_1 %></td>
-            <td><%= avg_floor_exchange_cycles_1 %></td>
+            <td><%= team_1.tot_floor_exchange_cycles %></td>
+            <td><%= team_1.max_floor_exchange_cycles %></td>
+            <td><%= team_1.avg_floor_exchange_cycles %></td>
             <td />
-            <td><%= tot_floor_exchange_cycles_2 %></td>
-            <td><%= max_floor_exchange_cycles_2 %></td>
-            <td><%= avg_floor_exchange_cycles_2 %></td>
+            <td><%= team_2.tot_floor_exchange_cycles %></td>
+            <td><%= team_2.max_floor_exchange_cycles %></td>
+            <td><%= team_2.avg_floor_exchange_cycles %></td>
             <td />
-            <td><%= tot_floor_exchange_cycles_3 %></td>
-            <td><%= max_floor_exchange_cycles_3 %></td>
-            <td><%= avg_floor_exchange_cycles_3 %></td>
+            <td><%= team_3.tot_floor_exchange_cycles %></td>
+            <td><%= team_3.max_floor_exchange_cycles %></td>
+            <td><%= team_3.avg_floor_exchange_cycles %></td>
           </tr>
         </table>
       </div>
@@ -534,14 +534,14 @@
               backgroundColor: "rgba(201,235,148,0.75)",
               borderColor: "rgba(201,235,148,1)",
               borderWidth: 2,
-              data: [<%= auto_made_trend_1 %>]
+              data: [<%= team_1.auto_made_trend %>]
             },
             {
               label: 'Auto Missed',
               backgroundColor: "rgba(255,166,158,0.75)",
               borderColor: "rgba(255,166,158,1)",
               borderWidth: 2,
-              data: [<%= auto_missed_trend_1 %>]
+              data: [<%= team_1.auto_missed_trend %>]
             }
           ]
         };
@@ -553,14 +553,14 @@
               backgroundColor: "rgba(201,235,148,0.75)",
               borderColor: "rgba(201,235,148,1)",
               borderWidth: 2,
-              data: [<%= auto_made_trend_2 %>]
+              data: [<%= team_2.auto_made_trend %>]
             },
             {
               label: 'Auto Missed',
               backgroundColor: "rgba(255,166,158,0.75)",
               borderColor: "rgba(255,166,158,1)",
               borderWidth: 2,
-              data: [<%= auto_missed_trend_2 %>]
+              data: [<%= team_2.auto_missed_trend %>]
             }
           ]
         };
@@ -572,14 +572,14 @@
               backgroundColor: "rgba(201,235,148,0.75)",
               borderColor: "rgba(201,235,148,1)",
               borderWidth: 2,
-              data: [<%= auto_made_trend_3 %>]
+              data: [<%= team_3.auto_made_trend %>]
             },
             {
               label: 'Auto Missed',
               backgroundColor: "rgba(255,166,158,0.75)",
               borderColor: "rgba(255,166,158,1)",
               borderWidth: 2,
-              data: [<%= auto_missed_trend_3 %>]
+              data: [<%= team_3.auto_missed_trend %>]
             }
           ]
         };
@@ -591,7 +591,7 @@
           options: {
             title: {
               display: true,
-              text: '<%= team_num_1 %> Autos',
+              text: '<%= team_1.team_num %> Autos',
               fontSize: 16
             },
             scales: {
@@ -625,7 +625,7 @@
           options: {
             title: {
               display: true,
-              text: '<%= team_num_2 %> Autos',
+              text: '<%= team_2.team_num %> Autos',
               fontSize: 16
             },
             scales: {
@@ -659,7 +659,7 @@
           options: {
             title: {
               display: true,
-              text: '<%= team_num_3 %> Autos',
+              text: '<%= team_3.team_num %> Autos',
               fontSize: 16
             },
             scales: {

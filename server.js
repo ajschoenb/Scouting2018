@@ -1,7 +1,7 @@
 // server.js
 
 var mysql = require('mysql');
-var rest = require("./REST.js");
+var rest = require("./js/REST.js");
 var morgan = require("morgan");
 var md5 = require("md5");
 var express = require('express');
